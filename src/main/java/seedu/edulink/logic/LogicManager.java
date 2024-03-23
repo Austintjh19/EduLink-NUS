@@ -16,7 +16,7 @@ import seedu.edulink.logic.parser.AddressBookParser;
 import seedu.edulink.logic.parser.exceptions.ParseException;
 import seedu.edulink.model.Model;
 import seedu.edulink.model.ReadOnlyAddressBook;
-import seedu.edulink.model.RecentCommand;
+import seedu.edulink.model.RecentCommands;
 import seedu.edulink.model.student.Student;
 import seedu.edulink.storage.Storage;
 
@@ -34,7 +34,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private final ArrayList<RecentCommand> recentCommands;
+    private final RecentCommands recentCommands;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -43,17 +43,16 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
-        recentCommands = new ArrayList<>();
+        recentCommands = new RecentCommands();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         CommandResult commandResult;
-        recentCommands.add(new RecentCommand(commandText));
+        recentCommands.add(commandText);
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-
         try {
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {
@@ -86,8 +85,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ArrayList<RecentCommand> getRecentCommands() {
-        return recentCommands;
+    public ArrayList<String> getRecentCommands() {
+        return recentCommands.getCommands();
     }
 
     @Override

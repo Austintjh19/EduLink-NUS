@@ -9,7 +9,6 @@ import seedu.edulink.logic.commands.CommandResult;
 import seedu.edulink.logic.commands.exceptions.CommandException;
 import seedu.edulink.logic.parser.exceptions.ParseException;
 import seedu.edulink.model.ReadOnlyAddressBook;
-import seedu.edulink.model.RecentCommand;
 import seedu.edulink.model.student.Student;
 
 /**
@@ -51,7 +50,7 @@ public interface Logic {
     /**
      * Returns Recent commands
      */
-    ArrayList<RecentCommand> getRecentCommands();
+    ArrayList<String> getRecentCommands();
 
     /**
      * Set the user prefs' GUI settings.
