@@ -1,6 +1,7 @@
 package seedu.edulink.logic;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.edulink.commons.core.GuiSettings;
@@ -8,6 +9,7 @@ import seedu.edulink.logic.commands.CommandResult;
 import seedu.edulink.logic.commands.exceptions.CommandException;
 import seedu.edulink.logic.parser.exceptions.ParseException;
 import seedu.edulink.model.ReadOnlyAddressBook;
+import seedu.edulink.model.RecentCommand;
 import seedu.edulink.model.student.Student;
 
 /**
@@ -45,6 +47,11 @@ public interface Logic {
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
+
+    /**
+     * Returns Recent commands
+     */
+    ArrayList<RecentCommand> getRecentCommands();
 
     /**
      * Set the user prefs' GUI settings.
