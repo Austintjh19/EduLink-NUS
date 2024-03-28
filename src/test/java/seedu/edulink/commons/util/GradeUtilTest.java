@@ -8,10 +8,6 @@ import seedu.edulink.model.grade.Grades;
 import seedu.edulink.model.grade.Score;
 
 public class GradeUtilTest {
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     @Test
     public void parseGrade_gradeA_returnsTrue() {
         Score score = new Score(95);
