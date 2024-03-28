@@ -1,7 +1,8 @@
 package seedu.edulink.logic.parser;
 
 import seedu.edulink.logic.commands.DeleteTagCommand;
-import seedu.edulink.logic.commands.TagCommand;
+import seedu.edulink.logic.commands.EditCommand;
+import seedu.edulink.logic.commands.EditTagCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
 import seedu.edulink.model.student.Id;
 import seedu.edulink.model.tag.Tag;
@@ -16,36 +17,41 @@ import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 
 
 /**
- * Parse input arguments and create a DeleteTagCommand object.
+ * Parse input arguments and create a EditTagCommand object.
  */
-public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
+public class EditTagCommandParser implements Parser<EditTagCommand> {
 
     /**
-     * Parses the user's arguments to DeleteTagCommand object.
+     * Parses the user's arguments to EditTagCommand object.
      *
      * @param args the user's argument.
-     * @return the new DeleteTagCommand object.
+     * @return the new EditTagCommand object.
      * @throws ParseException if the user's input doesn't conform the expected format.
      */
-    public DeleteTagCommand parse(String args) throws ParseException {
+    public EditTagCommand parse(String args) throws ParseException {
         Id userId;
-        Set<Tag> tagList;
+        Tag tagToEdit;
+        Tag resultingTag;
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID,
             PREFIX_TAG);
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_TAG)
             || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
         }
         try {
             String userIdString = argMultimap.getValue(PREFIX_ID).get();
             userId = new Id(userIdString);
-            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            if (argMultimap.getAllValues(PREFIX_TAG).size() != 2) {
+                throw new ParseException(EditTagCommand.MESSAGE_TWO_TAGS_NEED + EditTagCommand.MESSAGE_USAGE);
+            }
+            tagToEdit = ParserUtil.parseTag(argMultimap.getAllValues(PREFIX_TAG).get(0));
+            resultingTag = ParserUtil.parseTag(argMultimap.getAllValues(PREFIX_TAG).get(1));
         } catch (IllegalArgumentException e) {
             throw new ParseException(Id.MESSAGE_CONSTRAINTS);
         }
 
-        return new DeleteTagCommand(userId, tagList);
+        return new EditTagCommand(userId, tagToEdit, resultingTag);
     }
 
     /**
