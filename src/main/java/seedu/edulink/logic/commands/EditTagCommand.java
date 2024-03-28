@@ -30,6 +30,8 @@ public class EditTagCommand extends Command {
     public static final String MESSAGE_TWO_TAGS_NEED = "Please input exactly two tags.";
     public static final String MESSAGE_DUPLICATE = "Command Invalid: the resulting tag you input is already there.";
 
+    public static final String MESSAGE_DUPLICATE_AND_NOT_FOUND =
+            "Command Invalid: the tag you want to edit is not found, the resulting tag you input is already there.";
     private final Id personToEditId;
     private final Tag tagToEdit;
     private final Tag resultingTag;
@@ -64,13 +66,17 @@ public class EditTagCommand extends Command {
         Set<Tag> originalTags = studentToEdit.getTags();
         Set<Tag> editedTags = new HashSet<>(originalTags);
         boolean isResultingTagExit = editedTags.contains(resultingTag);
+        boolean isTagToEditExist = editedTags.contains(tagToEdit);
+        if (isResultingTagExit && !isTagToEditExist) {
+            throw new CommandException(MESSAGE_DUPLICATE_AND_NOT_FOUND);
+        }
+        if (!isTagToEditExist) {
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
+        }
         if (isResultingTagExit) {
             throw new CommandException(MESSAGE_DUPLICATE);
         }
-        boolean isRemoveSuccess = editedTags.remove(tagToEdit);
-        if (!isRemoveSuccess) {
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
-        }
+        editedTags.remove(tagToEdit);
         editedTags.add(resultingTag);
         Student editedStudent = new Student(studentToEdit.getId(), studentToEdit.getMajor(), studentToEdit.getIntake(),
             studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
