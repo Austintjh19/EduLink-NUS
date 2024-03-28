@@ -8,17 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.edulink.commons.core.LogsCenter;
-import seedu.edulink.logic.commands.AddCommand;
-import seedu.edulink.logic.commands.ClearCommand;
-import seedu.edulink.logic.commands.Command;
-import seedu.edulink.logic.commands.DeleteCommand;
-import seedu.edulink.logic.commands.EditCommand;
-import seedu.edulink.logic.commands.ExitCommand;
-import seedu.edulink.logic.commands.FindCommand;
-import seedu.edulink.logic.commands.HelpCommand;
-import seedu.edulink.logic.commands.ListCommand;
-import seedu.edulink.logic.commands.TagCommand;
-import seedu.edulink.logic.commands.UndoCommand;
+import seedu.edulink.logic.commands.*;
 import seedu.edulink.logic.parser.exceptions.ParseException;
 
 /**
@@ -84,6 +74,12 @@ public class AddressBookParser {
 
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
+
+        case DeleteTagCommand.COMMAND_WORD:
+            return new DeleteTagCommandParser().parse(arguments);
+
+        case EditTagCommand.COMMAND_WORD:
+            return new EditTagCommandParser().parse(arguments);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
