@@ -4,6 +4,7 @@ import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,7 +26,8 @@ public class TagCommand extends Command {
     public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the person you specified.";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tags: %1$s";
     public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID " + PREFIX_TAG + "Tag";
-    public static final String MESSAGE_DUPLICATE = "Note, Some tags you input are duplicated. Duplication is removed.";
+    public static final String MESSAGE_DUPLICATE = "Invalid Command: "
+            + "one or more tags you input are already there. ";
 
     private final Id personToEditId;
     private final Set<Tag> tags;
@@ -55,8 +57,12 @@ public class TagCommand extends Command {
         if (studentToEdit == null) {
             throw new CommandException(MESSAGE_PERSON_NOTFOUND);
         }
-        Set<Tag> resultTags = studentToEdit.getTags();
-        Set<Tag> mergedSet = new HashSet<>(resultTags);
+        Set<Tag> originalTags = studentToEdit.getTags();
+        Set<Tag> mergedSet = new HashSet<>(originalTags);
+        boolean isSetDisjoint = Collections.disjoint(mergedSet, tags);
+        if (!isSetDisjoint) {
+            throw new CommandException(MESSAGE_DUPLICATE);
+        }
         mergedSet.addAll(tags);
 
         Student editedStudent = new Student(studentToEdit.getId(), studentToEdit.getMajor(), studentToEdit.getIntake(),
@@ -64,11 +70,6 @@ public class TagCommand extends Command {
             studentToEdit.getAddress(), mergedSet);
 
         model.setPerson(studentToEdit, editedStudent);
-        if (mergedSet.size() != resultTags.size() + tags.size()) {
-            return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, tags)
-                + " \n" + MESSAGE_DUPLICATE);
-        }
-
         return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, tags));
     }
 

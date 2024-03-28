@@ -76,26 +76,26 @@ public class TagCommandTest {
     }
 
     @Test
-    public void execute_totallyDuplicateTag_success() {
+    public void execute_totallyDuplicateTag_throwCommandException() {
         HashSet<Tag> tagList = new HashSet<Tag>();
         tagList.add(new Tag("friends"));
-        Id invalidId = new Id("A0265901E");
-        TagCommand tagCommand = new TagCommand(invalidId, tagList);
-        String expectedMessage = String.format(MESSAGE_ADD_TAG_SUCCESS, tagList) + " \n" + MESSAGE_DUPLICATE;
+        Id validId = new Id("A0265901E");
+        TagCommand tagCommand = new TagCommand(validId, tagList);
+        String expectedErrorMessage = MESSAGE_DUPLICATE;
 
-        assertCommandSuccess(tagCommand, model, expectedMessage, model);
+        assertCommandFailure(tagCommand, model, expectedErrorMessage);
     }
 
     @Test
-    public void execute_partiallyDuplicateTag_success() {
+    public void execute_partiallyDuplicateTag_throwCommandException() {
         HashSet<Tag> tagList = new HashSet<Tag>();
         tagList.add(new Tag("friends"));
         tagList.add(new Tag("topstudent"));
-        Id invalidId = new Id("A0265901E");
-        TagCommand tagCommand = new TagCommand(invalidId, tagList);
-        String expectedMessage = String.format(MESSAGE_ADD_TAG_SUCCESS, tagList) + " \n" + MESSAGE_DUPLICATE;
+        Id validId = new Id("A0265901E");
+        TagCommand tagCommand = new TagCommand(validId, tagList);
+        String expectedErrorMessage = MESSAGE_DUPLICATE;
 
-        assertCommandSuccess(tagCommand, model, expectedMessage, model);
+        assertCommandFailure(tagCommand, model, expectedErrorMessage);
     }
 
     @Test
