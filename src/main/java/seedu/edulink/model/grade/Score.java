@@ -1,0 +1,64 @@
+package seedu.edulink.model.grade;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.edulink.commons.util.AppUtil.checkArgument;
+
+/**
+ * Represents a Student's Score in the Application.
+ * Guarantees: immutable; is valid as declared in {@link #isValidScore(double)}
+ */
+public class Score {
+    public static final String MESSAGE_CONSTRAINTS =
+        "Score should be a non-negative number between 0 and 100 inclusive";
+    public static final double MIN_SCORE = 0;
+    public static final double MAX_SCORE = 100;
+
+    public final double score;
+
+    /**
+     * Constructs a {@code Score}.
+     *
+     * @param score A valid score.
+     */
+    public Score(double score) {
+        requireNonNull(score);
+        checkArgument(isValidScore(score), MESSAGE_CONSTRAINTS);
+        this.score = score;
+    }
+
+    /**
+     * Returns true if a given double is a valid score.
+     */
+    public static boolean isValidScore(double test) {
+        return test >= MIN_SCORE && test <= MAX_SCORE;
+    }
+
+    public double getScore() {
+        return this.score;
+    }
+
+    @Override
+    public String toString() {
+        return Double.toString(score);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Score)) {
+            return false;
+        }
+
+        Score otherScore = (Score) other;
+        return Double.compare(this.score, otherScore.score) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Double.hashCode(score);
+    }
+}

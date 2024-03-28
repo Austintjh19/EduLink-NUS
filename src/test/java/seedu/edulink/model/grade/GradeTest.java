@@ -1,76 +1,74 @@
 package seedu.edulink.model.grade;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.edulink.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 public class GradeTest {
+    public static final Course VALID_COURSE1 = new Course("MA1522");
+    public static final Score VALID_SCORE1 = new Score(80);
+    public static final Grade VALID_GRADE1 = new Grade(VALID_COURSE1, VALID_SCORE1);
+
+    public static final Course VALID_COURSE2 = new Course("CS2040");
+    public static final Score VALID_SCORE2 = new Score(60);
+    public static final Grade VALID_GRADE2 = new Grade(VALID_COURSE2, VALID_SCORE2);
+
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Grade(null));
+    public void equals_sameValues_returnsTrue() {
+        Grade grade = new Grade(new Course("MA1522"), new Score(80));
+        assertTrue(VALID_GRADE1.equals(grade));
     }
 
     @Test
-    public void isValidMajor() {
-        // null Grade
-        assertThrows(NullPointerException.class, () -> Grade.isValidGrade(null));
-
-        // invalid Grade
-        assertFalse(Grade.isValidGrade("#!")); //special characters
-        assertFalse(Grade.isValidGrade("21515")); //5 digit Numeric
-        assertFalse(Grade.isValidGrade("a9326014")); //Alphanumeric
-        assertFalse(Grade.isValidGrade("Chem1351")); //Alphanumeric
-        assertFalse(Grade.isValidGrade("2026")); //Intake Year later than Current Year
-
-
-        // valid Grade
-        assertTrue(Grade.isValidGrade("A")); // Correct Format
-        assertTrue(Grade.isValidGrade("B"));
-        assertTrue(Grade.isValidGrade("D"));
-        assertTrue(Grade.isValidGrade("C"));
-        assertTrue(Grade.isValidGrade("F"));
-        assertTrue(Grade.isValidGrade("a"));
+    public void equals_sameObject_returnsTrue() {
+        assertTrue(VALID_GRADE1.equals(VALID_GRADE1));
     }
 
     @Test
-    public void stringTest() {
-        Grade grade = new Grade("A");
-        Grades valid = Grades.A;
-        Grades inValid = Grades.B;
-
-        assertTrue(grade.toString().equals(valid.toString()));
-        assertFalse(grade.toString().equals(inValid.toString()));
+    public void equals_nullValues_returnsFalse() {
+        assertFalse(VALID_GRADE1.equals(null));
     }
 
     @Test
-    public void hashTest() {
-        Grade grade = new Grade("A");
-        Grades valid = Grades.A;
-        Grades inValid = Grades.B;
-
-        assertTrue(grade.hashCode() == valid.hashCode());
-        assertFalse(grade.hashCode() == inValid.hashCode());
+    public void equals_differentValues_returnsFalse() {
+        assertFalse(VALID_GRADE1.equals(VALID_GRADE2));
     }
 
     @Test
-    public void equals() {
-        Grade grade = new Grade("A");
+    public void equals_differentCourse_returnsFalse() {
+        Course course = new Course("MA1522");
+        Score score = new Score(85);
+        Grade grade = new Grade(course, score);
+        assertFalse(VALID_GRADE1.equals(grade));
+    }
 
-        // same values -> returns true
-        assertTrue(grade.equals(new Grade("A")));
+    @Test
+    public void equals_differentScore_returnsFalse() {
+        Course course = new Course("CS2040");
+        Score score = new Score(45);
+        Grade grade = new Grade(course, score);
+        assertFalse(VALID_GRADE2.equals(grade));
+    }
 
-        // same object -> returns true
-        assertTrue(grade.equals(grade));
+    @Test
+    public void hashCode_sameValues_returnsTrue() {
+        Course course1 = new Course("MA1522");
+        Score score1 = new Score(85);
+        Grade grade1 = new Grade(course1, score1);
 
-        // null -> returns false
-        assertFalse(grade.equals(null));
+        Course course2 = new Course("MA1522");
+        Score score2 = new Score(85);
+        Grade grade2 = new Grade(course2, score2);
 
-        // different types -> returns false
-        assertFalse(grade.equals(5.0f));
+        assertTrue(grade1.hashCode() == grade2.hashCode());
+    }
 
-        // different values -> returns false
-        assertFalse(grade.equals(new Grade("B")));
+    @Test
+    public void toStringMethod() {
+        String expected = Grade.class.getCanonicalName() + "{course=" + VALID_COURSE1
+            + ", score=" + VALID_SCORE1 + ", grade=" + VALID_GRADE1.getGrade() + "}";
+        assertEquals(expected, VALID_GRADE1.toString());
     }
 }

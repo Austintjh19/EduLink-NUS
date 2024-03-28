@@ -17,7 +17,6 @@ import seedu.edulink.model.tag.Tag;
 public class Student {
 
     // Identity fields
-
     private final Id id;
     private final Name name;
     private final Phone phone;
@@ -170,5 +169,4 @@ public class Student {
             .add("tags", tags)
             .toString();
     }
-
 }
