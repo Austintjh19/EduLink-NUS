@@ -25,7 +25,8 @@ public class DeleteTagCommand extends Command {
     public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the person you specified.";
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tags: %1$s";
     public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID " + PREFIX_TAG + "Tag";
-    public static final String MESSAGE_TAG_NOT_FOUND = "Some tags you are looking for are not found.";
+    public static final String MESSAGE_TAG_NOT_FOUND = "Invalid Command"
+            + ", one or more tags you are looking for are not found.";
 
     private final Id personToEditId;
     private final Set<Tag> tags;
@@ -55,8 +56,12 @@ public class DeleteTagCommand extends Command {
         if (studentToEdit == null) {
             throw new CommandException(MESSAGE_PERSON_NOTFOUND);
         }
-        Set<Tag> resultTags = studentToEdit.getTags();
-        Set<Tag> removedSet = new HashSet<>(resultTags);
+        Set<Tag> originalTags = studentToEdit.getTags();
+        Set<Tag> removedSet = new HashSet<>(originalTags);
+        boolean isAllContained = originalTags.containsAll(tags);
+        if (!isAllContained) {
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
+        }
         removedSet.removeAll(tags);
 
         Student editedStudent = new Student(studentToEdit.getId(), studentToEdit.getMajor(), studentToEdit.getIntake(),
@@ -64,11 +69,6 @@ public class DeleteTagCommand extends Command {
             studentToEdit.getAddress(), removedSet);
 
         model.setPerson(studentToEdit, editedStudent);
-        if (removedSet.size() != resultTags.size() - tags.size()) {
-            return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tags)
-                + " \n" + MESSAGE_TAG_NOT_FOUND);
-        }
-
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tags));
     }
 

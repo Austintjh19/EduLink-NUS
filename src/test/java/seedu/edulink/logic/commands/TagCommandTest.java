@@ -75,7 +75,6 @@ public class TagCommandTest {
         assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_PERSON_NOTFOUND);
     }
 
-    //workingon, make good use of the util provided instead of adding by your own.
     @Test
     public void execute_totallyDuplicateTag_success() {
         HashSet<Tag> tagList = new HashSet<Tag>();
