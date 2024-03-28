@@ -1,19 +1,19 @@
 package seedu.edulink.logic.commands;
 
+import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.edulink.commons.util.ToStringBuilder;
 import seedu.edulink.logic.commands.exceptions.CommandException;
 import seedu.edulink.model.Model;
 import seedu.edulink.model.student.Id;
 import seedu.edulink.model.student.Student;
 import seedu.edulink.model.tag.Tag;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Edits a student's tag.
@@ -37,7 +37,7 @@ public class EditTagCommand extends Command {
     private final Tag resultingTag;
 
     /**
-     * Creates a DeleteTagCommand to delete tags from a student.
+     * Creates a EditTagCommand to edit tags of a student.
      *
      * @param personToEditId the ID of the student user add tags to.
      * @param tagToEdit the tag that the user wants to change.

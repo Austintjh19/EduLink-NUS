@@ -1,19 +1,19 @@
 package seedu.edulink.logic.commands;
 
+import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.edulink.commons.util.ToStringBuilder;
 import seedu.edulink.logic.commands.exceptions.CommandException;
 import seedu.edulink.model.Model;
 import seedu.edulink.model.student.Id;
 import seedu.edulink.model.student.Student;
 import seedu.edulink.model.tag.Tag;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Removes tags from a student.

@@ -1,6 +1,15 @@
 package seedu.edulink.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.edulink.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.edulink.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.edulink.testutil.TypicalPersons.BENSON;
+import static seedu.edulink.testutil.TypicalPersons.getTypicalAddressBook;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.edulink.model.Model;
 import seedu.edulink.model.ModelManager;
 import seedu.edulink.model.UserPrefs;
@@ -9,16 +18,8 @@ import seedu.edulink.model.student.Student;
 import seedu.edulink.model.tag.Tag;
 import seedu.edulink.testutil.PersonBuilder;
 
-import java.util.HashSet;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.edulink.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.edulink.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.edulink.testutil.TypicalPersons.BENSON;
-import static seedu.edulink.testutil.TypicalPersons.getTypicalAddressBook;
-
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code EditTagCommand}.
  */
 public class EditTagCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

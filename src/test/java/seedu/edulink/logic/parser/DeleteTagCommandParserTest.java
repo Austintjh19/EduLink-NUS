@@ -1,16 +1,16 @@
 package seedu.edulink.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.edulink.logic.commands.DeleteTagCommand;
-import seedu.edulink.logic.commands.TagCommand;
-import seedu.edulink.model.student.Id;
-import seedu.edulink.model.tag.Tag;
+import static seedu.edulink.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.edulink.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static seedu.edulink.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.edulink.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import org.junit.jupiter.api.Test;
+
+import seedu.edulink.logic.commands.DeleteTagCommand;
+import seedu.edulink.model.student.Id;
+import seedu.edulink.model.tag.Tag;
 
 public class DeleteTagCommandParserTest {
 
