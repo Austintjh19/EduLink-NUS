@@ -20,7 +20,8 @@ public class Grade {
     /**
      * Constructs a {@code Major}.
      *
-     * @param grade A valid Grade.
+     * @param course A valid Course.
+     * @param score A valid Score.
      */
     public Grade(Course course, Score score) {
         requireAllNonNull(course, score);
