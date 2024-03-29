@@ -20,13 +20,16 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Student> personListView;
 
+    private final MainWindow mainWindow;
+
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Student> studentList) {
+    public PersonListPanel(MainWindow mainWindow, ObservableList<Student> studentList) {
         super(FXML);
         personListView.setItems(studentList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        this.mainWindow = mainWindow;
     }
 
     /**
@@ -41,7 +44,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(student, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(mainWindow, student, getIndex() + 1).getRoot());
             }
         }
     }

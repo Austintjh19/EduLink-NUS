@@ -10,11 +10,11 @@ import javafx.scene.layout.Region;
 import seedu.edulink.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person} in Detail.
  */
-public class PersonCard extends UiPart<Region> {
+public class DetailsCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "DetailsCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -25,8 +25,6 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Student student;
-
-    private final MainWindow mainWindow;
 
     @FXML
     private HBox cardPane;
@@ -52,10 +50,9 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(MainWindow mainWindow, Student student, int displayedIndex) {
+    public DetailsCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
-        this.mainWindow = mainWindow;
         id.setText(displayedIndex + ". ");
         studentId.setText(student.getId().id);
         name.setText(student.getName().fullName);
@@ -65,12 +62,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
         student.getTags().stream()
-            .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-    }
-
-    @FXML
-    private void handleClick() {
-        mainWindow.displayStudentDetails(student);
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

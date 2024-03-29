@@ -16,6 +16,7 @@ import seedu.edulink.logic.Logic;
 import seedu.edulink.logic.commands.CommandResult;
 import seedu.edulink.logic.commands.exceptions.CommandException;
 import seedu.edulink.logic.parser.exceptions.ParseException;
+import seedu.edulink.model.student.Student;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -111,7 +112,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(this, logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -192,5 +193,14 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Displays current selected student details.
+     *
+     * @param student The selected student.
+     */
+    public void displayStudentDetails(Student student) {
+        System.out.println(student.toString());
     }
 }
