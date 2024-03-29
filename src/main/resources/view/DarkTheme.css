@@ -408,3 +408,15 @@
 #recentCommandsPlaceholder {
     -fx-content-display: none;
 }
+
+/*
+  // ================================
+  // Logo
+  // ================================ */
+
+.student-card-container {
+    -fx-background-color: #FEFEFE;
+    -fx-padding: 10px;
+    -fx-background-radius: 15px;
+    /*-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 1);*/
+}

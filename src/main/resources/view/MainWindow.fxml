@@ -13,7 +13,7 @@
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="EduLink NUS" minWidth="500" minHeight="750" onCloseRequest="#handleExit">
+         title="EduLink NUS" minWidth="1250" minHeight="750" onCloseRequest="#handleExit">
     <icons>
         <Image url="@/images/address_book_32.png"/>
     </icons>
@@ -76,12 +76,23 @@
 
                 </StackPane>
 
-                <VBox fx:id="studentList" styleClass="stack-pane" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-                    <padding>
-                        <Insets top="10" right="20" bottom="10" left="20"/>
-                    </padding>
-                    <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-                </VBox>
+                <HBox VBox.vgrow="ALWAYS">
+                    <VBox fx:id="studentCardPlaceholder" styleClass="stack-pane" minWidth="450" prefWidth="450" maxWidth="450" VBox.vgrow="ALWAYS">
+                        <padding>
+                            <Insets top="10" right="10" bottom="20" left="20"/>
+                        </padding>
+                        <StackPane styleClass="student-card-container" VBox.vgrow="ALWAYS" HBox.hgrow="NEVER">
+                        </StackPane>
+                    </VBox>
+
+                    <VBox fx:id="studentList" styleClass="stack-pane" minWidth="800" prefWidth="800" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+                        <padding>
+                            <Insets top="10" right="20" bottom="20" left="10"/>
+                        </padding>
+                        <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </HBox>
+
 
                 <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER"/>
             </VBox>
