@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.edulink.model.student.Id;
 
 public class RecentCommandsTest {
     private RecentCommands recentCommands;
@@ -28,6 +29,7 @@ public class RecentCommandsTest {
     @Test
     void testEquals() {
         RecentCommands other = new RecentCommands();
+        Id id = new Id("A0265901E");
         assertTrue(recentCommands.equals(other));
 
         recentCommands.add("command1");
@@ -35,6 +37,10 @@ public class RecentCommandsTest {
 
         other.add("command1");
         assertTrue(recentCommands.equals(other));
+
+        assertTrue(recentCommands.equals(recentCommands));
+
+        assertFalse(recentCommands.equals(id));
     }
 
     @Test
@@ -51,9 +57,9 @@ public class RecentCommandsTest {
     @Test
     void testAddWithLimit() {
         ObservableList<String> expected = FXCollections.observableArrayList(
-            Arrays.asList("command5", "command4", "command3", "command2", "command1"));
+            Arrays.asList("command6", "command5", "command4", "command3", "command2"));
 
-        for (int i = 1; i <= RecentCommands.LIMIT; i++) {
+        for (int i = 1; i <= RecentCommands.LIMIT + 1; i++) {
             recentCommands.add("command" + i);
         }
 
