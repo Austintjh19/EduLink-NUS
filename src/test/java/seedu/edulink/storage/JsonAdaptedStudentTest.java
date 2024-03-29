@@ -1,10 +1,11 @@
 package seedu.edulink.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.edulink.storage.JsonAdaptedGradeTest.VALID_COURSE;
+import static seedu.edulink.storage.JsonAdaptedGradeTest.VALID_SCORE;
 import static seedu.edulink.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.edulink.testutil.Assert.assertThrows;
 import static seedu.edulink.testutil.TypicalPersons.BENSON;
-import static seedu.edulink.testutil.TypicalPersons.BENSON_GRADE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,6 @@ import seedu.edulink.model.student.Intake;
 import seedu.edulink.model.student.Major;
 import seedu.edulink.model.student.Name;
 import seedu.edulink.model.student.Phone;
-import static seedu.edulink.storage.JsonAdaptedGradeTest.VALID_SCORE;
-import static seedu.edulink.storage.JsonAdaptedGradeTest.VALID_COURSE;
 
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";
@@ -165,7 +164,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_ID, VALID_MAJOR, VALID_INTAKE, VALID_GRADE,
-            VALID_NAME,VALID_PHONE, VALID_EMAIL, null, VALID_TAGS);
+            VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

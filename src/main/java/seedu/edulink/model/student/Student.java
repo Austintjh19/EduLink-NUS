@@ -168,12 +168,12 @@ public class Student {
         }
 
         Student otherStudent = (Student) other;
-        return id.equals(otherStudent.id) 
+        return id.equals(otherStudent.id)
             && name.equals(otherStudent.name)
             && phone.equals(otherStudent.phone)
             && email.equals(otherStudent.email)
             && address.equals(otherStudent.address)
-            && tags.equals(otherStudent.tags) 
+            && tags.equals(otherStudent.tags)
             && major.equals(otherStudent.major)
             && grade.equals(otherStudent.grade);
     }

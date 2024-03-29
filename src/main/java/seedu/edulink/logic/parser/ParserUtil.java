@@ -125,6 +125,13 @@ public class ParserUtil {
         return new Intake(trimmedIntake);
     }
 
+    /**
+     * Parses a {@code String grade} into a {@code Grade}.
+     * {@code String grade} is written as [course]: [score]
+     * All whitespaces will be removed.
+     *
+     * @throws ParseException if either the given course or score is invalid.
+     */
     public static Grade parseGrade(String grade) throws ParseException {
         requireNonNull(grade);
         String trimmedGrade = grade.replaceAll("\\s", "");

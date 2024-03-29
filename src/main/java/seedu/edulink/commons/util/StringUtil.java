@@ -131,9 +131,18 @@ public class StringUtil {
         }
     }
 
+    /**
+     * Returns true if {@code s} represents a valid double value
+     * e.g. 123.45", -0.123, 6.022e23 (scientific notation)
+     * Will return false for any other non-null string input that cannot be parsed as a double,
+     * e.g., empty string, "abc", "+", "-", 1.2.3 (invalid decimal format), etc.
+     *
+     * @param s the string to be checked
+     * @return true if {@code s} represents a valid double value, false otherwise
+     * @throws NullPointerException if {@code s} is null
+     */
     public static boolean isDouble(String s) {
         requireNonNull(s);
-    
         try {
             Double.parseDouble(s);
             return true;

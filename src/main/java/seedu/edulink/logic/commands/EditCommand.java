@@ -25,6 +25,7 @@ import seedu.edulink.commons.util.ToStringBuilder;
 import seedu.edulink.logic.Messages;
 import seedu.edulink.logic.commands.exceptions.CommandException;
 import seedu.edulink.model.Model;
+import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
 import seedu.edulink.model.student.Id;
@@ -33,7 +34,6 @@ import seedu.edulink.model.student.Major;
 import seedu.edulink.model.student.Name;
 import seedu.edulink.model.student.Phone;
 import seedu.edulink.model.student.Student;
-import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.tag.Tag;
 
 /**
