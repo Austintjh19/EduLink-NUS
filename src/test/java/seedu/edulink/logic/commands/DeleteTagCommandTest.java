@@ -20,9 +20,6 @@ import seedu.edulink.model.student.Student;
 import seedu.edulink.model.tag.Tag;
 import seedu.edulink.testutil.PersonBuilder;
 
-
-
-
 /**
  * Contains integration tests (interaction with the Model) for {@code DeleteTagCommand}.
  */
