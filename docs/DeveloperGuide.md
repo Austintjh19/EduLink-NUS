@@ -158,14 +158,14 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Find feature 
+### Find feature
 
-The find feature has been purposefully designed to allow for searches with Student ID, Name, or both. Searching using a name returns only the individuals whose name is an ordered super string of the search term. 
-Searching using student ID returns only the Individuals whose Student ID is a super string of the search id, disregarding ordering. Searching by name and id returns only the individuals who satisfy the two search values. 
+The find feature has been purposefully designed to allow for searches with Student ID, Name, or both. Searching using a name returns only the individuals whose name is an ordered super string of the search term.
+Searching using student ID returns only the Individuals whose Student ID is a super string of the search id, disregarding ordering. Searching by name and id returns only the individuals who satisfy the two search values.
 
 #### Proposed Implementation
 
-Below is a representing class diagram of the feature. 
+Below is a representing class diagram of the feature.
 
 <puml src="diagrams/find/FindClassDiagram.puml" alt="UML Class Diagram - Find"/>
 
@@ -293,7 +293,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 * EduLink NUS offers National University of Singapore professors and teaching assistants a centralised platform for effortless connection and search capabilities regarding past and current students. By streamlining communication and data retrieval, it enhances efficiency in academic engagement and administrative tasks.
 * manage contacts faster than a typical mouse/GUI driven app
 
@@ -402,7 +402,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 4b1 - 4b2 are repated till the data entered are correct.
 
       Use case resumes at step 5.
-   
+
 * 4c. updated information is the same as current information
 
     * 4c1. No changes made to information
