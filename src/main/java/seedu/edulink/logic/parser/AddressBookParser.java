@@ -85,10 +85,13 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
 
@@ -97,6 +100,7 @@ public class AddressBookParser {
 
         case EditTagCommand.COMMAND_WORD:
             return new EditTagCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
