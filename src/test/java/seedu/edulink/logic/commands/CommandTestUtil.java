@@ -67,7 +67,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "1515115";
     public static final String INVALID_MAJOR_DESC = " " + PREFIX_MAJOR + "1515";
-    public static final String INVALID_INTAKE_DESC = " " + PREFIX_INTAKE + "2400";
+    public static final String INVALID_INTAKE_DESC = " " + PREFIX_INTAKE + "2060";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol

@@ -10,6 +10,7 @@ import static seedu.edulink.logic.commands.CommandTestUtil.INTAKE_DESC_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.MAJOR_DESC_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.edulink.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.edulink.testutil.Assert.assertThrows;
 import static seedu.edulink.testutil.TypicalPersons.AMY;
 
@@ -182,8 +183,8 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + ID_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
-            + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + MAJOR_DESC_AMY + INTAKE_DESC_AMY;
-        Student expectedStudent = new PersonBuilder(AMY).withTags().build();
+            + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + MAJOR_DESC_AMY + INTAKE_DESC_AMY + TAG_DESC_FRIEND;
+        Student expectedStudent = new PersonBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedStudent);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

@@ -35,6 +35,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String INVALID_FILENAME = "?";
+    private static final String VALID_FILENAME2 = "_mystudents";
     private static final String VALID_FILENAME = "students";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -78,6 +79,8 @@ public class ParserUtilTest {
     public void parseFilename_validValue_returns() throws ParseException {
         String expected = "students";
         assertEquals(expected , ParserUtil.parseFilename(VALID_FILENAME));
+        String expected2 = "_mystudents";
+        assertEquals(expected2, ParserUtil.parseFilename(VALID_FILENAME2));
     }
 
     @Test
