@@ -49,8 +49,8 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText.toLowerCase());
-        recentCommands.add(commandText.toLowerCase());
+        Command command = addressBookParser.parseCommand(commandText);
+        recentCommands.add(commandText);
         commandResult = command.execute(model);
         try {
             storage.saveAddressBook(model.getAddressBook());
