@@ -199,7 +199,7 @@ public class AddCommandParserTest {
         // invalid intake
         assertParseFailure(parser, ID_DESC_BOB + MAJOR_DESC_BOB + INVALID_INTAKE_DESC
             + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-            + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Intake.MESSAGE_CONSTRAINTS);
+            + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Intake.INVALID_YEAR);
 
         // invalid phone
         assertParseFailure(parser, ID_DESC_BOB + MAJOR_DESC_BOB + INTAKE_DESC_BOB
