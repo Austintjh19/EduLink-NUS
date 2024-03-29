@@ -71,7 +71,7 @@ public class PersonCard extends UiPart<Region> {
     }
 
     @FXML
-    private void handleClick() {
-        mainWindow.displayStudentDetailsCard(student);
+    private void updateStudentDetailsCard() {
+        mainWindow.updateStudentDetailsCard(student);
     }
 }

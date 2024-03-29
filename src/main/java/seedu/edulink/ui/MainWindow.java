@@ -40,7 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private StackPane detailsContainer;
+    private StackPane studentDetailsContainer;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -201,10 +201,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void updateStudentDetailsCard() {
-        Student student = logic.getFilteredPersonList().get(0);
-        if (student != null) {
+        if (!logic.getFilteredPersonList().isEmpty()) {
             DetailsCard detailsCard = new DetailsCard(logic.getFilteredPersonList().get(0));
-            detailsContainer.getChildren().setAll(detailsCard.getRoot());
+            studentDetailsContainer.getChildren().setAll(detailsCard.getRoot());
         }
     }
 
@@ -213,10 +212,10 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @param student The selected student.
      */
-    public void displayStudentDetailsCard(Student student) {
+    public void updateStudentDetailsCard(Student student) {
         if (student != null) {
             DetailsCard detailsCard = new DetailsCard(student);
-            detailsContainer.getChildren().setAll(detailsCard.getRoot());
+            studentDetailsContainer.getChildren().setAll(detailsCard.getRoot());
         }
     }
 }
