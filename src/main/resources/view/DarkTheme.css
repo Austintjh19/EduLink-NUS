@@ -411,10 +411,10 @@
 
 /*
   // ================================
-  // Logo
+  // Details
   // ================================ */
 
-.student-card-container {
+.detailsContainer {
     -fx-background-color: #FEFEFE;
     -fx-padding: 10px;
     -fx-background-radius: 15px;

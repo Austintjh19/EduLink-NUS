@@ -33,8 +33,6 @@ public class DetailsCard extends UiPart<Region> {
     @FXML
     private Label studentId;
     @FXML
-    private Label id;
-    @FXML
     private Label major;
     @FXML
     private Label intake;
@@ -50,10 +48,9 @@ public class DetailsCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public DetailsCard(Student student, int displayedIndex) {
+    public DetailsCard(Student student) {
         super(FXML);
         this.student = student;
-        id.setText(displayedIndex + ". ");
         studentId.setText(student.getId().id);
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);

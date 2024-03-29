@@ -40,6 +40,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private StackPane detailsContainer;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
@@ -187,6 +190,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+            updateDisplayStudentDetails();
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -195,12 +199,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    private void updateDisplayStudentDetails() {
+        DetailsCard detailsCard = new DetailsCard(logic.getFilteredPersonList().get(0));
+        detailsContainer.getChildren().setAll(detailsCard.getRoot());
+    }
+
     /**
      * Displays current selected student details.
      *
      * @param student The selected student.
      */
     public void displayStudentDetails(Student student) {
-        System.out.println(student.toString());
+        DetailsCard detailsCard = new DetailsCard(student);
+        detailsContainer.getChildren().setAll(detailsCard.getRoot());
     }
 }
