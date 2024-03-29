@@ -1,7 +1,6 @@
 package seedu.edulink.logic;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.edulink.commons.core.GuiSettings;

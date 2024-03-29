@@ -2,13 +2,8 @@ package seedu.edulink.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.logging.Filter;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 
 /**
  * Keeps track of the Recent Commands
@@ -43,37 +38,27 @@ public class RecentCommands {
 
     /**
      * Adds a command to the List of Recent Commands
+     *
      * @param command Command to be added in the List
      */
     public void add(String command) {
         requireNonNull(command);
         if (counter == LIMIT) {
             removeOldestCommand();
-            commands.add(command);
+            commands.add(0, command);
         } else {
-            commands.add(command);
+            commands.add(0, command);
             counter++;
         }
     }
 
     private void removeOldestCommand() {
-        commands.remove(0);
+        commands.remove(commands.size() - 1);
     }
 
     public ObservableList<String> getCommands() {
         return commands;
     }
-
-//    @Override
-//    public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        for (int i = 0; i < counter; i++) {
-//            if (i == counter - 1) {
-//                sb.append(commands[i]);
-//            } else {
-//                sb.append(commands[i]).append(" ");
-//            }
-//        }
-//        return sb.toString();
-//    }
 }
+
+
