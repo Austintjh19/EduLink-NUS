@@ -130,4 +130,15 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static boolean isDouble(String s) {
+        requireNonNull(s);
+    
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }

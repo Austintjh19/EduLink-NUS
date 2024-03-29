@@ -3,6 +3,7 @@ package seedu.edulink.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
 import seedu.edulink.model.student.Id;
@@ -35,6 +36,7 @@ public class PersonBuilder {
     private Id id;
     private Major major;
     private Intake intake;
+    private Grade grade;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -48,6 +50,7 @@ public class PersonBuilder {
         major = new Major(DEFAULT_MAJOR);
         intake = new Intake(DEFAULT_INTAKE);
         tags = new HashSet<>();
+        grade = new GradeBuilder().build();
     }
 
     /**
@@ -61,6 +64,7 @@ public class PersonBuilder {
         id = studentToCopy.getId();
         major = studentToCopy.getMajor();
         intake = studentToCopy.getIntake();
+        grade = studentToCopy.getGrade();
         tags = new HashSet<>(studentToCopy.getTags());
     }
 
@@ -121,6 +125,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Grade} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGrade(Grade grade) {
+        this.grade = grade;
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
@@ -129,7 +141,7 @@ public class PersonBuilder {
     }
 
     public Student build() {
-        return new Student(id, major, intake, name, phone, email, address, tags);
+        return new Student(id, major, intake, grade, name, phone, email, address, tags);
     }
 
 }

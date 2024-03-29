@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_INTAKE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MAJOR;
@@ -37,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_TAG, PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE);
+                PREFIX_TAG, PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE, PREFIX_GRADE);
 
         Index index;
 
@@ -60,6 +61,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_INTAKE).isPresent()) {
             editPersonDescriptor.setIntake(ParserUtil.parseIntake(argMultimap.getValue(PREFIX_INTAKE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_GRADE).isPresent()) {
+            editPersonDescriptor.setGrade(ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get()));
         }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));

@@ -13,9 +13,9 @@ import seedu.edulink.commons.util.ToStringBuilder;
  */
 public class Grade {
 
-    public final Grades grade;
-    public final Course course;
-    public final Score score;
+    private final Grades grade;
+    private final Course course;
+    private final Score score;
 
     /**
      * Constructs a {@code Major}.
@@ -28,6 +28,14 @@ public class Grade {
         this.grade = GradeUtil.parseGrade(score);
         this.course = course;
         this.score = score;
+    }
+
+    public Course getCourse() {
+        return this.course;
+    }
+
+    public Score getScore() {
+        return this.score;
     }
 
     public Grades getGrade() {

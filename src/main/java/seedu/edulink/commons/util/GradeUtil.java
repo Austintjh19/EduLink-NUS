@@ -15,7 +15,7 @@ public class GradeUtil {
     private static final Predicate<Double> isGradeB = score -> score >= 80 && score < 90;
     private static final Predicate<Double> isGradeC = score -> score >= 70 && score < 80;
     private static final Predicate<Double> isGradeD = score -> score >= 60 && score < 70;
-    private static final Predicate<Double> isGradeF = score -> score >= 0 && score < 60;
+    private static final Predicate<Double> isGradeF = score -> score > 0 && score < 60;
 
     /**
      * Parses a given score into a corresponding grade.

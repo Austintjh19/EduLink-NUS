@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.edulink.model.AddressBook;
+import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Student;
 
 /**
@@ -34,8 +35,10 @@ public class TypicalPersons {
         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
         .withPhone("94351253")
         .withTags("friends", "TA", "Smart").build();
+    public static final Grade BENSON_GRADE = new GradeBuilder().withCourse("CS2103").withScore(70)
+        .build();
     public static final Student BENSON = new PersonBuilder().withName("Benson Meier").withId("A0265901E")
-        .withMajor("Physics").withIntake("2023")
+        .withMajor("Physics").withIntake("2023").withGrade(BENSON_GRADE)
         .withAddress("311, Clementi Ave 2, #02-25")
         .withEmail("johnd@example.com").withPhone("98765432")
         .withTags("owesMoney", "friends").build();
