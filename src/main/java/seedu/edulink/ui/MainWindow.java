@@ -190,7 +190,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-            updateDisplayStudentDetails();
+
+            updateStudentDetailsCard();
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -199,9 +200,12 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void updateDisplayStudentDetails() {
-        DetailsCard detailsCard = new DetailsCard(logic.getFilteredPersonList().get(0));
-        detailsContainer.getChildren().setAll(detailsCard.getRoot());
+    private void updateStudentDetailsCard() {
+        Student student = logic.getFilteredPersonList().get(0);
+        if (student != null) {
+            DetailsCard detailsCard = new DetailsCard(logic.getFilteredPersonList().get(0));
+            detailsContainer.getChildren().setAll(detailsCard.getRoot());
+        }
     }
 
     /**
@@ -209,8 +213,10 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @param student The selected student.
      */
-    public void displayStudentDetails(Student student) {
-        DetailsCard detailsCard = new DetailsCard(student);
-        detailsContainer.getChildren().setAll(detailsCard.getRoot());
+    public void displayStudentDetailsCard(Student student) {
+        if (student != null) {
+            DetailsCard detailsCard = new DetailsCard(student);
+            detailsContainer.getChildren().setAll(detailsCard.getRoot());
+        }
     }
 }

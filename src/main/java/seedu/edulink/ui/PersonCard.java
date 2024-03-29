@@ -56,6 +56,7 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         this.mainWindow = mainWindow;
+
         id.setText(displayedIndex + ". ");
         studentId.setText(student.getId().id);
         name.setText(student.getName().fullName);
@@ -71,6 +72,6 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private void handleClick() {
-        mainWindow.displayStudentDetails(student);
+        mainWindow.displayStudentDetailsCard(student);
     }
 }
