@@ -2,6 +2,7 @@ package seedu.edulink.testutil;
 
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.edulink.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ID_AMY;
@@ -14,6 +15,7 @@ import static seedu.edulink.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.edulink.logic.commands.CommandTestUtil.VALID_SCORE_89;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -26,12 +28,14 @@ import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Student;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Student} objects to be used in tests.
  */
 public class TypicalPersons {
 
+    public static final Grade ALICE_GRADE = new GradeBuilder().withCourse("CS2113").withScore(55)
+        .build();
     public static final Student ALICE = new PersonBuilder().withName("Alice Pauline").withId("A0251893P")
-        .withMajor("Computer Science").withIntake("2023")
+        .withMajor("Computer Science").withIntake("2023").withGrade(ALICE_GRADE)
         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
         .withPhone("94351253")
         .withTags("friends", "TA", "Smart").build();
@@ -81,11 +85,12 @@ public class TypicalPersons {
         .withPhone(VALID_PHONE_AMY).withId(VALID_ID_AMY)
         .withMajor(VALID_MAJOR_AMY).withIntake(VALID_INTAKE_AMY).withEmail(VALID_EMAIL_AMY)
         .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
+    public static final Grade BOB_GRADE = new GradeBuilder().withCourse(VALID_COURSE_CS2103T)
+        .withScore(VALID_SCORE_89).build();
     public static final Student BOB = new PersonBuilder().withId(VALID_ID_BOB).withName(VALID_NAME_BOB)
-        .withPhone(VALID_PHONE_BOB)
-        .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withMajor(VALID_MAJOR_BOB)
-        .withIntake(VALID_INTAKE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-        .build();
+        .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+        .withMajor(VALID_MAJOR_BOB).withIntake(VALID_INTAKE_BOB).withGrade(BOB_GRADE)
+        .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

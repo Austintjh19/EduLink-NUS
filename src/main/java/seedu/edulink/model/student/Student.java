@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.Optional;
 
 import seedu.edulink.commons.util.ToStringBuilder;
 import seedu.edulink.model.grade.Course;
@@ -31,7 +32,6 @@ public class Student {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-
 
     /**
      * Every field must be present and not null.
