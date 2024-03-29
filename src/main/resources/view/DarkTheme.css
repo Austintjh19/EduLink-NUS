@@ -405,6 +405,39 @@
   // Recent Command
   // ================================ */
 
-#recentCommandsPlaceholder {
-    -fx-content-display: none;
+.recents {
+    -fx-background-color: #FEFEFE;
+    -fx-background-radius: 15px;
+    -fx-alignment: center;
+    -fx-padding: 10 10 10 10;
+    -fx-spacing: 10px;
 }
+
+.recents-label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+}
+
+.recent-commands-list {
+    -fx-background-color: #FEFEFE;
+}
+
+.recent-commands-list .list-cell{
+    -fx-background-color: #cacbcc;
+    -fx-padding: 0 30 0 30;
+    -fx-background-insets: 0 10 0 10;
+}
+
+.recent-commands-list .list-cell .label{
+    -fx-max-width: 100px;
+    -fx-text-overrun: ELLIPSIS;
+    -fx-text-fill: #262626;
+}
+
+.recent-commands-list .list-cell:empty{
+    -fx-background-color: #FEFEFE;
+}
+
+

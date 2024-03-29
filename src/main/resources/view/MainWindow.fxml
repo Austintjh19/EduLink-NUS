@@ -72,8 +72,11 @@
 
                 </HBox>
 
-                <StackPane VBox.vgrow="NEVER" fx:id="recentCommandsPlaceholder">
-
+                <StackPane VBox.vgrow="NEVER" fx:id="recentCommandsPlaceholder" styleClass="stack-pane"
+                           minHeight="10" prefHeight="120" maxHeight="200">
+                    <padding>
+                        <Insets top="10" right="20" bottom="10" left="20"/>
+                    </padding>
                 </StackPane>
 
                 <VBox fx:id="studentList" styleClass="stack-pane" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
