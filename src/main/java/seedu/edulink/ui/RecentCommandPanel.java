@@ -1,10 +1,13 @@
 package seedu.edulink.ui;
 
+import java.util.Optional;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 
 /**
@@ -15,14 +18,27 @@ public class RecentCommandPanel extends UiPart<Region> {
     @FXML
     private ListView<String> commands;
 
+    private final CommandBox commandBox;
+
 
     /**
      * Creates a {@code RecentCommandPanel} with the given {@code recentCommands}.
      */
-    public RecentCommandPanel(ObservableList<String> recentCommands) {
+    public RecentCommandPanel(ObservableList<String> recentCommands, CommandBox commandBox) {
         super(FXML);
+        this.commandBox = commandBox;
         commands.setItems(recentCommands);
-        commands.setCellFactory(listView -> new RecentCommandCell());
+        commands.setCellFactory(listView -> {
+            RecentCommandCell cell = new RecentCommandCell();
+            cell.setOnMouseClicked(this::handleMouseClick);
+            return cell;
+        });
+    }
+
+    private void handleMouseClick(MouseEvent mouseEvent) {
+        RecentCommandCell source = (RecentCommandCell) mouseEvent.getSource();
+        Optional<Label> label = Optional.of((Label) source.getGraphic());
+        label.ifPresent(value -> this.commandBox.getCommandTextField().setText(value.getText()));
     }
 
     /**

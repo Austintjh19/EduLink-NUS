@@ -49,6 +49,10 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    public TextField getCommandTextField() {
+        return commandTextField;
+    }
+
     /**
      * Sets the command box style to use the default style.
      */
