@@ -119,10 +119,10 @@ Examples:
 
 ### Search students by name or ID: `find`
 
-Finds students whose names or IDs matches any of the given keywords. 
+Finds students whose names or IDs matches any of the given keywords.
 Can search by both the IDs and name.
 
-Formats: 
+Formats:
 * search by name: `find [n/NAME]`
 * search by student ID: `find [id/STUDENT_ID]`
 * * search by name: `find [n/NAME]`
@@ -134,7 +134,7 @@ Formats:
 * The search by ID supports partial word matching, does not need to be in chronological order e.g. `A123` will match `A1234567X`. And `2345` will match with `A1234567X`.
 * When querying student through name with multiple keywords, only names that match all will be returned.
   e.g. `Hans Bo` will return `Hans Bober`, `Hans Bober` and not `Hans Mayer`
-* When searching by both id and name, only ids and names that match both will be returned. 
+* When searching by both id and name, only ids and names that match both will be returned.
  e.g. `Hans Bo` and `A1234` will return entries that has names starting with `Hans Bo` and id starting with `A1234`.
 
 Examples:
@@ -156,8 +156,8 @@ Format: `delete INDEX` **OR** `delete id/STUDENT_ID`
 * Deletes the student at the specified `INDEX` or deletes the student identified by the specified `STUDENT_ID`.
 * The INDEX refers to the index number shown in the displayed student list.
 * The STUDENT_ID refers to the unique identification string associated with individuals stored in EduLink NUS.
-* The INDEX **must be a positive integer** 1, 2, 3, …​ 
-* The STUDENT_ID **must exist within the system** 
+* The INDEX **must be a positive integer** 1, 2, 3, …​
+* The STUDENT_ID **must exist within the system**
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
@@ -168,12 +168,12 @@ Examples:
 
 Filter displayed list of students based on a tag or tags.
 
-Format: `filter t/TAG [t/TAG] …​` 
+Format: `filter t/TAG [t/TAG] …​`
 
 * Tag names are case-sensitive. e.g `TA` will **NOT** match `Ta`
 * The order of the tags does not matter. e.g. result for `TA` and `Knowledgeable` will match `Knowledgeable` and `TA`.
 * Only full words will be matched e.g. `High Priority` will not match `High Achieving`.
-* Persons matching all tags listed will be returned. E.g. Person with `TA` tag only will not be returned, if tags 
+* Persons matching all tags listed will be returned. E.g. Person with `TA` tag only will not be returned, if tags
   specified includes `TA` and `Year 2`.
 
 Examples:
@@ -249,6 +249,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX` **OR** `delete id/STUDENT_ID` <br> e.g., `delete 3`, `delete id/A026273X`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA` 
+**Filter** | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`
 **List**   | `list`
 **Help**   | `help`

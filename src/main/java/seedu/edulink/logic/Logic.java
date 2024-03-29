@@ -47,6 +47,11 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
+     * Returns Recent commands
+     */
+    ObservableList<String> getRecentCommands();
+
+    /**
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);

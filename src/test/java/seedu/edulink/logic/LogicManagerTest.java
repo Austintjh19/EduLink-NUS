@@ -29,6 +29,7 @@ import seedu.edulink.logic.parser.exceptions.ParseException;
 import seedu.edulink.model.Model;
 import seedu.edulink.model.ModelManager;
 import seedu.edulink.model.ReadOnlyAddressBook;
+import seedu.edulink.model.RecentCommands;
 import seedu.edulink.model.UserPrefs;
 import seedu.edulink.model.student.Student;
 import seedu.edulink.storage.JsonAddressBookStorage;
@@ -83,6 +84,14 @@ public class LogicManagerTest {
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
             LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+    }
+
+    @Test
+    public void execute_getRecentCommands() throws Exception {
+        RecentCommands recentCommands = new RecentCommands();
+        recentCommands.add("list");
+        logic.execute("list");
+        assertEquals(recentCommands.getCommands(), logic.getRecentCommands());
     }
 
     @Test
