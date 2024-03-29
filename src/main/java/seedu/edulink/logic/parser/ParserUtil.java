@@ -8,6 +8,8 @@ import java.util.Set;
 
 import seedu.edulink.commons.core.index.Index;
 import seedu.edulink.commons.util.StringUtil;
+import seedu.edulink.logic.Messages;
+import seedu.edulink.logic.commands.ExportCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
@@ -24,8 +26,6 @@ import seedu.edulink.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String FILENAME_VALIDATION_REGEX = "^(?!^(con|prn|aux|nul|com\\d|lpt\\d)$)"
-        + "(?:[^\\\\/:*?\"<>|\\r\\n]+[ ]?)*[^\\\\/:*?\"<>|\\r\\n]+$";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -81,8 +81,9 @@ public class ParserUtil {
         requireNonNull(fileName);
         String trimmedFilename = fileName.trim();
 
-        if (trimmedFilename.isEmpty() || !trimmedFilename.matches(FILENAME_VALIDATION_REGEX)) {
-            throw new ParseException("File Name Shouldn't contain Illegal Characters!");
+        if (trimmedFilename.isEmpty() || !trimmedFilename.matches(ExportCommand.VALIDATION_FILENAME)) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                ExportCommand.FILENAME_CONSTRAIN));
         }
 
         return trimmedFilename;
