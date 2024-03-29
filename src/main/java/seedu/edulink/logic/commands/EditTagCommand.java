@@ -6,6 +6,7 @@ import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.edulink.commons.util.ToStringBuilder;
@@ -32,21 +33,21 @@ public class EditTagCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_AND_NOT_FOUND =
             "Command Invalid: the tag you want to edit is not found, the resulting tag you input is already there.";
-    private final Id personToEditId;
+    private final Id studentToEditId;
     private final Tag tagToEdit;
     private final Tag resultingTag;
 
     /**
      * Creates a EditTagCommand to edit tags of a student.
      *
-     * @param personToEditId the ID of the student user add tags to.
+     * @param studentToEditId the ID of the student user add tags to.
      * @param tagToEdit the tag that the user wants to change.
      * @param resultingTag the resulting tag that the user wants to change to.
      */
-    public EditTagCommand(Id personToEditId, Tag tagToEdit, Tag resultingTag) {
-        requireAllNonNull(personToEditId, tagToEdit, resultingTag);
+    public EditTagCommand(Id studentToEditId, Tag tagToEdit, Tag resultingTag) {
+        requireAllNonNull(studentToEditId, tagToEdit, resultingTag);
 
-        this.personToEditId = personToEditId;
+        this.studentToEditId = studentToEditId;
         this.tagToEdit = tagToEdit;
         this.resultingTag = resultingTag;
     }
@@ -54,15 +55,13 @@ public class EditTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Student> lastShownList = model.getFilteredPersonList();
-        Student studentToEdit = null;
-        for (Student student : lastShownList) {
-            if (student.getId().equals(personToEditId)) {
-                studentToEdit = student;
-            }
-        }
-        if (studentToEdit == null) {
+        Optional<Student> optionalStudentToEdit = lastShownList.stream().filter(
+                student -> student.getId().equals(studentToEditId)
+        ).findFirst();
+        if (optionalStudentToEdit.isEmpty()) {
             throw new CommandException(MESSAGE_PERSON_NOTFOUND);
         }
+        Student studentToEdit = optionalStudentToEdit.get();
         Set<Tag> originalTags = studentToEdit.getTags();
         Set<Tag> editedTags = new HashSet<>(originalTags);
         boolean isResultingTagExit = editedTags.contains(resultingTag);
@@ -83,7 +82,7 @@ public class EditTagCommand extends Command {
             studentToEdit.getAddress(), editedTags);
 
         model.setPerson(studentToEdit, editedStudent);
-        return new CommandResult(String.format(MESSAGE_EDIT_TAG_SUCCESS, personToEditId, tagToEdit, resultingTag));
+        return new CommandResult(String.format(MESSAGE_EDIT_TAG_SUCCESS, studentToEditId, tagToEdit, resultingTag));
     }
 
     @Override
@@ -97,7 +96,7 @@ public class EditTagCommand extends Command {
         }
 
         EditTagCommand otherTagCommand = (EditTagCommand) other;
-        boolean isStudentIdEqual = this.personToEditId.equals(otherTagCommand.personToEditId);
+        boolean isStudentIdEqual = this.studentToEditId.equals(otherTagCommand.studentToEditId);
         boolean isTagToEditEqual = this.tagToEdit.equals(otherTagCommand.tagToEdit);
         boolean isResultingTagEqual = this.resultingTag.equals(otherTagCommand.resultingTag);
         return (isStudentIdEqual && isResultingTagEqual && isTagToEditEqual);
@@ -106,7 +105,7 @@ public class EditTagCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("Id", this.personToEditId)
+            .add("Id", this.studentToEditId)
             .add("TagToEdit", this.tagToEdit)
             .add("ResultingTag", this.resultingTag)
             .toString();

@@ -4,29 +4,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulink.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.edulink.logic.parser.CliSyntax.*;
 import static seedu.edulink.testutil.Assert.assertThrows;
 import static seedu.edulink.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.edulink.logic.commands.AddCommand;
 import seedu.edulink.logic.commands.ClearCommand;
 import seedu.edulink.logic.commands.DeleteCommand;
+import seedu.edulink.logic.commands.DeleteTagCommand;
 import seedu.edulink.logic.commands.EditCommand;
 import seedu.edulink.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.edulink.logic.commands.EditTagCommand;
 import seedu.edulink.logic.commands.ExitCommand;
 import seedu.edulink.logic.commands.ExportCommand;
 import seedu.edulink.logic.commands.FindCommand;
 import seedu.edulink.logic.commands.HelpCommand;
 import seedu.edulink.logic.commands.ListCommand;
+import seedu.edulink.logic.commands.TagCommand;
 import seedu.edulink.logic.commands.UndoCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
+import seedu.edulink.model.student.Id;
 import seedu.edulink.model.student.IdAndNameContainsQueryIdAndNamePredicate;
 import seedu.edulink.model.student.IdContainsQueryIdPredicate;
 import seedu.edulink.model.student.NameContainsQueryNamePredicate;
 import seedu.edulink.model.student.Student;
+import seedu.edulink.model.tag.Tag;
 import seedu.edulink.testutil.EditPersonDescriptorBuilder;
 import seedu.edulink.testutil.PersonBuilder;
 import seedu.edulink.testutil.PersonUtil;
@@ -88,6 +94,48 @@ public class AddressBookParserTest {
         command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " "
             + PREFIX_NAME + queryName + " " + PREFIX_ID + queryId);
         assertEquals(new FindCommand(new IdAndNameContainsQueryIdAndNamePredicate(queryId, queryName)), command);
+    }
+
+    @Test
+    public void parseCommand_tag() throws Exception {
+        String tag1 = "TopStudent";
+        String tag2 = "friend";
+        String queryIdString = "A0912124E";
+        Id queryId = new Id("A0912124E");
+        HashSet<Tag> tagList = new HashSet<Tag>();
+        tagList.add(new Tag("TopStudent"));
+        tagList.add(new Tag("friend"));
+        TagCommand command = (TagCommand) parser.parseCommand(
+                TagCommand.COMMAND_WORD + " " + PREFIX_ID + queryIdString + " "
+                        + PREFIX_TAG + tag1 + " " + PREFIX_TAG + tag2);
+        assertEquals(new TagCommand(queryId, tagList), command);
+    }
+    @Test
+    public void parseCommand_dtag() throws Exception {
+        String tag1 = "TopStudent";
+        String tag2 = "friend";
+        String queryIdString = "A0912124E";
+        Id queryId = new Id("A0912124E");
+        HashSet<Tag> tagList = new HashSet<Tag>();
+        tagList.add(new Tag("TopStudent"));
+        tagList.add(new Tag("friend"));
+        DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(
+                DeleteTagCommand.COMMAND_WORD + " " + PREFIX_ID + queryIdString + " "
+                        + PREFIX_TAG + tag1 + " " + PREFIX_TAG + tag2);
+        assertEquals(new DeleteTagCommand(queryId, tagList), command);
+    }
+    @Test
+    public void parseCommand_etag() throws Exception {
+        String tagString1 = "TopStudent";
+        String tagString2 = "friend";
+        String queryIdString = "A0912124E";
+        Id queryId = new Id("A0912124E");
+        Tag tag1 = new Tag("TopStudent");
+        Tag tag2 = new Tag("friend");
+        EditTagCommand command = (EditTagCommand) parser.parseCommand(
+                EditTagCommand.COMMAND_WORD + " " + PREFIX_ID + queryIdString + " "
+                        + PREFIX_TAG + tagString1 + " " + PREFIX_TAG + tagString2);
+        assertEquals(new EditTagCommand(queryId, tag1, tag2), command);
     }
 
     @Test

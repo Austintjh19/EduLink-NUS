@@ -7,6 +7,7 @@ import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.edulink.commons.util.ToStringBuilder;
@@ -29,34 +30,32 @@ public class TagCommand extends Command {
     public static final String MESSAGE_DUPLICATE = "Invalid Command: "
             + "one or more tags you input are already there. ";
 
-    private final Id personToEditId;
+    private final Id studentToEditId;
     private final Set<Tag> tags;
 
     /**
      * Creates a TagCommand to add tags to a student.
      *
-     * @param personToEditId the ID of the student user add tags to.
+     * @param studentToEditId the ID of the student user add tags to.
      * @param tags           a set of tags that the user wish to add to the student.
      */
-    public TagCommand(Id personToEditId, Set<Tag> tags) {
-        requireAllNonNull(personToEditId, tags);
+    public TagCommand(Id studentToEditId, Set<Tag> tags) {
+        requireAllNonNull(studentToEditId, tags);
 
-        this.personToEditId = personToEditId;
+        this.studentToEditId = studentToEditId;
         this.tags = tags;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Student> lastShownList = model.getFilteredPersonList();
-        Student studentToEdit = null;
-        for (Student student : lastShownList) {
-            if (student.getId().equals(personToEditId)) {
-                studentToEdit = student;
-            }
-        }
-        if (studentToEdit == null) {
+        Optional<Student> optionalStudentToEdit = lastShownList.stream().filter(
+                student -> student.getId().equals(studentToEditId)
+        ).findFirst();
+        if (optionalStudentToEdit.isEmpty()) {
             throw new CommandException(MESSAGE_PERSON_NOTFOUND);
         }
+        Student studentToEdit = optionalStudentToEdit.get();
         Set<Tag> originalTags = studentToEdit.getTags();
         Set<Tag> mergedSet = new HashSet<>(originalTags);
         boolean isSetDisjoint = Collections.disjoint(mergedSet, tags);
@@ -84,7 +83,7 @@ public class TagCommand extends Command {
         }
 
         TagCommand otherTagCommand = (TagCommand) other;
-        boolean isStudentIdEqual = this.personToEditId.equals(otherTagCommand.personToEditId);
+        boolean isStudentIdEqual = this.studentToEditId.equals(otherTagCommand.studentToEditId);
         boolean isTagListEqual = this.tags.equals(otherTagCommand.tags);
         return (isStudentIdEqual && isTagListEqual);
     }
@@ -92,7 +91,7 @@ public class TagCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("Id", this.personToEditId)
+            .add("Id", this.studentToEditId)
             .add("Tags", this.tags)
             .toString();
     }
