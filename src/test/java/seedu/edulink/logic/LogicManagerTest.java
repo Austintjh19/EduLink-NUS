@@ -90,6 +90,7 @@ public class LogicManagerTest {
     public void execute_getRecentCommands() throws Exception {
         RecentCommands recentCommands = new RecentCommands();
         recentCommands.add("list");
+        logic.execute("list");
         assertEquals(recentCommands.getCommands(), logic.getRecentCommands());
     }
 
