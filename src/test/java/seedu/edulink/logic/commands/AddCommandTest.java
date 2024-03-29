@@ -157,6 +157,16 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Student> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void saveState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean resetToPreviousState() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
