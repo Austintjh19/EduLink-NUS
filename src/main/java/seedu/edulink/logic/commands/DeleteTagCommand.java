@@ -4,7 +4,6 @@ import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -18,28 +17,28 @@ import seedu.edulink.model.student.Student;
 import seedu.edulink.model.tag.Tag;
 
 /**
- * Adds tags to a student.
+ * Removes tags from a student.
  */
-public class TagCommand extends Command {
+public class DeleteTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "tag";
+    public static final String COMMAND_WORD = "dtag";
 
     public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the person you specified.";
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tags: %1$s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tags: %1$s";
     public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID " + PREFIX_TAG + "Tag";
-    public static final String MESSAGE_DUPLICATE = "Invalid Command: "
-            + "one or more tags you input are already there. ";
+    public static final String MESSAGE_TAG_NOT_FOUND = "Invalid Command"
+            + ", one or more tags you are looking for are not found.";
 
     private final Id studentToEditId;
     private final Set<Tag> tags;
 
     /**
-     * Creates a TagCommand to add tags to a student.
+     * Creates a DeleteTagCommand to delete tags from a student.
      *
      * @param studentToEditId the ID of the student user add tags to.
-     * @param tags           a set of tags that the user wish to add to the student.
+     * @param tags           a set of tags that the user wish to delete from the student.
      */
-    public TagCommand(Id studentToEditId, Set<Tag> tags) {
+    public DeleteTagCommand(Id studentToEditId, Set<Tag> tags) {
         requireAllNonNull(studentToEditId, tags);
 
         this.studentToEditId = studentToEditId;
@@ -57,19 +56,19 @@ public class TagCommand extends Command {
         }
         Student studentToEdit = optionalStudentToEdit.get();
         Set<Tag> originalTags = studentToEdit.getTags();
-        Set<Tag> mergedSet = new HashSet<>(originalTags);
-        boolean isSetDisjoint = Collections.disjoint(mergedSet, tags);
-        if (!isSetDisjoint) {
-            throw new CommandException(MESSAGE_DUPLICATE);
+        Set<Tag> removedSet = new HashSet<>(originalTags);
+        boolean isAllContained = originalTags.containsAll(tags);
+        if (!isAllContained) {
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
         }
-        mergedSet.addAll(tags);
+        removedSet.removeAll(tags);
 
         Student editedStudent = new Student(studentToEdit.getId(), studentToEdit.getMajor(), studentToEdit.getIntake(),
             studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
-            studentToEdit.getAddress(), mergedSet);
+            studentToEdit.getAddress(), removedSet);
 
         model.setPerson(studentToEdit, editedStudent);
-        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, tags));
+        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tags));
     }
 
     @Override
@@ -78,11 +77,11 @@ public class TagCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof TagCommand)) {
+        if (!(other instanceof DeleteTagCommand)) {
             return false;
         }
 
-        TagCommand otherTagCommand = (TagCommand) other;
+        DeleteTagCommand otherTagCommand = (DeleteTagCommand) other;
         boolean isStudentIdEqual = this.studentToEditId.equals(otherTagCommand.studentToEditId);
         boolean isTagListEqual = this.tags.equals(otherTagCommand.tags);
         return (isStudentIdEqual && isTagListEqual);
