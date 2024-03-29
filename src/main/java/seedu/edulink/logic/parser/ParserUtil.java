@@ -115,6 +115,9 @@ public class ParserUtil {
         if (!Intake.isValidIntake(trimmedIntake)) {
             throw new ParseException(Intake.MESSAGE_CONSTRAINTS);
         }
+        if (!Intake.isValidIntakeYear(trimmedIntake)) {
+            throw new ParseException(Intake.INVALID_YEAR);
+        }
         return new Intake(trimmedIntake);
     }
 

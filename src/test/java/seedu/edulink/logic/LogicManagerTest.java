@@ -10,6 +10,7 @@ import static seedu.edulink.logic.commands.CommandTestUtil.INTAKE_DESC_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.MAJOR_DESC_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.edulink.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.edulink.testutil.Assert.assertThrows;
 import static seedu.edulink.testutil.TypicalPersons.AMY;
 
