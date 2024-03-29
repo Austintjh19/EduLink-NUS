@@ -82,8 +82,8 @@ public class ParserUtil {
         String trimmedFilename = fileName.trim();
 
         if (trimmedFilename.isEmpty() || !trimmedFilename.matches(ExportCommand.VALIDATION_FILENAME)) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT
-                , ExportCommand.FILENAME_CONSTRAIN));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                ExportCommand.FILENAME_CONSTRAIN));
         }
 
         return trimmedFilename;

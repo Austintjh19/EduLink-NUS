@@ -80,7 +80,7 @@ public class ParserUtilTest {
         String expected = "students";
         assertEquals(expected , ParserUtil.parseFilename(VALID_FILENAME));
         String expected2 = "_mystudents";
-        assertEquals(expected, ParserUtil.parseFilename(VALID_FILENAME2));
+        assertEquals(expected2, ParserUtil.parseFilename(VALID_FILENAME2));
     }
 
     @Test
