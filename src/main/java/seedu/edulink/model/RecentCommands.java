@@ -4,6 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Filter;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 /**
  * Keeps track of the Recent Commands
@@ -11,7 +16,7 @@ import java.util.Arrays;
  */
 public class RecentCommands {
     public static final int LIMIT = 5;
-    private final String[] commands;
+    private final ObservableList<String> commands;
     private int counter;
 
     /**
@@ -19,7 +24,7 @@ public class RecentCommands {
      * and a counter to keep track of no. of Commands Stored
      */
     public RecentCommands() {
-        this.commands = new String[LIMIT];
+        this.commands = FXCollections.observableArrayList();
         this.counter = 0;
     }
 
@@ -31,7 +36,7 @@ public class RecentCommands {
             return false;
         } else {
             RecentCommands other = (RecentCommands) obj;
-            return Arrays.equals(this.commands, other.commands);
+            return this.commands.equals(other.commands);
         }
     }
 
@@ -44,37 +49,31 @@ public class RecentCommands {
         requireNonNull(command);
         if (counter == LIMIT) {
             removeOldestCommand();
-            commands[counter - 1] = command;
+            commands.add(command);
         } else {
-            commands[counter] = command;
+            commands.add(command);
             counter++;
         }
     }
 
     private void removeOldestCommand() {
-        for (int i = 0; i < counter - 1; i++) {
-            commands[i] = commands[i + 1];
-        }
+        commands.remove(0);
     }
 
-    public ArrayList<String> getCommands() {
-        ArrayList<String> result = new ArrayList<>();
-        for (int i = counter - 1; i >= 0; i--) {
-            result.add(commands[i]);
-        }
-        return result;
+    public ObservableList<String> getCommands() {
+        return commands;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < counter; i++) {
-            if (i == counter - 1) {
-                sb.append(commands[i]);
-            } else {
-                sb.append(commands[i]).append(" ");
-            }
-        }
-        return sb.toString();
-    }
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < counter; i++) {
+//            if (i == counter - 1) {
+//                sb.append(commands[i]);
+//            } else {
+//                sb.append(commands[i]).append(" ");
+//            }
+//        }
+//        return sb.toString();
+//    }
 }

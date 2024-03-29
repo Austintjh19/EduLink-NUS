@@ -50,7 +50,7 @@ public interface Logic {
     /**
      * Returns Recent commands
      */
-    ArrayList<String> getRecentCommands();
+    ObservableList<String> getRecentCommands();
 
     /**
      * Set the user prefs' GUI settings.

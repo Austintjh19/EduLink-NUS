@@ -85,7 +85,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ArrayList<String> getRecentCommands() {
+    public ObservableList<String> getRecentCommands() {
         return recentCommands.getCommands();
     }
 
