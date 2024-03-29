@@ -5,9 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulink.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.edulink.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.edulink.logic.commands.TagCommand.MESSAGE_ADD_TAG_SUCCESS;
-import static seedu.edulink.logic.commands.TagCommand.MESSAGE_DUPLICATE;
-import static seedu.edulink.testutil.TypicalPersons.ALICE;
+import static seedu.edulink.testutil.TypicalPersons.BENSON;
 import static seedu.edulink.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashSet;
@@ -23,9 +21,9 @@ import seedu.edulink.model.tag.Tag;
 import seedu.edulink.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code DeleteTagCommand}.
  */
-public class TagCommandTest {
+public class DeleteTagCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -45,9 +43,9 @@ public class TagCommandTest {
         thirdTagList.add(new Tag("BadStudent"));
         thirdTagList.add(new Tag("GoodStudent"));
 
-        TagCommand firstTagCommand = new TagCommand(firstStudentId, firstTagList);
-        TagCommand secondTagCommand = new TagCommand(secondStudentId, secondTagList);
-        TagCommand thirdTagCommand = new TagCommand(thirdStudentId, thirdTagList);
+        DeleteTagCommand firstTagCommand = new DeleteTagCommand(firstStudentId, firstTagList);
+        DeleteTagCommand secondTagCommand = new DeleteTagCommand(secondStudentId, secondTagList);
+        DeleteTagCommand thirdTagCommand = new DeleteTagCommand(thirdStudentId, thirdTagList);
 
         // same object -> returns true
         assertTrue(firstTagCommand.equals(firstTagCommand));
@@ -70,49 +68,37 @@ public class TagCommandTest {
         HashSet<Tag> tagList = new HashSet<Tag>();
         tagList.add(new Tag("TopStudent"));
         Id invalidId = new Id("A0912124E");
-        TagCommand tagCommand = new TagCommand(invalidId, tagList);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(invalidId, tagList);
 
-        assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_PERSON_NOTFOUND);
+        assertCommandFailure(deleteTagCommand, model, DeleteTagCommand.MESSAGE_PERSON_NOTFOUND);
     }
 
     @Test
-    public void execute_totallyDuplicateTag_throwCommandException() {
+    public void execute_tagNotFound_throwCommandException() {
         HashSet<Tag> tagList = new HashSet<Tag>();
-        tagList.add(new Tag("friends"));
-        Id validId = new Id("A0265901E");
-        TagCommand tagCommand = new TagCommand(validId, tagList);
-        String expectedErrorMessage = MESSAGE_DUPLICATE;
+        tagList.add(new Tag("potentialta"));
+        Id invalidId = new Id("A0251893P");
+        DeleteTagCommand deletetagCommand = new DeleteTagCommand(invalidId, tagList);
 
-        assertCommandFailure(tagCommand, model, expectedErrorMessage);
-    }
-
-    @Test
-    public void execute_partiallyDuplicateTag_throwCommandException() {
-        HashSet<Tag> tagList = new HashSet<Tag>();
-        tagList.add(new Tag("friends"));
-        tagList.add(new Tag("topstudent"));
-        Id validId = new Id("A0265901E");
-        TagCommand tagCommand = new TagCommand(validId, tagList);
-        String expectedErrorMessage = MESSAGE_DUPLICATE;
-
-        assertCommandFailure(tagCommand, model, expectedErrorMessage);
+        assertCommandFailure(deletetagCommand, model, DeleteTagCommand.MESSAGE_TAG_NOT_FOUND);
     }
 
     @Test
     public void execute_validIdValidTag_success() {
         HashSet<Tag> tagList = new HashSet<Tag>();
-        tagList.add(new Tag("TopStudent"));
-        Id invalidId = new Id("A0251893P");
-        TagCommand tagCommand = new TagCommand(invalidId, tagList);
+        tagList.add(new Tag("friends"));
+        Id validId = new Id("A0265901E");
+        DeleteTagCommand deletetagCommand = new DeleteTagCommand(validId, tagList);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Student resultStudent = new PersonBuilder().withName("Alice Pauline").withId("A0251893P")
-            .withMajor("Computer Science").withIntake("2023")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
-            .withTags("TA", "Smart", "friends", "TopStudent").build();
-        expectedModel.setPerson(ALICE, resultStudent);
-        assertCommandSuccess(tagCommand, model, String.format(MESSAGE_ADD_TAG_SUCCESS, tagList), expectedModel);
+        Student resultStudent = new PersonBuilder().withName("Benson Meier").withId("A0265901E")
+                .withMajor("Physics").withIntake("2023")
+                .withAddress("311, Clementi Ave 2, #02-25")
+                .withEmail("johnd@example.com").withPhone("98765432")
+                .withTags("owesMoney").build();
+        expectedModel.setPerson(BENSON, resultStudent);
+        assertCommandSuccess(deletetagCommand, model,
+                String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, tagList), expectedModel);
     }
 
     @Test
