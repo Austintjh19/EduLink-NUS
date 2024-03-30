@@ -11,11 +11,11 @@ import seedu.edulink.model.grade.Score;
 public class GradeUtil {
 
     // Define predicates for different grade intervals
-    private static final Predicate<Double> isGradeA = score -> score >= 90 && score <= 100;
-    private static final Predicate<Double> isGradeB = score -> score >= 80 && score < 90;
-    private static final Predicate<Double> isGradeC = score -> score >= 70 && score < 80;
-    private static final Predicate<Double> isGradeD = score -> score >= 60 && score < 70;
-    private static final Predicate<Double> isGradeF = score -> score > 0 && score < 60;
+    private static final Predicate<Double> isGradeA = score -> score >= 85 && score <= 100;
+    private static final Predicate<Double> isGradeB = score -> score >= 70 && score < 85;
+    private static final Predicate<Double> isGradeC = score -> score >= 60 && score < 70;
+    private static final Predicate<Double> isGradeD = score -> score >= 50 && score < 60;
+    private static final Predicate<Double> isGradeF = score -> score > 0 && score < 50;
 
     /**
      * Parses a given score into a corresponding grade.

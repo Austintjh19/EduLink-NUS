@@ -16,25 +16,31 @@ public class GradeUtilTest {
 
     @Test
     public void parseGrade_gradeB_returnsTrue() {
-        Score score = new Score(85);
+        Score score = new Score(83);
         assertTrue(GradeUtil.parseGrade(score).equals(Grades.B));
     }
 
     @Test
     public void parseGrade_gradeC_returnsTrue() {
-        Score score = new Score(75);
+        Score score = new Score(69);
         assertTrue(GradeUtil.parseGrade(score).equals(Grades.C));
     }
 
     @Test
     public void parseGrade_gradeD_returnsTrue() {
-        Score score = new Score(65);
+        Score score = new Score(55);
         assertTrue(GradeUtil.parseGrade(score).equals(Grades.D));
     }
 
     @Test
     public void parseGrade_gradeF_returnsTrue() {
-        Score score = new Score(55);
+        Score score = new Score(40);
         assertTrue(GradeUtil.parseGrade(score).equals(Grades.F));
+    }
+
+    @Test
+    public void parseGrade_gradeN_returnsTrue() {
+        Score score = new Score(0);
+        assertTrue(GradeUtil.parseGrade(score).equals(Grades.N));
     }
 }
