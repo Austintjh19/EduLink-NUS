@@ -55,8 +55,8 @@ public class Grade {
 
         Grade otherGrade = (Grade) other;
         return this.grade.equals(otherGrade.grade)
-            && this.course.equals(otherGrade.course)
-            && this.score.equals(otherGrade.score);
+            && this.score.equals(otherGrade.score)
+            && this.course.equals(otherGrade.course);
     }
 
     @Override
