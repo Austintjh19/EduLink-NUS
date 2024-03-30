@@ -65,7 +65,7 @@ public class TagCommand extends Command {
         mergedSet.addAll(tags);
 
         Student editedStudent = new Student(studentToEdit.getId(), studentToEdit.getMajor(), studentToEdit.getIntake(),
-            studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
+            studentToEdit.getGrade(), studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
             studentToEdit.getAddress(), mergedSet);
 
         model.setPerson(studentToEdit, editedStudent);

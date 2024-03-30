@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.edulink.commons.exceptions.IllegalValueException;
+import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
 import seedu.edulink.model.student.Id;
@@ -25,7 +26,7 @@ import seedu.edulink.model.tag.Tag;
  */
 class JsonAdaptedPerson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -35,13 +36,14 @@ class JsonAdaptedPerson {
     private final String intake;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final JsonAdaptedGrade grade;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("id") String id, @JsonProperty("major") String major,
-                             @JsonProperty("intake") String intake,
+                             @JsonProperty("intake") String intake, @JsonProperty("grade") JsonAdaptedGrade grade,
                              @JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
@@ -49,6 +51,7 @@ class JsonAdaptedPerson {
         this.id = id;
         this.major = major;
         this.intake = intake;
+        this.grade = grade;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -68,6 +71,7 @@ class JsonAdaptedPerson {
         id = source.getId().id;
         major = source.getMajor().major;
         intake = source.getIntake().toString();
+        grade = new JsonAdaptedGrade(source.getGrade());
         tags.addAll(source.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList()));
@@ -108,6 +112,11 @@ class JsonAdaptedPerson {
         }
         final Intake modelIntake = new Intake(intake);
 
+        if (grade == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
+        }
+        final Grade modelGrade = grade.toModelType();
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -141,8 +150,9 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Student(modelId, modelMajor, modelIntake, modelName, modelPhone, modelEmail, modelAddress,
-            modelTags);
+
+        return new Student(modelId, modelMajor, modelIntake, modelGrade, modelName, modelPhone, modelEmail,
+            modelAddress, modelTags);
     }
 
 }

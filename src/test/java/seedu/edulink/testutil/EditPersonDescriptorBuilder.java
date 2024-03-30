@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.edulink.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
 import seedu.edulink.model.student.Id;
@@ -43,6 +44,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setId(student.getId());
         descriptor.setMajor(student.getMajor());
         descriptor.setIntake(student.getIntake());
+        descriptor.setGrade(student.getGrade());
     }
 
     /**
@@ -74,6 +76,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withIntake(String intake) {
         descriptor.setIntake(new Intake(intake));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Grade} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withGrade(Grade grade) {
+        descriptor.setGrade(grade);
         return this;
     }
 

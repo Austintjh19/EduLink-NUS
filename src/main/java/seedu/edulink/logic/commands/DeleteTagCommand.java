@@ -64,7 +64,7 @@ public class DeleteTagCommand extends Command {
         removedSet.removeAll(tags);
 
         Student editedStudent = new Student(studentToEdit.getId(), studentToEdit.getMajor(), studentToEdit.getIntake(),
-            studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
+            studentToEdit.getGrade(), studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
             studentToEdit.getAddress(), removedSet);
 
         model.setPerson(studentToEdit, editedStudent);
