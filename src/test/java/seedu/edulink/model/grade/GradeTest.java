@@ -3,53 +3,42 @@ package seedu.edulink.model.grade;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.edulink.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
+import static seedu.edulink.logic.commands.CommandTestUtil.VALID_SCORE_89;
+import static seedu.edulink.testutil.TypicalPersons.ALICE_GRADE;
+import static seedu.edulink.testutil.TypicalPersons.BOB_GRADE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.edulink.testutil.GradeBuilder;
+
 public class GradeTest {
-    public static final Course VALID_COURSE1 = new Course("MA1522");
-    public static final Score VALID_SCORE1 = new Score(80);
-    public static final Grade VALID_GRADE1 = new Grade(VALID_COURSE1, VALID_SCORE1);
-
-    public static final Course VALID_COURSE2 = new Course("CS2040");
-    public static final Score VALID_SCORE2 = new Score(60);
-    public static final Grade VALID_GRADE2 = new Grade(VALID_COURSE2, VALID_SCORE2);
 
     @Test
-    public void equals_sameValues_returnsTrue() {
-        Grade grade = new Grade(new Course("MA1522"), new Score(80));
-        assertTrue(VALID_GRADE1.equals(grade));
-    }
+    public void equals() {
+        // same values -> returns true
+        Grade gradeCopy = new GradeBuilder(ALICE_GRADE).build();
+        assertTrue(ALICE_GRADE.equals(gradeCopy));
 
-    @Test
-    public void equals_sameObject_returnsTrue() {
-        assertTrue(VALID_GRADE1.equals(VALID_GRADE1));
-    }
+        // same object -> returns true
+        assertTrue(ALICE_GRADE.equals(ALICE_GRADE));
 
-    @Test
-    public void equals_nullValues_returnsFalse() {
-        assertFalse(VALID_GRADE1.equals(null));
-    }
+        // null -> returns false
+        assertFalse(ALICE_GRADE.equals(null));
 
-    @Test
-    public void equals_differentValues_returnsFalse() {
-        assertFalse(VALID_GRADE1.equals(VALID_GRADE2));
-    }
+        // different type -> returns false
+        assertFalse(ALICE_GRADE.equals(5));
 
-    @Test
-    public void equals_differentCourse_returnsFalse() {
-        Course course = new Course("MA1522");
-        Score score = new Score(85);
-        Grade grade = new Grade(course, score);
-        assertFalse(VALID_GRADE1.equals(grade));
-    }
+        // different person -> returns false
+        assertFalse(ALICE_GRADE.equals(BOB_GRADE));
 
-    @Test
-    public void equals_differentScore_returnsFalse() {
-        Course course = new Course("CS2040");
-        Score score = new Score(45);
-        Grade grade = new Grade(course, score);
-        assertFalse(VALID_GRADE2.equals(grade));
+        // different course -> returns false
+        Grade editedGrade = new GradeBuilder(ALICE_GRADE).withCourse(VALID_COURSE_CS2103T).build();
+        assertFalse(ALICE_GRADE.equals(editedGrade));
+
+        // different score -> returns false
+        editedGrade = new GradeBuilder(ALICE_GRADE).withScore(VALID_SCORE_89).build();
+        assertFalse(ALICE_GRADE.equals(editedGrade));
     }
 
     @Test
@@ -67,8 +56,8 @@ public class GradeTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Grade.class.getCanonicalName() + "{course=" + VALID_COURSE1
-            + ", score=" + VALID_SCORE1 + ", grade=" + VALID_GRADE1.getGrade() + "}";
-        assertEquals(expected, VALID_GRADE1.toString());
+        String expected = Grade.class.getCanonicalName() + "{course=" + ALICE_GRADE.getCourse()
+            + ", score=" + ALICE_GRADE.getScore() + ", grade=" + ALICE_GRADE.getGrade() + "}";
+        assertEquals(expected, ALICE_GRADE.toString());
     }
 }
