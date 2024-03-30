@@ -29,7 +29,7 @@ public class GradeTest {
         // different type -> returns false
         assertFalse(ALICE_GRADE.equals(5));
 
-        // different person -> returns false
+        // different grade -> returns false
         assertFalse(ALICE_GRADE.equals(BOB_GRADE));
 
         // different course -> returns false
