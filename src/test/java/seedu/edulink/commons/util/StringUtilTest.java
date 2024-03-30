@@ -47,7 +47,7 @@ public class StringUtilTest {
 
     //---------------- Tests for isDouble ---------------------------------------------
     @Test
-    public void IsDouble_withValidDouble() {
+    public void isDouble_validDouble_returnsTrue() {
         assertTrue(StringUtil.isDouble("3.14"));
         assertTrue(StringUtil.isDouble("12345"));
         assertTrue(StringUtil.isDouble("-0.5"));
@@ -55,7 +55,7 @@ public class StringUtilTest {
     }
 
     @Test
-    public void IsDouble_withInvalidDouble() {
+    public void isDouble_withInvalidDouble_returnsFalse() {
         assertFalse(StringUtil.isDouble("abc"));
         assertFalse(StringUtil.isDouble("12.34.56"));
         assertFalse(StringUtil.isDouble("1.0e"));

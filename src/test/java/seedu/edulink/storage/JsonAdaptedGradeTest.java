@@ -1,18 +1,16 @@
 package seedu.edulink.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.edulink.testutil.TypicalPersons.BENSON;
-import static seedu.edulink.testutil.TypicalPersons.BENSON_GRADE;
 import static seedu.edulink.storage.JsonAdaptedGrade.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.edulink.testutil.Assert.assertThrows;
+import static seedu.edulink.testutil.TypicalPersons.BENSON;
+import static seedu.edulink.testutil.TypicalPersons.BENSON_GRADE;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.edulink.commons.exceptions.IllegalValueException;
 import seedu.edulink.model.grade.Course;
 import seedu.edulink.model.grade.Score;
-import seedu.edulink.model.student.Id;
-import seedu.edulink.model.student.Name;
 
 public class JsonAdaptedGradeTest {
     public static final String VALID_COURSE = BENSON_GRADE.getCourse().toString();
