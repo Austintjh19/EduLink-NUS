@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.edulink.commons.exceptions.IllegalValueException;
+import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
 import seedu.edulink.model.student.Id;
@@ -178,5 +179,14 @@ public class JsonAdaptedStudentTest {
                 VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
+
+    @Test
+    public void toModelType_nullGrade_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_ID, VALID_MAJOR, VALID_INTAKE, null,
+            VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
 
 }

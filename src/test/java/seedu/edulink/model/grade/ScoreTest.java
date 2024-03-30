@@ -46,11 +46,22 @@ public class ScoreTest {
     }
 
     @Test
-    public void equals_differentValues_returnFalse() {
-        Score score1 = new Score(80);
-        Score score2 = new Score(90);
+    public void equals() {
+        Score score1 = new Score(70);
+        Score score2 = new Score(70);
+        Score score3 = new Score(90);
 
-        assertFalse(score1.equals(score2));
+        // same values -> returns true
+        assertTrue(score1.equals(score2));
+
+        // same object -> returns true
+        assertTrue(score1.equals(score1));
+
+        // null -> returns false
+        assertFalse(score1.equals(null));
+
+        // different values -> returns false
+        assertFalse(score1.equals(score3));
     }
 
     @Test
