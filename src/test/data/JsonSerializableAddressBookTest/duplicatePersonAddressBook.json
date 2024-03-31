@@ -1,5 +1,5 @@
 {
-  "persons": [
+  "students": [
     {
       "id": "A0265901E",
       "name": "Alice Pauline",
@@ -10,7 +10,11 @@
         "friends"
       ],
       "major": "Physics",
-      "intake": "2024"
+      "intake": "2024",
+      "grade": {
+        "course": "CS2103T",
+        "score": 0
+      }
     },
     {
       "id": "A0265901E",
@@ -19,7 +23,11 @@
       "email": "pauline@example.com",
       "address": "4th street",
       "major": "Physics",
-      "intake": "2024"
+      "intake": "2024",
+      "grade": {
+        "course": "CS2103",
+        "score": 77
+      }
     }
   ]
 }

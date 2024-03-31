@@ -73,7 +73,7 @@
                 </HBox>
 
                 <StackPane VBox.vgrow="NEVER" fx:id="recentCommandsPlaceholder" styleClass="stack-pane"
-                           minHeight="10" prefHeight="50" maxHeight="50">
+                           minHeight="10" prefHeight="50" maxHeight="100">
                     <padding>
                         <Insets top="10" right="20" bottom="10" left="20"/>
                     </padding>

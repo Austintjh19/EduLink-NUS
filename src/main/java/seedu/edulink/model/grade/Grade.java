@@ -1,72 +1,45 @@
 package seedu.edulink.model.grade;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.edulink.commons.util.AppUtil.checkArgument;
+import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.stream.Stream;
+import java.util.Objects;
+
+import seedu.edulink.commons.util.GradeUtil;
+import seedu.edulink.commons.util.ToStringBuilder;
 
 /**
  * Represents a Student's Grade in the Application.
  * Guarantees: immutable; is valid as declared in {@link #isValidGrade(String)}
  */
 public class Grade {
-    public static final String MESSAGE_CONSTRAINTS =
-        "Grade should only contain single Alphabetic character [A,B,C,D,F]";
-    public static final String VALIDATION_REGEX = "[a-zA-Z]";
 
-    public final Grades grade;
+    private final Grades grade;
+    private final Course course;
+    private final Score score;
 
     /**
      * Constructs a {@code Major}.
      *
-     * @param grade A valid Grade.
+     * @param course A valid Course.
+     * @param score A valid Score.
      */
-    public Grade(String grade) {
-        requireNonNull(grade);
-        checkArgument(isValidGrade(grade), MESSAGE_CONSTRAINTS);
-        this.grade = parseGrade(grade);
+    public Grade(Course course, Score score) {
+        requireAllNonNull(course, score);
+        this.grade = GradeUtil.parseGrade(score);
+        this.course = course;
+        this.score = score;
     }
 
-    /**
-     * Validates a Grade
-     *
-     * @param test an input to validate.
-     */
-    public static boolean isValidGrade(String test) {
-        boolean isValid;
-        Stream<String> valid = Stream.of("A", "B", "C", "D", "F");
-        isValid = valid.anyMatch((input) -> input.equalsIgnoreCase(test));
-        return test.matches(VALIDATION_REGEX) && isValid;
+    public Course getCourse() {
+        return this.course;
     }
 
-    /**
-     * parses the grade into enum Grade
-     *
-     * @param grade an input to parse.
-     */
-    public Grades parseGrade(String grade) {
-        switch (grade.toUpperCase()) {
-        case "A":
-            return Grades.A;
-        case "B":
-            return Grades.B;
-        case "C":
-            return Grades.C;
-        case "D":
-            return Grades.D;
-        case "F":
-            return Grades.F;
-        default:
-            return Grades.N;
-        }
+    public Score getScore() {
+        return this.score;
     }
 
-    @Override
-    public String toString() {
-        if (this.grade.equals(Grades.N)) {
-            return "";
-        }
-        return this.grade.toString();
+    public Grades getGrade() {
+        return this.grade;
     }
 
     @Override
@@ -81,11 +54,23 @@ public class Grade {
         }
 
         Grade otherGrade = (Grade) other;
-        return this.grade.equals(otherGrade.grade);
+        return this.grade.equals(otherGrade.grade)
+            && this.score.equals(otherGrade.score)
+            && this.course.equals(otherGrade.course);
     }
 
     @Override
     public int hashCode() {
-        return this.grade.hashCode();
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(grade, course, score);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+            .add("course", course)
+            .add("score", score)
+            .add("grade", grade)
+            .toString();
     }
 }

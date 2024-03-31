@@ -17,6 +17,9 @@ import org.junit.jupiter.api.Test;
 import seedu.edulink.model.Model;
 import seedu.edulink.model.ModelManager;
 import seedu.edulink.model.UserPrefs;
+import seedu.edulink.model.grade.Course;
+import seedu.edulink.model.grade.Grade;
+import seedu.edulink.model.grade.Score;
 import seedu.edulink.model.student.Id;
 import seedu.edulink.model.student.Student;
 import seedu.edulink.model.tag.Tag;
@@ -102,12 +105,13 @@ public class TagCommandTest {
     public void execute_validIdValidTag_success() {
         HashSet<Tag> tagList = new HashSet<Tag>();
         tagList.add(new Tag("TopStudent"));
-        Id invalidId = new Id("A0251893P");
-        TagCommand tagCommand = new TagCommand(invalidId, tagList);
+        Id validId = new Id("A0251893P");
+        TagCommand tagCommand = new TagCommand(validId, tagList);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Student resultStudent = new PersonBuilder().withName("Alice Pauline").withId("A0251893P")
             .withMajor("Computer Science").withIntake("2023")
+            .withGrade(new Grade(new Course("CS2113"), new Score(55)))
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("TA", "Smart", "friends", "TopStudent").build();

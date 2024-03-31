@@ -12,7 +12,6 @@ public class IdTest {
         assertThrows(NullPointerException.class, () -> new Id(null));
     }
 
-
     @Test
     public void isValidId() {
         // null Id

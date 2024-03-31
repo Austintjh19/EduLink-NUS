@@ -3,7 +3,9 @@ package seedu.edulink.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
+import seedu.edulink.logic.Logic;
 import seedu.edulink.logic.commands.CommandResult;
 import seedu.edulink.logic.commands.exceptions.CommandException;
 import seedu.edulink.logic.parser.exceptions.ParseException;
@@ -17,6 +19,8 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final Logic logic;
+    private int recentCommandCounter;
 
     @FXML
     private TextField commandTextField;
@@ -24,11 +28,26 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, Logic logic) {
         super(FXML);
+        this.logic = logic;
+        this.recentCommandCounter = 0;
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.TAB) {
+                ObservableList<String> recentCommands = logic.getRecentCommands();
+                if (!recentCommands.isEmpty()) {
+                    String text = recentCommands.get(recentCommandCounter % recentCommands.size());
+                    commandTextField.setText(text);
+                    this.commandTextField.requestFocus();
+                    this.commandTextField.positionCaret(text.length());
+                }
+                recentCommandCounter++;
+                event.consume();
+            }
+        });
     }
 
     /**
