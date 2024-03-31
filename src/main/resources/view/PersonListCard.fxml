@@ -9,8 +9,8 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane HBox.hgrow="ALWAYS">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" >
+    <GridPane HBox.hgrow="ALWAYS" >
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>
         </columnConstraints>
@@ -36,6 +36,10 @@
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <Label fx:id="major" styleClass="cell_small_label" text="\$major"/>
                 <Label fx:id="intake" styleClass="cell_small_label" text="\$intake"/>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="1">
+                <Label fx:id="course" styleClass="cell_small_label" text="\$course"/>
+                <Label fx:id="letterGrade" styleClass="cell_small_label" text="\$letterGrade"/>
             </HBox>
             <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
         </VBox>

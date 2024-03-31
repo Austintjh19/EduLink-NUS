@@ -8,7 +8,12 @@ import java.util.Set;
 
 import seedu.edulink.commons.core.index.Index;
 import seedu.edulink.commons.util.StringUtil;
+import seedu.edulink.logic.Messages;
+import seedu.edulink.logic.commands.ExportCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
+import seedu.edulink.model.grade.Course;
+import seedu.edulink.model.grade.Grade;
+import seedu.edulink.model.grade.Score;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
 import seedu.edulink.model.student.Id;
@@ -24,8 +29,6 @@ import seedu.edulink.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String FILENAME_VALIDATION_REGEX = "^(?!^(con|prn|aux|nul|com\\d|lpt\\d)$)"
-        + "(?:[^\\\\/:*?\"<>|\\r\\n]+[ ]?)*[^\\\\/:*?\"<>|\\r\\n]+$";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -81,8 +84,9 @@ public class ParserUtil {
         requireNonNull(fileName);
         String trimmedFilename = fileName.trim();
 
-        if (trimmedFilename.isEmpty() || !trimmedFilename.matches(FILENAME_VALIDATION_REGEX)) {
-            throw new ParseException("File Name Shouldn't contain Illegal Characters!");
+        if (trimmedFilename.isEmpty() || !trimmedFilename.matches(ExportCommand.VALIDATION_FILENAME)) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                ExportCommand.FILENAME_CONSTRAIN));
         }
 
         return trimmedFilename;
@@ -115,7 +119,37 @@ public class ParserUtil {
         if (!Intake.isValidIntake(trimmedIntake)) {
             throw new ParseException(Intake.MESSAGE_CONSTRAINTS);
         }
+        if (!Intake.isValidIntakeYear(trimmedIntake)) {
+            throw new ParseException(Intake.INVALID_YEAR);
+        }
         return new Intake(trimmedIntake);
+    }
+
+    /**
+     * Parses a {@code String grade} into a {@code Grade}.
+     * {@code String grade} is written as [course]: [score]
+     * All whitespaces will be removed.
+     *
+     * @throws ParseException if either the given course or score is invalid.
+     */
+    public static Grade parseGrade(String grade) throws ParseException {
+        requireNonNull(grade);
+        String trimmedGrade = grade.replaceAll("\\s", "");
+        String courseCode = trimmedGrade.split(":")[0];
+        if (!Course.isValidCourseCode(courseCode)) {
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+        }
+        String scoreStr = trimmedGrade.split(":")[1];
+        if (!StringUtil.isDouble(scoreStr)) {
+            throw new ParseException(Score.MESSAGE_CONSTRAINTS);
+        }
+        Double score = Double.parseDouble(scoreStr);
+        if (!Score.isValidScore(score)) {
+            throw new ParseException(Score.MESSAGE_CONSTRAINTS);
+        }
+        System.out.println(courseCode);
+        System.out.println(scoreStr);
+        return new Grade(new Course(courseCode), new Score(score));
     }
 
     /**

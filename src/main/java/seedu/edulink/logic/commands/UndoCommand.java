@@ -10,7 +10,7 @@ import seedu.edulink.model.Model;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Undo Command done Successfully";
+    public static final String MESSAGE_SUCCESS = "Undo Command executed Successfully";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

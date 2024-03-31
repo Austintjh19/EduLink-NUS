@@ -7,15 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person} in Detail.
  */
-public class PersonCard extends UiPart<Region> {
+public class DetailsCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "DetailsCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -26,9 +25,6 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Student student;
-    public final Grade grade;
-
-    private final MainWindow mainWindow;
 
     @FXML
     private HBox cardPane;
@@ -37,15 +33,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label studentId;
     @FXML
-    private Label id;
-    @FXML
     private Label major;
     @FXML
     private Label intake;
     @FXML
     private Label course;
     @FXML
-    private Label letterGrade;
+    private Label grade;
     @FXML
     private Label phone;
     @FXML
@@ -58,29 +52,20 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(MainWindow mainWindow, Student student, int displayedIndex) {
+    public DetailsCard(Student student) {
         super(FXML);
         this.student = student;
-        this.grade = student.getGrade();
-        this.mainWindow = mainWindow;
-
-        id.setText(displayedIndex + ". ");
         studentId.setText(student.getId().id);
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         major.setText(student.getMajor().major);
         intake.setText(student.getIntake().toString());
-        course.setText(grade.getCourse().courseCode + ": ");
-        letterGrade.setText(grade.getGrade().toString());
+        course.setText(student.getGrade().getCourse().courseCode + ": ");
+        grade.setText(student.getGrade().getGrade().toString());
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
         student.getTags().stream()
-            .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-    }
-
-    @FXML
-    private void updateStudentDetailsCard() {
-        mainWindow.updateStudentDetailsCard(student);
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

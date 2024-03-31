@@ -2,6 +2,7 @@ package seedu.edulink.testutil;
 
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_INTAKE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MAJOR;
@@ -58,6 +59,8 @@ public class PersonUtil {
             .append(" "));
         descriptor.getIntake().ifPresent(intake -> sb.append(PREFIX_INTAKE)
             .append(intake.intake.toString()).append(" "));
+        descriptor.getGrade().ifPresent(grade-> sb.append(PREFIX_GRADE).append(grade.getCourse().courseCode)
+            .append(":").append(grade.getScore().score).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));

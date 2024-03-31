@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox styleClass="studentDetails" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox styleClass="studentDetailsEntries">
+        <Label styleClass="studentDetailsLabels" text="Student ID: "/>
+        <Label fx:id="studentId" styleClass="studentDetailsData"/>
+    </HBox>
+    <HBox styleClass="studentDetailsEntries">
+        <Label styleClass="studentDetailsLabels" text="Name: "/>
+        <Label fx:id="name" styleClass="studentDetailsData"/>
+    </HBox>
+    <HBox styleClass="studentDetailsEntries">
+        <Label styleClass="studentDetailsLabels" text="Tags: "/>
+        <FlowPane fx:id="tags"/>
+    </HBox >
+    <HBox styleClass="studentDetailsEntries">
+        <Label styleClass="studentDetailsLabels" text="Phone: "/>
+        <Label fx:id="phone" styleClass="studentDetailsData"/>
+    </HBox>
+    <HBox styleClass="studentDetailsEntries">
+        <Label styleClass="studentDetailsLabels" text="Email: "/>
+        <Label fx:id="email" styleClass="studentDetailsData"/>
+    </HBox>
+    <HBox styleClass="studentDetailsEntries">
+        <Label styleClass="studentDetailsLabels" text="Major: "/>
+        <Label fx:id="major" styleClass="studentDetailsData"/>
+    </HBox>
+    <HBox styleClass="studentDetailsEntries">
+        <Label styleClass="studentDetailsLabels" text="Intake: "/>
+        <Label fx:id="intake" styleClass="studentDetailsData"/>
+    </HBox>
+    <HBox styleClass="studentDetailsEntries">
+        <Label fx:id="course" styleClass="studentDetailsData"/>
+        <Label fx:id="grade" styleClass="studentDetailsData"/>
+    </HBox>
+    <HBox styleClass="studentDetailsEntries">
+        <Label styleClass="studentDetailsLabels" text="Address: "/>
+        <Label fx:id="address" styleClass="studentDetailsData"/>
+    </HBox>
+</VBox>

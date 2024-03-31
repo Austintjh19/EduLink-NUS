@@ -1,76 +1,63 @@
 package seedu.edulink.model.grade;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.edulink.testutil.Assert.assertThrows;
+import static seedu.edulink.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
+import static seedu.edulink.logic.commands.CommandTestUtil.VALID_SCORE_89;
+import static seedu.edulink.testutil.TypicalPersons.ALICE_GRADE;
+import static seedu.edulink.testutil.TypicalPersons.BOB_GRADE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.edulink.testutil.GradeBuilder;
+
 public class GradeTest {
-    @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Grade(null));
-    }
-
-    @Test
-    public void isValidMajor() {
-        // null Grade
-        assertThrows(NullPointerException.class, () -> Grade.isValidGrade(null));
-
-        // invalid Grade
-        assertFalse(Grade.isValidGrade("#!")); //special characters
-        assertFalse(Grade.isValidGrade("21515")); //5 digit Numeric
-        assertFalse(Grade.isValidGrade("a9326014")); //Alphanumeric
-        assertFalse(Grade.isValidGrade("Chem1351")); //Alphanumeric
-        assertFalse(Grade.isValidGrade("2026")); //Intake Year later than Current Year
-
-
-        // valid Grade
-        assertTrue(Grade.isValidGrade("A")); // Correct Format
-        assertTrue(Grade.isValidGrade("B"));
-        assertTrue(Grade.isValidGrade("D"));
-        assertTrue(Grade.isValidGrade("C"));
-        assertTrue(Grade.isValidGrade("F"));
-        assertTrue(Grade.isValidGrade("a"));
-    }
-
-    @Test
-    public void stringTest() {
-        Grade grade = new Grade("A");
-        Grades valid = Grades.A;
-        Grades inValid = Grades.B;
-
-        assertTrue(grade.toString().equals(valid.toString()));
-        assertFalse(grade.toString().equals(inValid.toString()));
-    }
-
-    @Test
-    public void hashTest() {
-        Grade grade = new Grade("A");
-        Grades valid = Grades.A;
-        Grades inValid = Grades.B;
-
-        assertTrue(grade.hashCode() == valid.hashCode());
-        assertFalse(grade.hashCode() == inValid.hashCode());
-    }
 
     @Test
     public void equals() {
-        Grade grade = new Grade("A");
-
         // same values -> returns true
-        assertTrue(grade.equals(new Grade("A")));
+        Grade gradeCopy = new GradeBuilder(ALICE_GRADE).build();
+        assertTrue(ALICE_GRADE.equals(gradeCopy));
 
         // same object -> returns true
-        assertTrue(grade.equals(grade));
+        assertTrue(ALICE_GRADE.equals(ALICE_GRADE));
 
         // null -> returns false
-        assertFalse(grade.equals(null));
+        assertFalse(ALICE_GRADE.equals(null));
 
-        // different types -> returns false
-        assertFalse(grade.equals(5.0f));
+        // different type -> returns false
+        assertFalse(ALICE_GRADE.equals(5));
 
-        // different values -> returns false
-        assertFalse(grade.equals(new Grade("B")));
+        // different grade -> returns false
+        assertFalse(ALICE_GRADE.equals(BOB_GRADE));
+
+        // different course -> returns false
+        Grade editedGrade = new GradeBuilder(ALICE_GRADE).withCourse(VALID_COURSE_CS2103T).build();
+        assertFalse(ALICE_GRADE.equals(editedGrade));
+
+        // different score -> returns false
+        editedGrade = new GradeBuilder(ALICE_GRADE).withScore(VALID_SCORE_89).build();
+        assertFalse(ALICE_GRADE.equals(editedGrade));
+    }
+
+    @Test
+    public void hashCode_sameValues_returnsTrue() {
+        Course course1 = new Course("MA1522");
+        Score score1 = new Score(85);
+        Grade grade1 = new Grade(course1, score1);
+
+        Course course2 = new Course("MA1522");
+        Score score2 = new Score(85);
+        Grade grade2 = new Grade(course2, score2);
+
+        assertTrue(grade1.hashCode() == grade2.hashCode());
+    }
+
+    @Test
+    public void toStringMethod() {
+        String expected = Grade.class.getCanonicalName() + "{course=" + ALICE_GRADE.getCourse()
+            + ", score=" + ALICE_GRADE.getScore() + ", grade=" + ALICE_GRADE.getGrade() + "}";
+        assertEquals(expected, ALICE_GRADE.toString());
     }
 }

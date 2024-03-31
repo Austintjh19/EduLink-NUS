@@ -415,7 +415,7 @@
 
 .recents-label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 18px;
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-text-fill: #000000;
 }
@@ -433,11 +433,45 @@
 .recent-commands-list .list-cell .label{
     -fx-max-width: 100px;
     -fx-text-overrun: ELLIPSIS;
-    -fx-text-fill: #262626;
+    -fx-text-fill: #000000;
 }
 
 .recent-commands-list .list-cell:empty{
     -fx-background-color: #FEFEFE;
 }
 
+/*
+  // ================================
+  // Details
+  // ================================ */
 
+.studentDetailsContainer {
+    -fx-background-color: #FEFEFE;
+    -fx-padding: 10px;
+    -fx-background-radius: 15px;
+    /*-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 1);*/
+}
+
+.studentDetails{
+    -fx-padding: 20px;
+}
+
+.studentDetailsEntries {
+    -fx-padding: 0px 0px 15px 0px;
+}
+
+.studentDetailsLabels {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000;
+    -fx-min-width: 100px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 0 0 0;
+}
+
+.studentDetailsData {
+    -fx-font-size: 16px;
+    -fx-text-fill: #3d3d3d;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-wrap-text: true;
+}

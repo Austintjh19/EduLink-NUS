@@ -78,7 +78,7 @@ public class EditTagCommand extends Command {
         editedTags.remove(tagToEdit);
         editedTags.add(resultingTag);
         Student editedStudent = new Student(studentToEdit.getId(), studentToEdit.getMajor(), studentToEdit.getIntake(),
-            studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
+            studentToEdit.getGrade(), studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
             studentToEdit.getAddress(), editedTags);
 
         model.setPerson(studentToEdit, editedStudent);

@@ -45,6 +45,24 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
+    //---------------- Tests for isDouble ---------------------------------------------
+    @Test
+    public void isDouble_validDouble_returnsTrue() {
+        assertTrue(StringUtil.isDouble("3.14"));
+        assertTrue(StringUtil.isDouble("12345"));
+        assertTrue(StringUtil.isDouble("-0.5"));
+        assertTrue(StringUtil.isDouble("1.0e-5"));
+    }
+
+    @Test
+    public void isDouble_withInvalidDouble_returnsFalse() {
+        assertFalse(StringUtil.isDouble("abc"));
+        assertFalse(StringUtil.isDouble("12.34.56"));
+        assertFalse(StringUtil.isDouble("1.0e"));
+        assertFalse(StringUtil.isDouble("1,234"));
+        assertFalse(StringUtil.isDouble(""));
+    }
+
     //---------------- Tests for matchesIgnoreCase -------------------------------------
     @Test
     public void matchesIgnoreCase_nullSentence_throwsNullPointerException() {

@@ -17,8 +17,6 @@ import seedu.edulink.testutil.TypicalPersons;
 
 public class CsvUtilTest {
 
-
-
     @Test
     public void convertToCsv_typicalStudents_success() throws IOException {
         List<Student> typicalStudents = new ArrayList<>();
