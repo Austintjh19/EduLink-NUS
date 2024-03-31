@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Student;
 
 /**
@@ -25,6 +26,7 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Student student;
+    public final Grade grade;
 
     private final MainWindow mainWindow;
 
@@ -41,6 +43,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label intake;
     @FXML
+    private Label course;
+    @FXML
+    private Label letterGrade;
+    @FXML
     private Label phone;
     @FXML
     private Label address;
@@ -55,6 +61,7 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(MainWindow mainWindow, Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
+        this.grade = student.getGrade();
         this.mainWindow = mainWindow;
 
         id.setText(displayedIndex + ". ");
@@ -63,6 +70,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         major.setText(student.getMajor().major);
         intake.setText(student.getIntake().toString());
+        course.setText(grade.getCourse().courseCode + ": ");
+        letterGrade.setText(grade.getGrade().toString());
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
         student.getTags().stream()

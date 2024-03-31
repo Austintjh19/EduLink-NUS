@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_INTAKE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MAJOR;
@@ -47,6 +48,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_COURSE_CS2103T = "cs2103T";
+    public static final double VALID_SCORE_89 = 89;
 
     public static final String ID_DESC_AMY = " " + PREFIX_ID + VALID_ID_AMY;
     public static final String ID_DESC_BOB = " " + PREFIX_ID + VALID_ID_BOB;
@@ -64,10 +67,12 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String GRADE_DESC_BOB = " " + PREFIX_GRADE + VALID_COURSE_CS2103T
+            + ":" + VALID_SCORE_89;
 
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "1515115";
     public static final String INVALID_MAJOR_DESC = " " + PREFIX_MAJOR + "1515";
-    public static final String INVALID_INTAKE_DESC = " " + PREFIX_INTAKE + "2400";
+    public static final String INVALID_INTAKE_DESC = " " + PREFIX_INTAKE + "2060";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol

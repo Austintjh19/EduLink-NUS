@@ -18,7 +18,7 @@ public class IntakeTest {
 
 
     @Test
-    public void isValidMajor() {
+    public void isValidIntake() {
         // null Intake
         assertThrows(NullPointerException.class, () -> Intake.isValidIntake(null));
 
@@ -27,7 +27,7 @@ public class IntakeTest {
         assertFalse(Intake.isValidIntake("21515")); //5 digit Numeric
         assertFalse(Intake.isValidIntake("a9326014")); //Alphanumeric
         assertFalse(Intake.isValidIntake("Chem1351")); //Alphanumeric
-        assertFalse(Intake.isValidIntake("2026")); //Intake Year later than Current Year
+        assertFalse(Intake.isValidIntakeYear("2026")); //Intake Year later than Current Year
 
 
         // valid Intakes

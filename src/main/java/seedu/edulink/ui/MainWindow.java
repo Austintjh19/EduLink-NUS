@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private RecentCommandPanel recentCommandsPanel;
+    private DetailsCard detailsCard;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -121,8 +122,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(this, logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
-
+        updateStudentDetailsCard();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -130,7 +130,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         recentCommandsPanel = new RecentCommandPanel(logic.getRecentCommands(), commandBox);
@@ -198,7 +198,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
             updateStudentDetailsCard();
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -210,8 +209,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private void updateStudentDetailsCard() {
         if (!logic.getFilteredPersonList().isEmpty()) {
-            DetailsCard detailsCard = new DetailsCard(logic.getFilteredPersonList().get(0));
+            detailsCard = new DetailsCard(logic.getFilteredPersonList().get(0));
             studentDetailsContainer.getChildren().setAll(detailsCard.getRoot());
+        } else {
+            studentDetailsContainer.getChildren().clear();
         }
     }
 

@@ -14,6 +14,8 @@ public class Intake {
     public static final String MESSAGE_CONSTRAINTS =
         "Intake should contain Year in the form YYYY, and it should not be blank";
     public static final String VALIDATION_REGEX = "\\b\\d{4}\\b";
+    public static final String INVALID_YEAR = "Invalid Intake ! The Entered Intake"
+        + " is after the Current Year";
 
     public final Year intake;
 
@@ -32,10 +34,14 @@ public class Intake {
      * Returns true if a given string is a valid Intake.
      */
     public static boolean isValidIntake(String test) {
-        if (test.matches(VALIDATION_REGEX)) {
-            return !Year.of(Integer.parseInt(test)).isAfter(Year.now());
-        }
-        return false;
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given Intake is now after the Current Year
+     */
+    public static boolean isValidIntakeYear(String test) {
+        return !Year.of(Integer.parseInt(test)).isAfter(Year.now());
     }
 
     /**
