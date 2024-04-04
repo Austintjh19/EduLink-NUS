@@ -2,7 +2,6 @@ package seedu.edulink.testutil;
 
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.edulink.logic.commands.CommandTestUtil.VALID_MODULE_CS2103T;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ID_AMY;
@@ -11,6 +10,7 @@ import static seedu.edulink.logic.commands.CommandTestUtil.VALID_INTAKE_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_INTAKE_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_MAJOR_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_MAJOR_BOB;
+import static seedu.edulink.logic.commands.CommandTestUtil.VALID_MODULE_CS2103T;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_PHONE_AMY;

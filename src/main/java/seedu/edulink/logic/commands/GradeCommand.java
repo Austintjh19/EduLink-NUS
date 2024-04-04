@@ -1,8 +1,8 @@
 package seedu.edulink.logic.commands;
 
 import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_SCORE;
 
 import java.util.HashSet;
