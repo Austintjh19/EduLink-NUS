@@ -3,7 +3,6 @@ package seedu.edulink.logic.parser;
 import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_INTAKE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MAJOR;
@@ -16,7 +15,6 @@ import java.util.stream.Stream;
 
 import seedu.edulink.logic.commands.AddCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
-import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
 import seedu.edulink.model.student.Id;
@@ -41,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE, PREFIX_GRADE);
+                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_ADDRESS,
             PREFIX_PHONE, PREFIX_EMAIL, PREFIX_INTAKE, PREFIX_MAJOR)
@@ -61,11 +59,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Student student = new Student(id, major, intake, name, phone, email, address, tagList);
-
-        if (argMultimap.getValue(PREFIX_GRADE).isPresent()) {
-            Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
-            student = new Student(id, major, intake, grade, name, phone, email, address, tagList);
-        }
 
         return new AddCommand(student);
     }
