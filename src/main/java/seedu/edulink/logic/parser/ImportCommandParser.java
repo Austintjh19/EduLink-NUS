@@ -17,6 +17,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
     private Storage storage;
 
     public ImportCommandParser(Storage storage) {
+        requireNonNull(storage);
         this.storage = storage;
     }
 
