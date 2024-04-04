@@ -33,10 +33,6 @@
         <Label fx:id="intake" styleClass="studentDetailsData"/>
     </HBox>
     <HBox styleClass="studentDetailsEntries">
-        <Label fx:id="course" styleClass="studentDetailsData"/>
-        <Label fx:id="grade" styleClass="studentDetailsData"/>
-    </HBox>
-    <HBox styleClass="studentDetailsEntries">
         <Label styleClass="studentDetailsLabels" text="Address: "/>
         <Label fx:id="address" styleClass="studentDetailsData"/>
     </HBox>

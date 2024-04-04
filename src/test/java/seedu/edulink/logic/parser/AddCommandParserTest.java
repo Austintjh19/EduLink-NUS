@@ -5,7 +5,6 @@ import static seedu.edulink.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.edulink.logic.commands.CommandTestUtil.GRADE_DESC_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.ID_DESC_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.INTAKE_DESC_AMY;
@@ -68,8 +67,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + ID_DESC_BOB + NAME_DESC_BOB
-            + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-            + MAJOR_DESC_BOB + INTAKE_DESC_BOB + GRADE_DESC_BOB
+            + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + MAJOR_DESC_BOB + INTAKE_DESC_BOB
             + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
 
 
@@ -77,8 +75,7 @@ public class AddCommandParserTest {
         Student expectedStudentMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
             .build();
         assertParseSuccess(parser, ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + MAJOR_DESC_BOB + INTAKE_DESC_BOB + GRADE_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + MAJOR_DESC_BOB + INTAKE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
             new AddCommand(expectedStudentMultipleTags));
     }
 

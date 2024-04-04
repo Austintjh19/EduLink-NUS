@@ -3,7 +3,6 @@ package seedu.edulink.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_INTAKE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MAJOR;
@@ -43,8 +42,7 @@ public class AddCommand extends Command {
         + PREFIX_MAJOR + "Computer Science "
         + PREFIX_INTAKE + "2024 "
         + PREFIX_TAG + "friends "
-        + PREFIX_TAG + "owesMoney"
-        + "[" + PREFIX_GRADE + "CS2103T/CS2103: SCORE]";
+        + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New Student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This Student already exists in the address book";
