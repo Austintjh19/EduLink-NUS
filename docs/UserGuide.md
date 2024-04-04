@@ -171,6 +171,17 @@ Method: Left-click on a specific Student Panel Card within the Student List Pane
 * The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter` ... 
 * If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
 
+### Accessing the Recent Commands in CommandBox:
+
+Access the 5 most Recent Successful Commands in the CommandBox.
+
+![Ui](images/RecentCommands.png)
+
+**Method 1 -  Using GUI**:
+Left-Click with Mouse on the desired Recent Command (any one of the command marked with Red Rectangle).
+
+**Method 2 -  Using CLI**:Press `TAB` on your Keyboard to access the RecentCommands in the order shown in the Image above
+starting from left to right i.e (Most RecentCommand First)
 
 ### Listing all students : `list`
 
@@ -327,6 +338,18 @@ Examples:
 * `import f/NUS-CS`
 * `import f/_Stanford`
 
+### Undo Changes: `undo`
+
+Undoes the last command executed and reverts the application to the previous state.
+
+Format: `undo`
+
+* The `undo` command revert the changes done by last data changing command i.e command that changes (add, edit or delete) information for any Student in the Application.
+* The application stores up to 20 previous states, allowing you to undo up to the last 20 commands.
+* If there are no commands to undo, an error message will be displayed saying No History available.
+
+Examples:
+* `undo`
 
 ### Clearing all entries : `clear`
 
