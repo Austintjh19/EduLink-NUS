@@ -33,6 +33,9 @@ Whether you're a seasoned user looking to enhance your workflow or a newcomer ea
     - [Tagging a student: `tag`](#tagging-a-student--tag)
     - [Editing a student's tag: `etag`](#editing-tags-for-a-student-etag)
     - [Deleting a student's tag: `dtag`](#deleting-a-tag-from-a-student--dtag)
+    - [Exporting students data: `export`](#exporting-students-data--export)
+    - [Importing students data: `import`](#importing-students-data--import)
+    - [Undo Changes: `undo`](#undo-changes-undo)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
     - [Exiting the program: `exit`](#exiting-the-program--exit)
     - [Saving the data](#saving-the-data)
@@ -310,7 +313,7 @@ Format: `dtag id/ID t/TAG t/TAG`
 Examples:
 * `dtag id/A0257418E t/potentialTA t/Active`
 
-### Exporting the Data : `export`
+### Exporting Students Data : `export`
 
 Exports the students from the address book in a CSV file.
 
@@ -324,7 +327,7 @@ Examples:
 * `export f/Mystudents`
 * `export f/NUS-CS`
 
-### Importing the Data : `import`
+### Importing Students Data : `import`
 
 Imports data from a valid JSON file into the Application
 
@@ -408,4 +411,7 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`
 **List**   | `list`
+**Undo**   | `undo`
+**Export**   | `export f/[FILENAME]` <br> e.g, `export f/mystudents`
+**Import**   | `import f/[FILENAME]` <br> e.g,`import f/NTU-CS`
 **Help**   | `help`
