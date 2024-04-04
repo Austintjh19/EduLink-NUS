@@ -31,7 +31,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
         if (argMultimap.getValue(PREFIX_FILENAME).isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                ExportCommand.MESSAGE_USAGE));
+                ImportCommand.MESSAGE_USAGE));
         }
         String filename = argMultimap.getValue(PREFIX_FILENAME).get();
         return new ImportCommand(ParserUtil.parseFilename(filename), storage);

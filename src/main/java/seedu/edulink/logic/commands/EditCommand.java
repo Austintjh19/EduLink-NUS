@@ -53,13 +53,11 @@ public class EditCommand extends Command {
         + "[" + PREFIX_EMAIL + "EMAIL] "
         + "[" + PREFIX_ADDRESS + "ADDRESS] "
         + "[" + PREFIX_MAJOR + "MAJOR] "
-        + "[" + PREFIX_INTAKE + "INTAKE] "
-        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "[" + PREFIX_INTAKE + "INTAKE]...\n"
         + "Example: " + COMMAND_WORD + " 1 " + PREFIX_ID + "A0951516M "
         + PREFIX_PHONE + "91234567 "
         + PREFIX_MAJOR + "Physics "
-        + PREFIX_EMAIL + "johndoe@example.com"
-        + "[" + PREFIX_GRADE + "CS2103T/CS2103: SCORE]";
+        + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
