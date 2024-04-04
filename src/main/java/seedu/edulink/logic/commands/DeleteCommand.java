@@ -24,13 +24,17 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Deletes the person identified by the index number used in the displayed person list or Student ID.\n"
-        + "Parameters: INDEX (must be a positive integer) or" + "[" + PREFIX_ID + "KEYWORD]\n"
-        + "Example: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " " + PREFIX_ID + "A1234567Z";
+        + ": Deletes the student identified by the index number used in the displayed student list or Student ID."
+        + "Can also bulk-delete a filtered list of students.\n"
+        + "Parameters: INDEX (must be a positive integer) or "
+        + "[" + PREFIX_ID + "STUDENT_ID] or ALL (can be in lower caps). "
+        + "Example: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " " + PREFIX_ID + "A1234567Z, " + COMMAND_WORD + " all";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_DELETE_PERSONS_SUCCESS = "Deleted %1$s students!";
 
     private final boolean isIndexBased;
+    private boolean istargetAll;
     private Index targetIndex;
     private Id targetStudentId;
 
@@ -50,9 +54,21 @@ public class DeleteCommand extends Command {
         this.targetStudentId = targetStudentId;
     }
 
+    /**
+     * Instantiate Delete Command with given student ID.
+     */
+    public DeleteCommand() {
+        this.isIndexBased = false;
+        this.istargetAll = true;
+    }
+
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (istargetAll) {
+            return handleDeleteAll(model);
+        }
         if (isIndexBased) {
             return handleIndexInput(model);
         } else {
@@ -100,6 +116,13 @@ public class DeleteCommand extends Command {
         model.deletePerson(personToDelete.get());
         return new CommandResult(
             String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete.get())));
+    }
+
+    private CommandResult handleDeleteAll(Model model) throws CommandException {
+        List<Student> lastShownList = model.getFilteredPersonList();
+        int deletedCount = lastShownList.size();
+        model.deletePersons(lastShownList);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSONS_SUCCESS, deletedCount));
     }
 
     @Override

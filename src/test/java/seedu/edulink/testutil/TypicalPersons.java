@@ -2,7 +2,6 @@ package seedu.edulink.testutil;
 
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.edulink.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ID_AMY;
@@ -11,6 +10,7 @@ import static seedu.edulink.logic.commands.CommandTestUtil.VALID_INTAKE_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_INTAKE_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_MAJOR_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_MAJOR_BOB;
+import static seedu.edulink.logic.commands.CommandTestUtil.VALID_MODULE_CS2103T;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -32,17 +32,18 @@ import seedu.edulink.model.student.Student;
  */
 public class TypicalPersons {
 
-    public static final Grade ALICE_GRADE = new GradeBuilder().withCourse("CS2113").withScore(55)
+    public static final Grade ALICE_GRADE = new GradeBuilder().withModule("CS2113").withScore(55)
         .build();
+    public static final Grade BENSON_GRADE = new GradeBuilder().withModule("CS2103").withScore(70)
+        .build();
+
     public static final Student ALICE = new PersonBuilder().withName("Alice Pauline").withId("A0251893P")
-        .withMajor("Computer Science").withIntake("2023").withGrade(ALICE_GRADE)
+        .withMajor("Computer Science").withIntake("2023")
         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
         .withPhone("94351253")
         .withTags("friends", "TA", "Smart").build();
-    public static final Grade BENSON_GRADE = new GradeBuilder().withCourse("CS2103").withScore(70)
-        .build();
     public static final Student BENSON = new PersonBuilder().withName("Benson Meier").withId("A0265901E")
-        .withMajor("Physics").withIntake("2023").withGrade(BENSON_GRADE)
+        .withMajor("Physics").withIntake("2023")
         .withAddress("311, Clementi Ave 2, #02-25")
         .withEmail("johnd@example.com").withPhone("98765432")
         .withTags("owesMoney", "friends").build();
@@ -81,15 +82,16 @@ public class TypicalPersons {
         .withEmail("pie@example.com").withAddress("hk ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
+    public static final Grade BOB_GRADE = new GradeBuilder().withModule(VALID_MODULE_CS2103T)
+        .withScore(VALID_SCORE_89).build();
+
     public static final Student AMY = new PersonBuilder().withName(VALID_NAME_AMY)
         .withPhone(VALID_PHONE_AMY).withId(VALID_ID_AMY)
         .withMajor(VALID_MAJOR_AMY).withIntake(VALID_INTAKE_AMY).withEmail(VALID_EMAIL_AMY)
         .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Grade BOB_GRADE = new GradeBuilder().withCourse(VALID_COURSE_CS2103T)
-        .withScore(VALID_SCORE_89).build();
     public static final Student BOB = new PersonBuilder().withId(VALID_ID_BOB).withName(VALID_NAME_BOB)
         .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-        .withMajor(VALID_MAJOR_BOB).withIntake(VALID_INTAKE_BOB).withGrade(BOB_GRADE)
+        .withMajor(VALID_MAJOR_BOB).withIntake(VALID_INTAKE_BOB)
         .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

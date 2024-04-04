@@ -9,10 +9,7 @@
       "address": "123, Jurong West Ave 6, #08-111",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": {
-        "course": "CS2113",
-        "score": 55
-      },
+      "grade": [],
       "tags": [
         "TA",
         "Smart",
@@ -27,10 +24,7 @@
       "address": "311, Clementi Ave 2, #02-25",
       "major": "Physics",
       "intake": "2023",
-      "grade": {
-        "course": "CS2103",
-        "score": 70
-      },
+      "grade": [],
       "tags": [
         "owesMoney",
         "friends"
@@ -44,10 +38,7 @@
       "address": "wall street",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": {
-        "course": "CS2103T",
-        "score": 0
-      },
+      "grade": [],
       "tags": []
     },
     {
@@ -58,10 +49,7 @@
       "address": "10th street",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": {
-        "course": "CS2103T",
-        "score": 0
-      },
+      "grade": [],
       "tags": [
         "friends"
       ]
@@ -74,10 +62,7 @@
       "address": "michegan ave",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": {
-        "course": "CS2103T",
-        "score": 0
-      },
+      "grade": [],
       "tags": []
     },
     {
@@ -88,10 +73,7 @@
       "address": "little tokyo",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": {
-        "course": "CS2103T",
-        "score": 0
-      },
+      "grade": [],
       "tags": []
     },
     {
@@ -102,10 +84,7 @@
       "address": "4th street",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": {
-        "course": "CS2103T",
-        "score": 0
-      },
+      "grade": [],
       "tags": []
     },
     {
@@ -116,10 +95,7 @@
       "address": "new york ave",
       "major": "Computer Science",
       "intake": "2024",
-      "grade": {
-        "course": "CS2103T",
-        "score": 0
-      },
+      "grade": [],
       "tags": []
     },
     {
@@ -130,10 +106,7 @@
       "address": "hk ave",
       "major": "Computer Science",
       "intake": "2022",
-      "grade": {
-        "course": "CS2103T",
-        "score": 0
-      },
+      "grade": [],
       "tags": []
     }
   ]

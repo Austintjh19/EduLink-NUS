@@ -37,9 +37,8 @@ public class DetailsCard extends UiPart<Region> {
     @FXML
     private Label intake;
     @FXML
-    private Label course;
-    @FXML
-    private Label grade;
+    private Label module;
+
     @FXML
     private Label phone;
     @FXML
@@ -48,6 +47,9 @@ public class DetailsCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+
+    @FXML
+    private FlowPane grades;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -60,12 +62,12 @@ public class DetailsCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         major.setText(student.getMajor().major);
         intake.setText(student.getIntake().toString());
-        course.setText(student.getGrade().getCourse().courseCode + ": ");
-        grade.setText(student.getGrade().getGrade().toString());
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        student.getGrades().forEach(grade -> grades.getChildren()
+                .add(new Label(grade.module.toString() + " - " + grade.score.toString())));
     }
 }

@@ -23,7 +23,7 @@ public class DeleteTagCommand extends Command {
 
     public static final String COMMAND_WORD = "dtag";
 
-    public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the person you specified.";
+    public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the Student you specified.";
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tags: %1$s";
     public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID " + PREFIX_TAG + "Tag";
     public static final String MESSAGE_TAG_NOT_FOUND = "Invalid Command"
@@ -64,8 +64,8 @@ public class DeleteTagCommand extends Command {
         removedSet.removeAll(tags);
 
         Student editedStudent = new Student(studentToEdit.getId(), studentToEdit.getMajor(), studentToEdit.getIntake(),
-            studentToEdit.getGrade(), studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
-            studentToEdit.getAddress(), removedSet);
+            studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
+            studentToEdit.getAddress(), removedSet, studentToEdit.getGrades());
 
         model.setPerson(studentToEdit, editedStudent);
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tags));

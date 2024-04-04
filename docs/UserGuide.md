@@ -33,6 +33,9 @@ Whether you're a seasoned user looking to enhance your workflow or a newcomer ea
     - [Tagging a student: `tag`](#tagging-a-student--tag)
     - [Editing a student's tag: `etag`](#editing-tags-for-a-student-etag)
     - [Deleting a student's tag: `dtag`](#deleting-a-tag-from-a-student--dtag)
+    - [Exporting students data: `export`](#exporting-students-data--export)
+    - [Importing students data: `import`](#importing-students-data--import)
+    - [Undo Changes: `undo`](#undo-changes-undo)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
     - [Exiting the program: `exit`](#exiting-the-program--exit)
     - [Saving the data](#saving-the-data)
@@ -73,11 +76,11 @@ Whether you're a seasoned user looking to enhance your workflow or a newcomer ea
 
 ## Graphical User Interface Layout
 
-EduLink NUS's user interface can be split into 6 main components, as shown below: 
+EduLink NUS's user interface can be split into 6 main components, as shown below:
 
 ![Ui](images/UiLayout.png)
 
-The designated names assigned to each component of the User Interface will be consistently utilized throughout the User Guide to mitigate any potential confusion. 
+The designated names assigned to each component of the User Interface will be consistently utilized throughout the User Guide to mitigate any potential confusion.
 Please refer below for a comprehensive description of each component.
 
 
@@ -90,7 +93,7 @@ Please refer below for a comprehensive description of each component.
 * Student Card: For more detailed information about an individual student stored in the system, users can refer to the Student Card, providing comprehensive insights.
 
 --------------------------------------------------------------------------------------------------------------------
-## EduLink-NUS Features 
+## EduLink-NUS Features
 
 <box type="info" seamless>
 
@@ -106,7 +109,7 @@ Please refer below for a comprehensive description of each component.
 
 **Notes about the command format:**<br>
 
-* Commands are case-insensitive. e.g `filter` and `Filter` are the same command. 
+* Commands are case-insensitive. e.g `filter` and `Filter` are the same command.
 
 *  **TAB** key serve a distinct purpose and are not employed for creating four spaces.
 
@@ -168,9 +171,20 @@ Method: Left-click on a specific Student Panel Card within the Student List Pane
 
 * The Student Card will display the currently selected student from the Student List Panel.
 * The Student Card will display the details of the first student on the Student List Panel, when a specific student is not selected from the Student List Panel.
-* The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter` ... 
+* The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter` ...
 * If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
 
+### Accessing the Recent Commands in CommandBox:
+
+Access the 5 most Recent Successful Commands in the CommandBox.
+
+![Ui](images/RecentCommands.png)
+
+**Method 1 -  Using GUI**:
+Left-Click with Mouse on the desired Recent Command (any one of the command marked with Red Rectangle).
+
+**Method 2 -  Using CLI**:Press `TAB` on your Keyboard to access the RecentCommands in the order shown in the Image above
+starting from left to right i.e (Most RecentCommand First)
 
 ### Listing all students : `list`
 
@@ -178,25 +192,22 @@ Shows a list of all Students in the EduLink NUS.
 
 Format: `list`
 
-* Displays the list of all students stored within EduLink NUS on the Student List Panel. 
-* No parameters are required for this command, and any parameter added will be ignored. 
+* Displays the list of all students stored within EduLink NUS on the Student List Panel.
+* No parameters are required for this command, and any parameter added will be ignored.
 
 ### Editing a student : `edit`
 
 Edits an existing student in the address book.
 
-Format: `edit INDEX [id/ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [id/ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower in/2020` Edits the name of the 2nd student to be `Betsy Crower` and changes the intake to `2020`.
 
 
 ### Search Students by Name or ID: `find`
@@ -278,9 +289,9 @@ Format: `etag id/ID t/TAG t/RESULTING_TAG`
 * Tags the student with id `ID`.
 * The `ID` refers to the alphanumeric string on the left of Name
 * The `ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* `TAG` must be alphabetic without spaces. It is the existing tag 
+* `TAG` must be alphabetic without spaces. It is the existing tag
 that you intend to edit. This parameter must exactly match the current tag assigned to the student.
-* `RESULTING_TAG` is the new tag that will replace the existing TAG. 
+* `RESULTING_TAG` is the new tag that will replace the existing TAG.
 
 Examples:
 * `etag id/A0265901E t/Honors t/Scholar` updates the tag from "Honors" to "Scholar" for the student with ID "A0265901E.
@@ -299,14 +310,52 @@ Format: `dtag id/ID t/TAG t/TAG`
 Examples:
 * `dtag id/A0257418E t/potentialTA t/Active`
 
+### Exporting Students Data : `export`
+
+Exports the students from the address book in a CSV file.
+
+Format: `export f/[FILENAME]`
+
+* Exports the Students Data in a CSV file named `FILENAME.csv` in the **exports** directory i.e `[JAR_FILE_LOCATION]/exports/FILENAME.csv`
+* Multiple values within an attribute is separated with a `|` e.g Tags -> `Potenial TA | Honours` in the CSV File.
+* `FILENAME` must be alphanumeric and it can include ` _ (Underscore)` and `- (Hyphen)`.
+
+Examples:
+* `export f/Mystudents`
+* `export f/NUS-CS`
+
+### Importing Students Data : `import`
+
+Imports data from a valid JSON file into the Application
+
+Format: `import f/[FILENAME]`
+
+* Imports Students Data from JSON file named `FILENAME.json` in the **data** directory i.e `[JAR_FILE_LOCATION]/data/FILENAME.json`
+* `FILENAME` must be alphanumeric and it can include ` _ (Underscore)` and `- (Hyphen)`.
+
+Examples:
+* `import f/Mystudents`
+* `import f/NUS-CS`
+* `import f/_Stanford`
+
+### Undo Changes: `undo`
+
+Undoes the last command executed and reverts the application to the previous state.
+
+Format: `undo`
+
+* The `undo` command revert the changes done by last data changing command i.e command that changes (add, edit or delete) information for any Student in the Application.
+* The application stores up to 20 previous states, allowing you to undo up to the last 20 commands.
+* If there are no commands to undo, an error message will be displayed saying No History available.
+
+Examples:
+* `undo`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
-
-* After executing this command, all existing entries in the address book will be removed.
-
 
 ### Exiting the program : `exit`
 
@@ -314,24 +363,9 @@ Exits the program.
 
 Format: `exit`
 
-<<<<<<< HEAD
-* Upon execution, the program will be exited, returning you to the operating system or main environment.
-
-
 ### Saving the data
-=======
-### Exporting Data: `export`
-The export command in EduLink-NUS enables users to export their current list of student contacts to a csv file.
->>>>>>> master
 
-Format: `export f/FILENAME`
-
-* `FILENAME` is the name of the file where the user intends to export. 
-The application will automatically append file format extension (.csv).
-
-Examples:
-* `export f/student_contacts_march` 
-saves the current list of student contacts to a file named `student_contacts_march.csv`
+AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -367,14 +401,17 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add id/STUDENT_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MAJOR in/INTAKE [t/TAG]…​` <br> e.g., `add id/A0265901E n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 m/Computer Science in/2024 t/TA`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` **OR** `delete id/STUDENT_ID` <br> e.g., `delete 3`, `delete id/A026273X`
-**Edit**   | `edit INDEX [ id/STUDENT_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE] `<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find n/NAME`, `find id/STUDENT_ID`, or `find n/NAME id/STUDENT_ID`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`
-**Edit Tag** | `etag id/ID t/TAG t/RESULTING_TAG` <br> e.g., `etag id/A0265901E t/Honors t/Scholar`
-**Delete Tag** | `dtag id/ID t/TAG [t/TAG]…​` <br> e.g., `dtag id/A0265901E t/Honors t/GoodTA`
-**Tag**    | `tag id/ID t/TAG [t/TAG]…​` <br> e.g., `tag id/A0257418E t/Sincere t/GoodTA`
+**Tag** | `tag id/ID t/TAG t/TAG` <br> e.g, `tag id/A0257418E t/potentialTA t/Active`
 **List**   | `list`
+**Undo**   | `undo`
+**Export**   | `export f/FILENAME` <br> e.g, `export f/mystudents`
+**Import**   | `import f/FILENAME` <br> e.g,`import f/NTU-CS`
+**Dtag**   | `dtag id/ID t/TAG` <br> e.g,`dtag id/A0257418E t/potentialTA`
+**Etag** | `etag id/ID t/TAG t/RESULTING_TAG` <br> e.g `etag id/A0265901E t/Honors t/Scholar`
 **Help**   | `help`

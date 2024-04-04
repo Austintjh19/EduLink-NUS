@@ -11,8 +11,7 @@ import seedu.edulink.commons.util.StringUtil;
 import seedu.edulink.logic.Messages;
 import seedu.edulink.logic.commands.ExportCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
-import seedu.edulink.model.grade.Course;
-import seedu.edulink.model.grade.Grade;
+import seedu.edulink.model.grade.Module;
 import seedu.edulink.model.grade.Score;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
@@ -126,30 +125,37 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String grade} into a {@code Grade}.
-     * {@code String grade} is written as [course]: [score]
-     * All whitespaces will be removed.
+     * Parses a {@code String module} into a {@code module}.
+     * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if either the given course or score is invalid.
+     * @throws ParseException if either the given {@code module} is invalid.
      */
-    public static Grade parseGrade(String grade) throws ParseException {
-        requireNonNull(grade);
-        String trimmedGrade = grade.replaceAll("\\s", "");
-        String courseCode = trimmedGrade.split(":")[0];
-        if (!Course.isValidCourseCode(courseCode)) {
-            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+    public static Module parseModule(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedmoduleCode = moduleCode.trim();
+        if (!Module.isValidModuleCode(trimmedmoduleCode)) {
+            throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
-        String scoreStr = trimmedGrade.split(":")[1];
-        if (!StringUtil.isDouble(scoreStr)) {
+        return new Module(trimmedmoduleCode);
+    }
+
+    /**
+     * Parses a {@code String score} into a {@code Score}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if either the given {@code Score} is invalid.
+     */
+    public static Score parseScore(String score) throws ParseException {
+        requireNonNull(score);
+        String trimmedScore = score.trim();
+        if (!StringUtil.isDouble(trimmedScore)) {
             throw new ParseException(Score.MESSAGE_CONSTRAINTS);
         }
-        Double score = Double.parseDouble(scoreStr);
-        if (!Score.isValidScore(score)) {
+        Double numericalScore = Double.parseDouble(trimmedScore);
+        if (!Score.isValidScore(numericalScore)) {
             throw new ParseException(Score.MESSAGE_CONSTRAINTS);
         }
-        System.out.println(courseCode);
-        System.out.println(scoreStr);
-        return new Grade(new Course(courseCode), new Score(score));
+        return new Score(numericalScore);
     }
 
     /**

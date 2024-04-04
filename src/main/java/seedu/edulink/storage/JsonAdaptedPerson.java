@@ -36,27 +36,30 @@ class JsonAdaptedPerson {
     private final String intake;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final JsonAdaptedGrade grade;
+    private final List<JsonAdaptedGrade> grades = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("id") String id, @JsonProperty("major") String major,
-                             @JsonProperty("intake") String intake, @JsonProperty("grade") JsonAdaptedGrade grade,
-                             @JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("intake") String intake, @JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                             @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("grades") List<JsonAdaptedGrade> grades) {
         this.name = name;
         this.id = id;
         this.major = major;
         this.intake = intake;
-        this.grade = grade;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (grades != null) {
+            this.grades.addAll(grades);
         }
     }
 
@@ -71,9 +74,11 @@ class JsonAdaptedPerson {
         id = source.getId().id;
         major = source.getMajor().major;
         intake = source.getIntake().toString();
-        grade = new JsonAdaptedGrade(source.getGrade());
         tags.addAll(source.getTags().stream()
             .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList()));
+        grades.addAll(source.getGrades().stream()
+            .map(JsonAdaptedGrade::new)
             .collect(Collectors.toList()));
     }
 
@@ -84,8 +89,12 @@ class JsonAdaptedPerson {
      */
     public Student toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        final List<Grade> personGrades = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+        for (JsonAdaptedGrade grade : grades) {
+            personGrades.add(grade.toModelType());
         }
 
         if (id == null) {
@@ -111,11 +120,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Intake.MESSAGE_CONSTRAINTS);
         }
         final Intake modelIntake = new Intake(intake);
-
-        if (grade == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
-        }
-        final Grade modelGrade = grade.toModelType();
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -150,9 +154,10 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Grade> modelGrades = new HashSet<>(personGrades);
 
-        return new Student(modelId, modelMajor, modelIntake, modelGrade, modelName, modelPhone, modelEmail,
-            modelAddress, modelTags);
+        return new Student(modelId, modelMajor, modelIntake, modelName, modelPhone, modelEmail,
+            modelAddress, modelTags, modelGrades);
     }
 
 }

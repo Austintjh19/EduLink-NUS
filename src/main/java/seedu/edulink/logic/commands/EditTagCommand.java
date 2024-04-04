@@ -23,7 +23,7 @@ public class EditTagCommand extends Command {
 
     public static final String COMMAND_WORD = "etag";
 
-    public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the person you specified.";
+    public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the Student you specified.";
     public static final String MESSAGE_EDIT_TAG_SUCCESS = "Edited Tags: %1$s: tag %2$s is replaced by %3$s";
     public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID "
             + PREFIX_TAG + "Tag to edit " + PREFIX_TAG + "Resulting tag";
@@ -78,8 +78,8 @@ public class EditTagCommand extends Command {
         editedTags.remove(tagToEdit);
         editedTags.add(resultingTag);
         Student editedStudent = new Student(studentToEdit.getId(), studentToEdit.getMajor(), studentToEdit.getIntake(),
-            studentToEdit.getGrade(), studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
-            studentToEdit.getAddress(), editedTags);
+            studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
+            studentToEdit.getAddress(), editedTags, studentToEdit.getGrades());
 
         model.setPerson(studentToEdit, editedStudent);
         return new CommandResult(String.format(MESSAGE_EDIT_TAG_SUCCESS, studentToEditId, tagToEdit, resultingTag));
