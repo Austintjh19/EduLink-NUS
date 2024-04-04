@@ -3,13 +3,11 @@ package seedu.edulink.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_INTAKE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.edulink.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -301,9 +299,7 @@ public class EditCommand extends Command {
                 && Objects.equals(intake, otherEditPersonDescriptor.intake)
                 && Objects.equals(phone, otherEditPersonDescriptor.phone)
                 && Objects.equals(email, otherEditPersonDescriptor.email)
-                && Objects.equals(address, otherEditPersonDescriptor.address)
-                && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                && Objects.equals(grade, otherEditPersonDescriptor.grade);
+                && Objects.equals(address, otherEditPersonDescriptor.address);
         }
 
         @Override

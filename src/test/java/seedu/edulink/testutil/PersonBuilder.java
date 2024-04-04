@@ -26,7 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ID = "A8914515M";
     public static final String DEFAULT_MAJOR = "Computer Science";
-    public static final String DEFAULT_INTAKE = "2020";
+    public static final String DEFAULT_INTAKE = "2021";
 
     private Name name;
     private Phone phone;

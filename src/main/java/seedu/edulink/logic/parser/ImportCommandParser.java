@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_FILENAME;
 
 import seedu.edulink.logic.Messages;
-import seedu.edulink.logic.commands.ExportCommand;
 import seedu.edulink.logic.commands.ImportCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
 import seedu.edulink.storage.Storage;
