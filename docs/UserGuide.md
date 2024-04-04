@@ -245,7 +245,7 @@ Format: `tag id/ID t/TAG t/TAG`
 * Tags the student with id `ID`.
 * The `ID` refers to the alphanumeric string on the left of Name
 * The `ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* `TAGS` can be alphabetic without spaces and multiple tags can be specified
+* `TAG` can be alphabetic without spaces and multiple tags can be specified
 
 Examples:
 * `tag id/A0257418E t/potentialTA t/Active`
@@ -259,7 +259,7 @@ Format: `etag id/ID t/TAG t/RESULTING_TAG`
 * Tags the student with id `ID`.
 * The `ID` refers to the alphanumeric string on the left of Name
 * The `ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* `TAGS` must be alphabetic without spaces. It is the existing tag 
+* `TAG` must be alphabetic without spaces. It is the existing tag 
 that you intend to edit. This parameter must exactly match the current tag assigned to the student.
 * `RESULTING_TAG` is the new tag that will replace the existing TAG. 
 
