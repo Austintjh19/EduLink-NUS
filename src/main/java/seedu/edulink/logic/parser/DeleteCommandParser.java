@@ -26,6 +26,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
+        if (trimmedArgs.toUpperCase().equals("ALL")) {
+            return new DeleteCommand();
+        }
+
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_ID);
 
