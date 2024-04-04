@@ -237,18 +237,20 @@ Examples:
 
 Deletes the specified individual from the EduLink NUS system.
 
-Format: `delete INDEX` **OR** `delete id/STUDENT_ID`
+Format: `delete INDEX`, `delete id/STUDENT_ID` **OR** `delete ALL` 
 
 * Deletes the student at the specified `INDEX` or deletes the student identified by the specified `STUDENT_ID`.
 * The INDEX refers to the index number shown in the displayed student list.
 * The STUDENT_ID refers to the unique identification string associated with individuals stored in EduLink NUS.
 * The INDEX **must be a positive integer** 1, 2, 3, …​
 * The STUDENT_ID **must exist within the system**
+* ALL is **not case-sensitive**
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 * `delete id/A026273X` deletes the student with Student ID A026273X.
+* `find n/Lim` followed by `delete all` deletes all Students with firstname or lastname starting with Lim.
 
 ### Filtering displayed list : `filter`
 
@@ -350,6 +352,24 @@ Format: `undo`
 
 Examples:
 * `undo`
+
+### Grading a student : `grade`
+
+Grades the specified individual from the EduLink NUS system for a specified module
+
+Format: `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE`
+
+* Grades the student identified by the specified `STUDENT_ID`.
+* The STUDENT_ID refers to the unique identification string associated with individuals stored in EduLink NUS.
+* Edit's the student identified by the specified `STUDENT_ID`'s grade if a grade for the specified `MODULE` already exists.
+* The STUDENT_ID **must exist within the system**
+* The MODULE_CODE **must be valid i.e. matches [2 letters] followed by [4 digits] then [a optional letter]**
+* The SCORE **must be within 0 to 100**. 0 stands up **Not Available**.
+
+Examples:
+* `grade id/A026273X mod/CS2103T s/77` grades the student with Student ID A026273X for module CS2103T. 77 out of 100 is translated to grade B.
+* `grade id/A026273X mod/CS2103T s/85` edits the student with Student ID A026273X's grade for module CS2103T because a grade for it already exists. 85 out of 100 is now translated to grade A.
+
 
 ### Clearing all entries : `clear`
 

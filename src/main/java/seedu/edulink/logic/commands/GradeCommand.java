@@ -79,7 +79,7 @@ public class GradeCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_EDIT_GRADE_SUCCESS, studentToGradeId,
-                grade.getModule(), grade.getScore()));
+                grade.getModule(), Messages.format(grade.getScore())));
     }
 
     @Override
