@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.edulink.commons.core.GuiSettings;
 import seedu.edulink.commons.core.LogsCenter;
 import seedu.edulink.model.student.Student;
+import seedu.edulink.storage.Storage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,7 +30,6 @@ public class ModelManager implements Model {
 
     private final Stack<List<Student>> previousStates;
 
-
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -42,6 +42,10 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getPersonList());
         previousStates = new Stack<>();
+    }
+
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Storage storage) {
+        this(addressBook, userPrefs);
     }
 
     public ModelManager() {

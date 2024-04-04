@@ -89,7 +89,11 @@ public class MainApp extends Application {
                 + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
         }
-
+        try {
+            storage.saveAddressBook(initialData);
+        } catch (IOException ioe) {
+            logger.warning("Unable to save the initial data to addressBook, making an empty addressBook");
+        }
         return new ModelManager(initialData, userPrefs);
     }
 
