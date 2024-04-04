@@ -6,7 +6,15 @@
 
 # EduLink-NUS User Guide
 
-EduLink NUS is a **desktop app for Academic Instructors to keep contacts of their past and current student, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduLink NUS can get your contact management tasks done faster than traditional GUI apps.
+--------------------------------------------------------------------------------------------------------------------
+## Introduction
+
+Welcome to the **EduLink NUS User Guide** – your essential companion to unlocking the full potential of academic contact/ student management at the National University of Singapore (NUS). Designed specifically for professors and teaching assistants, EduLink NUS is a **desktop app for Academic Instructors to keep contacts of their past and current student, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduLink NUS can get your contact management tasks done faster than traditional GUI apps.
+
+In this comprehensive guide, you will discover everything you need to know to harness the capabilities of EduLink NUS effectively. From getting started with launching the application to exploring its myriad features and optimizing performance, each section is meticulously crafted to empower you in managing your academic interactions seamlessly.
+
+Whether you're a seasoned user looking to enhance your workflow or a newcomer eager to dive into the world of efficient contact management, this User Guide is your roadmap to success with EduLink NUS. Let's embark on this journey together and unlock the full potential of academic engagement at NUS with EduLink NUS.
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -103,6 +111,9 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+* The format does not require any additional parameters; entering parameters will be disregarded.
+* The help message image provided offers clear instructions for users seeking assistance.
+
 
 ### Adding a student: `add`
 
@@ -128,6 +139,9 @@ Shows a list of all Students in the EduLink NUS.
 
 Format: `list`
 
+* Displays the list of all students stored within EduLink NUS on the Student List Panel. 
+* No parameters are required for this command, and any parameter added will be ignored. 
+
 ### Editing a student : `edit`
 
 Edits an existing student in the address book.
@@ -146,34 +160,27 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 
-### Search students by name or ID: `find`
+### Search Students by Name or ID: `find`
 
-Finds students whose names or IDs matches any of the given keywords.
-Can search by both the IDs and name.
+This command facilitates the search for students in the EduLink NUS application based on their **Names**, **Student IDs**, or **Both**. Matching students will be displayed on the Student List Panel.
 
-Formats:
-* search by name: `find [n/NAME]`
-* search by student ID: `find [id/STUDENT_ID]`
-* * search by name: `find [n/NAME]`
-* search by student ID and name: `find [n/NAME] [id/STUDENT_ID]`
+Formats: `find n/NAME`, `find id/STUDENT_ID`, OR `find n/NAME id/STUDENT_ID`
 
 * The search is case-insensitive. e.g `john` will match `John`, `a1234567x` will match `A1234567X`
-* Only the name or student id is queried.
 * The search by name supports partial word matching, but must be in chronological order e.g. `John` will match `Jonathan`. And `nathan` will not match with `Jonathan`.
-* The search by ID supports partial word matching, does not need to be in chronological order e.g. `A123` will match `A1234567X`. And `2345` will match with `A1234567X`.
-* When querying student through name with multiple keywords, only names that match all will be returned.
-  e.g. `Hans Bo` will return `Hans Bober`, `Hans Bober` and not `Hans Mayer`
-* When searching by both id and name, only ids and names that match both will be returned.
- e.g. `Hans Bo` and `A1234` will return entries that has names starting with `Hans Bo` and id starting with `A1234`.
+* When searching by name with multiple words, only entries with the same chronological combination of the search words will match. It disregards the specific location of the match. e.g. `Li A` will successfully match `John Li An`.
+  Additionally, `Hans Bo` will return `Hans Bober`, `Hans Bober` and not `Hans Mayer`
+* The search by ID supports partial word matching and does not need to be in chronological order e.g. `A123` will match `A1234567X`. And `2345` will match with `A1234567X`.
+* When searching by both ID and name, only entries with IDs and names that match both criteria will be returned.
+ e.g. `Hans Bo` and `A1234` will return entries that has names that includes `Hans Bo` and IDs with `A1234`.
 
 Examples:
 * `find n/John` returns `john`, `John Doe`, `Johnathan`
-* `find n/John` returns `john`, `John Doe`, `Johnathan`
-* `find n/alex david` returns `Alex David`
+* `find n/alex david` returns `Alex David`, `Alex Davidson`
 * `find id/A1234567X` returns a person with ID `A12345678X`
 * `find id/A123` returns entries with IDs with `A123`
 * `find id/A1234567X n/John Doe` returns a person `John Doe` with ID `A12345678X`
-
+* `find id/234 n/John D` returns a person `Jeff John Doe Leong` with ID `A12345678X`
 
 
 ### Deleting a student : `delete`
@@ -195,13 +202,13 @@ Examples:
 
 ### Filtering displayed list : `filter`
 
-Filter displayed list of students based on a tag or tags.
+Filter displayed list of students on the Student List Panel based on a tag or tags.
 
 Format: `filter t/TAG [t/TAG] …​`
 
-* Tag names are case-sensitive. e.g `TA` will **NOT** match `Ta`
+* Tag names are case-insensitive. e.g `TA` will match `Ta`
 * The order of the tags does not matter. e.g. result for `TA` and `Knowledgeable` will match `Knowledgeable` and `TA`.
-* Only full words will be matched e.g. `High Priority` will not match `High Achieving`.
+* Only full words will be matched, no support for partial word matches. e.g. `TA` will not match `TAPotential`.
 * Persons matching all tags listed will be returned. E.g. Person with `TA` tag only will not be returned, if tags
   specified includes `TA` and `Year 2`.
 
