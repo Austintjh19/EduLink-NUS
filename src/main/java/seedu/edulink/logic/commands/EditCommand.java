@@ -43,8 +43,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-        + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
+        + "by the index number used in the displayed student list. "
         + "Existing values will be overwritten by the input values.\n"
         + "Parameters: INDEX (must be a positive integer) "
         + "[" + PREFIX_ID + "ID] "
@@ -61,9 +61,9 @@ public class EditCommand extends Command {
         + PREFIX_EMAIL + "johndoe@example.com"
         + "[" + PREFIX_GRADE + "CS2103T/CS2103: SCORE]";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This Student already exists in the address book.";
     public static final String MESSAGE_NO_CHANGE = "There are no Changes according to the Arguments Provided";
 
     private final Index index;
