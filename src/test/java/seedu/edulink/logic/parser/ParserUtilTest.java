@@ -38,10 +38,10 @@ public class ParserUtilTest {
     private static final String VALID_FILENAME2 = "_mystudents";
     private static final String VALID_FILENAME = "students";
 
-    private static final String INVALID_COURSE = "CS100";
+    private static final String INVALID_MODULE = "CS100";
     private static final double INVALID_SCORE_105 = 105;
     private static final String INVALID_SCORE_ABC = "abc";
-    private static final String VALID_COURSE = "MA1522";
+    private static final String VALID_MODULE = "MA1522";
     private static final double VALID_SCORE = 100;
 
     private static final String WHITESPACE = " \t\r\n";
@@ -218,20 +218,20 @@ public class ParserUtilTest {
     }
 
     // @Test
-    // public void parseGrade_invalidCourse_throwsParseException() {
+    // public void parseGrade_invalidModule_throwsParseException() {
     //     assertThrows(ParseException.class, () ->
-    //             ParserUtil.parseGrade(INVALID_COURSE + ":" + VALID_SCORE));
+    //             ParserUtil.parseGrade(INVALID_MODULE + ":" + VALID_SCORE));
     // }
 
     // @Test
     // public void parseGrade_invalidScoreNotDouble_throwsParseException() {
     //     assertThrows(ParseException.class, () ->
-    //         ParserUtil.parseGrade(VALID_COURSE + ":" + INVALID_SCORE_105));
+    //         ParserUtil.parseGrade(VALID_MODULE + ":" + INVALID_SCORE_105));
     // }
 
     // @Test
     // public void parseGrade_invalidScoreOutOfRange_throwsParseException() {
     //     assertThrows(ParseException.class, () ->
-    //             ParserUtil.parseGrade(VALID_COURSE + ":" + INVALID_SCORE_ABC));
+    //             ParserUtil.parseGrade(VALID_MODULE + ":" + INVALID_SCORE_ABC));
     // }
 }

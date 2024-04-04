@@ -2,7 +2,7 @@ package seedu.edulink.testutil;
 
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.edulink.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
+import static seedu.edulink.logic.commands.CommandTestUtil.VALID_MODULE_CS2103T;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ID_AMY;
@@ -32,9 +32,9 @@ import seedu.edulink.model.student.Student;
  */
 public class TypicalPersons {
 
-    public static final Grade ALICE_GRADE = new GradeBuilder().withCourse("CS2113").withScore(55)
+    public static final Grade ALICE_GRADE = new GradeBuilder().withModule("CS2113").withScore(55)
         .build();
-    public static final Grade BENSON_GRADE = new GradeBuilder().withCourse("CS2103").withScore(70)
+    public static final Grade BENSON_GRADE = new GradeBuilder().withModule("CS2103").withScore(70)
         .build();
 
     public static final Student ALICE = new PersonBuilder().withName("Alice Pauline").withId("A0251893P")
@@ -82,7 +82,7 @@ public class TypicalPersons {
         .withEmail("pie@example.com").withAddress("hk ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Grade BOB_GRADE = new GradeBuilder().withCourse(VALID_COURSE_CS2103T)
+    public static final Grade BOB_GRADE = new GradeBuilder().withModule(VALID_MODULE_CS2103T)
         .withScore(VALID_SCORE_89).build();
 
     public static final Student AMY = new PersonBuilder().withName(VALID_NAME_AMY)

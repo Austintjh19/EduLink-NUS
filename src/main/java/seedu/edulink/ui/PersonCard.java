@@ -40,7 +40,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label intake;
     @FXML
-    private Label course;
+    private Label module;
     @FXML
     private Label letterGrade;
     @FXML

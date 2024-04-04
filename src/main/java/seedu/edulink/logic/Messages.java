@@ -63,8 +63,8 @@ public class Messages {
      */
     public static String format(Grade grade) {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Course: ")
-            .append(grade.getCourse())
+        builder.append("Module: ")
+            .append(grade.getModule())
             .append("; Score: ")
             .append(grade.getScore());
         return builder.toString();

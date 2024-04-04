@@ -1,7 +1,7 @@
 package seedu.edulink.logic.commands;
 
 import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_COURSE;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_SCORE;
 
@@ -28,9 +28,9 @@ public class GradeCommand extends Command {
     public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the person you specified.";
     public static final String MESSAGE_ADD_GRADE_SUCCESS = "Added Grade: %1$s";
     public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID "
-            + PREFIX_COURSE + "Course " + PREFIX_SCORE + "Score";
+            + PREFIX_MODULE + "MODULE " + PREFIX_SCORE + "SCORE";
     public static final String MESSAGE_EDIT_GRADE_SUCCESS = "Edited Grade: "
-            + "%1$s: score for course %2$s changed to %3$s";
+            + "%1$s: score for module %2$s changed to %3$s";
 
     private final Id studentToEditId;
     private final Grade grade;
@@ -39,13 +39,13 @@ public class GradeCommand extends Command {
      * Creates a GradeCommand to add grade to a student.
      *
      * @param studentToEditId the ID of the student user add grade to.
-     * @param grade           grade that the user wish to add to the student.
+     * @param grade2           grade that the user wish to add to the student.
      */
-    public GradeCommand(Id studentToEditId, Grade grade) {
-        requireAllNonNull(studentToEditId, grade);
+    public GradeCommand(Id studentToEditId, Grade grade2) {
+        requireAllNonNull(studentToEditId, grade2);
 
         this.studentToEditId = studentToEditId;
-        this.grade = grade;
+        this.grade = grade2;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class GradeCommand extends Command {
         Set<Grade> editedGrades = new HashSet<>(originalGrades);
 
         Optional<Grade> optionalGradeToEdit = editedGrades.stream().filter(
-                grade -> grade.getCourse().equals(this.grade.getCourse())
+                grade -> grade.getModule().equals(this.grade.getModule())
         ).findFirst();
         optionalGradeToEdit.ifPresent(existingGrade -> {
             editedGrades.remove(existingGrade);
@@ -79,7 +79,7 @@ public class GradeCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_EDIT_GRADE_SUCCESS, studentToEditId,
-                grade.getCourse(), grade.getScore()));
+                grade.getModule(), grade.getScore()));
     }
 
     @Override

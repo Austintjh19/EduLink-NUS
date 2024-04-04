@@ -266,8 +266,8 @@ public class EditCommand extends Command {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
-        public void setGrades(Set<Grade> grades) {
-            this.grades = (grades != null) ? new HashSet<>(grades) : null;
+        public void setGrades(Set<Grade> grades2) {
+            this.grades = (grades2 != null) ? new HashSet<>(grades2) : null;
         }
 
         /**

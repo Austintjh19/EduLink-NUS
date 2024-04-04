@@ -11,7 +11,7 @@ import seedu.edulink.commons.util.StringUtil;
 import seedu.edulink.logic.Messages;
 import seedu.edulink.logic.commands.ExportCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
-import seedu.edulink.model.grade.Course;
+import seedu.edulink.model.grade.Module;
 import seedu.edulink.model.grade.Score;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
@@ -125,18 +125,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String course} into a {@code Course}.
+     * Parses a {@code String module} into a {@code module}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if either the given {@code Course} is invalid.
+     * @throws ParseException if either the given {@code module} is invalid.
      */
-    public static Course parseCourse(String courseCode) throws ParseException {
-        requireNonNull(courseCode);
-        String trimmedCourseCode = courseCode.trim();
-        if (!Course.isValidCourseCode(trimmedCourseCode)) {
-            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+    public static Module parseModule(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedmoduleCode = moduleCode.trim();
+        if (!Module.isValidModuleCode(trimmedmoduleCode)) {
+            throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
-        return new Course(trimmedCourseCode);
+        return new Module(trimmedmoduleCode);
     }
 
     /**

@@ -3,7 +3,7 @@ package seedu.edulink.model.grade;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.edulink.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
+import static seedu.edulink.logic.commands.CommandTestUtil.VALID_MODULE_CS2103T;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_SCORE_89;
 import static seedu.edulink.testutil.TypicalPersons.ALICE_GRADE;
 import static seedu.edulink.testutil.TypicalPersons.BOB_GRADE;
@@ -32,8 +32,8 @@ public class GradeTest {
         // different grade -> returns false
         assertFalse(ALICE_GRADE.equals(BOB_GRADE));
 
-        // different course -> returns false
-        Grade editedGrade = new GradeBuilder(ALICE_GRADE).withCourse(VALID_COURSE_CS2103T).build();
+        // different module -> returns false
+        Grade editedGrade = new GradeBuilder(ALICE_GRADE).withModule(VALID_MODULE_CS2103T).build();
         assertFalse(ALICE_GRADE.equals(editedGrade));
 
         // different score -> returns false
@@ -43,20 +43,20 @@ public class GradeTest {
 
     @Test
     public void hashCode_sameValues_returnsTrue() {
-        Course course1 = new Course("MA1522");
+        Module module1 = new Module("MA1522");
         Score score1 = new Score(85);
-        Grade grade1 = new Grade(course1, score1);
+        Grade grade1 = new Grade(module1, score1);
 
-        Course course2 = new Course("MA1522");
+        Module module2 = new Module("MA1522");
         Score score2 = new Score(85);
-        Grade grade2 = new Grade(course2, score2);
+        Grade grade2 = new Grade(module2, score2);
 
         assertTrue(grade1.hashCode() == grade2.hashCode());
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Grade.class.getCanonicalName() + "{course=" + ALICE_GRADE.getCourse()
+        String expected = Grade.class.getCanonicalName() + "{module=" + ALICE_GRADE.getModule()
             + ", score=" + ALICE_GRADE.getScore() + ", grade=" + ALICE_GRADE.getGrade() + "}";
         assertEquals(expected, ALICE_GRADE.toString());
     }
