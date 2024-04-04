@@ -46,6 +46,7 @@ public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
+
     @Test
     public void parseCommand_add() throws Exception {
         Student student = new PersonBuilder().build();
