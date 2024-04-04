@@ -15,9 +15,32 @@ In this comprehensive guide, you will discover everything you need to know to ha
 
 Whether you're a seasoned user looking to enhance your workflow or a newcomer eager to dive into the world of efficient contact management, this User Guide is your roadmap to success with EduLink NUS. Let's embark on this journey together and unlock the full potential of academic engagement at NUS with EduLink NUS.
 
-
 <!-- * Table of Contents -->
-<page-nav-print />
+
+## Contents
+
+--------------------------------------------------------------------------------------------------------------------
+
+- [Quick Start](#quick-start)
+- [Features](#features)
+    - [Viewing help: `help`](#viewing-help--help)
+    - [Adding a student: `add`](#adding-a-student-add)
+    - [Listing all students: `list`](#listing-all-students--list)
+    - [Editing a student: `edit`](#editing-a-student--edit)
+    - [Search students by name or ID: `find`](#search-students-by-name-or-id-find)
+    - [Deleting a student: `delete`](#deleting-a-student--delete)
+    - [Filtering displayed list: `filter`](#filtering-displayed-list--filter)
+    - [Tagging a student: `tag`](#tagging-a-student--tag)
+    - [Editing a student's tag: `etag`](#editing-tags-for-a-student-etag)
+    - [Deleting a student's tag: `dtag`](#deleting-a-tag-from-a-student--dtag)
+    - [Clearing all entries: `clear`](#clearing-all-entries--clear)
+    - [Exiting the program: `exit`](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -237,10 +260,40 @@ Format: `tag id/ID t/TAG t/TAG`
 * Tags the student with id `ID`.
 * The `ID` refers to the alphanumeric string on the left of Name
 * The `ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* `TAG` can be alphabetic without spaces and multiple tags can be specified
+
+Examples:
+* `tag id/A0257418E t/potentialTA t/Active`
+
+### Editing tags for a Student: `etag`
+
+Edits the tag of a specific student in EduLink NUS
+
+Format: `etag id/ID t/TAG t/RESULTING_TAG`
+
+* Tags the student with id `ID`.
+* The `ID` refers to the alphanumeric string on the left of Name
+* The `ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* `TAG` must be alphabetic without spaces. It is the existing tag 
+that you intend to edit. This parameter must exactly match the current tag assigned to the student.
+* `RESULTING_TAG` is the new tag that will replace the existing TAG. 
+
+Examples:
+* `etag id/A0265901E t/Honors t/Scholar` updates the tag from "Honors" to "Scholar" for the student with ID "A0265901E.
+
+### Deleting a tag from a student : `dtag`
+
+Remove a specific tag from a student's profile.
+
+Format: `dtag id/ID t/TAG t/TAG`
+
+* Tags the student with id `ID`.
+* The `ID` refers to the alphanumeric string on the left of Name
+* The `ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
 * `TAGS` can be alphabetic without spaces and multiple tags can be specified
 
 Examples:
-* `tag id/A0257418E t/Sincere t/Good`
+* `dtag id/A0257418E t/potentialTA t/Active`
 
 ### Clearing all entries : `clear`
 
@@ -257,12 +310,24 @@ Exits the program.
 
 Format: `exit`
 
+<<<<<<< HEAD
 * Upon execution, the program will be exited, returning you to the operating system or main environment.
 
 
 ### Saving the data
+=======
+### Exporting Data: `export`
+The export command in EduLink-NUS enables users to export their current list of student contacts to a csv file.
+>>>>>>> master
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Format: `export f/FILENAME`
+
+* `FILENAME` is the name of the file where the user intends to export. 
+The application will automatically append file format extension (.csv).
+
+Examples:
+* `export f/student_contacts_march` 
+saves the current list of student contacts to a file named `student_contacts_march.csv`
 
 ### Editing the data file
 
@@ -304,5 +369,8 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`
+**Edit Tag** | `etag id/ID t/TAG t/RESULTING_TAG` <br> e.g., `etag id/A0265901E t/Honors t/Scholar`
+**Delete Tag** | `dtag id/ID t/TAG [t/TAG]…​` <br> e.g., `dtag id/A0265901E t/Honors t/GoodTA`
+**Tag**    | `tag id/ID t/TAG [t/TAG]…​` <br> e.g., `tag id/A0257418E t/Sincere t/GoodTA`
 **List**   | `list`
 **Help**   | `help`
