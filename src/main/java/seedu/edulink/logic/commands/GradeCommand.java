@@ -32,19 +32,19 @@ public class GradeCommand extends Command {
     public static final String MESSAGE_EDIT_GRADE_SUCCESS = "Edited Grade: "
             + "%1$s: score for module %2$s changed to %3$s";
 
-    private final Id studentToEditId;
+    private final Id studentToGradeId;
     private final Grade grade;
 
     /**
      * Creates a GradeCommand to add grade to a student.
      *
-     * @param studentToEditId the ID of the student user add grade to.
+     * @param studentToGradeId the ID of the student user add grade to.
      * @param grade2           grade that the user wish to add to the student.
      */
-    public GradeCommand(Id studentToEditId, Grade grade2) {
-        requireAllNonNull(studentToEditId, grade2);
+    public GradeCommand(Id studentToGradeId, Grade grade2) {
+        requireAllNonNull(studentToGradeId, grade2);
 
-        this.studentToEditId = studentToEditId;
+        this.studentToGradeId = studentToGradeId;
         this.grade = grade2;
     }
 
@@ -52,7 +52,7 @@ public class GradeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Student> lastShownList = model.getFilteredPersonList();
         Optional<Student> optionalStudentToEdit = lastShownList.stream().filter(
-                student -> student.getId().equals(studentToEditId)
+                student -> student.getId().equals(studentToGradeId)
         ).findFirst();
         if (optionalStudentToEdit.isEmpty()) {
             throw new CommandException(MESSAGE_PERSON_NOTFOUND);
@@ -78,7 +78,7 @@ public class GradeCommand extends Command {
             return new CommandResult(String.format(MESSAGE_ADD_GRADE_SUCCESS, Messages.format(grade)));
         }
 
-        return new CommandResult(String.format(MESSAGE_EDIT_GRADE_SUCCESS, studentToEditId,
+        return new CommandResult(String.format(MESSAGE_EDIT_GRADE_SUCCESS, studentToGradeId,
                 grade.getModule(), grade.getScore()));
     }
 
@@ -93,7 +93,7 @@ public class GradeCommand extends Command {
         }
 
         GradeCommand otherGradeCommand = (GradeCommand) other;
-        boolean isStudentIdEqual = this.studentToEditId.equals(otherGradeCommand.studentToEditId);
+        boolean isStudentIdEqual = this.studentToGradeId.equals(otherGradeCommand.studentToGradeId);
         boolean isGradeEqual = this.grade.equals(otherGradeCommand.grade);
         return (isStudentIdEqual && isGradeEqual);
     }
@@ -101,7 +101,7 @@ public class GradeCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("Id", this.studentToEditId)
+            .add("Id", this.studentToGradeId)
             .add("grade", this.grade)
             .toString();
     }
