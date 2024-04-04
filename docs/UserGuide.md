@@ -448,6 +448,18 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+## Glossary
+
+Term    | Definition and or Explanation
+--------|----------------------------------------------------------------------
+**CSV** | **Comma-Seperated Values** , a file format generally used to import data in Spreadsheets and Do analysis
+**JSON** | **JavaScrip Object Notation**, a standard file format for data interchange
+**Data Changing Command** | Commands in the Application that modifies the Students Data e.g Delete, Edit, Tag
+**NUS** | National University of Singapore , A University Located in Central Singapore
+**Student ID** | A particular format of ID followed in NUS, Starting with a Alphabet followed by 7 digits and ending with an Alphabet e.g A0252195L
+**GUI** | Graphical User Interface , all the part of the application which you can interact with your mouse
+**CLI** | Command Line Interface , part of application which can only be used with commands from the Keyboard
+
 
 ## Command summary
 
