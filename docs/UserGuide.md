@@ -73,11 +73,11 @@ Whether you're a seasoned user looking to enhance your workflow or a newcomer ea
 
 ## Graphical User Interface Layout
 
-EduLink NUS's user interface can be split into 6 main components, as shown below: 
+EduLink NUS's user interface can be split into 6 main components, as shown below:
 
 ![Ui](images/UiLayout.png)
 
-The designated names assigned to each component of the User Interface will be consistently utilized throughout the User Guide to mitigate any potential confusion. 
+The designated names assigned to each component of the User Interface will be consistently utilized throughout the User Guide to mitigate any potential confusion.
 Please refer below for a comprehensive description of each component.
 
 
@@ -90,7 +90,7 @@ Please refer below for a comprehensive description of each component.
 * Student Card: For more detailed information about an individual student stored in the system, users can refer to the Student Card, providing comprehensive insights.
 
 --------------------------------------------------------------------------------------------------------------------
-## EduLink-NUS Features 
+## EduLink-NUS Features
 
 <box type="info" seamless>
 
@@ -106,7 +106,7 @@ Please refer below for a comprehensive description of each component.
 
 **Notes about the command format:**<br>
 
-* Commands are case-insensitive. e.g `filter` and `Filter` are the same command. 
+* Commands are case-insensitive. e.g `filter` and `Filter` are the same command.
 
 *  **TAB** key serve a distinct purpose and are not employed for creating four spaces.
 
@@ -168,7 +168,7 @@ Method: Left-click on a specific Student Panel Card within the Student List Pane
 
 * The Student Card will display the currently selected student from the Student List Panel.
 * The Student Card will display the details of the first student on the Student List Panel, when a specific student is not selected from the Student List Panel.
-* The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter` ... 
+* The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter` ...
 * If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
 
 
@@ -178,8 +178,8 @@ Shows a list of all Students in the EduLink NUS.
 
 Format: `list`
 
-* Displays the list of all students stored within EduLink NUS on the Student List Panel. 
-* No parameters are required for this command, and any parameter added will be ignored. 
+* Displays the list of all students stored within EduLink NUS on the Student List Panel.
+* No parameters are required for this command, and any parameter added will be ignored.
 
 ### Editing a student : `edit`
 
@@ -278,9 +278,9 @@ Format: `etag id/ID t/TAG t/RESULTING_TAG`
 * Tags the student with id `ID`.
 * The `ID` refers to the alphanumeric string on the left of Name
 * The `ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* `TAG` must be alphabetic without spaces. It is the existing tag 
+* `TAG` must be alphabetic without spaces. It is the existing tag
 that you intend to edit. This parameter must exactly match the current tag assigned to the student.
-* `RESULTING_TAG` is the new tag that will replace the existing TAG. 
+* `RESULTING_TAG` is the new tag that will replace the existing TAG.
 
 Examples:
 * `etag id/A0265901E t/Honors t/Scholar` updates the tag from "Honors" to "Scholar" for the student with ID "A0265901E.
@@ -326,11 +326,11 @@ The export command in EduLink-NUS enables users to export their current list of 
 
 Format: `export f/FILENAME`
 
-* `FILENAME` is the name of the file where the user intends to export. 
+* `FILENAME` is the name of the file where the user intends to export.
 The application will automatically append file format extension (.csv).
 
 Examples:
-* `export f/student_contacts_march` 
+* `export f/student_contacts_march`
 saves the current list of student contacts to a file named `student_contacts_march.csv`
 
 ### Editing the data file
