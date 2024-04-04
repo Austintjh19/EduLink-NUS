@@ -112,10 +112,10 @@ public class EditCommand extends Command {
         Id updatedId = editPersonDescriptor.getId().orElse(studentToEdit.getId());
         Major updatedMajor = editPersonDescriptor.getMajor().orElse(studentToEdit.getMajor());
         Intake updatedIntake = editPersonDescriptor.getIntake().orElse(studentToEdit.getIntake());
-        Grade updatedGrade = editPersonDescriptor.getGrade().orElse(studentToEdit.getGrade());
+        Set<Grade> updatedGrades = editPersonDescriptor.getGrades().orElse(studentToEdit.getGrades());
 
-        return new Student(updatedId, updatedMajor, updatedIntake, updatedGrade, updatedName, updatedPhone,
-            updatedEmail, updatedAddress, updatedTags);
+        return new Student(updatedId, updatedMajor, updatedIntake, updatedName, updatedPhone,
+            updatedEmail, updatedAddress, updatedTags, updatedGrades);
     }
 
     @Override
@@ -155,7 +155,7 @@ public class EditCommand extends Command {
         private Id id;
         private Major major;
         private Intake intake;
-        private Grade grade;
+        private Set<Grade> grades;
 
         public EditPersonDescriptor() {
         }
@@ -173,7 +173,7 @@ public class EditCommand extends Command {
             setId(toCopy.id);
             setMajor(toCopy.major);
             setIntake(toCopy.intake);
-            setGrade(toCopy.grade);
+            setGrades(toCopy.grades);
         }
 
         /**
@@ -190,14 +190,14 @@ public class EditCommand extends Command {
             setId(toCopy.getId());
             setMajor(toCopy.getMajor());
             setIntake(toCopy.getIntake());
-            setGrade(toCopy.getGrade());
+            setGrades(toCopy.getGrades());
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(id, major, intake, grade, name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(id, major, intake, name, phone, email, address, tags);
         }
 
         public void setName(Name name) {
@@ -216,10 +216,6 @@ public class EditCommand extends Command {
             this.intake = intake;
         }
 
-        public void setGrade(Grade grade) {
-            this.grade = grade;
-        }
-
         public Optional<Id> getId() {
             return Optional.ofNullable(id);
         }
@@ -230,10 +226,6 @@ public class EditCommand extends Command {
 
         public Optional<Intake> getIntake() {
             return Optional.ofNullable(intake);
-        }
-
-        public Optional<Grade> getGrade() {
-            return Optional.ofNullable(grade);
         }
 
         public Optional<Name> getName() {
@@ -272,6 +264,10 @@ public class EditCommand extends Command {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
+        public void setGrades(Set<Grade> grades2) {
+            this.grades = (grades2 != null) ? new HashSet<>(grades2) : null;
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -279,6 +275,10 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public Optional<Set<Grade>> getGrades() {
+            return (grades != null) ? Optional.of(Collections.unmodifiableSet(grades)) : Optional.empty();
         }
 
         @Override
@@ -312,7 +312,7 @@ public class EditCommand extends Command {
                 .add("address", address)
                 .add("major", major)
                 .add("intake", intake)
-                .add("grade", grade)
+                .add("grades", grades)
                 .add("tags", tags)
                 .toString();
         }

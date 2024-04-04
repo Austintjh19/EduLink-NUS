@@ -11,10 +11,7 @@
       ],
       "major": "Physics",
       "intake": "2024",
-      "grade": {
-        "course": "CS2103T",
-        "score": 0
-      }
+      "grade": []
     },
     {
       "id": "A0265901E",
@@ -24,10 +21,7 @@
       "address": "4th street",
       "major": "Physics",
       "intake": "2024",
-      "grade": {
-        "course": "CS2103",
-        "score": 77
-      }
+      "grade": []
     }
   ]
 }

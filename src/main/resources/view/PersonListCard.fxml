@@ -37,10 +37,6 @@
                 <Label fx:id="major" styleClass="cell_small_label" text="\$major"/>
                 <Label fx:id="intake" styleClass="cell_small_label" text="\$intake"/>
             </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="1">
-                <Label fx:id="course" styleClass="cell_small_label" text="\$course"/>
-                <Label fx:id="letterGrade" styleClass="cell_small_label" text="\$letterGrade"/>
-            </HBox>
             <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
         </VBox>
         <rowConstraints>
