@@ -2,6 +2,7 @@ package seedu.edulink.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -92,6 +93,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Student key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes list of {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removePersons(List<Student> keys) {
+        Iterator<Student> iterator = persons.iterator();
+        while (iterator.hasNext()) {
+            Student person = iterator.next();
+            if (keys.contains(person)) {
+                iterator.remove();
+            }
+        }
     }
 
     //// util methods
