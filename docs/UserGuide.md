@@ -363,11 +363,11 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MAJOR in/INTAKE [t/TAG]…​` <br> e.g., `add id/A0265901E n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 m/Computer Science in/2024 t/TA`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` **OR** `delete id/STUDENT_ID` <br> e.g., `delete 3`, `delete id/A026273X`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE] `<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find n/NAME`, `find id/STUDENT_ID`, or `find n/NAME id/STUDENT_ID`
 **Filter** | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`
 **Edit Tag** | `etag id/ID t/TAG t/RESULTING_TAG` <br> e.g., `etag id/A0265901E t/Honors t/Scholar`
 **Delete Tag** | `dtag id/ID t/TAG [t/TAG]…​` <br> e.g., `dtag id/A0265901E t/Honors t/GoodTA`
