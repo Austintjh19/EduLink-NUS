@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.edulink.logic.parser.Prefix;
+import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Student;
 
 /**
@@ -18,7 +19,7 @@ public class Messages {
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Student with given ID does not exist!";
     public static final String MESSAGE_NO_HISTORY_FOUND = "No History available to Undo or"
         + " Max allowed limit for undo reached";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d students listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
         "Multiple values specified for the following single-valued field(s): ";
 
@@ -54,6 +55,18 @@ public class Messages {
             .append(student.getIntake())
             .append("; Tags: ");
         student.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code grade} for display to the user.
+     */
+    public static String format(Grade grade) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Module: ")
+            .append(grade.getModule())
+            .append("; Score: ")
+            .append(grade.getScore());
         return builder.toString();
     }
 

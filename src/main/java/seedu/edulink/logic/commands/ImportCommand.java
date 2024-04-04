@@ -24,8 +24,6 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported Data from the file - %s.json";
     public static final String MESSAGE_IMPORT_FAILURE = "Unable to Import data to Application : Invalid JSON File";
     public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_FILENAME + "FILENAME";
-    public static final String FILENAME_CONSTRAIN = "File name can only contain Alphanumeric words,"
-        + " - (hyphens) and _ (underscore)";
     public static final String VALIDATION_FILENAME = "^[\\w\\-]+$";
 
     private final String fileName;
@@ -48,7 +46,7 @@ public class ImportCommand extends Command {
             JsonAddressBookStorage addressBookStorage = getNewAddressBookStorage();
             Optional<ReadOnlyAddressBook> addressBookOptional = addressBookStorage.readAddressBook();
             if (addressBookOptional.isEmpty()) {
-                throw new CommandException(String.format("File not found or invalid data: %s", fileName));
+                throw new CommandException(String.format("File not found: %s.json", fileName));
             }
             storage.setAddressBookFilePath(addressBookStorage);
             ReadOnlyAddressBook addressBookToImport = addressBookOptional.get();

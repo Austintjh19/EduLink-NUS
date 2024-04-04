@@ -8,9 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.edulink.commons.util.ToStringBuilder;
-import seedu.edulink.model.grade.Course;
 import seedu.edulink.model.grade.Grade;
-import seedu.edulink.model.grade.Score;
 import seedu.edulink.model.tag.Tag;
 
 /**
@@ -26,11 +24,11 @@ public class Student {
     private final Email email;
     private final Major major;
     private final Intake intake;
-    private final Grade grade;
 
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Grade> grades = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -40,7 +38,6 @@ public class Student {
         this.id = id;
         this.major = new Major("");
         this.intake = new Intake("2023");
-        this.grade = new Grade(new Course("CS2103T"), new Score(0));
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,7 +53,6 @@ public class Student {
         this.id = new Id("N1111111N");
         this.major = new Major("");
         this.intake = new Intake("2023");
-        this.grade = new Grade(new Course("CS2103T"), new Score(0));
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -73,7 +69,6 @@ public class Student {
         this.id = id;
         this.major = major;
         this.intake = intake;
-        this.grade = new Grade(new Course("CS2103T"), new Score(0));
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -84,18 +79,18 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Id id, Major major, Intake intake, Grade grade, Name name, Phone phone, Email email,
-                   Address address, Set<Tag> tags) {
+    public Student(Id id, Major major, Intake intake, Name name, Phone phone, Email email,
+                   Address address, Set<Tag> tags, Set<Grade> grades) {
         requireAllNonNull(name, phone, email, address, tags, id, major, intake);
         this.id = id;
         this.major = major;
         this.intake = intake;
-        this.grade = grade;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.grades.addAll(grades);
     }
 
     public Id getId() {
@@ -108,10 +103,6 @@ public class Student {
 
     public Intake getIntake() {
         return intake;
-    }
-
-    public Grade getGrade() {
-        return grade;
     }
 
     public Name getName() {
@@ -136,6 +127,10 @@ public class Student {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Set<Grade> getGrades() {
+        return Collections.unmodifiableSet(grades);
     }
 
     /**
@@ -174,7 +169,7 @@ public class Student {
             && address.equals(otherStudent.address)
             && tags.equals(otherStudent.tags)
             && major.equals(otherStudent.major)
-            && grade.equals(otherStudent.grade);
+            && grades.equals(otherStudent.grades);
     }
 
     @Override
@@ -193,7 +188,7 @@ public class Student {
             .add("address", address)
             .add("major", major)
             .add("intake", intake)
-            .add("grade", grade)
+            .add("grades", grades)
             .add("tags", tags)
             .toString();
     }

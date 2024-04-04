@@ -13,9 +13,6 @@ import org.junit.jupiter.api.Test;
 import seedu.edulink.model.Model;
 import seedu.edulink.model.ModelManager;
 import seedu.edulink.model.UserPrefs;
-import seedu.edulink.model.grade.Course;
-import seedu.edulink.model.grade.Grade;
-import seedu.edulink.model.grade.Score;
 import seedu.edulink.model.student.Id;
 import seedu.edulink.model.student.Student;
 import seedu.edulink.model.tag.Tag;
@@ -107,7 +104,6 @@ public class EditTagCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Student resultStudent = new PersonBuilder().withName("Benson Meier").withId("A0265901E")
                 .withMajor("Physics").withIntake("2023")
-                .withGrade(new Grade(new Course("CS2103"), new Score(70)))
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withEmail("johnd@example.com").withPhone("98765432")
                 .withTags("owesMoney", "parent").build();
