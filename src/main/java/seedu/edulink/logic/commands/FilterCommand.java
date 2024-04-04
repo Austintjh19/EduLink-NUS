@@ -18,7 +18,7 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tag matches exaclty with "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose tag matches exaclty with "
             + "the specified tags and displays them as a list with index numbers.\n"
             + "Parameters: " + PREFIX_TAG + "KEYWORD "
             + "[" + PREFIX_TAG + "KEYWORD] ... \n"

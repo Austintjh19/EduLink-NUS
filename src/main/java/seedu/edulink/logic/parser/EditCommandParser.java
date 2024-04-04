@@ -9,20 +9,11 @@ import static seedu.edulink.logic.parser.CliSyntax.PREFIX_INTAKE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
 
 import seedu.edulink.commons.core.index.Index;
 import seedu.edulink.logic.commands.EditCommand;
 import seedu.edulink.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.edulink.logic.parser.exceptions.ParseException;
-import seedu.edulink.model.grade.Grade;
-import seedu.edulink.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -39,7 +30,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_TAG, PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE);
+                PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE);
 
         Index index;
 
@@ -75,40 +66,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-        parseGradesForEdit(editPersonDescriptor.getGrades()).ifPresent(editPersonDescriptor::setGrades);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
         return new EditCommand(index, editPersonDescriptor);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
-     */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
-    }
-
-    private Optional<Set<Grade>> parseGradesForEdit(Optional<Set<Grade>> grades) throws ParseException {
-        assert grades != null;
-
-        if (grades.isEmpty()) {
-            return Optional.of(Collections.emptySet());
-        }
-        Set<Grade> gradeSet = new HashSet<>();
-        gradeSet.addAll(grades.get());
-
-        return Optional.of(gradeSet);
     }
 
 }
