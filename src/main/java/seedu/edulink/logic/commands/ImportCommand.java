@@ -22,7 +22,7 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
     public static final String IMPORT_FORMAT = ".json";
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported Data to the file - ";
-    public static final String MESSAGE_IMPORT_FAILURE = "Unable to Import data to Application";
+    public static final String MESSAGE_IMPORT_FAILURE = "Unable to Import data to Application : Invalid JSON File";
     public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_FILENAME + "FILENAME";
     public static final String FILENAME_CONSTRAIN = "File name can only contain Alphanumeric words,"
         + " - (hyphens) and _ (underscore)";

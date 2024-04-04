@@ -1,9 +1,7 @@
 package seedu.edulink.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulink.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -42,7 +40,6 @@ public class AddressBookParser {
     private Storage storage;
 
     public AddressBookParser(Storage storage) {
-        requireNonNull(storage);
         this.storage = storage;
     }
 
