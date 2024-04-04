@@ -17,7 +17,7 @@ Whether you're a seasoned user looking to enhance your workflow or a newcomer ea
 
 <!-- * Table of Contents -->
 
-## Contents
+## Table of Contents
 
 --------------------------------------------------------------------------------------------------------------------
 
