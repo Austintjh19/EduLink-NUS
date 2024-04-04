@@ -133,6 +133,18 @@ Examples:
 * `add n/John Doe id/A0265901E p/1234567890, 9876543210 e/john.doe@example.com, jdoe@example.com i/2023 m/Computer Science p/CS2103 Tut  g/A+ t/Honors`
 * `add n/Kumar Prabhat id/A0041400M p/1234567890, 9876543210 e/john.doe@example.com`
 
+### Viewing a Student on the Student Card:
+
+View a single student's details in a formatted and organized manner.
+
+Method: Left-click on a specific Student Panel Card within the Student List Panel of the EduLink NUS User Interface.
+
+* The Student Card will display the currently selected student from the Student List Panel.
+* The Student Card will display the details of the first student on the Student List Panel, when a specific student is not selected from the Student List Panel.
+* The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter` ... 
+* If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
+
+
 ### Listing all students : `list`
 
 Shows a list of all Students in the EduLink NUS.
@@ -236,11 +248,17 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+* After executing this command, all existing entries in the address book will be removed.
+
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+* Upon execution, the program will be exited, returning you to the operating system or main environment.
+
 
 ### Saving the data
 
