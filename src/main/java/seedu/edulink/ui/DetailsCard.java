@@ -60,8 +60,6 @@ public class DetailsCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         major.setText(student.getMajor().major);
         intake.setText(student.getIntake().toString());
-        course.setText(student.getGrade().getCourse().courseCode + ": ");
-        grade.setText(student.getGrade().getGrade().toString());
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
         student.getTags().stream()

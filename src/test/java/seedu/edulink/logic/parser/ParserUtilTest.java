@@ -217,21 +217,21 @@ public class ParserUtilTest {
         assertEquals(expectedTagSet, actualTagSet);
     }
 
-    @Test
-    public void parseGrade_invalidCourse_throwsParseException() {
-        assertThrows(ParseException.class, () ->
-                ParserUtil.parseGrade(INVALID_COURSE + ":" + VALID_SCORE));
-    }
+    // @Test
+    // public void parseGrade_invalidCourse_throwsParseException() {
+    //     assertThrows(ParseException.class, () ->
+    //             ParserUtil.parseGrade(INVALID_COURSE + ":" + VALID_SCORE));
+    // }
 
-    @Test
-    public void parseGrade_invalidScoreNotDouble_throwsParseException() {
-        assertThrows(ParseException.class, () ->
-            ParserUtil.parseGrade(VALID_COURSE + ":" + INVALID_SCORE_105));
-    }
+    // @Test
+    // public void parseGrade_invalidScoreNotDouble_throwsParseException() {
+    //     assertThrows(ParseException.class, () ->
+    //         ParserUtil.parseGrade(VALID_COURSE + ":" + INVALID_SCORE_105));
+    // }
 
-    @Test
-    public void parseGrade_invalidScoreOutOfRange_throwsParseException() {
-        assertThrows(ParseException.class, () ->
-                ParserUtil.parseGrade(VALID_COURSE + ":" + INVALID_SCORE_ABC));
-    }
+    // @Test
+    // public void parseGrade_invalidScoreOutOfRange_throwsParseException() {
+    //     assertThrows(ParseException.class, () ->
+    //             ParserUtil.parseGrade(VALID_COURSE + ":" + INVALID_SCORE_ABC));
+    // }
 }

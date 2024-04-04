@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_INTAKE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MAJOR;
@@ -14,6 +13,7 @@ import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -21,6 +21,7 @@ import seedu.edulink.commons.core.index.Index;
 import seedu.edulink.logic.commands.EditCommand;
 import seedu.edulink.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.edulink.logic.parser.exceptions.ParseException;
+import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.tag.Tag;
 
 /**
@@ -38,7 +39,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_TAG, PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE, PREFIX_GRADE);
+                PREFIX_TAG, PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE);
 
         Index index;
 
@@ -62,9 +63,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_INTAKE).isPresent()) {
             editPersonDescriptor.setIntake(ParserUtil.parseIntake(argMultimap.getValue(PREFIX_INTAKE).get()));
         }
-        if (argMultimap.getValue(PREFIX_GRADE).isPresent()) {
-            editPersonDescriptor.setGrade(ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get()));
-        }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -78,6 +76,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseGradesForEdit(editPersonDescriptor.getGrades()).ifPresent(editPersonDescriptor::setGrades);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -98,6 +97,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    private Optional<Set<Grade>> parseGradesForEdit(Optional<Set<Grade>> grades) throws ParseException {
+        assert grades != null;
+
+        if (grades.isEmpty()) {
+            return Optional.of(Collections.emptySet());
+        }
+        Set<Grade> gradeSet = new HashSet<>();
+        gradeSet.addAll(grades.get());
+
+        return Optional.of(gradeSet);
     }
 
 }

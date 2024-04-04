@@ -36,7 +36,7 @@ public class PersonBuilder {
     private Id id;
     private Major major;
     private Intake intake;
-    private Grade grade;
+    private Set<Grade> grades;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -50,7 +50,7 @@ public class PersonBuilder {
         major = new Major(DEFAULT_MAJOR);
         intake = new Intake(DEFAULT_INTAKE);
         tags = new HashSet<>();
-        grade = new GradeBuilder().build();
+        grades = new HashSet<>();
     }
 
     /**
@@ -64,8 +64,8 @@ public class PersonBuilder {
         id = studentToCopy.getId();
         major = studentToCopy.getMajor();
         intake = studentToCopy.getIntake();
-        grade = studentToCopy.getGrade();
         tags = new HashSet<>(studentToCopy.getTags());
+        grades = new HashSet<>(studentToCopy.getGrades());
     }
 
     /**
@@ -127,8 +127,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Grade} of the {@code Person} that we are building.
      */
-    public PersonBuilder withGrade(Grade grade) {
-        this.grade = grade;
+    public PersonBuilder withGrades(Set<Grade> grades) {
+        this.grades = grades;
         return this;
     }
 
@@ -141,7 +141,7 @@ public class PersonBuilder {
     }
 
     public Student build() {
-        return new Student(id, major, intake, grade, name, phone, email, address, tags);
+        return new Student(id, major, intake, name, phone, email, address, tags, grades);
     }
 
 }

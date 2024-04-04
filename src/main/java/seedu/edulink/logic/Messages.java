@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.edulink.logic.parser.Prefix;
+import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Student;
 
 /**
@@ -54,6 +55,18 @@ public class Messages {
             .append(student.getIntake())
             .append("; Tags: ");
         student.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code grade} for display to the user.
+     */
+    public static String format(Grade grade) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Course: ")
+            .append(grade.getCourse())
+            .append("; Score: ")
+            .append(grade.getScore());
         return builder.toString();
     }
 
