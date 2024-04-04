@@ -171,6 +171,17 @@ Method: Left-click on a specific Student Panel Card within the Student List Pane
 * The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter` ... 
 * If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
 
+### Accessing the Recent Commands in CommandBox:
+
+Access the 5 most Recent Successful Commands in the CommandBox.
+
+![Ui](images/RecentCommands.png)
+
+**Method 1 -  Using GUI**:
+Left-Click with Mouse on the desired Recent Command (any one of the command marked with Red Rectangle).
+
+**Method 2 -  Using CLI**:Press `TAB` on your Keyboard to access the RecentCommands in the order shown in the Image above
+starting from left to right i.e (Most RecentCommand First)
 
 ### Listing all students : `list`
 
@@ -299,14 +310,52 @@ Format: `dtag id/ID t/TAG t/TAG`
 Examples:
 * `dtag id/A0257418E t/potentialTA t/Active`
 
+### Exporting the Data : `export`
+
+Exports the students from the address book in a CSV file.
+
+Format: `export f/[FILENAME]`
+
+* Exports the Students Data in a CSV file named `FILENAME.csv` in the **exports** directory i.e `[JAR_FILE_LOCATION]/exports/FILENAME.csv`
+* Multiple values within an attribute is separated with a `|` e.g Tags -> `Potenial TA | Honours` in the CSV File.
+* `FILENAME` must be alphanumeric and it can include ` _ (Underscore)` and `- (Hyphen)`.
+
+Examples:
+* `export f/Mystudents`
+* `export f/NUS-CS`
+
+### Importing the Data : `import`
+
+Imports data from a valid JSON file into the Application
+
+Format: `import f/[FILENAME]`
+
+* Imports Students Data from JSON file named `FILENAME.json` in the **data** directory i.e `[JAR_FILE_LOCATION]/data/FILENAME.json`
+* `FILENAME` must be alphanumeric and it can include ` _ (Underscore)` and `- (Hyphen)`.
+
+Examples:
+* `import f/Mystudents`
+* `import f/NUS-CS`
+* `import f/_Stanford`
+
+### Undo Changes: `undo`
+
+Undoes the last command executed and reverts the application to the previous state.
+
+Format: `undo`
+
+* The `undo` command revert the changes done by last data changing command i.e command that changes (add, edit or delete) information for any Student in the Application.
+* The application stores up to 20 previous states, allowing you to undo up to the last 20 commands.
+* If there are no commands to undo, an error message will be displayed saying No History available.
+
+Examples:
+* `undo`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
-
-* After executing this command, all existing entries in the address book will be removed.
-
 
 ### Exiting the program : `exit`
 
@@ -314,24 +363,9 @@ Exits the program.
 
 Format: `exit`
 
-<<<<<<< HEAD
-* Upon execution, the program will be exited, returning you to the operating system or main environment.
-
-
 ### Saving the data
-=======
-### Exporting Data: `export`
-The export command in EduLink-NUS enables users to export their current list of student contacts to a csv file.
->>>>>>> master
 
-Format: `export f/FILENAME`
-
-* `FILENAME` is the name of the file where the user intends to export. 
-The application will automatically append file format extension (.csv).
-
-Examples:
-* `export f/student_contacts_march` 
-saves the current list of student contacts to a file named `student_contacts_march.csv`
+AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -367,14 +401,11 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add id/STUDENT_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MAJOR in/INTAKE [t/TAG]…​` <br> e.g., `add id/A0265901E n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 m/Computer Science in/2024 t/TA`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` **OR** `delete id/STUDENT_ID` <br> e.g., `delete 3`, `delete id/A026273X`
-**Edit**   | `edit INDEX [ id/STUDENT_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE] `<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find n/NAME`, `find id/STUDENT_ID`, or `find n/NAME id/STUDENT_ID`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`
-**Edit Tag** | `etag id/ID t/TAG t/RESULTING_TAG` <br> e.g., `etag id/A0265901E t/Honors t/Scholar`
-**Delete Tag** | `dtag id/ID t/TAG [t/TAG]…​` <br> e.g., `dtag id/A0265901E t/Honors t/GoodTA`
-**Tag**    | `tag id/ID t/TAG [t/TAG]…​` <br> e.g., `tag id/A0257418E t/Sincere t/GoodTA`
 **List**   | `list`
 **Help**   | `help`
