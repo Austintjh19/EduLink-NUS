@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_FILENAME;
 
 import seedu.edulink.logic.Messages;
-import seedu.edulink.logic.commands.ExportCommand;
 import seedu.edulink.logic.commands.ImportCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
 import seedu.edulink.storage.Storage;
@@ -31,7 +30,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
         if (argMultimap.getValue(PREFIX_FILENAME).isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                ExportCommand.MESSAGE_USAGE));
+                ImportCommand.MESSAGE_USAGE));
         }
         String filename = argMultimap.getValue(PREFIX_FILENAME).get();
         return new ImportCommand(ParserUtil.parseFilename(filename), storage);

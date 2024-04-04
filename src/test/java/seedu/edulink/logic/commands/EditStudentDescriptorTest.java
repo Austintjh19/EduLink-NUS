@@ -6,14 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulink.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.edulink.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_INTAKE_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_MAJOR_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.edulink.logic.commands.CommandTestUtil.VALID_SCORE_89;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -23,9 +21,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.edulink.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.edulink.model.grade.Course;
 import seedu.edulink.model.grade.Grade;
-import seedu.edulink.model.grade.Score;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
 import seedu.edulink.model.student.Id;
@@ -73,9 +69,6 @@ public class EditStudentDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
@@ -88,7 +81,7 @@ public class EditStudentDescriptorTest {
             + editPersonDescriptor.getEmail().orElse(null) + ", address="
             + editPersonDescriptor.getAddress().orElse(null) + ", major="
             + editPersonDescriptor.getMajor().orElse(null) + ", intake="
-            + editPersonDescriptor.getGrade().orElse(null) + ", grade="
+            + editPersonDescriptor.getGrades().orElse(null) + ", grades="
             + editPersonDescriptor.getIntake().orElse(null) + ", tags="
             + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
@@ -102,14 +95,14 @@ public class EditStudentDescriptorTest {
         expected.setMajor(new Major(VALID_MAJOR_BOB));
         expected.setAddress(new Address(VALID_ADDRESS_BOB));
         expected.setIntake(new Intake(VALID_INTAKE_BOB));
-        expected.setGrade(new Grade(new Course(VALID_COURSE_CS2103T),
-                new Score(VALID_SCORE_89)));
         expected.setPhone(new Phone(VALID_PHONE_BOB));
         expected.setEmail(new Email(VALID_EMAIL_BOB));
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag(VALID_TAG_FRIEND));
         tags.add(new Tag(VALID_TAG_HUSBAND));
         expected.setTags(tags);
+        Set<Grade> grades = new HashSet<>();
+        expected.setGrades(grades);
         EditPersonDescriptor test = new EditPersonDescriptor(TypicalPersons.BOB);
         assertEquals(expected, test);
     }

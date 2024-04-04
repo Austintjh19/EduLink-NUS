@@ -24,11 +24,11 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Deletes the person identified by the index number used in the displayed person list or Student ID.\n"
+        + ": Deletes the student identified by the index number used in the displayed student list or Student ID.\n"
         + "Parameters: INDEX (must be a positive integer) or" + "[" + PREFIX_ID + "KEYWORD]\n"
         + "Example: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " " + PREFIX_ID + "A1234567Z";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
 
     private final boolean isIndexBased;
     private Index targetIndex;

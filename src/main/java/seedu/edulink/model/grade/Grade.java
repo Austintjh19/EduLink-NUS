@@ -14,24 +14,24 @@ import seedu.edulink.commons.util.ToStringBuilder;
 public class Grade {
 
     private final Grades grade;
-    private final Course course;
+    private final Module module;
     private final Score score;
 
     /**
      * Constructs a {@code Major}.
      *
-     * @param course A valid Course.
+     * @param module A valid module.
      * @param score A valid Score.
      */
-    public Grade(Course course, Score score) {
-        requireAllNonNull(course, score);
+    public Grade(Module module, Score score) {
+        requireAllNonNull(module, score);
         this.grade = GradeUtil.parseGrade(score);
-        this.course = course;
+        this.module = module;
         this.score = score;
     }
 
-    public Course getCourse() {
-        return this.course;
+    public Module getModule() {
+        return this.module;
     }
 
     public Score getScore() {
@@ -56,19 +56,19 @@ public class Grade {
         Grade otherGrade = (Grade) other;
         return this.grade.equals(otherGrade.grade)
             && this.score.equals(otherGrade.score)
-            && this.course.equals(otherGrade.course);
+            && this.module.equals(otherGrade.module);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(grade, course, score);
+        return Objects.hash(grade, module, score);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("course", course)
+            .add("module", module)
             .add("score", score)
             .add("grade", grade)
             .toString();
