@@ -13,9 +13,11 @@ import seedu.edulink.commons.util.ToStringBuilder;
  */
 public class Grade {
 
-    private final Grades grade;
-    private final Module module;
-    private final Score score;
+    public final Grades grade;
+
+    public final Module module;
+
+    public final Score score;
 
     /**
      * Constructs a {@code Major}.
