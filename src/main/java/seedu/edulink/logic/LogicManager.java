@@ -41,7 +41,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        addressBookParser = new AddressBookParser(storage);
         recentCommands = new RecentCommands();
     }
 
@@ -50,8 +50,8 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        recentCommands.add(commandText);
         commandResult = command.execute(model);
+        recentCommands.add(commandText);
         try {
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {
@@ -59,7 +59,6 @@ public class LogicManager implements Logic {
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
-
         return commandResult;
     }
 
