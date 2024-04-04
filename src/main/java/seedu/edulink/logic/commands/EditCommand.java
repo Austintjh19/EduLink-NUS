@@ -3,13 +3,11 @@ package seedu.edulink.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_INTAKE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.edulink.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -43,8 +41,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-        + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
+        + "by the index number used in the displayed student list. "
         + "Existing values will be overwritten by the input values.\n"
         + "Parameters: INDEX (must be a positive integer) "
         + "[" + PREFIX_ID + "ID] "
@@ -53,17 +51,15 @@ public class EditCommand extends Command {
         + "[" + PREFIX_EMAIL + "EMAIL] "
         + "[" + PREFIX_ADDRESS + "ADDRESS] "
         + "[" + PREFIX_MAJOR + "MAJOR] "
-        + "[" + PREFIX_INTAKE + "INTAKE] "
-        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "[" + PREFIX_INTAKE + "INTAKE]...\n"
         + "Example: " + COMMAND_WORD + " 1 " + PREFIX_ID + "A0951516M "
         + PREFIX_PHONE + "91234567 "
         + PREFIX_MAJOR + "Physics "
-        + PREFIX_EMAIL + "johndoe@example.com"
-        + "[" + PREFIX_GRADE + "CS2103T/CS2103: SCORE]";
+        + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This Student already exists in the address book.";
     public static final String MESSAGE_NO_CHANGE = "There are no Changes according to the Arguments Provided";
 
     private final Index index;
@@ -303,9 +299,7 @@ public class EditCommand extends Command {
                 && Objects.equals(intake, otherEditPersonDescriptor.intake)
                 && Objects.equals(phone, otherEditPersonDescriptor.phone)
                 && Objects.equals(email, otherEditPersonDescriptor.email)
-                && Objects.equals(address, otherEditPersonDescriptor.address)
-                && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                && Objects.equals(grade, otherEditPersonDescriptor.grade);
+                && Objects.equals(address, otherEditPersonDescriptor.address);
         }
 
         @Override

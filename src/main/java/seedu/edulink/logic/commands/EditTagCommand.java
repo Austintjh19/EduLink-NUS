@@ -23,7 +23,7 @@ public class EditTagCommand extends Command {
 
     public static final String COMMAND_WORD = "etag";
 
-    public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the person you specified.";
+    public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the Student you specified.";
     public static final String MESSAGE_EDIT_TAG_SUCCESS = "Edited Tags: %1$s: tag %2$s is replaced by %3$s";
     public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID "
             + PREFIX_TAG + "Tag to edit " + PREFIX_TAG + "Resulting tag";
