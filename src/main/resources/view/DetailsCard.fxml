@@ -3,8 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox styleClass="studentDetails" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <HBox styleClass="studentDetailsEntries">
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fitToWidth="true">
+<VBox styleClass="studentDetails">
+    <HBox styleClass="studentDetailsEntries" alignment="CENTER_LEFT">
         <Label styleClass="studentDetailsLabels" text="Student ID: "/>
         <Label fx:id="studentId" styleClass="studentDetailsData"/>
     </HBox>
@@ -36,4 +37,9 @@
         <Label styleClass="studentDetailsLabels" text="Address: "/>
         <Label fx:id="address" styleClass="studentDetailsData"/>
     </HBox>
+    <HBox styleClass="studentDetailsEntries">
+        <Label styleClass="studentDetailsLabels" text="Grades: "/>
+        <FlowPane fx:id="grades"/>
+    </HBox >
 </VBox>
+</ScrollPane>
