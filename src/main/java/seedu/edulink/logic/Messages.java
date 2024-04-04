@@ -69,7 +69,7 @@ public class Messages {
         builder.append("Module: ")
             .append(grade.getModule())
             .append("; Score: ")
-            .append(df.format(grade.getScore()));
+            .append(df.format(grade.getScore().getScore()));
         return builder.toString();
     }
 
@@ -78,7 +78,7 @@ public class Messages {
      */
     public static String format(Score score) {
         DecimalFormat df = new DecimalFormat("#.##");
-        return df.format(score);
+        return df.format(score.getScore());
     }
 
 }

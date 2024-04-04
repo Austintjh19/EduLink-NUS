@@ -75,7 +75,8 @@ public class PersonCard extends UiPart<Region> {
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         student.getGrades().forEach(grade -> grades.getChildren()
-                .add(new Label(grade.module.toString() + " - " + grade.score.toString())));
+                .add(new Label(grade.getModule().toString() + " - "
+                        + grade.getScore().toString())));
     }
 
     @FXML

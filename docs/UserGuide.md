@@ -453,7 +453,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 Term    | Definition and or Explanation
 --------|----------------------------------------------------------------------
 **CSV** | **Comma-Seperated Values** , a file format generally used to import data in Spreadsheets and Do analysis
-**JSON** | **JavaScrip Object Notation**, a standard file format for data interchange
+**JSON** | **JavaScript Object Notation**, a standard file format for data interchange
 **Data Changing Command** | Commands in the Application that modifies the Students Data e.g Delete, Edit, Tag
 **NUS** | National University of Singapore , A University Located in Central Singapore
 **Student ID** | A particular format of ID followed in NUS, Starting with a Alphabet followed by 7 digits and ending with an Alphabet e.g A0252195L
