@@ -6,7 +6,7 @@
 
 # EduLink-NUS User Guide
 
-EduLink NUS is a **desktop app for Academic Instructors to keep contacts of their past and current student, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduLink NUS can get your contact management tasks done faster than traditional GUI apps.
+EduLink NUS is a **desktop app for Academic Instructors to keep contacts of their past and current student, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduLink NUS can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,20 +17,18 @@ EduLink NUS is a **desktop app for Academic Instructors to keep contacts of thei
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `edulink-NUS.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `edulink-NUS.jar` from [here](https://github.com/AY2324S2-CS2103T-T16-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your EduLink NUS.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar edulink-NUS.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
+   ![Ui](images/Ui.png) <br><br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -42,7 +40,36 @@ EduLink NUS is a **desktop app for Academic Instructors to keep contacts of thei
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Graphical User Interface Layout
+
+EduLink NUS's user interface can be split into 6 main components, as shown below: 
+
+![Ui](images/UiLayout.png)
+
+The designated names assigned to each component of the User Interface will be consistently utilized throughout the User Guide to mitigate any potential confusion. 
+Please refer below for a comprehensive description of each component.
+
+
+
+* Command Box: This is the designated space where users can input commands to be executed by EduLink NUS.
+* Result Box: Located prominently on the interface, this box showcases the outcomes of executed commands.
+* Recent Command Box: This section conveniently presents a history of recently executed commands for quick reference.
+* Student List Panel: This panel serves as a visual representation of the roster of students stored within the EduLink NUS system.
+  * Student Panel Card: Within the Student List Panel, each student is represented by a concise overview encapsulated in a card format.
+* Student Card: For more detailed information about an individual student stored in the system, users can refer to the Student Card, providing comprehensive insights.
+
+--------------------------------------------------------------------------------------------------------------------
+## EduLink-NUS Features 
+
+<box type="info" seamless>
+
+**General Notes about EduLink-NUS:**<br>
+
+* Duplicate student entires is defined as 2 person who have identical `STUDENT_ID`.
+
+* Unless explicitly stated otherwise, when indicating character limitations, spaces between words are counted within the total character count, while any leading or trailing spaces are not included in the calculation.
+
+</box>
 
 <box type="info" seamless>
 
@@ -52,16 +79,18 @@ EduLink NUS is a **desktop app for Academic Instructors to keep contacts of thei
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/TA` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/TA`, `t/TA t/Helpful` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* The `INDEX` value must fall within the range of 1 to 2,147,483,647. Any value outside of this range will be deemed incorrect. Moreover, if the value falls within the specified range but is not found in the student list panel, it will be considered out of bounds.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
