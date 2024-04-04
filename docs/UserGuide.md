@@ -106,6 +106,10 @@ Please refer below for a comprehensive description of each component.
 
 **Notes about the command format:**<br>
 
+* Commands are case-insensitive. e.g `filter` and `Filter` are the same command. 
+
+*  **TAB** key serve a distinct purpose and are not employed for creating four spaces.
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
@@ -363,10 +367,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MAJOR in/INTAKE [t/TAG]…​` <br> e.g., `add id/A0265901E n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 m/Computer Science in/2024 t/TA`
+**Add**    | `add id/STUDENT_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MAJOR in/INTAKE [t/TAG]…​` <br> e.g., `add id/A0265901E n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 m/Computer Science in/2024 t/TA`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` **OR** `delete id/STUDENT_ID` <br> e.g., `delete 3`, `delete id/A026273X`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE] `<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [ id/STUDENT_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE] `<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find n/NAME`, `find id/STUDENT_ID`, or `find n/NAME id/STUDENT_ID`
 **Filter** | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`
 **Edit Tag** | `etag id/ID t/TAG t/RESULTING_TAG` <br> e.g., `etag id/A0265901E t/Honors t/Scholar`
