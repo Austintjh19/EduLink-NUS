@@ -31,7 +31,6 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor, Logic logic) {
         super(FXML);
         this.logic = logic;
-        this.recentCommandCounter = 0;
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
@@ -39,6 +38,7 @@ public class CommandBox extends UiPart<Region> {
             if (event.getCode() == KeyCode.TAB) {
                 ObservableList<String> recentCommands = logic.getRecentCommands();
                 if (!recentCommands.isEmpty()) {
+                    recentCommandCounter = logic.getRecentCommandsCounter();
                     String text = recentCommands.get(recentCommandCounter % recentCommands.size());
                     commandTextField.setText(text);
                     this.commandTextField.requestFocus();

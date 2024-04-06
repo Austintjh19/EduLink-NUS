@@ -102,7 +102,7 @@ public class AddressBookParser {
             return new ExportCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            return new UndoCommandParser().parse(arguments);
 
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);

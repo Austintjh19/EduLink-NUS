@@ -30,6 +30,8 @@ public class LogicManager implements Logic {
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
+    private int recentCommandCounter = 0;
+
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
@@ -51,6 +53,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        recentCommandCounter = 0;
         recentCommands.add(commandText);
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -90,5 +93,12 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public int getRecentCommandsCounter() {
+        int previousCommandCounter = recentCommandCounter;
+        recentCommandCounter++;
+        return previousCommandCounter;
     }
 }

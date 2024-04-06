@@ -14,7 +14,7 @@ public class ExportCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsExportCommand() {
-        assertParseSuccess(parser, "export f/test", new ExportCommand("test"));
+        assertParseSuccess(parser, " f/test", new ExportCommand("test"));
     }
 
 
