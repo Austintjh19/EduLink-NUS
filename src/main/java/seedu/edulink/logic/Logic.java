@@ -60,4 +60,6 @@ public interface Logic {
      * returns the recentCommandIndex
      */
     int getRecentCommandsCounter();
+
+    int getDetailsIndex();
 }

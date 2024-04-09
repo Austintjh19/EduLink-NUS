@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
+import seedu.edulink.Main;
 import seedu.edulink.logic.Logic;
 import seedu.edulink.logic.commands.CommandResult;
 import seedu.edulink.logic.commands.exceptions.CommandException;
@@ -20,7 +21,9 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
     private final Logic logic;
+    private final MainWindow mainWindow;
     private int recentCommandCounter;
+    private int detailsIndex;
 
     @FXML
     private TextField commandTextField;
@@ -28,10 +31,11 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor, Logic logic) {
+    public CommandBox(CommandExecutor commandExecutor, Logic logic, MainWindow mainWindow) {
         super(FXML);
         this.logic = logic;
         this.commandExecutor = commandExecutor;
+        this.mainWindow = mainWindow;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         commandTextField.setOnKeyPressed(event -> {
@@ -44,7 +48,12 @@ public class CommandBox extends UiPart<Region> {
                     this.commandTextField.requestFocus();
                     this.commandTextField.positionCaret(text.length());
                 }
-                recentCommandCounter++;
+                event.consume();
+            } else if (event.getCode() == KeyCode.ESCAPE) {
+                if(!logic.getFilteredPersonList().isEmpty()) {
+                    detailsIndex = logic.getDetailsIndex();
+                    mainWindow.updateStudentDetailsCard(detailsIndex % logic.getFilteredPersonList().size());
+                }
                 event.consume();
             }
         });
