@@ -9,7 +9,7 @@ import static seedu.edulink.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
-    public static final String VALIDATION_REGEX = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+    public static final String VALIDATION_REGEX = "^[\\w-.]{1,50}@([\\w-]+\\.)+[\\w-]{2,4}$";
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
         + "and adhere to the following constraints:\n"
