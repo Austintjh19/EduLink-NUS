@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
-import seedu.edulink.Main;
 import seedu.edulink.logic.Logic;
 import seedu.edulink.logic.commands.CommandResult;
 import seedu.edulink.logic.commands.exceptions.CommandException;
@@ -50,7 +49,7 @@ public class CommandBox extends UiPart<Region> {
                 }
                 event.consume();
             } else if (event.getCode() == KeyCode.ESCAPE) {
-                if(!logic.getFilteredPersonList().isEmpty()) {
+                if (!logic.getFilteredPersonList().isEmpty()) {
                     detailsIndex = logic.getDetailsIndex();
                     mainWindow.updateStudentDetailsCard(detailsIndex % logic.getFilteredPersonList().size());
                 }
