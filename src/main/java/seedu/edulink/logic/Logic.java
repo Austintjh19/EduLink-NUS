@@ -61,5 +61,5 @@ public interface Logic {
      */
     int getRecentCommandsCounter();
 
-    int getDetailsIndex();
+    int getDetailsIndex(boolean isIncrement, int limit);
 }
