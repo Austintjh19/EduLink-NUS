@@ -78,7 +78,7 @@ public class Messages {
      */
     public static String format(Score score) {
         DecimalFormat df = new DecimalFormat("#.##");
-        return df.format(score);
+        return df.format(score.getScore());
     }
 
 }

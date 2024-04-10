@@ -7,17 +7,13 @@
 # EduLink-NUS User Guide
 
 --------------------------------------------------------------------------------------------------------------------
-## Introduction
+### Welcome to the EduLink-NUS User Guide!
 
-Welcome to the **EduLink NUS User Guide** – your essential companion to unlocking the full potential of academic contact/ student management at the National University of Singapore (NUS). Designed specifically for professors and teaching assistants, EduLink NUS is a **desktop app for Academic Instructors to keep contacts of their past and current student, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduLink NUS can get your contact management tasks done faster than traditional GUI apps.
+Welcome to the **EduLink NUS User Guide** – your essential companion to unlocking the full potential of academic contacts/data and management at the National University of Singapore (NUS). We extend a warm welcome to you, and we're thrilled that you've chosen EduLink-NUS to enhance and improve your academic interactions.
 
-In this comprehensive guide, you will discover everything you need to know to harness the capabilities of EduLink NUS effectively. From getting started with launching the application to exploring its myriad features and optimizing performance, each section is meticulously crafted to empower you in managing your academic interactions seamlessly.
+In this comprehensive guide, we'll take you on a journey to unlock the full potential of EduLink-NUS. It is your essential companion, crafted to empower you in mastering every aspect of the EduLink-NUS application.
 
-Whether you're a seasoned user looking to enhance your workflow or a newcomer eager to dive into the world of efficient contact management, this User Guide is your roadmap to success with EduLink NUS. Let's embark on this journey together and unlock the full potential of academic engagement at NUS with EduLink NUS.
-
-<!-- * Table of Contents -->
-
-## Contents
+## Table of Contents
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -25,11 +21,14 @@ Whether you're a seasoned user looking to enhance your workflow or a newcomer ea
 - [Features](#features)
     - [Viewing help: `help`](#viewing-help--help)
     - [Adding a student: `add`](#adding-a-student-add)
-    - [Listing all students: `list`](#listing-all-students--list)
     - [Editing a student: `edit`](#editing-a-student--edit)
-    - [Search students by name or ID: `find`](#search-students-by-name-or-id-find)
     - [Deleting a student: `delete`](#deleting-a-student--delete)
-    - [Filtering displayed list: `filter`](#filtering-displayed-list--filter)
+    - [Listing all students: `list`](#listing-all-students--list)
+    - [Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
+    - [Search students by name or ID: `find`](#search-students-by-name-or-id-find)
+    - [Filtering List of Students: `filter`](#filtering-list-of-students--filter)
+    - [Adding or Editing Module Grade to a Student: `grade`](#adding-or-editing-module-grade-to-a-student--grade)
+    - [Deleting Module Grade to a Student: `dgrade`](#deleting-module-grade-to-a-student--dgrade)
     - [Tagging a student: `tag`](#tagging-a-student--tag)
     - [Editing a student's tag: `etag`](#editing-tags-for-a-student-etag)
     - [Deleting a student's tag: `dtag`](#deleting-a-tag-from-a-student--dtag)
@@ -40,22 +39,49 @@ Whether you're a seasoned user looking to enhance your workflow or a newcomer ea
     - [Exiting the program: `exit`](#exiting-the-program--exit)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
-    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
 
+## Introduction
+
 --------------------------------------------------------------------------------------------------------------------
+
+### What is EduLink-NUS
+
+EduLink-NUS is a **desktop application tailored specifically for academic instructors** at the National University of Singapore (NUS). It serves as a powerful tool for **managing academic contacts/data** and streamlining interactions with past and current students. With its intuitive Command Line Interface (CLI) and graphical user interface (GUI), EduLink-NUS offers a seamless user experience, empowering instructors to effortlessly navigate through its features.
+
+Overview of Main Features: 
+- Contact Management: Easily add, edit, and delete student entries, ensuring up-to-date information of students is always available.
+- Module Grade Tracking: Record and manage module grades for individual students.
+- Tagging System: Categorize students with custom tags for streamlined organization and quick retrieval of specific student groups.
+- Export and Import Functionality: Seamlessly export student data to CSV files for external use and import data from JSON files for easier management of diverse organizational data. 
+- Undo Functionality: Safeguard against accidental changes with the ability to undo the last action.
+- User-friendly Interface: Intuitive GUI layout.
+
+### User Proficiency and Expectations
+
+- Level of Relatedness: Users of EduLink-NUS are assumed to have a direct relationship with NUS and are actively engaged in academic activities, including teaching, student mentoring, and administrative tasks related to student management.
+- Comprehension: Users of EduLink-NUS are assumed to have a strong comprehension of academic terminology and procedures used within NUS. They are familiar with concepts such as the student IDs and module grading system. 
+- Prior Knowledge: Users of EduLink-NUS re assumed to possess prior knowledge of computer applications and basic technical skills necessary to navigate software interfaces
+- Desire for Efficiency: Users of EduLink-NUS prioritize efficiency and productivity in their academic tasks.
+
+### Why This Guide Matters
+
+This guide is more than just a manual, it is your gateway to maximizing your experience with EduLink-NUS. By following the instructions and insights provided here, you'll discover shortcuts, tips, and strategies to streamline your workflow and enhance productivity. Whether you're a seasoned user or just getting started, this guide will equip you with the knowledge and skills to leverage EduLink-NUS effectively.
+
+We're excited to embark on this journey with you and help you make the most out of your academic engagement at NUS with EduLink-NUS. So let's dive in and unleash the full potential of EduLink-NUS together!
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+--------------------------------------------------------------------------------------------------------------------
+1. Ensure you have Java `11` installed in your Computer. Only that is supported
 
-1. Download the latest `edulink-NUS.jar` from [here](https://github.com/AY2324S2-CS2103T-T16-1/tp/releases).
+1. Download the latest `EduLink-NUS.jar` from [here](https://github.com/AY2324S2-CS2103T-T16-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your EduLink NUS.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar edulink-NUS.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EduLink-NUS.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/Ui.png) <br><br>
 
@@ -116,6 +142,8 @@ Please refer below for a comprehensive description of each component.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+* Any parameter supplied by the user must not contain the **/** character as it serves a distinct purpose in out application. 
+
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/TA` or as `n/John Doe`.
 
@@ -149,19 +177,71 @@ Format: `help`
 
 Adds a Student to the EduLink NUS.
 
-Format: `add n/NAME id/STUDENT_ID p/PRIMARY_ PHONE_NUMBER [, SECONDARY_PHONE_NUMBER] e/PRIMARY_EMAIL [ , SECONDARY_EMAIL] [i/INTAKE] [m/MAJOR] [p/PART_OF] [g/GRADE] [t/TAG]…​`
+Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/address in/INTAKE m/MAJOR [t/TAG]…​`
 
 <box type="tip" seamless>
 
 **Tip:** A student can have any number of tags (including 0)
 </box>
 
-* The `ID` refers to the alphanumeric string on the left of Name
-* The `ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g. A0265901E.
+* The `PHONE_NUMBER` must consist of only numeric characters and be at least longer than 3 digits. 
+* The `INTAKE` must be a 4 digit positive number and cant be after the current year.
+* The `TAG` must be less than 15 characters long with no space in between.
+
 
 Examples:
-* `add n/John Doe id/A0265901E p/1234567890, 9876543210 e/john.doe@example.com, jdoe@example.com i/2023 m/Computer Science p/CS2103 Tut  g/A+ t/Honors`
-* `add n/Kumar Prabhat id/A0041400M p/1234567890, 9876543210 e/john.doe@example.com`
+* `add n/John Doe id/A2265901E p/1234567890 e/john.doe@example.com a/311, Clementi Ave 2, #02-25 in/2023 m/Computer Science t/Honors`
+
+### Editing a student : `edit`
+
+Edits an existing student in the address book, using the Student List Panel index. 
+
+![Index Location](images/Index.png)
+
+Format: `edit INDEX [id/STUDENT_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE]…​`
+
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the Student List Panel. The index **must be a positive integer** 1, 2, 3, …​
+* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g. A0265901E.
+* The `PHONE_NUMBER` must consist of only numeric characters and be at least longer than 3 digits.
+* The `INTAKE` must be a 4 digit positive number and cant be after the current year.
+* The `TAG` must be less than 15 characters with no space in between.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower in/2020` Edits the name of the 2nd student to be `Betsy Crower` and changes the intake to `2020`.
+
+### Deleting a student : `delete`
+
+Deletes a specified or a group of individual from the EduLink NUS system. Either through the student ID, Student List Panel index, or Student List Panel.
+
+Format: `delete INDEX` **OR** `delete id/STUDENT_ID` **OR** `delete all`
+
+![Delete All](images/deleteAll.png)
+
+* Deletes the student at the specified `INDEX` or deletes the student identified by the specified `STUDENT_ID`.
+* The index refers to the index number shown in the Student List Panel.
+* The `STUDENT_ID` refers to the unique identification string associated with individuals stored in EduLink NUS.
+* The INDEX **must be a positive integer** 1, 2, 3, …​
+* The STUDENT_ID **must exist within the system**
+* Using the `all` keyword removes all the current students displayed within the Student List Panel from EduLink NUS.
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `delete id/A026273X` deletes the student with Student ID A026273X, even if it is not currently on displayed on the Student List Panel.
+* `filter t/TA` followed by `delete all` deletes all students with the `TA` tag. I.e. it removes all students currently displayed on the Student List Panel.
+
+### Listing all students : `list`
+
+Shows a list of all Students in the EduLink NUS.
+
+Format: `list`
+
+* Displays the list of all students stored within EduLink NUS on the Student List Panel.
+* No parameters are required for this command, and any parameter added will be ignored.
 
 ### Viewing a Student on the Student Card:
 
@@ -186,35 +266,12 @@ Left-Click with Mouse on the desired Recent Command (any one of the command mark
 **Method 2 -  Using CLI**:Press `TAB` on your Keyboard to access the RecentCommands in the order shown in the Image above
 starting from left to right i.e (Most RecentCommand First)
 
-### Listing all students : `list`
-
-Shows a list of all Students in the EduLink NUS.
-
-Format: `list`
-
-* Displays the list of all students stored within EduLink NUS on the Student List Panel.
-* No parameters are required for this command, and any parameter added will be ignored.
-
-### Editing a student : `edit`
-
-Edits an existing student in the address book.
-
-Format: `edit INDEX [id/ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE]…​`
-
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower in/2020` Edits the name of the 2nd student to be `Betsy Crower` and changes the intake to `2020`.
-
 
 ### Search Students by Name or ID: `find`
 
 This command facilitates the search for students in the EduLink NUS application based on their **Names**, **Student IDs**, or **Both**. Matching students will be displayed on the Student List Panel.
 
-Formats: `find n/NAME`, `find id/STUDENT_ID`, OR `find n/NAME id/STUDENT_ID`
+Formats: `find n/NAME`, `find id/STUDENT_ID`, **OR** `find n/NAME id/STUDENT_ID`
 
 * The search is case-insensitive. e.g `john` will match `John`, `a1234567x` will match `A1234567X`
 * The search by name supports partial word matching, but must be in chronological order e.g. `John` will match `Jonathan`. And `nathan` will not match with `Jonathan`.
@@ -233,26 +290,7 @@ Examples:
 * `find id/234 n/John D` returns a person `Jeff John Doe Leong` with ID `A12345678X`
 
 
-### Deleting a student : `delete`
-
-Deletes the specified individual from the EduLink NUS system.
-
-Format: `delete INDEX`, `delete id/STUDENT_ID` **OR** `delete ALL` 
-
-* Deletes the student at the specified `INDEX` or deletes the student identified by the specified `STUDENT_ID`.
-* The INDEX refers to the index number shown in the displayed student list.
-* The STUDENT_ID refers to the unique identification string associated with individuals stored in EduLink NUS.
-* The INDEX **must be a positive integer** 1, 2, 3, …​
-* The STUDENT_ID **must exist within the system**
-* ALL is **not case-sensitive**
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
-* `delete id/A026273X` deletes the student with Student ID A026273X.
-* `find n/Lim` followed by `delete all` deletes all Students with firstname or lastname starting with Lim.
-
-### Filtering displayed list : `filter`
+### Filtering List of Students: `filter`
 
 Filter displayed list of students on the Student List Panel based on a tag or tags.
 
@@ -268,16 +306,54 @@ Examples:
 * `filter t/CS2103T` will display only people that have been tagged with `CS2103T`.
 * `filter t/CS2103T t/TA` wil display only people that have been tagged with `CS2103T` and `TA`.
 
+### Adding or Editing Module Grade to a Student: `grade`
+
+Adds a Module Grade for an individual from the EduLink NUS system, using the Student ID. 
+
+Format: `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE`
+
+* Adds a Module Grade to a student identified by the specified STUDENT_ID.
+* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
+* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* The `STUDENT_ID` must exist within the system
+* The `MODULE_CODE` must be valid i.e. matches [2 letters] followed by [4 digits] then [an optional letter]
+* The SCORE must be within 0 to 100. It will round values up to 2 deicimal places when displayed.
+* Command will **edit** the grade of a specified module if `MODULE_CODE` already exists. 
+* For each execution the Command can only **add** or **edit** a single module grade for one particular student.
+
+Examples:
+* `grade id/A0264273X mod/CS2103T s/77` grades the student with Student ID A0264273X for module CS2103T. 77 will be the displayed grade.
+* `grade id/A0262743X mod/CS2103T s/85` edits the student with Student ID A0262743X's grade for module CS2103T because a grade for it already exists. 85 will be the displayed grade.
+
+
+### Deleting Module Grade to a Student: `dgrade`
+
+Deletes a Module Grade for an individual from the EduLink NUS system, using the Student ID.
+
+Format: `dgrade id/STUDENT_ID mod/MODULE_CODE `
+
+* Deletes a Module Grade for a student identified by the specified STUDENT_ID.
+* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
+* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* The `STUDENT_ID` must exist within the system
+* The `MODULE_CODE` must be valid i.e. matches [2 letters] followed by [4 digits] then [an optional letter]. 
+* The `MODULE_CODE` must already exist for that particular student.
+* For each execution the Command can only **delete** a single module grade entry for one particular student.
+
+Examples:
+* `dgrade` id/A026273X mod/CS2103T deletes the grade of the student with Student ID A026273X for module CS2103T.
+
 ### Tagging a student : `tag`
 
 Tags the specified student from the address book.
 
-Format: `tag id/ID t/TAG t/TAG`
+Format: `tag id/STUDENT_ID t/TAG [t/TAG] …​`
 
-* Tags the student with id `ID`.
-* The `ID` refers to the alphanumeric string on the left of Name
-* The `ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* `TAG` can be alphabetic without spaces and multiple tags can be specified
+* Adds a tag or multiple tags to the student with id `STUDENT_ID`.
+* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
+* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* Each `TAG` should be alphanumeric, and is case-sensitive.
+* Each `TAG` must be not more than 15 characters long with no space in between.
 
 Examples:
 * `tag id/A0257418E t/potentialTA t/Active`
@@ -286,28 +362,32 @@ Examples:
 
 Edits the tag of a specific student in EduLink NUS
 
-Format: `etag id/ID t/TAG t/RESULTING_TAG`
+Format: `etag id/STUDENT_ID t/EXISTING_TAG t/RESULTING_TAG`
 
-* Tags the student with id `ID`.
-* The `ID` refers to the alphanumeric string on the left of Name
-* The `ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* `TAG` must be alphabetic without spaces. It is the existing tag
-that you intend to edit. This parameter must exactly match the current tag assigned to the student.
+* Edits the tag of the student with id `STUDENT_ID`.
+* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
+* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* `EXISTING_TAG` must be alphabetic without spaces. It is the existing tag
+that you intend to edit. This parameter must match exactly the current tag assigned to the student. 
+Meaning it is case-sensitive.
 * `RESULTING_TAG` is the new tag that will replace the existing TAG.
+* Both the `EXISTING_TAG` and `RESULTING_TAG` must be not more than 15 characters long with no space in between.
+* Both the `EXISTING_TAG` and `RESULTING_TAG` much be alphanumeric, and they are case-sensitive.
 
 Examples:
-* `etag id/A0265901E t/Honors t/Scholar` updates the tag from "Honors" to "Scholar" for the student with ID "A0265901E.
+* `etag id/A0265901E t/Honors t/Scholar` updates the tag from `Honors` to `Scholar` for the student with ID `A0265901E`.
 
 ### Deleting a tag from a student : `dtag`
 
-Remove a specific tag from a student's profile.
+Remove a list of specified tags from a student's profile.
 
-Format: `dtag id/ID t/TAG t/TAG`
+Format: `dtag id/STUDENT_ID t/TAG [t/TAG] …​`
 
-* Tags the student with id `ID`.
-* The `ID` refers to the alphanumeric string on the left of Name
-* The `ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* `TAGS` can be alphabetic without spaces and multiple tags can be specified
+* Deletes tags of the student with id `STUDENT_ID`.
+* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
+* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* Each `TAG` should be alphanumeric, and is case-sensitive.
+* Each `TAG` must be not more than 15 characters long with no space in between.
 
 Examples:
 * `dtag id/A0257418E t/potentialTA t/Active`
@@ -412,10 +492,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -430,6 +506,18 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+## Glossary
+
+Term    | Definition and or Explanation
+--------|----------------------------------------------------------------------
+**CSV** | **Comma-Seperated Values** , a file format generally used to import data in Spreadsheets and Do analysis
+**JSON** | **JavaScript Object Notation**, a standard file format for data interchange
+**Data Changing Command** | Commands in the Application that modifies the Students Data e.g Delete, Edit, Tag
+**NUS** | National University of Singapore , A University Located in Central Singapore
+**Student ID** | A particular format of ID followed in NUS, Starting with a Alphabet followed by 7 digits and ending with an Alphabet e.g A0252195L
+**GUI** | Graphical User Interface , all the part of the application which you can interact with your mouse
+**CLI** | Command Line Interface , part of application which can only be used with commands from the Keyboard
+
 
 ## Command summary
 
@@ -437,15 +525,17 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Delete** | `delete INDEX` **OR** `delete id/STUDENT_ID` <br> e.g., `delete 3`, `delete id/A026273X`
+**Delete** | `delete INDEX` **OR** `delete id/STUDENT_ID` **OR** `delete all` <br> e.g., `delete 3`, `delete id/A026273X`, `delete all`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find n/NAME`  **OR**  `find id/STUDENT_ID` **OR** `find n/NAME id/STUDENT_ID` <br> e.g. `find n/John`, `find id/A123`, `find id/234 n/John D`
 **Filter** | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`
-**Tag** | `tag id/ID t/TAG t/TAG` <br> e.g, `tag id/A0257418E t/potentialTA t/Active`
+**Add Tag/Tags** | `tag id/ID t/TAG t/TAG` <br> e.g, `tag id/A0257418E t/potentialTA t/Active`
 **List**   | `list`
 **Undo**   | `undo`
 **Export**   | `export f/FILENAME` <br> e.g, `export f/mystudents`
 **Import**   | `import f/FILENAME` <br> e.g,`import f/NTU-CS`
-**Dtag**   | `dtag id/ID t/TAG` <br> e.g,`dtag id/A0257418E t/potentialTA`
-**Etag** | `etag id/ID t/TAG t/RESULTING_TAG` <br> e.g `etag id/A0265901E t/Honors t/Scholar`
+**Delete tag/tags**   | `dtag id/STUDENT_ID t/TAG` <br> e.g,`dtag id/A0257418E t/potentialTA`
+**Edit tag/tags** | `etag id/STUDENT_ID t/TAG t/RESULTING_TAG` <br> e.g `etag id/A0265901E t/Honors t/Scholar`
+**Grade** | `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE` <br> e.g `grade id/A0262733X mod/CS2103T s/77`
+**Delete Grade** | `dgrade id/STUDENT_ID mod/MODULE_CODE` <br> e.g `dgrade id/A0262733X mod/CS2103T`
 **Help**   | `help`

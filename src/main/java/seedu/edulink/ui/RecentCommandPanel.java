@@ -38,7 +38,12 @@ public class RecentCommandPanel extends UiPart<Region> {
     private void handleMouseClick(MouseEvent mouseEvent) {
         RecentCommandCell source = (RecentCommandCell) mouseEvent.getSource();
         Optional<Label> label = Optional.of((Label) source.getGraphic());
-        label.ifPresent(value -> this.commandBox.getCommandTextField().setText(value.getText()));
+        label.ifPresent(value -> {
+            this.commandBox.getCommandTextField().setText(value.getText());
+            this.commandBox.getCommandTextField().requestFocus();
+            this.commandBox.getCommandTextField()
+                .positionCaret(this.commandBox.getCommandTextField().getLength());
+        });
     }
 
     /**

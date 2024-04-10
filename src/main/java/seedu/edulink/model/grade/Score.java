@@ -3,6 +3,8 @@ package seedu.edulink.model.grade;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.commons.util.AppUtil.checkArgument;
 
+import java.text.DecimalFormat;
+
 /**
  * Represents a Student's Score in the Application.
  * Guarantees: immutable; is valid as declared in {@link #isValidScore(double)}
@@ -39,7 +41,8 @@ public class Score {
 
     @Override
     public String toString() {
-        return Double.toString(score);
+        DecimalFormat df = new DecimalFormat("#.##");
+        return df.format(score);
     }
 
     @Override
