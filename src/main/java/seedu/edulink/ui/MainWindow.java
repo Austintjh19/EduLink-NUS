@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private RecentCommandPanel recentCommandsPanel;
     private DetailsCard detailsCard;
 
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -122,7 +123,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(this, logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-        updateStudentDetailsCard();
+        updateStudentDetailsCard(0);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -130,7 +131,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand, logic);
+        CommandBox commandBox = new CommandBox(this::executeCommand, logic, this);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         recentCommandsPanel = new RecentCommandPanel(logic.getRecentCommands(), commandBox);
@@ -198,7 +199,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-            updateStudentDetailsCard();
+            updateStudentDetailsCard(0);
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -206,10 +207,14 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
-
-    private void updateStudentDetailsCard() {
+    /**
+     * Displays current selected student details.
+     *
+     * @param index student at the index to be shown.
+     */
+    public void updateStudentDetailsCard(int index) {
         if (!logic.getFilteredPersonList().isEmpty()) {
-            detailsCard = new DetailsCard(logic.getFilteredPersonList().get(0));
+            detailsCard = new DetailsCard(logic.getFilteredPersonList().get(index));
             studentDetailsContainer.getChildren().setAll(detailsCard.getRoot());
         } else {
             studentDetailsContainer.getChildren().clear();

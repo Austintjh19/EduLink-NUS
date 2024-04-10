@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.edulink.commons.core.GuiSettings;
 import seedu.edulink.commons.core.LogsCenter;
+import seedu.edulink.commons.util.CounterUtil;
 import seedu.edulink.logic.commands.Command;
 import seedu.edulink.logic.commands.CommandResult;
 import seedu.edulink.logic.commands.exceptions.CommandException;
@@ -30,6 +31,9 @@ public class LogicManager implements Logic {
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
+    private int recentCommandCounter = 0;
+    private int detailsIndex = 1;
+
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
@@ -51,6 +55,8 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        recentCommandCounter = 0;
+        detailsIndex = 1;
         recentCommands.add(commandText);
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -90,5 +96,19 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public int getRecentCommandsCounter() {
+        int previousCommandCounter = recentCommandCounter;
+        recentCommandCounter = CounterUtil.incrementCounter(recentCommandCounter);
+        return previousCommandCounter;
+    }
+
+    @Override
+    public int getDetailsIndex() {
+        int previousDetailsIndex = detailsIndex;
+        detailsIndex = CounterUtil.incrementCounter(detailsIndex);
+        return previousDetailsIndex;
     }
 }
