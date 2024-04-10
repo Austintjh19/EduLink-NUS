@@ -5,7 +5,6 @@ import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulink.logic.parser.CliSyntax.*;
 
 import seedu.edulink.commons.core.index.Index;
-import seedu.edulink.logic.commands.AddCommand;
 import seedu.edulink.logic.commands.EditCommand;
 import seedu.edulink.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.edulink.logic.parser.exceptions.ParseException;
