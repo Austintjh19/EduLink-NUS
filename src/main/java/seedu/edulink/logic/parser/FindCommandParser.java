@@ -1,17 +1,16 @@
 package seedu.edulink.logic.parser;
 
 import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.edulink.logic.parser.CliSyntax.*;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_NAME;
 
-import seedu.edulink.commons.util.AppUtil;
-import seedu.edulink.logic.commands.AddCommand;
+import java.util.stream.Stream;
+
 import seedu.edulink.logic.commands.FindCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
 import seedu.edulink.model.student.IdAndNameContainsQueryIdAndNamePredicate;
 import seedu.edulink.model.student.IdContainsQueryIdPredicate;
 import seedu.edulink.model.student.NameContainsQueryNamePredicate;
-
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new FindCommand object
