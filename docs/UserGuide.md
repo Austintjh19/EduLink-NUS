@@ -7,15 +7,11 @@
 # EduLink-NUS User Guide
 
 --------------------------------------------------------------------------------------------------------------------
-## Introduction
+### Welcome to the EduLink-NUS User Guide!
 
-Welcome to the **EduLink NUS User Guide** – your essential companion to unlocking the full potential of academic contact/ student management at the National University of Singapore (NUS). Designed specifically for professors and teaching assistants, EduLink NUS is a **desktop app for Academic Instructors to keep contacts of their past and current student, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduLink NUS can get your contact management tasks done faster than traditional GUI apps.
+Welcome to the **EduLink NUS User Guide** – your essential companion to unlocking the full potential of academic contacts/data and management at the National University of Singapore (NUS). We extend a warm welcome to you, and we're thrilled that you've chosen EduLink-NUS to enhance and improve your academic interactions.
 
-In this comprehensive guide, you will discover everything you need to know to harness the capabilities of EduLink NUS effectively. From getting started with launching the application to exploring its myriad features and optimizing performance, each section is meticulously crafted to empower you in managing your academic interactions seamlessly.
-
-Whether you're a seasoned user looking to enhance your workflow or a newcomer eager to dive into the world of efficient contact management, this User Guide is your roadmap to success with EduLink NUS. Let's embark on this journey together and unlock the full potential of academic engagement at NUS with EduLink NUS.
-
-<!-- * Table of Contents -->
+In this comprehensive guide, we'll take you on a journey to unlock the full potential of EduLink-NUS. It is your essential companion, crafted to empower you in mastering every aspect of the EduLink-NUS application.
 
 ## Table of Contents
 
@@ -47,10 +43,38 @@ Whether you're a seasoned user looking to enhance your workflow or a newcomer ea
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
 
+## Introduction
+
 --------------------------------------------------------------------------------------------------------------------
+
+### What is EduLink-NUS
+
+EduLink-NUS is a **desktop application tailored specifically for academic instructors** at the National University of Singapore (NUS). It serves as a powerful tool for **managing academic contacts/data** and streamlining interactions with past and current students. With its intuitive Command Line Interface (CLI) and graphical user interface (GUI), EduLink-NUS offers a seamless user experience, empowering instructors to effortlessly navigate through its features.
+
+Overview of Main Features: 
+- Contact Management: Easily add, edit, and delete student entries, ensuring up-to-date information of students is always available.
+- Module Grade Tracking: Record and manage module grades for individual students.
+- Tagging System: Categorize students with custom tags for streamlined organization and quick retrieval of specific student groups.
+- Export and Import Functionality: Seamlessly export student data to CSV files for external use and import data from JSON files for easier management of diverse organizational data. 
+- Undo Functionality: Safeguard against accidental changes with the ability to undo the last action.
+- User-friendly Interface: Intuitive GUI layout.
+
+### User Proficiency and Expectations
+
+- Level of Relatedness: Users of EduLink-NUS are assumed to have a direct relationship with NUS and are actively engaged in academic activities, including teaching, student mentoring, and administrative tasks related to student management.
+- Comprehension: Users of EduLink-NUS are assumed to have a strong comprehension of academic terminology and procedures used within NUS. They are familiar with concepts such as the student IDs and module grading system. 
+- Prior Knowledge: Users of EduLink-NUS re assumed to possess prior knowledge of computer applications and basic technical skills necessary to navigate software interfaces
+- Desire for Efficiency: Users of EduLink-NUS prioritize efficiency and productivity in their academic tasks.
+
+### Why This Guide Matters
+
+This guide is more than just a manual, it is your gateway to maximizing your experience with EduLink-NUS. By following the instructions and insights provided here, you'll discover shortcuts, tips, and strategies to streamline your workflow and enhance productivity. Whether you're a seasoned user or just getting started, this guide will equip you with the knowledge and skills to leverage EduLink-NUS effectively.
+
+We're excited to embark on this journey with you and help you make the most out of your academic engagement at NUS with EduLink-NUS. So let's dive in and unleash the full potential of EduLink-NUS together!
 
 ## Quick start
 
+--------------------------------------------------------------------------------------------------------------------
 1. Ensure you have Java `11` installed in your Computer. Only that is supported
 
 1. Download the latest `EduLink-NUS.jar` from [here](https://github.com/AY2324S2-CS2103T-T16-1/tp/releases).
