@@ -150,4 +150,12 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static boolean hasMoreThanTwoDecimalPlaces(String numberString) {
+        int dotIndex = numberString.indexOf('.');
+        if (dotIndex != -1 && numberString.length() - dotIndex > 3) {
+            return true;
+        }
+        return false;
+    }
 }

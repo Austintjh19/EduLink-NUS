@@ -149,7 +149,7 @@ public class ParserUtil {
     public static Score parseScore(String score) throws ParseException {
         requireNonNull(score);
         String trimmedScore = score.trim();
-        if (!StringUtil.isDouble(trimmedScore)) {
+        if (!StringUtil.isDouble(trimmedScore) || StringUtil.hasMoreThanTwoDecimalPlaces(trimmedScore)) {
             throw new ParseException(Score.MESSAGE_CONSTRAINTS);
         }
         Double numericalScore = Double.parseDouble(trimmedScore);
