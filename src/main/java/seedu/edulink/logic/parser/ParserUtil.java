@@ -1,6 +1,7 @@
 package seedu.edulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_DELIMITER;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -231,7 +232,34 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Checks whether all the detected prefixes are valid.
+     *
+     * @param argumentMultimap The existing argument mapping of prefixes derived from the passed argsString
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @param prefixes List of Prefixes expected within the pass argsString
+     * @return whether all the detected prefixes are valid.
+     */
+    public static boolean areValidPrefixes(ArgumentMultimap argumentMultimap, String argsString, Prefix... prefixes) {
+        int delimiterCount = 0;
+        int index = 0;
+
+        while ((index = argsString.indexOf(PREFIX_DELIMITER.getPrefix(), index)) != -1) {
+            delimiterCount++;
+            index += PREFIX_DELIMITER.getPrefix().length();
+        }
+
+        System.out.println(argumentMultimap.getLengthForPrefixes(prefixes));
+        System.out.println(delimiterCount);
+
+        return argumentMultimap.getLengthForPrefixes(prefixes) == delimiterCount;
     }
 }
