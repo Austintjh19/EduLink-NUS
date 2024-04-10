@@ -6,6 +6,8 @@
 
 # EduLink-NUS User Guide
 
+##
+
 #### Welcome to the EduLink-NUS User Guide!
 
 Welcome to the **EduLink NUS User Guide** – your essential companion to unlocking the full potential of academic contacts/data and management at the National University of Singapore (NUS). We extend a warm welcome to you, and we're thrilled that you've chosen EduLink-NUS to enhance and improve your academic interactions.
