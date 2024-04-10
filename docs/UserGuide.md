@@ -18,7 +18,7 @@ In this comprehensive guide, we'll take you on a journey to unlock the full pote
 --------------------------------------------------------------------------------------------------------------------
 
 - [Quick Start](#quick-start)
-- [Features](#features)
+- [Features](#edulink-nus-features)
     - [Viewing help: `help`](#viewing-help--help)
     - [Adding a student: `add`](#adding-a-student-add)
     - [Editing a student: `edit`](#editing-a-student--edit)
