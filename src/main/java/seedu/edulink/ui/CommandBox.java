@@ -55,8 +55,9 @@ public class CommandBox extends UiPart<Region> {
     private void handleTabKeyPressed() {
         ObservableList<String> recentCommands = logic.getRecentCommands();
         if (!recentCommands.isEmpty()) {
-            int recentCommandCounter = logic.getRecentCommandsCounter();
-            String text = recentCommands.get(recentCommandCounter % recentCommands.size());
+            int limit = recentCommands.size();
+            int recentCommandCounter = logic.getRecentCommandsCounter(limit);
+            String text = recentCommands.get(recentCommandCounter % limit);
             commandTextField.setText(text);
             commandTextField.requestFocus();
             commandTextField.positionCaret(text.length());

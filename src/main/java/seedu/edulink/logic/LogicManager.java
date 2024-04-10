@@ -99,18 +99,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public int getRecentCommandsCounter() {
+    public int getRecentCommandsCounter(int limit) {
         int previousCommandCounter = recentCommandCounter;
-        recentCommandCounter = CounterUtil.incrementCounter(recentCommandCounter);
+        recentCommandCounter = CounterUtil.incrementCounter(recentCommandCounter, limit);
         return previousCommandCounter;
     }
 
     @Override
     public int getDetailsIndex(boolean isIncrement, int limit) {
         if (isIncrement) {
-            detailsIndex = CounterUtil.incrementDetailsCounter(detailsIndex, limit);
+            detailsIndex = CounterUtil.incrementCounter(detailsIndex, limit);
         } else {
-            detailsIndex = CounterUtil.decrementDetailsCounter(detailsIndex, limit);
+            detailsIndex = CounterUtil.decrementCounter(detailsIndex, limit);
         }
         return detailsIndex;
     }
