@@ -2,7 +2,6 @@ package seedu.edulink.logic.commands;
 
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.edulink.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,7 +43,6 @@ public class DeleteGradeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Student> lastShownList = model.getFilteredPersonList();
         Optional<Student> optionalStudentToDelGrade = lastShownList.stream().filter(
                 student -> student.getId().equals(studentToDelGradeId)
