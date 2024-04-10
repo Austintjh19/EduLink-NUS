@@ -14,7 +14,9 @@ import seedu.edulink.commons.util.ToStringBuilder;
 public class Grade {
 
     private final Grades grade;
+
     private final Module module;
+
     private final Score score;
 
     /**

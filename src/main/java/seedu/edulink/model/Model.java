@@ -1,6 +1,7 @@
 package seedu.edulink.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -66,6 +67,12 @@ public interface Model {
      * The person must exist in the address book.
      */
     void deletePerson(Student target);
+
+    /**
+     * Deletes a list of persons.
+     * The person must exist in the address book.
+     */
+    void deletePersons(List<Student> targets);
 
     /**
      * Adds the given person.

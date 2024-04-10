@@ -34,7 +34,7 @@ public class ScoreTest {
     @Test
     public void toString_returnsCorrectString() {
         Score score = new Score(75);
-        assertTrue(score.toString().equals("75.0"));
+        assertTrue(score.toString().equals("75"));
     }
 
     @Test

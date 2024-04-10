@@ -1,11 +1,13 @@
 package seedu.edulink.logic;
 
+import java.text.DecimalFormat;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.edulink.logic.parser.Prefix;
 import seedu.edulink.model.grade.Grade;
+import seedu.edulink.model.grade.Score;
 import seedu.edulink.model.student.Student;
 
 /**
@@ -62,12 +64,21 @@ public class Messages {
      * Formats the {@code grade} for display to the user.
      */
     public static String format(Grade grade) {
+        DecimalFormat df = new DecimalFormat("#.##");
         final StringBuilder builder = new StringBuilder();
         builder.append("Module: ")
             .append(grade.getModule())
             .append("; Score: ")
-            .append(grade.getScore());
+            .append(df.format(grade.getScore().getScore()));
         return builder.toString();
+    }
+
+    /**
+     * Formats the {@code score} for display to the user.
+     */
+    public static String format(Score score) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        return df.format(score.getScore());
     }
 
 }
