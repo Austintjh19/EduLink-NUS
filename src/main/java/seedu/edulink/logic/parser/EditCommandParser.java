@@ -2,15 +2,10 @@ package seedu.edulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_INTAKE;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MAJOR;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.edulink.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.edulink.logic.parser.CliSyntax.*;
 
 import seedu.edulink.commons.core.index.Index;
+import seedu.edulink.logic.commands.AddCommand;
 import seedu.edulink.logic.commands.EditCommand;
 import seedu.edulink.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.edulink.logic.parser.exceptions.ParseException;
@@ -38,6 +33,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
+
+        if (!ParserUtil.areValidPrefixes(argMultimap, args, PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE, PREFIX_NAME,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE, PREFIX_NAME,
