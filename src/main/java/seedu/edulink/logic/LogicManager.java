@@ -32,7 +32,7 @@ public class LogicManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private int recentCommandCounter = 0;
-    private int detailsIndex = 1;
+    private int detailsIndex = 0;
 
     private final Model model;
     private final Storage storage;
@@ -56,7 +56,7 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
         recentCommandCounter = 0;
-        detailsIndex = 1;
+        detailsIndex = 0;
         recentCommands.add(commandText);
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -99,16 +99,19 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public int getRecentCommandsCounter() {
+    public int getRecentCommandsCounter(int limit) {
         int previousCommandCounter = recentCommandCounter;
-        recentCommandCounter = CounterUtil.incrementCounter(recentCommandCounter);
+        recentCommandCounter = CounterUtil.incrementCounter(recentCommandCounter, limit);
         return previousCommandCounter;
     }
 
     @Override
-    public int getDetailsIndex() {
-        int previousDetailsIndex = detailsIndex;
-        detailsIndex = CounterUtil.incrementCounter(detailsIndex);
-        return previousDetailsIndex;
+    public int getDetailsIndex(boolean isIncrement, int limit) {
+        if (isIncrement) {
+            detailsIndex = CounterUtil.incrementCounter(detailsIndex, limit);
+        } else {
+            detailsIndex = CounterUtil.decrementCounter(detailsIndex, limit);
+        }
+        return detailsIndex;
     }
 }

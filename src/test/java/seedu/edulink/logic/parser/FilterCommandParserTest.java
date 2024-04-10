@@ -44,15 +44,15 @@ public class FilterCommandParserTest {
 
         FilterCommand expectedFilterCommand =
                 new FilterCommand(new TagsContainQueryTagsPredicate(queryTags));
-        assertParseSuccess(parser, "filter t/TA", expectedFilterCommand);
+        assertParseSuccess(parser, " t/TA", expectedFilterCommand);
 
         // Filter - 2 tags
         Tag testTag2 = new Tag("Smart");
         queryTags.add(testTag2);
-        assertParseSuccess(parser, "filter t/TA t/Smart", expectedFilterCommand);
+        assertParseSuccess(parser, " t/TA t/Smart", expectedFilterCommand);
 
         // Filter - White Spaces
-        assertParseSuccess(parser, "filter t/ TA t/      Smart      ", expectedFilterCommand);
+        assertParseSuccess(parser, " t/ TA t/      Smart      ", expectedFilterCommand);
     }
 
 

@@ -112,6 +112,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deletePersons(List<Student> targets) {
+        saveState();
+        addressBook.removePersons(targets);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void addPerson(Student student) {
         saveState();
         addressBook.addPerson(student);

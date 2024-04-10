@@ -12,6 +12,7 @@ import seedu.edulink.logic.commands.AddCommand;
 import seedu.edulink.logic.commands.ClearCommand;
 import seedu.edulink.logic.commands.Command;
 import seedu.edulink.logic.commands.DeleteCommand;
+import seedu.edulink.logic.commands.DeleteGradeCommand;
 import seedu.edulink.logic.commands.DeleteTagCommand;
 import seedu.edulink.logic.commands.EditCommand;
 import seedu.edulink.logic.commands.EditTagCommand;
@@ -118,6 +119,9 @@ public class AddressBookParser {
 
         case GradeCommand.COMMAND_WORD:
             return new GradeCommandParser().parse(arguments);
+
+        case DeleteGradeCommand.COMMAND_WORD:
+            return new DeleteGradeCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -27,9 +27,18 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         requireNonNull(args);
 
         Set<Tag> tagList;
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
+        if (!ParserUtil.areValidPrefixes(argMultimap, args, PREFIX_TAG)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
         if (argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TAG) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
@@ -44,5 +53,4 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         return new FilterCommand(new TagsContainQueryTagsPredicate(tagList));
     }
-
 }
