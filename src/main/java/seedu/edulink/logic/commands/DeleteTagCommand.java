@@ -3,6 +3,7 @@ package seedu.edulink.logic.commands;
 import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.edulink.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +26,10 @@ public class DeleteTagCommand extends Command {
 
     public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the Student you specified.";
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tags: %1$s";
-    public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID " + PREFIX_TAG + "Tag";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete tags(case sensitive) from the specific student. \n"
+            + "Parameters: " + PREFIX_ID + "ID " + PREFIX_TAG + "TAG \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "A0744231A "
+            + PREFIX_TAG + "Tag1 " + PREFIX_TAG + "Tag2";
     public static final String MESSAGE_TAG_NOT_FOUND = "Invalid Command"
             + ", one or more tags you are looking for are not found.";
 
@@ -51,6 +55,14 @@ public class DeleteTagCommand extends Command {
         Optional<Student> optionalStudentToEdit = lastShownList.stream().filter(
                 student -> student.getId().equals(studentToEditId)
         ).findFirst();
+        if (optionalStudentToEdit.isEmpty()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            lastShownList = model.getFilteredPersonList();
+
+            optionalStudentToEdit = lastShownList.stream()
+                    .filter(person -> person.getId().equals(studentToEditId))
+                    .findFirst();
+        }
         if (optionalStudentToEdit.isEmpty()) {
             throw new CommandException(MESSAGE_PERSON_NOTFOUND);
         }

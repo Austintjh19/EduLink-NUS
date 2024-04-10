@@ -3,6 +3,7 @@ package seedu.edulink.logic.commands;
 import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.edulink.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -26,7 +27,10 @@ public class TagCommand extends Command {
 
     public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the student you specified.";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tags: %1$s";
-    public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID " + PREFIX_TAG + "Tag";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add tags(case sensitive) to the specific student. \n"
+            + "Parameters: " + PREFIX_ID + "ID " + PREFIX_TAG + "TAG \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "A0744231A "
+            + PREFIX_TAG + "Tag1 " + PREFIX_TAG + "Tag2";
     public static final String MESSAGE_DUPLICATE = "Invalid Command: "
             + "one or more tags you input are already there. ";
 
@@ -52,6 +56,14 @@ public class TagCommand extends Command {
         Optional<Student> optionalStudentToEdit = lastShownList.stream().filter(
                 student -> student.getId().equals(studentToEditId)
         ).findFirst();
+        if (optionalStudentToEdit.isEmpty()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            lastShownList = model.getFilteredPersonList();
+
+            optionalStudentToEdit = lastShownList.stream()
+                    .filter(person -> person.getId().equals(studentToEditId))
+                    .findFirst();
+        }
         if (optionalStudentToEdit.isEmpty()) {
             throw new CommandException(MESSAGE_PERSON_NOTFOUND);
         }

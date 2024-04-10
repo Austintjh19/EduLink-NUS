@@ -3,12 +3,15 @@ package seedu.edulink.logic.commands;
 import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.edulink.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.edulink.commons.core.LogsCenter;
 import seedu.edulink.commons.util.ToStringBuilder;
 import seedu.edulink.logic.commands.exceptions.CommandException;
 import seedu.edulink.model.Model;
@@ -25,14 +28,17 @@ public class EditTagCommand extends Command {
 
     public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the Student you specified.";
     public static final String MESSAGE_EDIT_TAG_SUCCESS = "Edited Tags: %1$s: tag %2$s is replaced by %3$s";
-    public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID "
-            + PREFIX_TAG + "Tag to edit " + PREFIX_TAG + "Resulting tag";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit a tag(case sensitive) of the specific student. \n"
+            + "Parameters: " + PREFIX_ID + "ID " + PREFIX_TAG + "TAG\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "A0744231A "
+            + PREFIX_TAG + "TagToReplace " + PREFIX_TAG + "Tag";
     public static final String MESSAGE_TAG_NOT_FOUND = "The tag you want to edit is not found.";
     public static final String MESSAGE_TWO_TAGS_NEED = "Please input exactly two tags.";
     public static final String MESSAGE_DUPLICATE = "Command Invalid: the resulting tag you input is already there.";
 
     public static final String MESSAGE_DUPLICATE_AND_NOT_FOUND =
             "Command Invalid: the tag you want to edit is not found, the resulting tag you input is already there.";
+    private static final Logger logger = LogsCenter.getLogger(EditTagCommand.class);
     private final Id studentToEditId;
     private final Tag tagToEdit;
     private final Tag resultingTag;
@@ -46,10 +52,12 @@ public class EditTagCommand extends Command {
      */
     public EditTagCommand(Id studentToEditId, Tag tagToEdit, Tag resultingTag) {
         requireAllNonNull(studentToEditId, tagToEdit, resultingTag);
-
         this.studentToEditId = studentToEditId;
         this.tagToEdit = tagToEdit;
         this.resultingTag = resultingTag;
+        logger.fine("Student to Edit ID: " + studentToEditId.toString()
+                + "Tag to edit" + tagToEdit.toString()
+                + "Resulting Tag" + resultingTag.toString());
     }
 
     @Override
@@ -58,6 +66,14 @@ public class EditTagCommand extends Command {
         Optional<Student> optionalStudentToEdit = lastShownList.stream().filter(
                 student -> student.getId().equals(studentToEditId)
         ).findFirst();
+        if (optionalStudentToEdit.isEmpty()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            lastShownList = model.getFilteredPersonList();
+
+            optionalStudentToEdit = lastShownList.stream()
+                    .filter(person -> person.getId().equals(studentToEditId))
+                    .findFirst();
+        }
         if (optionalStudentToEdit.isEmpty()) {
             throw new CommandException(MESSAGE_PERSON_NOTFOUND);
         }
