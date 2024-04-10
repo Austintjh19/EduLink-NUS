@@ -4,6 +4,7 @@ import static seedu.edulink.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_SCORE;
+import static seedu.edulink.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -52,6 +53,7 @@ public class GradeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Student> lastShownList = model.getFilteredPersonList();
         Optional<Student> optionalStudentToEdit = lastShownList.stream().filter(
                 student -> student.getId().equals(studentToGradeId)
