@@ -2,13 +2,12 @@ package seedu.edulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.edulink.logic.parser.CliSyntax.*;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.edulink.logic.commands.FilterCommand;
-import seedu.edulink.logic.commands.FindCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
 import seedu.edulink.model.student.TagsContainQueryTagsPredicate;
 import seedu.edulink.model.tag.Tag;
