@@ -39,29 +39,24 @@ public class FindCommandParser implements Parser<FindCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ID);
 
         if (argMultimap.getValue(PREFIX_ID).isPresent() && argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            return parseIdAndName(argMultimap, args);
+            return parseQueryIdAndName(argMultimap, args);
         }
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            return parseId(argMultimap, args);
+            return parseQueryId(argMultimap, args);
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            return parseName(argMultimap, args);
+            return parseQueryName(argMultimap, args);
         }
 
         throw new ParseException(
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
-    private FindCommand parseIdAndName(ArgumentMultimap argMultimap, String args) throws ParseException {
+    private FindCommand parseQueryIdAndName(ArgumentMultimap argMultimap, String args) throws ParseException {
 
-        if (!ParserUtil.areValidPrefixes(argMultimap, args, PREFIX_NAME, PREFIX_ID)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!ParserUtil.isValidCommandFormat(argMultimap, args, PREFIX_NAME, PREFIX_ID)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
@@ -79,13 +74,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(new IdAndNameContainsQueryIdAndNamePredicate(queryId, queryName));
     }
 
-    private FindCommand parseId(ArgumentMultimap argMultimap, String args) throws ParseException {
+    private FindCommand parseQueryId(ArgumentMultimap argMultimap, String args) throws ParseException {
 
-        if (!ParserUtil.areValidPrefixes(argMultimap, args, PREFIX_ID)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ID) || !argMultimap.getPreamble().isEmpty()) {
+        if (!ParserUtil.isValidCommandFormat(argMultimap, args, PREFIX_ID)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
@@ -98,13 +89,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(new IdContainsQueryIdPredicate(queryId));
     }
 
-    private FindCommand parseName(ArgumentMultimap argMultimap, String args) throws ParseException {
+    private FindCommand parseQueryName(ArgumentMultimap argMultimap, String args) throws ParseException {
 
-        if (!ParserUtil.areValidPrefixes(argMultimap, args, PREFIX_NAME)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
+        if (!ParserUtil.isValidCommandFormat(argMultimap, args, PREFIX_NAME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
@@ -116,7 +103,5 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         return new FindCommand(new NameContainsQueryNamePredicate(queryName));
     }
-
-
 
 }

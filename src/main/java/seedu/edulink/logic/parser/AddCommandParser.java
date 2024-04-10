@@ -11,7 +11,6 @@ import static seedu.edulink.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.edulink.logic.commands.AddCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
@@ -41,9 +40,14 @@ public class AddCommandParser implements Parser<AddCommand> {
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_ADDRESS,
-            PREFIX_PHONE, PREFIX_EMAIL, PREFIX_INTAKE, PREFIX_MAJOR)
-            || !argMultimap.getPreamble().isEmpty()) {
+        if (!ParserUtil.areValidPrefixes(argMultimap, args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ID, PREFIX_MAJOR, PREFIX_INTAKE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_ADDRESS,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_INTAKE, PREFIX_MAJOR)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -63,11 +67,4 @@ public class AddCommandParser implements Parser<AddCommand> {
         return new AddCommand(student);
     }
 
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
 }

@@ -256,10 +256,20 @@ public class ParserUtil {
             delimiterCount++;
             index += PREFIX_DELIMITER.getPrefix().length();
         }
-
-        System.out.println(argumentMultimap.getLengthForPrefixes(prefixes));
-        System.out.println(delimiterCount);
-
         return argumentMultimap.getLengthForPrefixes(prefixes) == delimiterCount;
+    }
+
+    /**
+     * Checks whether command format is valid.
+     *
+     * @param argumentMultimap The existing argument mapping of prefixes derived from the passed argsString
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @param prefixes List of Prefixes expected within the pass argsString
+     * @return whether command format is valid
+     */
+    public static boolean isValidCommandFormat(ArgumentMultimap argumentMultimap,
+                                               String argsString, Prefix... prefixes) {
+        return areValidPrefixes(argumentMultimap, argsString, prefixes)
+                && arePrefixesPresent(argumentMultimap, prefixes) && argumentMultimap.getPreamble().isEmpty();
     }
 }
