@@ -56,14 +56,6 @@ public class DeleteTagCommand extends Command {
                 student -> student.getId().equals(studentToEditId)
         ).findFirst();
         if (optionalStudentToEdit.isEmpty()) {
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            lastShownList = model.getFilteredPersonList();
-
-            optionalStudentToEdit = lastShownList.stream()
-                    .filter(person -> person.getId().equals(studentToEditId))
-                    .findFirst();
-        }
-        if (optionalStudentToEdit.isEmpty()) {
             throw new CommandException(MESSAGE_PERSON_NOTFOUND);
         }
         Student studentToEdit = optionalStudentToEdit.get();
