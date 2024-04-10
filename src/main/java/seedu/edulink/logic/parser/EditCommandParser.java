@@ -2,7 +2,13 @@ package seedu.edulink.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.edulink.logic.parser.CliSyntax.*;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_INTAKE;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MAJOR;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.edulink.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.edulink.commons.core.index.Index;
 import seedu.edulink.logic.commands.EditCommand;
