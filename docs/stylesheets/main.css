@@ -142,13 +142,13 @@ mark {
       font-size: 1.0rem !important;
   }
   h3 {
-      font-size: 0.9rem !important;
-  }
-  h4 {
       font-size: 0.8rem !important;
   }
+  h4 {
+      font-size: 0.65rem !important;
+  }
   h5 {
-      font-size: 0.7rem !important;
+      font-size: 0.65rem !important;
   }
   body {
       font-size: 0.65rem !important;
@@ -166,5 +166,5 @@ h3,
 h4,
 h5,
 h6 {
-  color: #e46c0a;
+  color: #7333E0;
 }
