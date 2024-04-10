@@ -69,7 +69,7 @@ public class Messages {
         builder.append("Module: ")
             .append(grade.getModule())
             .append("; Score: ")
-            .append(df.format(grade.getScore()));
+            .append(df.format(grade.getScore().getScore()));
         return builder.toString();
     }
 

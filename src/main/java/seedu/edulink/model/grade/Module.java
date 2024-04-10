@@ -12,9 +12,10 @@ import java.util.regex.Pattern;
  */
 public class Module {
     public static final String MESSAGE_CONSTRAINTS =
-        "Module code should be in the format LLDDDD[L] where L represents a letter and D represents a digit. "
-                + "\n[L] represents optional letter at the end of the code.";
-    private static final Pattern MODULE_CODE_PATTERN = Pattern.compile("[a-zA-Z]{2}\\d{4}[a-zA-Z]?");
+        "Module code should only contain alphanumeric characters starting with min. 2 to max.4 alphabets."
+            + "followed by 4 digits and may end with an optional alphabet"
+            + " e.g GESS1035, and it should not be blank";
+    private static final Pattern MODULE_CODE_PATTERN = Pattern.compile("[a-zA-Z]{2,4}\\d{4}[a-zA-Z]?");
 
     public final String moduleCode;
 

@@ -2,6 +2,7 @@ package seedu.edulink.logic.commands;
 
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.edulink.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -25,8 +26,9 @@ public class DeleteGradeCommand extends Command {
 
     public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the person you specified.";
     public static final String MESSAGE_GRADE_NOTFOUND = "Can't find the grade for the course you specified.";
-    public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID "
-        + PREFIX_MODULE + "MODULE ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a grade for a Student in the address book. "
+        + "Parameters: " + PREFIX_ID + "ID " + PREFIX_MODULE + "MODULE "
+        + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "A0265901E " + PREFIX_MODULE + "CS2103T ";
     public static final String MESSAGE_DELETE_GRADE_SUCCESS = "Deleted %1$s grade for student %2$s.";
 
     private Id studentToDelGradeId;
@@ -42,6 +44,7 @@ public class DeleteGradeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Student> lastShownList = model.getFilteredPersonList();
         Optional<Student> optionalStudentToDelGrade = lastShownList.stream().filter(
                 student -> student.getId().equals(studentToDelGradeId)

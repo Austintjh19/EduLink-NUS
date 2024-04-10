@@ -27,8 +27,10 @@ public class GradeCommand extends Command {
 
     public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the person you specified.";
     public static final String MESSAGE_ADD_GRADE_SUCCESS = "Added Grade: %1$s";
-    public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_ID + "ID "
-            + PREFIX_MODULE + "MODULE " + PREFIX_SCORE + "SCORE";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds grade to a Student in the address book. "
+            + "Parameters: " + PREFIX_ID + "ID " + PREFIX_MODULE + "MODULE " + PREFIX_SCORE + "SCORE"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_ID + "A0265901E " + PREFIX_MODULE + "CS2103T " + PREFIX_SCORE + "80";
     public static final String MESSAGE_EDIT_GRADE_SUCCESS = "Edited Grade: "
             + "%1$s: score for module %2$s changed to %3$s";
 
