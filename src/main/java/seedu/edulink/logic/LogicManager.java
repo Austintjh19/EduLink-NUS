@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.edulink.commons.core.GuiSettings;
 import seedu.edulink.commons.core.LogsCenter;
+import seedu.edulink.commons.util.CounterUtil;
 import seedu.edulink.logic.commands.Command;
 import seedu.edulink.logic.commands.CommandResult;
 import seedu.edulink.logic.commands.exceptions.CommandException;
@@ -100,14 +101,14 @@ public class LogicManager implements Logic {
     @Override
     public int getRecentCommandsCounter() {
         int previousCommandCounter = recentCommandCounter;
-        recentCommandCounter++;
+        recentCommandCounter = CounterUtil.incrementCounter(recentCommandCounter);
         return previousCommandCounter;
     }
 
     @Override
     public int getDetailsIndex() {
         int previousDetailsIndex = detailsIndex;
-        detailsIndex++;
+        detailsIndex = CounterUtil.incrementCounter(detailsIndex);
         return previousDetailsIndex;
     }
 }
