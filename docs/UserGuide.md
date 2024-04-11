@@ -8,7 +8,7 @@
 
 #
 
-#### Welcome to the EduLink-NUS User Guide!
+### Welcome to the EduLink-NUS User Guide!
 
 Welcome to the **EduLink NUS User Guide** – your essential companion in unlocking the full potential of academic contacts and data management at the National University of Singapore (NUS).
 
@@ -50,7 +50,7 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
 
 #
 
-#### What is EduLink-NUS
+### What is EduLink-NUS
 
 EduLink-NUS serves as a **desktop application tailored specifically for academic instructors** at the National University of Singapore (NUS). It is a powerful tool that can assists in **managing academic contacts and data**. With its purposefully designed Command Line Interface (CLI) and Graphical User Interface (GUI), users have no trouble in integrating it into workflows for efficient academic administration.
 
@@ -61,7 +61,7 @@ Overview of Main Features:
 - Export and Import Functionality: Seamlessly export student data to CSV files for external use and import data from JSON files for easier management of diverse organizational data. 
 - Undo Functionality: Safeguard against accidental changes with the ability to undo the last action.
 
-#### User Proficiency and Expectations
+### User Proficiency and Expectations
 
 - Level of Relatedness: Users of EduLink-NUS are assumed to have a direct relationship with NUS and are actively engaged in academic activities, including teaching, student mentoring, and administrative tasks related to student management.
 
@@ -74,7 +74,7 @@ Overview of Main Features:
 
 - Desire for Efficiency: Users of EduLink-NUS prioritize efficiency and productivity in their academic administration tasks.
 
-#### Why This Guide Matters
+### Why This Guide Matters
 
 This guide is more than just a manual, it is a gateway to maximize your experience with EduLink-NUS. By following the instructions and insights provided here, you'll discover shortcuts, tips, and strategies to streamline your workflow and enhance productivity. Whether you're a seasoned user or just getting started, this guide will equip you with the knowledge and skills to leverage EduLink-NUS effectively.
 
@@ -87,13 +87,13 @@ We're excited to embark on this journey with you and help you make the most out 
 
 This section is designed to help users effectively navigate the User Guide for EduLink-NUS. Below, you'll find information on how to interpret icons, formatting, and instructions provided throughout the document.
 
-#### Navigating the Document:
+### Navigating the Document:
 - **Table of Contents:** Located at the beginning of the document, the Table of Contents provides an overview of the topics covered. Users can click on any section title to jump directly to that part of the guide.
 
 
 - **Section Organization:** Each section is organized with headings and subheadings, breaking down information into manageable chunks. Users can easily locate specific topics or commands by scanning through the contents.
 
-#### Sections: 
+### Sections: 
 
 Below is a detailed overview of the main sections within this User Guide and what can be expected from each section. 
 
@@ -116,7 +116,7 @@ Below is a detailed overview of the main sections within this User Guide and wha
 For first-time users of the application, it is highly recommended for you to read through the Getting Started section before utilizing the application.
 </box>
 
-#### Icons: 
+### Icons: 
 
 As you navigate through this user guide, you'll encounter colored boxes containing valuable insights. Each box is adorned with an icon, indicating the type of information it holds.
 
@@ -131,7 +131,7 @@ As you navigate through this user guide, you'll encounter colored boxes containi
 
 #
 
-#### Installation
+### Installation
 
 1. Ensure you have Java `11` installed in your Computer. EduLink-NUS is optimized for this version, and while it may function on other versions, we cannot guarantee smooth operation outside of Java 11.
 
@@ -157,9 +157,9 @@ As you navigate through this user guide, you'll encounter colored boxes containi
 
 1. Refer to the [Features]() below for details of all commands supported by EduLink-NUS. Alternatively, refer to the [Command Summary]() for a quick summary. 
 
-#### Graphical User Interface Layout:
+### Graphical User Interface Layout:
 
-**User Interface Overview:**
+#### User Interface Overview:
 
 EduLink NUS's user interface can be split into 7 main components, as shown below:
 
@@ -176,7 +176,7 @@ Please refer below for a comprehensive description of each component.
   * Student Panel Card: Within the Student List Panel, each student is represented by a concise overview encapsulated in a card format.
 * Student Card: For more detailed information about an individual student stored in the system, users can refer to the Student Card, providing comprehensive insights.
 
-**Additional UI Components:**
+#### Additional UI Components:
 
 ![Ui](images/UiLayout2.png)
 
@@ -186,8 +186,58 @@ Please refer below for a comprehensive description of each component.
 * Student Grade: Highlighted in pink, the Student Grade appears in both the Student Card and Student Panel Card, providing information about the academic performance of each student. Like tags, students can have multiple grades associated with them.
 * Selected Student Highlight: Highlighted with a purple outline, this component indicates the selected Student Panel Card for viewing in the Student Card.
 
+### How to use EduLink-NUS commands:
+
+EduLink-NUS operates primarily through text-based commands. Before we explore the specific commands in detail in the Commands section, let’s familiarize ourselves with the basic components and format of a command.
+
+#### Parameter Prefixes:
+
+In EduLink-NUS, a parameter prefix acts as a delimiter for specifying different types of parameters in commands. Here's a reference table for common parameter prefixes and their corresponding parameters:
+
+| Parameter Prefix | Corresponding Parameter |
+|------------------|-------------------------|
+| `id/`            | `STUDENT_ID`            |
+| `n/`             | `NAME`                  |
+| `p/`             | `PHONE_NUMBER`          |
+| `e/`             | `EMAIL`                 |
+| `a/`             | `ADDRESS`               |
+| `m/`             | `MAJOR`                 |
+| `in/`            | `INTAKE`                |
+| `t/`             | `TAG`                   |
+| `mod/`           | `MODULE`                |
+| `s/`             | `MODULE_SCORE`          |
+| `f/`             | `FILENAME`              |
+
+#### Parameter:
+
+In EduLink-NUS, a parameter represents a placeholder where users input data. Parameters typically follow immediately after their corresponding Parameter Prefixes.
+
+Each parameter has unique constraints, which restrict what users can input for the parameter. Refer to the table below for details.
+
+<box type="info" seamless> 
+Some parameters to not come along with their own Parameter Prefix. E.g. KEYWORD and INDEX. 
+</box> 
+
+| Parameter      | Parameter Prefix | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|----------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `STUDENT_ID`   | `id/`            | Specifies the Student ID of a student. <br/><br/> - IDs must contain only alphanumeric characters. <br/> - The ID must start with a letter, followed by exactly 7 digits, and end with a letter.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `NAME`         | `n/`             | Specifies the Name of a student. <br/><br/> - Names must contain only alphanumeric characters and whitespaces. <br/> - The name must start with a letter. <br/> - Names are restricted to a 100 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 
+| `PHONE_NUMBER` | `p/`             | Specifies the Phone Number of a student. <br/><br/> - Phone numbers must contain only numerical digits. <br/> - Phone numbers must be at least 3 digits long. <br/> - Phone numbers are restricted to 20 digits.                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 
+| `EMAIL`        | `e/`             | Specifies the Email of a student. <br/><br/> - Emails should be of the format `local-part@domain`. <br/> - local-part should only contain alphanumeric characters and these characters: `+` `_` `.` `-`  <br/> - The local-part must be followed by a '@' and then a domain name. <br/> -  The domain name is made up of domain labels separated by periods. <br/> - The domain name must end with a domain label at least 2 characters long. <br/> - Each domain label must start and end with alphanumeric characters. <br/> -  Each domain label consists of alphanumeric characters, separated only by hyphens, if any. <br/> - Emails are restricted to a 100 characters long. |
+| `ADDRESS`      | `a/`             | Specifies the Address of a student. <br/><br/> - Addresses can contain only alphanumeric characters, whitespaces, and the following special characters: `,` `#` `-`.  <br/> - Addresses are restricted to a 100 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 
+| `MAJOR`        | `m/`             | Specifies the Major of a student. <br/><br/> - Majors must contain only alphabetical characters.  <br/> - Majors are restricted to 50 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 
+| `INTAKE`       | `in/`            | Specifies the Intake of a student. <br/><br/> - Intake should contain Year in the form YYYY. <br/> - Intakes can't be after the current year.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 
+| `TAG`          | `t/`             | Specifies the tag to categorize a student under. <br/><br/> - Tags names should be alphanumeric. <br/> - Tags are restricted to 15 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 
+| `MODULE`       | `mod/`           | Specifies the module code of an associated grade score for a student. <br/><br/> - Module code should be in the format LLDDDD[L] where L represents a letter and D represents a digit. <br/> - [L] represents optional letter at the end of the code.                                                                                                                                                                                                                                                                                                                                                                                                                               | 
+| `MODULE_SCORE` | `s/`             | Specifies the module score for an associated module grade for a student. <br/><br/> - Module score should be a non-negative number between 0 and 100 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 
+| `FILENAME`     | `f/`             | Specifies the file to import or export from. <br/><br/> - File names can only contain alphanumeric characters and the special characters: `-` and `_`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 
+| `KEYWORD`      | Not Applicable   | Specifies the keywords to search for when finding students.  <br/><br/> - Can contain alphanumeric characters, spaces, and any special characters, except the special character: `/`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 
+| `INDEX`        | Not Applicable   | Refers to the index number shown in the Student List Panel.  <br/><br/> -  Must be a positive whole number, e.g. 1, 2, 3.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | 
+
+
+
 --------------------------------------------------------------------------------------------------------------------
-## EduLink-NUS Features
+## Commands
 
 <box type="info" seamless>
 
