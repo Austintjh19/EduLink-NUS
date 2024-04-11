@@ -21,8 +21,8 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_EXPORT_SUCCESS = "Exported Data to the file - ";
     public static final String MESSAGE_EXPORT_FAILURE = "Unable to Export data to the destination";
     public static final String MESSAGE_USAGE = "Usage: " + COMMAND_WORD + " " + PREFIX_FILENAME + "FILENAME";
-    public static final String FILENAME_CONSTRAIN = "File name can only contain Alphanumeric words,"
-        + " - (hyphens) and _ (underscore)";
+    public static final String FILENAME_CONSTRAIN = "File names can only contain alphanumeric characters, "
+            + "hyphens (-), and underscores (_), and can't be left blank.";
     public static final String VALIDATION_FILENAME = "^[\\w\\-]+$";
 
     private final String fileName;
