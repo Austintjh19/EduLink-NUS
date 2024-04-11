@@ -210,7 +210,7 @@ In EduLink-NUS, a parameter prefix acts as a delimiter for specifying different 
 
 #### Parameter:
 
-In EduLink-NUS, a parameter represents a placeholder where users input data. Parameters typically follow immediately after their corresponding Parameter Prefixes.
+In EduLink-NUS, a parameter represents a placeholder where users input data. Parameters typically follow immediately after their corresponding Parameter Prefixes. Essentially they are to be supplied by the user.
 
 Each parameter has unique constraints, which restrict what users can input for the parameter. Refer to the table below for details.
 
@@ -231,13 +231,31 @@ Some parameters to not come along with their own Parameter Prefix. E.g. KEYWORD 
 | `MODULE`       | `mod/`           | Specifies the module code of an associated grade score for a student. <br/><br/> - Module code should be in the format LLDDDD[L] where L represents a letter and D represents a digit. <br/> - [L] represents optional letter at the end of the code.                                                                                                                                                                                                                                                                                                                                                                                                                               | 
 | `MODULE_SCORE` | `s/`             | Specifies the module score for an associated module grade for a student. <br/><br/> - Module score should be a non-negative number between 0 and 100 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 
 | `FILENAME`     | `f/`             | Specifies the file to import or export from. <br/><br/> - File names can only contain alphanumeric characters and the special characters: `-` and `_`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 
-| `KEYWORD`      | Not Applicable   | Specifies the keywords to search for when finding students.  <br/><br/> - Can contain alphanumeric characters, spaces, and any special characters, except the special character: `/`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 
-| `INDEX`        | Not Applicable   | Refers to the index number shown in the Student List Panel.  <br/><br/> -  Must be a positive whole number, e.g. 1, 2, 3.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | 
+| `KEYWORD`      | Not Applicable   | Specifies the keywords to search for when finding students.  <br/><br/> - Can contain alphanumeric characters, spaces, and any special characters, except the special character: `/`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 
+| `INDEX`        | Not Applicable   | Refers to the index number shown in the Student List Panel.  <br/><br/> -  Must be a positive whole number, e.g. 1, 2, 3. And fall withing the range of 1 to 2,147,483,647.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 
 
+#### Command Format:
 
+To understand how a full command is interpreted, we will utilise the following example.
 
---------------------------------------------------------------------------------------------------------------------
-## Commands
+**Example:** `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS in/INTAKE m/MAJOR [t/TAG]…​`
+
+|             | Component Name    | Meaning                                                        |
+|-------------|-------------------|----------------------------------------------------------------|
+| **`add`**   | Command           | Will result in the execution of the Add Command by EduLink-NUS |
+| **`n/`**    | Parameter Prefix  | Distinguishes `NAME` from other input fields.                  |
+| **`NAME`**  | Parameter         | Represents placeholder for name of the student.                |
+
+Certainly, here's a revised version:
+
+You'll notice that `[TAG]` is wrapped in square brackets, indicating that it's an optional component.
+
+- For example, in `n/STUDENT_NAME [TAG]`, you can include a tag like `n/John t/TA` or simply input the student's name as `n/John`.
+
+Moreover, notice that `[TAG]` is followed by an ellipsis (`…`). This signifies that items followed by an ellipsis can be entered multiple times, including zero times.
+
+- As an illustration, `n/STUDENT_NAME [TAG]…` can be used with no tags at all, like `n/John`, or with multiple tags, such as `n/John t/Math t/TA`.
+
 
 <box type="info" seamless>
 
@@ -255,12 +273,8 @@ Some parameters to not come along with their own Parameter Prefix. E.g. KEYWORD 
 
 * Commands are case-insensitive. e.g `filter` and `Filter` are the same command.
 
-*  **TAB** key serve a distinct purpose and are not employed for creating four spaces.
-
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Any parameter supplied by the user must not contain the **/** character as it serves a distinct purpose in out application. 
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/TA` or as `n/John Doe`.
@@ -278,6 +292,19 @@ Some parameters to not come along with their own Parameter Prefix. E.g. KEYWORD 
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+
+<box type="warning" seamless>
+
+**VERY IMPORTANT !!!**<br>
+
+* **TAB** key serve a distinct purpose and should now be utilised for creating four whitespaces.
+
+* Any parameter supplied by the user must not contain the **/** character as it serves a distinct purpose in the application.
+</box>
+
+
+--------------------------------------------------------------------------------------------------------------------
+## Commands
 
 ### Viewing help : `help`
 
