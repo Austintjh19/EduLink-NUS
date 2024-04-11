@@ -25,7 +25,7 @@ public class DeleteTagCommand extends Command {
 
     public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the Student you specified.";
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tags: %1$s";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete tags(case sensitive)"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete tags"
             + " from the specific student. \n"
             + "Parameters: " + PREFIX_ID + "ID " + PREFIX_TAG + "TAG \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "A0744231A "
