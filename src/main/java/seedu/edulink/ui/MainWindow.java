@@ -216,6 +216,7 @@ public class MainWindow extends UiPart<Stage> {
         if (!logic.getFilteredPersonList().isEmpty()) {
             detailsCard = new DetailsCard(logic.getFilteredPersonList().get(index));
             studentDetailsContainer.getChildren().setAll(detailsCard.getRoot());
+            personListPanel.getPersonListView().getSelectionModel().select(index);
         } else {
             studentDetailsContainer.getChildren().clear();
         }
