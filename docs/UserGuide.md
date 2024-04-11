@@ -463,18 +463,16 @@ Adds a Module Grade for an individual from the EduLink NUS system, using the Stu
 
 Format: `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE`
 
-* Adds a Module Grade to a student identified by the specified STUDENT_ID.
-* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
-* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* Adds a Module Grade to a student identified by the specified STUDENT_ID in the **filtered** list and not full list. 
 * The `STUDENT_ID` must exist within the system
-* The `MODULE_CODE` must be valid i.e. matches [2 letters] followed by [4 digits] then [an optional letter]
-* The SCORE must be within 0 to 100. It will round values up to 2 deicimal places when displayed.
+* The `MODULE_CODE` must be valid i.e. matches [min. 2 to max 4. letters] followed by [4 digits] then [an optional letter]
+* The SCORE must be within 0 to 100 and can only be given up to 2 decimal places.
 * Command will **edit** the grade of a specified module if `MODULE_CODE` already exists. 
 * For each execution the Command can only **add** or **edit** a single module grade for one particular student.
 
 Examples:
-* `grade id/A0264273X mod/CS2103T s/77` grades the student with Student ID A0264273X for module CS2103T. 77 will be the displayed grade.
-* `grade id/A0262743X mod/CS2103T s/85` edits the student with Student ID A0262743X's grade for module CS2103T because a grade for it already exists. 85 will be the displayed grade.
+* `grade id/A0265901E mod/CS2103T s/77.5` grades the student with Student ID A0265901E for module CS2103T if found in the filtered list. 77.5 will be the displayed grade.
+* `grade id/id/A0265901E mod/CS2103T s/85` edits the student with Student ID A0262743X's grade for module CS2103T because a grade for it already exists. 85 will be the displayed grade.
 
 
 ### Deleting Module Grade to a Student: `dgrade`
@@ -483,16 +481,14 @@ Deletes a Module Grade for an individual from the EduLink NUS system, using the 
 
 Format: `dgrade id/STUDENT_ID mod/MODULE_CODE `
 
-* Deletes a Module Grade for a student identified by the specified STUDENT_ID.
-* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
-* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* Deletes a Module Grade for a student identified by the specified STUDENT_ID in the **filtered** list and not full list.
 * The `STUDENT_ID` must exist within the system
-* The `MODULE_CODE` must be valid i.e. matches [2 letters] followed by [4 digits] then [an optional letter]. 
+* The `MODULE_CODE` must be valid i.e. matches [min. 2 to max 4. letters] followed by [4 digits] then [an optional letter]
 * The `MODULE_CODE` must already exist for that particular student.
 * For each execution the Command can only **delete** a single module grade entry for one particular student.
 
 Examples:
-* `dgrade` id/A026273X mod/CS2103T deletes the grade of the student with Student ID A026273X for module CS2103T.
+* `dgrade id/A026273X mod/CS2103T` deletes the grade of the student with Student ID A026273X for module CS2103T.
 
 ### Tagging a student : `tag`
 
