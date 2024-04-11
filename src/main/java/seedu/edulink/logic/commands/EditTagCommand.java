@@ -27,7 +27,7 @@ public class EditTagCommand extends Command {
 
     public static final String MESSAGE_PERSON_NOTFOUND = "Can't find the Student you specified.";
     public static final String MESSAGE_EDIT_TAG_SUCCESS = "Edited Tags: %1$s: tag %2$s is replaced by %3$s";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit a tag(case sensitive) of the specific student. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit a tag of the specific student. \n"
             + "Parameters: " + PREFIX_ID + "ID " + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "A0744231A "
             + PREFIX_TAG + "TagToReplace " + PREFIX_TAG + "Tag";

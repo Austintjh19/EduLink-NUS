@@ -450,18 +450,16 @@ Adds a Module Grade for an individual from the EduLink NUS system, using the Stu
 
 Format: `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE`
 
-* Adds a Module Grade to a student identified by the specified STUDENT_ID.
-* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
-* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* Adds a Module Grade to a student identified by the specified STUDENT_ID in the **filtered** list and not full list. 
 * The `STUDENT_ID` must exist within the system
-* The `MODULE_CODE` must be valid i.e. matches [2 letters] followed by [4 digits] then [an optional letter]
-* The SCORE must be within 0 to 100. It will round values up to 2 deicimal places when displayed.
+* The `MODULE_CODE` must be valid i.e. matches [min. 2 to max 4. letters] followed by [4 digits] then [an optional letter]
+* The SCORE must be within 0 to 100 and can only be given up to 2 decimal places.
 * Command will **edit** the grade of a specified module if `MODULE_CODE` already exists. 
 * For each execution the Command can only **add** or **edit** a single module grade for one particular student.
 
 Examples:
-* `grade id/A0264273X mod/CS2103T s/77` grades the student with Student ID A0264273X for module CS2103T. 77 will be the displayed grade.
-* `grade id/A0262743X mod/CS2103T s/85` edits the student with Student ID A0262743X's grade for module CS2103T because a grade for it already exists. 85 will be the displayed grade.
+* `grade id/A0265901E mod/CS2103T s/77.5` grades the student with Student ID A0265901E for module CS2103T if found in the filtered list. 77.5 will be the displayed grade.
+* `grade id/id/A0265901E mod/CS2103T s/85` edits the student with Student ID A0262743X's grade for module CS2103T because a grade for it already exists. 85 will be the displayed grade.
 
 
 ### Deleting Module Grade to a Student: `dgrade`
@@ -470,16 +468,14 @@ Deletes a Module Grade for an individual from the EduLink NUS system, using the 
 
 Format: `dgrade id/STUDENT_ID mod/MODULE_CODE `
 
-* Deletes a Module Grade for a student identified by the specified STUDENT_ID.
-* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
-* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
+* Deletes a Module Grade for a student identified by the specified STUDENT_ID in the **filtered** list and not full list.
 * The `STUDENT_ID` must exist within the system
-* The `MODULE_CODE` must be valid i.e. matches [2 letters] followed by [4 digits] then [an optional letter]. 
+* The `MODULE_CODE` must be valid i.e. matches [min. 2 to max 4. letters] followed by [4 digits] then [an optional letter]
 * The `MODULE_CODE` must already exist for that particular student.
 * For each execution the Command can only **delete** a single module grade entry for one particular student.
 
 Examples:
-* `dgrade` id/A026273X mod/CS2103T deletes the grade of the student with Student ID A026273X for module CS2103T.
+* `dgrade id/A026273X mod/CS2103T` deletes the grade of the student with Student ID A026273X for module CS2103T.
 
 ### Tagging a student : `tag`
 
@@ -490,8 +486,10 @@ Format: `tag id/STUDENT_ID t/TAG [t/TAG] …​`
 * Adds a tag or multiple tags to the student with id `STUDENT_ID`.
 * The `STUDENT_ID` refers to the alphanumeric string on the left of Name
 * The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* Each `TAG` should be alphanumeric, and is case-sensitive.
-* Each `TAG` must be not more than 15 characters long with no space in between.
+* Each `TAG` should be alphanumeric, not more than 15 characters long, with no space in between. 
+* `Tag` is case-insensitive: TA and ta are the same.
+  * If add two same tag, only one will be added.
+  * Can't add tag that the student already have.
 
 Examples:
 * `tag id/A0257418E t/potentialTA t/Active`
@@ -505,12 +503,11 @@ Format: `etag id/STUDENT_ID t/EXISTING_TAG t/RESULTING_TAG`
 * Edits the tag of the student with id `STUDENT_ID`.
 * The `STUDENT_ID` refers to the alphanumeric string on the left of Name
 * The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* `EXISTING_TAG` must be alphabetic without spaces. It is the existing tag
-that you intend to edit. This parameter must match exactly the current tag assigned to the student. 
-Meaning it is case-sensitive.
-* `RESULTING_TAG` is the new tag that will replace the existing TAG.
+* `EXISTING_TAG` It is the existing tag
+that you intend to edit. It is case-insensitive.
+* `RESULTING_TAG` is the new tag that will replace the existing tag.
 * Both the `EXISTING_TAG` and `RESULTING_TAG` must be not more than 15 characters long with no space in between.
-* Both the `EXISTING_TAG` and `RESULTING_TAG` much be alphanumeric, and they are case-sensitive.
+* Both the `EXISTING_TAG` and `RESULTING_TAG` much be alphanumeric, and they are case-insensitive.
 
 Examples:
 * `etag id/A0265901E t/Honors t/Scholar` updates the tag from `Honors` to `Scholar` for the student with ID `A0265901E`.
@@ -524,8 +521,10 @@ Format: `dtag id/STUDENT_ID t/TAG [t/TAG] …​`
 * Deletes tags of the student with id `STUDENT_ID`.
 * The `STUDENT_ID` refers to the alphanumeric string on the left of Name
 * The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* Each `TAG` should be alphanumeric, and is case-sensitive.
-* Each `TAG` must be not more than 15 characters long with no space in between.
+* Each `TAG` should be alphanumeric, not more than 15 characters long, with no space in between.
+* `Tag` is case-insensitive: TA and ta are the same.
+  * If add two same tag, only one of them will be added.
+  * Can't add tag that the student already have.
 
 Examples:
 * `dtag id/A0257418E t/potentialTA t/Active`
@@ -571,6 +570,38 @@ Format: `undo`
 
 Examples:
 * `undo`
+
+### Grading a student : `grade`
+
+Grades the specified individual from the EduLink NUS system for a specified module
+
+Format: `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE`
+
+* Grades the student identified by the specified `STUDENT_ID`.
+* The STUDENT_ID refers to the unique identification string associated with individuals stored in EduLink NUS.
+* Edit's the student identified by the specified `STUDENT_ID`'s grade if a grade for the specified `MODULE` already exists.
+* The STUDENT_ID **must exist within the system**
+* The MODULE_CODE **must be valid i.e. matches [2 letters] followed by [4 digits] then [a optional letter]**
+* The SCORE **must be within 0 to 100**. 0 stands up **Not Available**.
+
+Examples:
+* `grade id/A026273X mod/CS2103T s/77` grades the student with Student ID A026273X for module CS2103T. 77 out of 100 is translated to grade B.
+* `grade id/A026273X mod/CS2103T s/85` edits the student with Student ID A026273X's grade for module CS2103T because a grade for it already. 85 out of 100 is now translated to grade A.
+
+### Deleting a grade for a student : `dgrade`
+
+Deletes the grade of the specified individual from the EduLink NUS system for the specified module.
+
+Format: `dgrade id/STUDENT_ID mod/MODULE_CODE`
+
+* Deletes grade of the student identified by the specified `STUDENT_ID` for the specified `MODULE_CODE`.
+* The STUDENT_ID refers to the unique identification string associated with individuals stored in EduLink NUS.
+* The STUDENT_ID **must exist within the system**
+* The MODULE_CODE **must be valid i.e. matches [2 letters] followed by [4 digits] then [a optional letter]**
+* The MODULE_CODE **must exist within the student's list of grades**
+
+Examples:
+* `dgrade id/A026273X mod/CS2103T` deletes the grade of the student with Student ID A026273X for module CS2103T.
 
 ### Clearing all entries : `clear`
 

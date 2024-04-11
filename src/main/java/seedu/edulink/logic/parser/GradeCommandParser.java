@@ -6,8 +6,6 @@ import static seedu.edulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_SCORE;
 
-import java.util.stream.Stream;
-
 import seedu.edulink.logic.commands.GradeCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
 import seedu.edulink.model.grade.Grade;
@@ -34,7 +32,7 @@ public class GradeCommandParser implements Parser<GradeCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_MODULE, PREFIX_SCORE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_MODULE, PREFIX_SCORE)
+        if (!ParserUtil.isValidCommandFormat(argMultimap, args, PREFIX_ID, PREFIX_MODULE, PREFIX_SCORE)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE));
         }
@@ -51,13 +49,5 @@ public class GradeCommandParser implements Parser<GradeCommand> {
         }
 
         return new GradeCommand(userId, grade);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
