@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.edulink.logic.Logic;
 import seedu.edulink.logic.commands.CommandResult;
@@ -21,7 +22,6 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
     private final Logic logic;
     private final MainWindow mainWindow;
-    private int recentCommandCounter;
     private int detailsIndex;
 
     @FXML
@@ -37,25 +37,47 @@ public class CommandBox extends UiPart<Region> {
         this.mainWindow = mainWindow;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
-        commandTextField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.TAB) {
-                ObservableList<String> recentCommands = logic.getRecentCommands();
-                if (!recentCommands.isEmpty()) {
-                    recentCommandCounter = logic.getRecentCommandsCounter();
-                    String text = recentCommands.get(recentCommandCounter % recentCommands.size());
-                    commandTextField.setText(text);
-                    this.commandTextField.requestFocus();
-                    this.commandTextField.positionCaret(text.length());
-                }
-                event.consume();
-            } else if (event.getCode() == KeyCode.ESCAPE) {
-                if (!logic.getFilteredPersonList().isEmpty()) {
-                    detailsIndex = logic.getDetailsIndex();
-                    mainWindow.updateStudentDetailsCard(detailsIndex % logic.getFilteredPersonList().size());
-                }
-                event.consume();
-            }
-        });
+        commandTextField.setOnKeyPressed(this::handleKeyPressed);
+    }
+
+    private void handleKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.TAB) {
+            handleTabKeyPressed();
+            event.consume();
+        } else if (event.getCode() == KeyCode.DOWN) {
+            handleDownKeyPressed();
+            event.consume();
+        } else if (event.getCode() == KeyCode.UP) {
+            handleUpKeyPressed();
+        }
+    }
+
+    private void handleTabKeyPressed() {
+        ObservableList<String> recentCommands = logic.getRecentCommands();
+        if (!recentCommands.isEmpty()) {
+            int limit = recentCommands.size();
+            int recentCommandCounter = logic.getRecentCommandsCounter(limit);
+            String text = recentCommands.get(recentCommandCounter % limit);
+            commandTextField.setText(text);
+            commandTextField.requestFocus();
+            commandTextField.positionCaret(text.length());
+        }
+    }
+
+    private void handleDownKeyPressed() {
+        if (!logic.getFilteredPersonList().isEmpty()) {
+            int limit = logic.getFilteredPersonList().size();
+            detailsIndex = logic.getDetailsIndex(true, limit);
+            mainWindow.updateStudentDetailsCard(detailsIndex % limit);
+        }
+    }
+
+    private void handleUpKeyPressed() {
+        if (!logic.getFilteredPersonList().isEmpty()) {
+            int limit = logic.getFilteredPersonList().size();
+            detailsIndex = logic.getDetailsIndex(false, limit);
+            mainWindow.updateStudentDetailsCard(detailsIndex % limit);
+        }
     }
 
     /**
