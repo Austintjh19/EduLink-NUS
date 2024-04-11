@@ -397,8 +397,10 @@ Format: `tag id/STUDENT_ID t/TAG [t/TAG] …​`
 * Adds a tag or multiple tags to the student with id `STUDENT_ID`.
 * The `STUDENT_ID` refers to the alphanumeric string on the left of Name
 * The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* Each `TAG` should be alphanumeric, and is case-sensitive.
-* Each `TAG` must be not more than 15 characters long with no space in between.
+* Each `TAG` should be alphanumeric, not more than 15 characters long, with no space in between. 
+* `Tag` is case-insensitive: TA and ta are the same.
+  * If add two same tag, only one will be added.
+  * Can't add tag that the student already have.
 
 Examples:
 * `tag id/A0257418E t/potentialTA t/Active`
@@ -412,12 +414,11 @@ Format: `etag id/STUDENT_ID t/EXISTING_TAG t/RESULTING_TAG`
 * Edits the tag of the student with id `STUDENT_ID`.
 * The `STUDENT_ID` refers to the alphanumeric string on the left of Name
 * The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* `EXISTING_TAG` must be alphabetic without spaces. It is the existing tag
-that you intend to edit. This parameter must match exactly the current tag assigned to the student. 
-Meaning it is case-sensitive.
-* `RESULTING_TAG` is the new tag that will replace the existing TAG.
+* `EXISTING_TAG` It is the existing tag
+that you intend to edit. It is case-insensitive.
+* `RESULTING_TAG` is the new tag that will replace the existing tag.
 * Both the `EXISTING_TAG` and `RESULTING_TAG` must be not more than 15 characters long with no space in between.
-* Both the `EXISTING_TAG` and `RESULTING_TAG` much be alphanumeric, and they are case-sensitive.
+* Both the `EXISTING_TAG` and `RESULTING_TAG` much be alphanumeric, and they are case-insensitive.
 
 Examples:
 * `etag id/A0265901E t/Honors t/Scholar` updates the tag from `Honors` to `Scholar` for the student with ID `A0265901E`.
@@ -431,8 +432,10 @@ Format: `dtag id/STUDENT_ID t/TAG [t/TAG] …​`
 * Deletes tags of the student with id `STUDENT_ID`.
 * The `STUDENT_ID` refers to the alphanumeric string on the left of Name
 * The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* Each `TAG` should be alphanumeric, and is case-sensitive.
-* Each `TAG` must be not more than 15 characters long with no space in between.
+* Each `TAG` should be alphanumeric, not more than 15 characters long, with no space in between.
+* `Tag` is case-insensitive: TA and ta are the same.
+  * If add two same tag, only one of them will be added.
+  * Can't add tag that the student already have.
 
 Examples:
 * `dtag id/A0257418E t/potentialTA t/Active`

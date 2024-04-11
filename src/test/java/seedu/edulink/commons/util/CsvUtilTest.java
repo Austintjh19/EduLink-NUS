@@ -37,7 +37,7 @@ public class CsvUtilTest {
 
         String expectedLine1 = "A0251893P,Alice Pauline,94351253,"
             + "alice@example.com,123 | Jurong West Ave 6 | #08-111,"
-            + "Computer Science,2023,TA | Smart | friends";
+            + "Computer Science,2023,TA | friends | Smart";
         assertEquals(expectedLine1, lines.get(1));
         Files.delete(filePath);
     }

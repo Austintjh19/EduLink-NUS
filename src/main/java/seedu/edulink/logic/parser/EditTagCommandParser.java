@@ -31,8 +31,8 @@ public class EditTagCommandParser implements Parser<EditTagCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID,
             PREFIX_TAG);
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_TAG)
-            || !argMultimap.getPreamble().isEmpty()) {
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID);
+        if (!ParserUtil.isValidCommandFormat(argMultimap, args, PREFIX_TAG, PREFIX_ID)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
         }
         try {
