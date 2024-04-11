@@ -6,8 +6,6 @@
 
 # EduLink-NUS User Guide
 
-#
-
 ### Welcome to the EduLink-NUS User Guide!
 
 Welcome to the **EduLink NUS User Guide** – your essential companion in unlocking the full potential of academic contacts and data management at the National University of Singapore (NUS).
@@ -16,8 +14,6 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
-
-#
 
 - [Quick Start](#quick-start)
 - [Features](#edulink-nus-features)
@@ -47,8 +43,6 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
 
 --------------------------------------------------------------------------------------------------------------------
 ## Introduction
-
-#
 
 ### What is EduLink-NUS
 
@@ -82,8 +76,6 @@ We're excited to embark on this journey with you and help you make the most out 
 
 --------------------------------------------------------------------------------------------------------------------
 ## How to use this User Guide
-
-#
 
 This section is designed to help users effectively navigate the User Guide for EduLink-NUS. Below, you'll find information on how to interpret icons, formatting, and instructions provided throughout the document.
 
@@ -128,8 +120,6 @@ As you navigate through this user guide, you'll encounter colored boxes containi
 
 --------------------------------------------------------------------------------------------------------------------
 ## Getting Started
-
-#
 
 ### Installation
 
@@ -208,7 +198,7 @@ In EduLink-NUS, a parameter prefix acts as a delimiter for specifying different 
 | `s/`             | `MODULE_SCORE`          |
 | `f/`             | `FILENAME`              |
 
-#### Parameter:
+#### Parameters:
 
 In EduLink-NUS, a parameter represents a placeholder where users input data. Parameters typically follow immediately after their corresponding Parameter Prefixes. Essentially they are to be supplied by the user.
 
@@ -295,7 +285,7 @@ Moreover, notice that `[TAG]` is followed by an ellipsis (`…`). This signifies
 
 <box type="warning" seamless>
 
-**VERY IMPORTANT !!!**<br>
+**IMPORTANT !!!**<br>
 
 * **TAB** key serve a distinct purpose and should now be utilised for creating four whitespaces.
 
@@ -305,6 +295,50 @@ Moreover, notice that `[TAG]` is followed by an ellipsis (`…`). This signifies
 
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
+
+### Student Data Modification Commands: 
+
+#### Adding a student: `add`
+
+> Adds a Student to the EduLink-NUS application.
+
+Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS in/INTAKE m/MAJOR [t/TAG]…​`
+
+<box type="tip" seamless>
+**Tip:** A student can have any number of tags (including 0)
+</box>
+
+Command Details & Constraints:
+* Adds a new student data to the EduLink-NUS application. Will be located at the end of the Student List Panel. 
+* Command will only be executed, if there is no preexisting student data within the EduLink-NUS application with the same `STUDENT_ID`.
+* All parameters must satisfy their corresponding parameter constraints.
+
+Examples:
+* `add n/John Doe id/A2265901E p/1234567890 e/john.doe@example.com a/311, Clementi Ave 2, #02-25 in/2023 m/Computer Science t/Honors`
+* `add n/John Doe id/A2265901E p/1234567890 e/john.doe@example.com a/311, Clementi Ave 2, #02-25 in/2023 m/Computer Science t/Honors t/TA`
+
+#### Editing a student : `edit`
+
+> Edits an existing student in the address book, using the Student List Panel index.
+
+![Index Location](images/Index.png)
+
+Format: `edit INDEX [id/STUDENT_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE]​`
+
+<box type="info" seamless>
+**Info:** For the command to be valid. At least one Parameter Prefix and its corresponding parameter must be provided.
+</box>
+
+Command Details & Constraints:
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the Student List Panel.
+* At least one of the optional fields must be provided.
+* Existing values will be updated with the input parameter values. 
+* All parameters must satisfy their corresponding parameter constraints.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student on the Student List Panel to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower in/2020` Edits the name of the 2nd student to be `Betsy Crower` and changes the intake to `2020`.
+
 
 ### Viewing help : `help`
 
@@ -316,53 +350,6 @@ Format: `help`
 
 * The format does not require any additional parameters; entering parameters will be disregarded.
 * The help message image provided offers clear instructions for users seeking assistance.
-
-
-### Adding a student: `add`
-
-Adds a Student to the EduLink NUS.
-
-Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS in/INTAKE m/MAJOR [t/TAG]…​`
-
-<box type="tip" seamless>
-
-**Tip:** A student can have any number of tags (including 0)
-</box>
-
-* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g. A0265901E.
-* The `PHONE_NUMBER` must consist of only numeric characters and can be at least 3 digits and at most 15 digits longer. 
-* The `INTAKE` must be a 4 digit positive number and can't be after the current year i.e. while the current year is `2024` you can't assign an intake of `2027`.
-* The `TAG` must be less than 16 characters long with no space in between.
-* The `ADDRESS` must be less than 101 characters long with only following characters allowed :-
-    * Lowercase or uppercase letters (a-z, A-Z)
-    * Digits (0-9)
-    * Whitespace
-    * Comma (,)
-    * Hash/pound sign (#)
-    * Hyphen (-)
-
-
-Examples:
-* `add n/John Doe id/A2265901E p/1234567890 e/john.doe@example.com a/311, Clementi Ave 2, #02-25 in/2023 m/Computer Science t/Honors`
-
-### Editing a student : `edit`
-
-Edits an existing student in the address book, using the Student List Panel index. 
-
-![Index Location](images/Index.png)
-
-Format: `edit INDEX [id/STUDENT_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE]​`
-
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the Student List Panel. The index **must be a positive integer** 1, 2, 3, …​
-* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g. A0265901E.
-* The `PHONE_NUMBER` must consist of only numeric characters and be at least longer than 3 digits.
-* The `INTAKE` must be a 4 digit positive number and cant be after the current year.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower in/2020` Edits the name of the 2nd student to be `Betsy Crower` and changes the intake to `2020`.
 
 ### Deleting a student : `delete`
 
