@@ -139,7 +139,6 @@ public class StringUtil {
      *
      * @param s the string to be checked
      * @return true if {@code s} represents a valid double value, false otherwise
-     * @throws NullPointerException if {@code s} is null
      */
     public static boolean isDouble(String s) {
         requireNonNull(s);
@@ -149,5 +148,22 @@ public class StringUtil {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if {@code s} represents an invalid score with more than 2 decimal places.
+     * e.g. 100.000000000000000000001
+     * Will return false for valid inputs,
+     * e.g., "100.", "80.5", "89.67"
+     *
+     * @param s the string to be checked
+     * @return false if {@code s} represents a valid double value, true otherwise
+     */
+    public static boolean hasMoreThanTwoDecimalPlaces(String s) {
+        int dotIndex = s.indexOf('.');
+        if (dotIndex != -1 && s.length() - dotIndex > 3) {
+            return true;
+        }
+        return false;
     }
 }
