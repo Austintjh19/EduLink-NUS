@@ -6,16 +6,18 @@
 
 # EduLink-NUS User Guide
 
-##
+#
 
 #### Welcome to the EduLink-NUS User Guide!
 
-Welcome to the **EduLink NUS User Guide** – your essential companion to unlocking the full potential of academic contacts/data and management at the National University of Singapore (NUS). We extend a warm welcome to you, and we're thrilled that you've chosen EduLink-NUS to enhance and improve your academic interactions.
+Welcome to the **EduLink NUS User Guide** – your essential companion in unlocking the full potential of academic contacts and data management at the National University of Singapore (NUS).
 
-In this comprehensive guide, we'll take you on a journey to unlock the full potential of EduLink-NUS. It is your essential companion, crafted to empower you in mastering every aspect of the EduLink-NUS application.
+In this comprehensive guide, we'll take you on a journey to harness the power of EduLink-NUS. But first, we would  like to extend a warm welcome and express our gratitude to you for choosing EduLink-NUS to enhance and improve your academic interactions.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
+
+#
 
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -46,9 +48,11 @@ In this comprehensive guide, we'll take you on a journey to unlock the full pote
 --------------------------------------------------------------------------------------------------------------------
 ## Introduction
 
+#
+
 #### What is EduLink-NUS
 
-EduLink-NUS is a **desktop application tailored specifically for academic instructors** at the National University of Singapore (NUS). It serves as a powerful tool for **managing academic contacts/data** and streamlining interactions with past and current students. With its intuitive Command Line Interface (CLI) and graphical user interface (GUI), EduLink-NUS offers a seamless user experience, empowering instructors to effortlessly navigate through its features.
+EduLink-NUS serves as a **desktop application tailored specifically for academic instructors** at the National University of Singapore (NUS). It is a powerful tool that can assists in **managing academic contacts and data**. With its purposefully designed Command Line Interface (CLI) and Graphical User Interface (GUI), users have no trouble in integrating it into workflows for efficient academic administration.
 
 Overview of Main Features: 
 - Contact Management: Easily add, edit, and delete student entries, ensuring up-to-date information of students is always available.
@@ -56,56 +60,65 @@ Overview of Main Features:
 - Tagging System: Categorize students with custom tags for streamlined organization and quick retrieval of specific student groups.
 - Export and Import Functionality: Seamlessly export student data to CSV files for external use and import data from JSON files for easier management of diverse organizational data. 
 - Undo Functionality: Safeguard against accidental changes with the ability to undo the last action.
-- User-friendly Interface: Intuitive GUI layout.
 
 #### User Proficiency and Expectations
 
 - Level of Relatedness: Users of EduLink-NUS are assumed to have a direct relationship with NUS and are actively engaged in academic activities, including teaching, student mentoring, and administrative tasks related to student management.
-- Comprehension: Users of EduLink-NUS are assumed to have a strong comprehension of academic terminology and procedures used within NUS. They are familiar with concepts such as the student IDs and module grading system. 
-- Prior Knowledge: Users of EduLink-NUS re assumed to possess prior knowledge of computer applications and basic technical skills necessary to navigate software interfaces
-- Desire for Efficiency: Users of EduLink-NUS prioritize efficiency and productivity in their academic tasks.
+
+
+- Comprehension: Users of EduLink-NUS are assumed to have a strong comprehension of academic terminology and procedures used within NUS. They are familiar with concepts such as student IDs and the module grading system. 
+
+
+- Prior Knowledge: Users of EduLink-NUS are assumed to possess prior knowledge of computer applications and basic technical skills necessary to navigate software interfaces.
+
+
+- Desire for Efficiency: Users of EduLink-NUS prioritize efficiency and productivity in their academic administration tasks.
 
 #### Why This Guide Matters
 
-This guide is more than just a manual, it is your gateway to maximizing your experience with EduLink-NUS. By following the instructions and insights provided here, you'll discover shortcuts, tips, and strategies to streamline your workflow and enhance productivity. Whether you're a seasoned user or just getting started, this guide will equip you with the knowledge and skills to leverage EduLink-NUS effectively.
+This guide is more than just a manual, it is a gateway to maximize your experience with EduLink-NUS. By following the instructions and insights provided here, you'll discover shortcuts, tips, and strategies to streamline your workflow and enhance productivity. Whether you're a seasoned user or just getting started, this guide will equip you with the knowledge and skills to leverage EduLink-NUS effectively.
 
 We're excited to embark on this journey with you and help you make the most out of your academic engagement at NUS with EduLink-NUS. So let's dive in and unleash the full potential of EduLink-NUS together!
 
-
 --------------------------------------------------------------------------------------------------------------------
 ## How to use this User Guide
+
+#
+
 This section is designed to help users effectively navigate the User Guide for EduLink-NUS. Below, you'll find information on how to interpret icons, formatting, and instructions provided throughout the document.
 
 #### Navigating the Document:
 - **Table of Contents:** Located at the beginning of the document, the Table of Contents provides an overview of the topics covered. Users can click on any section title to jump directly to that part of the guide.
+
+
 - **Section Organization:** Each section is organized with headings and subheadings, breaking down information into manageable chunks. Users can easily locate specific topics or commands by scanning through the contents.
 
 #### Sections: 
 
-Below is a detailed overview of the main sections within this User Guide and what you can expect to find ther. 
+Below is a detailed overview of the main sections within this User Guide and what can be expected from each section. 
 
-- [Installation](#installation): If you're new to EduLink-NUS or require guidance on installing the application, navigate to this section for step-by-step instructions.
-
-
-- [Getting Started](#getting-started): Designed for beginners, this section provides an introductory overview of EduLink-NUS, covering essential information such as the [Layout](#layout) and [Command format](#command-format).
+- [Installation](): If you're new to EduLink-NUS or require guidance on installing the application, navigate to this section for step-by-step instructions.
 
 
-- Commands: Section of the User Guide that delves into the intricacies of EduLink-NUS commands, it is here where you'll find detailed explanations and practical examples for effective command usage.
+- [Getting Started](): Designed for beginners, this section provides an introductory overview of EduLink-NUS, covering essential information such as the [Layout]() and [Command format]().
 
 
-- Command Summary: For experienced users seeking a quick reference, this section offers a concise summary of all supported commands.
+- [Commands](): Section of the User Guide that delves into the intricacies of EduLink-NUS commands, it is here where you'll find detailed explanations and practical examples for effective command usage.
 
 
-- FAQ: Should you encounter any queries or uncertainties while using the application, refer to this section for answers to frequently asked questions.
+- [Command Summary](): For experienced users seeking a quick reference, this section offers a concise summary of all supported commands.
+
+
+- [FAQ](): Should you encounter any queries or uncertainties while using the application, refer to this section for answers to frequently asked questions.
 
 
 <box type="info" seamless>
-For **first time** users of the applicaiton, it is  **highly recommend** for you to read through the [Getting Started](#getting-started) section before utilizing the application.
+For first-time users of the application, it is highly recommended for you to read through the Getting Started section before utilizing the application.
 </box>
 
 #### Icons: 
 
-As you navigate through this user guide, you'll encounter colored boxes containing valuable insights. Each box is adorned with an icon at the top, indicating the type of information it holds.
+As you navigate through this user guide, you'll encounter colored boxes containing valuable insights. Each box is adorned with an icon, indicating the type of information it holds.
 
 | Icon                                   | Meaning                                                      |
 |----------------------------------------|--------------------------------------------------------------|
@@ -116,17 +129,20 @@ As you navigate through this user guide, you'll encounter colored boxes containi
 --------------------------------------------------------------------------------------------------------------------
 ## Getting Started
 
-#### Installing EduLink - NUS: 
+#
 
-1. Ensure you have Java `11` installed in your Computer. EduLink-NUS is most optimized for this version.
+#### Installation
+
+1. Ensure you have Java `11` installed in your Computer. EduLink-NUS is optimized for this version, and while it may function on other versions, we cannot guarantee smooth operation outside of Java 11.
 
 1. Download the latest `EduLink-NUS.jar` from [here](https://github.com/AY2324S2-CS2103T-T16-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your EduLink NUS.
 
-1. Open a command terminal, `cd` into the folder you have placed the jar file in, and enter the `java -jar EduLink-NUS.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you have placed the jar file in, and enter the `java -jar EduLink-NUS.jar` command to run the application.<br><br>
    A GUI similar to the below should appear in a few seconds. Note that the application will contain some sample data.<br><br>
    ![Ui](images/Ui.png) <br><br>
+   <box type="info" seamless> To remove the sample data quickly, you can use the [`clear`]() command.</box> <br><br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -139,25 +155,36 @@ As you navigate through this user guide, you'll encounter colored boxes containi
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of all commands supported by EduLink-NUS. Alternatively, refer to the [Command Summary](#Command Summary) for a quick summary. 
+1. Refer to the [Features]() below for details of all commands supported by EduLink-NUS. Alternatively, refer to the [Command Summary]() for a quick summary. 
 
 #### Graphical User Interface Layout:
 
-EduLink NUS's user interface can be split into 6 main components, as shown below:
+**User Interface Overview:**
 
-![Ui](images/UiLayout.png)
+EduLink NUS's user interface can be split into 7 main components, as shown below:
+
+![Ui](images/UiLayout1.png)
 
 The designated names assigned to each component of the User Interface will be consistently utilized throughout the User Guide to mitigate any potential confusion.
 Please refer below for a comprehensive description of each component.
 
-
-
+* Menu Bar:  Located at the top of the interface, the menu bar provides access to various functions and features within EduLink NUS.
 * Command Box: This is the designated space where users can input commands to be executed by EduLink NUS.
 * Result Box: Located prominently on the interface, this box showcases the outcomes of executed commands.
-* Recent Command Box: This section conveniently presents a history of recently executed commands for quick reference.
+* Recent Command Box: This section conveniently presents a history of recently executed commands for quick reference. The ordering in the Recent Command Box goes from left to right, with the most recent executed command appearing on the left.
 * Student List Panel: This panel serves as a visual representation of the roster of students stored within the EduLink NUS system.
   * Student Panel Card: Within the Student List Panel, each student is represented by a concise overview encapsulated in a card format.
 * Student Card: For more detailed information about an individual student stored in the system, users can refer to the Student Card, providing comprehensive insights.
+
+**Additional UI Components:**
+
+![Ui](images/UiLayout2.png)
+
+* Recent Command: Highlighted in gray, this component stores a previously successfully executed command.
+* Index: This component indicates the position of each student in the Student List Panel.
+* Student Tag: Highlighted in purple, the Student Tag appears in both the Student Card and Student Panel Card. Each student can have multiple tags associated with them.
+* Student Grade: Highlighted in pink, the Student Grade appears in both the Student Card and Student Panel Card, providing information about the academic performance of each student. Like tags, students can have multiple grades associated with them.
+* Selected Student Highlight: Highlighted with a purple outline, this component indicates the selected Student Panel Card for viewing in the Student Card.
 
 --------------------------------------------------------------------------------------------------------------------
 ## EduLink-NUS Features
