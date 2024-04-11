@@ -177,7 +177,7 @@ Format: `help`
 
 Adds a Student to the EduLink NUS.
 
-Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/address in/INTAKE m/MAJOR [t/TAG]…​`
+Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS in/INTAKE m/MAJOR [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -188,6 +188,13 @@ Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/address in/INTAKE m/M
 * The `PHONE_NUMBER` must consist of only numeric characters and can be at least 3 digits and at most 15 digits longer. 
 * The `INTAKE` must be a 4 digit positive number and can't be after the current year i.e. while the current year is `2024` you can't assign an intake of `2027`.
 * The `TAG` must be less than 16 characters long with no space in between.
+* The `ADDRESS` must be less than 101 characters long with only following characters allowed :-
+    * Lowercase or uppercase letters (a-z, A-Z)
+    * Digits (0-9)
+    * Whitespace characters (space, tab, newline, etc.)
+    * Comma (,)
+    * Hash/pound sign (#)
+    * Hyphen (-)
 
 
 Examples:
