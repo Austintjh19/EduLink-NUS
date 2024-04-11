@@ -59,7 +59,7 @@ public interface Logic {
     /**
      * returns the recentCommandIndex
      */
-    int getRecentCommandsCounter();
+    int getRecentCommandsCounter(int limit);
 
-    int getDetailsIndex();
+    int getDetailsIndex(boolean isIncrement, int limit);
 }

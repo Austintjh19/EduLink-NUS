@@ -77,4 +77,19 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns the number of argument values for all the given prefixes.
+     *
+     * @param prefixes the prefixes to search through
+     * @return number of argument values for all the given prefixes
+     */
+    public int getLengthForPrefixes(Prefix... prefixes) {
+        int numberOfArguments = 0;
+        for (Prefix prefix : prefixes) {
+            numberOfArguments += getAllValues(prefix).size();
+        }
+        return numberOfArguments;
+    }
+
 }

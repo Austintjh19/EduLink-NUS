@@ -16,7 +16,7 @@ In this comprehensive guide, we'll take you on a journey to unlock the full pote
 ## Table of Contents
 
 - [Quick Start](#quick-start)
-- [Features](#features)
+- [Features](#edulink-nus-features)
     - [Viewing help: `help`](#viewing-help--help)
     - [Adding a student: `add`](#adding-a-student-add)
     - [Editing a student: `edit`](#editing-a-student--edit)
@@ -216,7 +216,7 @@ Format: `help`
 
 Adds a Student to the EduLink NUS.
 
-Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/address in/INTAKE m/MAJOR [t/TAG]…​`
+Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS in/INTAKE m/MAJOR [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -224,9 +224,16 @@ Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/address in/INTAKE m/M
 </box>
 
 * The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g. A0265901E.
-* The `PHONE_NUMBER` must consist of only numeric characters and be at least longer than 3 digits. 
-* The `INTAKE` must be a 4 digit positive number and cant be after the current year.
-* The `TAG` must be less than 15 characters long with no space in between.
+* The `PHONE_NUMBER` must consist of only numeric characters and can be at least 3 digits and at most 15 digits longer. 
+* The `INTAKE` must be a 4 digit positive number and can't be after the current year i.e. while the current year is `2024` you can't assign an intake of `2027`.
+* The `TAG` must be less than 16 characters long with no space in between.
+* The `ADDRESS` must be less than 101 characters long with only following characters allowed :-
+    * Lowercase or uppercase letters (a-z, A-Z)
+    * Digits (0-9)
+    * Whitespace characters (space, tab, newline, etc.)
+    * Comma (,)
+    * Hash/pound sign (#)
+    * Hyphen (-)
 
 
 Examples:
@@ -238,13 +245,12 @@ Edits an existing student in the address book, using the Student List Panel inde
 
 ![Index Location](images/Index.png)
 
-Format: `edit INDEX [id/STUDENT_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE]…​`
+Format: `edit INDEX [id/STUDENT_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE]​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the Student List Panel. The index **must be a positive integer** 1, 2, 3, …​
 * The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g. A0265901E.
 * The `PHONE_NUMBER` must consist of only numeric characters and be at least longer than 3 digits.
 * The `INTAKE` must be a 4 digit positive number and cant be after the current year.
-* The `TAG` must be less than 15 characters with no space in between.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -451,8 +457,9 @@ Imports data from a valid JSON file into the Application
 
 Format: `import f/[FILENAME]`
 
-* Imports Students Data from JSON file named `FILENAME.json` in the **data** directory i.e `[JAR_FILE_LOCATION]/data/FILENAME.json`
+* Imports Students Data from JSON file named `FILENAME.json` in the **data** directory i.e `[JAR_FILE_LOCATION]/data/FILENAME.json`.
 * `FILENAME` must be alphanumeric and it can include ` _ (Underscore)` and `- (Hyphen)`.
+* If you try to import an invalid JSON file, it will display an error message.
 
 Examples:
 * `import f/Mystudents`
@@ -465,9 +472,9 @@ Undoes the last command executed and reverts the application to the previous sta
 
 Format: `undo`
 
-* The `undo` command revert the changes done by last data changing command i.e command that changes (add, edit or delete) information for any Student in the Application.
+* The `undo` command revert the changes done by last **Data changing command** i.e. command that changes (adds, edits or deletes) information for any Student in the Application.
 * The application stores up to 20 previous states, allowing you to undo up to the last 20 commands.
-* If there are no commands to undo, an error message will be displayed saying No History available.
+* If there are no commands to undo or else you already executed `undo` for 20 commands , an error message will be displayed.
 
 Examples:
 * `undo`
@@ -519,7 +526,7 @@ Term    | Definition and or Explanation
 --------|----------------------------------------------------------------------
 **CSV** | **Comma-Seperated Values** , a file format generally used to import data in Spreadsheets and Do analysis
 **JSON** | **JavaScript Object Notation**, a standard file format for data interchange
-**Data Changing Command** | Commands in the Application that modifies the Students Data e.g Delete, Edit, Tag
+**Data Changing Command** | Commands in the Application that modifies the Students Data e.g Delete, Edit, Tag, etc
 **NUS** | National University of Singapore , A University Located in Central Singapore
 **Student ID** | A particular format of ID followed in NUS, Starting with a Alphabet followed by 7 digits and ending with an Alphabet e.g A0252195L
 **GUI** | Graphical User Interface , all the part of the application which you can interact with your mouse
@@ -530,10 +537,10 @@ Term    | Definition and or Explanation
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add id/ID n/NAME p/PHONE_NUMBER e/EMAIL  m/MAJOR in/INTAKE a/ADDRESS [t/Tag]…​` <br> e.g., `add id/A0265901E n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 m/Computer Science in/2020 t/Sincere`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` **OR** `delete id/STUDENT_ID` **OR** `delete all` <br> e.g., `delete 3`, `delete id/A026273X`, `delete all`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [id/ID] [m/MAJOR] [in/INTAKE] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` ,`edit 1 id/A0267901E`
 **Find**   | `find n/NAME`  **OR**  `find id/STUDENT_ID` **OR** `find n/NAME id/STUDENT_ID` <br> e.g. `find n/John`, `find id/A123`, `find id/234 n/John D`
 **Filter** | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`
 **Add Tag/Tags** | `tag id/ID t/TAG t/TAG` <br> e.g, `tag id/A0257418E t/potentialTA t/Active`

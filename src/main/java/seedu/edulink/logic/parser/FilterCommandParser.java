@@ -5,7 +5,6 @@ import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulink.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.edulink.logic.commands.FilterCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
@@ -28,13 +27,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         requireNonNull(args);
 
         Set<Tag> tagList;
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
-        if (argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
+        if (!ParserUtil.isValidCommandFormat(argMultimap, args, PREFIX_TAG)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TAG) || !argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
@@ -48,13 +48,5 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         return new FilterCommand(new TagsContainQueryTagsPredicate(tagList));
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
