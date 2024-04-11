@@ -309,7 +309,7 @@ Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS in/INTAKE m/M
 * The `ADDRESS` must be less than 101 characters long with only following characters allowed :-
     * Lowercase or uppercase letters (a-z, A-Z)
     * Digits (0-9)
-    * Whitespace characters (space, tab, newline, etc.)
+    * Whitespace
     * Comma (,)
     * Hash/pound sign (#)
     * Hyphen (-)
