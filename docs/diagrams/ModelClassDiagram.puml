@@ -22,6 +22,11 @@ Class Phone
 Class Tag
 Class Intake
 Class Major
+Class Grade
+Class Score
+Class Module
+Class LetterGrades
+Class RecentCommands
 
 Class I #FFFFFF
 }
@@ -48,6 +53,11 @@ Student *--> Address
 Student *--> "*" Tag
 Student *--> Intake
 Student *--> Major
+Student *--> Grade
+Grade *--> Module
+Grade *--> Score
+Grade *--> LetterGrades
+
 
 Student -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
