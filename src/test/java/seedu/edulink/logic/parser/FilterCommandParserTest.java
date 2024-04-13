@@ -10,7 +10,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.edulink.logic.commands.FilterCommand;
-import seedu.edulink.model.student.TagsContainQueryTagsPredicate;
+import seedu.edulink.model.student.predicates.TagsContainQueryTagsPredicate;
 import seedu.edulink.model.tag.Tag;
 
 public class FilterCommandParserTest {

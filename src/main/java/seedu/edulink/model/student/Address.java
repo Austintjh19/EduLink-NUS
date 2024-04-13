@@ -3,6 +3,8 @@ package seedu.edulink.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.commons.util.AppUtil.checkArgument;
 
+import seedu.edulink.commons.util.UserInputUtil;
+
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
@@ -29,7 +31,7 @@ public class Address {
     public Address(String address) {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        value = address;
+        value = UserInputUtil.removeDuplicatedWhitespaces(address);
     }
 
     /**
