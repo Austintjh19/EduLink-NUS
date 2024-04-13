@@ -44,10 +44,10 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
         - [Deleting a tag from a student: `dtag`](#deleting-a-tag-from-a-student-dtag)
     - [Data Filtering Commands](#data-filtering-commands)
         - [Listing all students: `list`](#listing-all-students-list)
-        - [Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
         - [Search Students by Name or ID: `find`](#search-students-by-name-or-id-find)
         - [Filtering List of Students: `filter`](#filtering-list-of-students-filter)
     - [General Commands](#general-commands)
+        - [Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
         - [Accessing the Recent Commands](#accessing-the-recent-commands)
         - [Undo Changes: `undo`](#undo-changes-undo)
         - [Importing Students Data: `import`](#importing-students-data-import)
@@ -109,19 +109,19 @@ This section is designed to help users effectively navigate the User Guide for E
 
 Below is a detailed overview of the main sections within this User Guide and what can be expected from each section. 
 
-- [Installation](): If you're new to EduLink-NUS or require guidance on installing the application, navigate to this section for step-by-step instructions.
+- [Installation](#installation): If you're new to EduLink-NUS or require guidance on installing the application, navigate to this section for step-by-step instructions.
 
 
-- [Getting Started](): Designed for beginners, this section provides an introductory overview of EduLink-NUS, covering essential information such as the [Layout]() and [Command format]().
+- [Getting Started](#getting-started): Designed for beginners, this section provides an introductory overview of EduLink-NUS, covering essential information such as the [Layout](#graphical-user-interface-layout) and [Command format](#command-format).
 
 
-- [Commands](): Section of the User Guide that delves into the intricacies of EduLink-NUS commands, it is here where you'll find detailed explanations and practical examples for effective command usage.
+- [Commands](#commands): Section of the User Guide that delves into the intricacies of EduLink-NUS commands, it is here where you'll find detailed explanations and practical examples for effective command usage.
 
 
-- [Command Summary](): For experienced users seeking a quick reference, this section offers a concise summary of all supported commands.
+- [Command Summary](#command-summary): For experienced users seeking a quick reference, this section offers a concise summary of all supported commands.
 
 
-- [FAQ](): Should you encounter any queries or uncertainties while using the application, refer to this section for answers to frequently asked questions.
+- [FAQ](#faq): Should you encounter any queries or uncertainties while using the application, refer to this section for answers to frequently asked questions.
 
 
 <box type="info" seamless>
@@ -152,7 +152,7 @@ As you navigate through this user guide, you'll encounter colored boxes containi
 1. Open a command terminal, `cd` into the folder you have placed the jar file in, and enter the `java -jar EduLink-NUS.jar` command to run the application.<br><br>
    A GUI similar to the below should appear in a few seconds. Note that the application will contain some sample data.<br><br>
    ![Ui](images/Ui.png) <br><br>
-   <box type="info" seamless> To remove the sample data quickly, you can use the [`clear`]() command.</box> <br><br>
+   <box type="info" seamless> To remove the sample data quickly, you can use the [`clear`](#clearing-all-entries-clear) command.</box> <br><br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -165,7 +165,7 @@ As you navigate through this user guide, you'll encounter colored boxes containi
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features]() below for details of all commands supported by EduLink-NUS. Alternatively, refer to the [Command Summary]() for a quick summary. 
+1. Refer to the [Command Section](#commands) below for details of all commands supported by EduLink-NUS. Alternatively, refer to the [Command Summary](#command-summary) for a quick summary. 
 
 ### Graphical User Interface Layout:
 
@@ -243,6 +243,10 @@ Some parameters to not come along with their own Parameter Prefix. E.g. KEYWORD 
 | `FILENAME`     | `f/`             | Specifies the file to import or export from. <br/><br/> - Filenames can only contain alphanumeric characters and the special characters: `-` and `_`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `KEYWORD`      | Not Applicable   | Specifies the keywords to search for when finding students.  <br/><br/> - Can contain alphanumeric characters and any special characters, except the special character: `/`. No whitespaces allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `INDEX`        | Not Applicable   | Refers to the index number shown in the Student List Panel.  <br/><br/> -  Must be a positive whole number, e.g. 1, 2, 3. And fall withing the range of 1 to 2,147,483,647.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 
+
+<box type="info" seamless> 
+System date can be modified as to allow for `INTAKE` to be of any year after the current year. 
+</box>
 
 #### Command Format:
 
@@ -327,6 +331,10 @@ Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS in/INTAKE m/M
 
 <box type="tip" seamless>
 **Tip:** A student can have any number of tags (including 0)
+</box>
+
+<box type="warning" seamless> 
+System date can be modified as to allow for `INTAKE` to be of any year after the current year.
 </box>
 
 Command Details & Constraints:
@@ -507,18 +515,6 @@ Command Details & Constraints:
 * Displays the list of all students stored within EduLink NUS on the Student List Panel.
 * No parameters are required for this command, and any parameter added will be ignored.
 
-#### Viewing a Student on the Student Card:
-
-> View a single student's details in a formatted and organized manner.
-
-Method: Left-click on a specific Student Panel Card within the Student List Panel of the EduLink NUS User Interface.
-
-Command Details & Constraints:
-* The Student Card will display the currently selected student from the Student List Panel.
-* The Student Card will display the details of the first student on the Student List Panel, when a specific student is not selected from the Student List Panel.
-* The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the data within Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter`, `edit`, `tag` ...
-* If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
-
 #### Search Students by Name or ID: `find`
 
 > This command facilitates the search for students in the EduLink-NUS application based on their **Names**, **Student IDs**, or **Both**.
@@ -577,19 +573,34 @@ Examples:
 
 ### General Commands:
 
+#### Viewing a Student on the Student Card:
+
+> View a single student's details in a formatted and organized manner.
+
+**Method 1 -  Using GUI**: Left-click on a specific Student Panel Card within the Student List Panel of the EduLink-NUS User Interface.
+
+**Method 2 -  Using CLI**: Navigate using the up and down arrow keys to switch between Student Panel Cards on the Student List Panel. 
+
+Command Details & Constraints:
+* The Student Card will always display the currently selected Student Panel Card from the Student List Panel. The currently selected Student Panel Card is highlighted in purple. 
+* The Student Card will display the details of the first student on the Student List Panel, when a specific student is not selected from the Student List Panel.
+* The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the data within Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter`, `edit`, `tag` ...
+* If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
+
+
 #### Accessing the Recent Commands:
 
 > Access the 5 most recent successfully executed commands.
 
+
+**Method 1 -  Using GUI**: Left-Click with Mouse on the desired Recent Command (any one of the command marked with Red Rectangle).
+
+**Method 2 -  Using CLI**: Press `TAB` on your Keyboard to access the RecentCommands in the order shown in the Image above starting from left to right i.e (Most RecentCommand First)
+
 ![Ui](images/RecentCommands.png)
 
 Command Details & Constraints:
-* **Method 1 -  Using GUI**:
-  * Left-Click with Mouse on the desired Recent Command (any one of the command marked with Red Rectangle).
-  * The command will be displayed in the command box.
-* **Method 2 -  Using CLI**:
-  * Press `TAB` on your Keyboard to access the RecentCommands in the order shown in the Image above starting from left to right i.e (Most RecentCommand First)
-  * The command will be displayed in the command box.
+* The selected command will be copied into the command box for use.
 
 #### Undo Changes: `undo`
 
