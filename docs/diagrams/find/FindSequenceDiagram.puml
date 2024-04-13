@@ -27,7 +27,7 @@ activate findCommandParser
 addressBookParser -> findCommandParser : parse("n/John D \n id/A123")
 
 create findCommand
-findCommandParser -> findCommand
+findCommandParser -> findCommand : FindCommand(Predicate)
 activate findCommand
 returnCommand
 
@@ -51,4 +51,5 @@ return commandResult
 
 return commandResult
 
+return commandResult
 @enduml
