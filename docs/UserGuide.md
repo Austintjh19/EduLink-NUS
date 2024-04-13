@@ -44,7 +44,7 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
         - [Deleting a tag from a student: `dtag`](#deleting-a-tag-from-a-student-dtag)
     - [Data Filtering Commands](#data-filtering-commands)
         - [Listing all students: `list`](#listing-all-students-list)
-        - [Search Students by Name or ID: `find`](#search-students-by-name-or-id-find)
+        - [Find Students by Name or ID: `find`](#find-students-by-name-or-id-find)
         - [Filtering List of Students: `filter`](#filtering-list-of-students-filter)
     - [General Commands](#general-commands)
         - [Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
@@ -330,7 +330,7 @@ This section provides comprehensive guidance on how to use each command, detaili
 Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS in/INTAKE m/MAJOR [t/TAG]…​`
 
 <box type="tip" seamless>
-**Tip:** A student can have any number of tags (including 0)
+<b>Tip:</b> A student can have any number of tags (including 0)
 </box>
 
 <box type="warning" seamless>
@@ -355,7 +355,7 @@ Examples:
 Format: `edit INDEX [id/STUDENT_ID] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/MAJOR] [in/INTAKE]​`
 
 <box type="info" seamless>
-**Info:** For the command to be valid. At least one Parameter Prefix and its corresponding parameter must be provided.
+<b>Info:</b> For the command to be valid. At least one Parameter Prefix and its corresponding parameter must be provided.
 </box>
 
 Command Details & Constraints:
@@ -399,7 +399,7 @@ Examples:
 Format: `grade id/STUDENT_ID mod/MODULE s/SCORE`
 
 <box type="info" seamless>
-**Info:** For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes.
+<b>Info:</b> For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes.
 </box>
 
 Command Details & Constraints:
@@ -420,7 +420,7 @@ Examples:
 Format: `dgrade id/STUDENT_ID mod/MODULE`
 
 <box type="info" seamless>
-**Info:** For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes.
+<b>Info:</b> For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes.
 </box>
 
 Command Details & Constraints:
@@ -440,7 +440,7 @@ Examples:
 Format: `tag id/STUDENT_ID t/TAG [t/TAG] …​`
 
 <box type="info" seamless>
-**Info:** For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes.
+<b>Info:</b> For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes.
 </box>
 
 <box type="tip" seamless>
@@ -465,7 +465,7 @@ Examples:
 Format: `etag id/STUDENT_ID t/EXISTING_TAG t/RESULTING_TAG`
 
 <box type="info" seamless>
-**Info:** For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes.
+<b>Info:</b> For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes.
 </box>
 
 Command Details & Constraints:
@@ -487,7 +487,7 @@ Examples:
 Format: `dtag id/STUDENT_ID t/TAG [t/TAG] …​`
 
 <box type="info" seamless>
-**Info:** For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes.
+<b>Info:</b> For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes.
 </box>
 
 Command Details & Constraints:
@@ -515,7 +515,7 @@ Command Details & Constraints:
 * Displays the list of all students stored within EduLink NUS on the Student List Panel.
 * No parameters are required for this command, and any parameter added will be ignored.
 
-#### Search Students by Name or ID: `find`
+#### Find Students by Name or ID: `find`
 
 > This command facilitates the search for students in the EduLink-NUS application based on their **Names**, **Student IDs**, or **Both**.
 
@@ -690,7 +690,7 @@ The data in the EduLink-NUS application are saved in the hard disk automatically
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
-**Caution:**
+<b>Caution:</b>
 If your changes to the data file makes its format invalid, the EduLink-NUS application will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
