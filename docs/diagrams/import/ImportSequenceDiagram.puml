@@ -31,12 +31,10 @@ create ImportCommand
 ImportCommandParser -> ImportCommand
 activate ImportCommand
 returnCommand
-
 return Command
 
-
 return Command
-
+destroy ImportCommandParser
 logicManager -> ImportCommand : execute(m)
 activate ImportCommand
 

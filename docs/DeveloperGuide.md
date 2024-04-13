@@ -187,6 +187,11 @@ To illustrate how all these classes interact to form the find feature refer to t
 
 <puml src="diagrams/find/FindSequenceDiagram.puml" alt="UML Sequence Diagram - Find"/>
 
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
 ### Export feature
 
 This export feature enables the user to effectively export the students data into nicely formatted CSV file, which users can use to port the data to other Applications such as Excel, Spreadsheet
@@ -202,6 +207,11 @@ Below is a representative class diagram of the feature. The implementation of th
 
 <puml src="diagrams/export/ExportSequenceDiagram.puml" alt="UML Sequence Diagram - Export"/>
 
+<box type="info" seamless>
+
+**Note:** The lifeline for `ExportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
 ### Import feature
 
 This import feature enables the user to import the students data into the application from a valid `JSON` file,
@@ -216,6 +226,11 @@ Below is a representative class diagram of the feature. The implementation of th
 #### Implementation - Sequence Diagrams:
 
 <puml src="diagrams/import/ImportSequenceDiagram.puml" alt="UML Sequence Diagram - Import"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ImportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 
 ### \[Proposed\] Undo/redo feature
