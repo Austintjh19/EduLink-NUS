@@ -1,0 +1,61 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ": LogicManager" as logicManager LOGIC_COLOR
+participant ": AddressBookParser" as addressBookParser LOGIC_COLOR
+participant ": ImportCommandParser" as ImportCommandParser LOGIC_COLOR
+participant ": ImportCommand" as ImportCommand LOGIC_COLOR
+participant ": CommandResult" as commandResult LOGIC_COLOR
+end box
+
+box Storage MODEL_COLOR_T1
+participant ": Storage" as model MODEL_COLOR
+participant ": JsonAddressBookStorage" as JsonAddressBookStorage MODEL_COLOR
+end box
+
+[-> logicManager : execute("import f/text")
+activate logicManager
+
+logicManager -> addressBookParser : parseCommand("import f/text")
+activate addressBookParser
+
+create ImportCommandParser
+addressBookParser -> ImportCommandParser
+activate ImportCommandParser
+
+addressBookParser -> ImportCommandParser : parse("f/test")
+
+create ImportCommand
+ImportCommandParser -> ImportCommand
+activate ImportCommand
+returnCommand
+return Command
+
+return Command
+destroy ImportCommandParser
+logicManager -> ImportCommand : execute(m)
+activate ImportCommand
+
+|||
+create JsonAddressBookStorage
+ImportCommand -> JsonAddressBookStorage : create
+activate JsonAddressBookStorage
+return
+ImportCommand -> JsonAddressBookStorage : readAddressBook
+activate JsonAddressBookStorage
+return
+
+ImportCommand -> model : setAddressBookFilePath
+activate model
+return
+
+create commandResult
+ImportCommand -> commandResult
+activate commandResult
+return commandResult
+
+return commandResult
+
+@enduml
