@@ -44,6 +44,10 @@ public class Grade {
         return this.grade;
     }
 
+    public String getModuleScore() {
+        return module.toString() + " - " + score.toString();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

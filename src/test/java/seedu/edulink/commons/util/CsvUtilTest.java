@@ -32,7 +32,7 @@ public class CsvUtilTest {
         List<String> lines = Files.readAllLines(filePath);
         assertEquals(3, lines.size()); // 1 header line + 2 students
 
-        String expectedHeader = "id,name,phone,email,address,major,intake,tags";
+        String expectedHeader = "id,name,phone,email,address,major,intake,tags,grades";
         assertEquals(expectedHeader, lines.get(0));
 
         String expectedLine1 = "A0251893P,Alice Pauline,94351253,"
@@ -54,7 +54,7 @@ public class CsvUtilTest {
         List<String> lines = Files.readAllLines(filePath);
         assertEquals(1, lines.size()); // Only header line
 
-        String expectedHeader = "id,name,phone,email,address,major,intake,tags";
+        String expectedHeader = "id,name,phone,email,address,major,intake,tags,grades";
         assertEquals(expectedHeader, lines.get(0));
         Files.delete(filePath);
     }
