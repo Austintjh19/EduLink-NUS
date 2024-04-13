@@ -15,6 +15,52 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 
+1. [Introduction](#introduction)
+  - [What is EduLink-NUS](#what-is-edulink-nus)
+  - [User Proficiency and Expectations](#user-proficiency-and-expectations)
+  - [Why This Guide Matters](#why-this-guide-matters)
+2. [How to use this User Guide](#how-to-use-this-user-guide)
+  - [Navigating the Document](#navigating-the-document)
+  - [Sections](#sections)
+  - [Icons](#icons)
+3. [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Graphical User Interface Layout](#graphical-user-interface-layout)
+    - [User Interface Overview](#user-interface-overview)
+    - [Additional UI Components](#additional-ui-components)
+  - [How to use EduLink-NUS commands](#how-to-use-edulink-nus-commands)
+    - [Parameter Prefixes](#parameter-prefixes)
+    - [Parameters](#parameters)
+    - [Command Format](#command-format)
+4. [Commands](#commands)
+    - [Data Modification Commands](#data-modification-commands)
+        - [Adding a student: `add`](#adding-a-student-add)
+        - [Editing a student: `edit`](#editing-a-student-edit)
+        - [Deleting a student: `delete`](#deleting-a-student-delete)
+        - [Adding or Editing a Module Score to a Student: `grade`](#adding-or-editing-a-module-score-to-a-student-grade)
+        - [Deleting a Module Score for a Student: `dgrade`](#deleting-a-module-score-for-a-student-dgrade)
+        - [Tagging a Student: `tag`](#tagging-a-student-tag)
+        - [Editing tags for a Student: `etag`](#editing-tags-for-a-student-etag)
+        - [Deleting a tag from a student: `dtag`](#deleting-a-tag-from-a-student-dtag)
+    - [Data Filtering Commands](#data-filtering-commands)
+        - [Listing all students: `list`](#listing-all-students-list)
+        - [Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
+        - [Search Students by Name or ID: `find`](#search-students-by-name-or-id-find)
+        - [Filtering List of Students: `filter`](#filtering-list-of-students-filter)
+    - [General Commands](#general-commands)
+        - [Accessing the Recent Commands](#accessing-the-recent-commands)
+        - [Undo Changes: `undo`](#undo-changes-undo)
+        - [Importing Students Data: `import`](#importing-students-data-import)
+        - [Exporting Students Data: `export`](#exporting-students-data-export)
+        - [Clearing all entries: `clear`](#clearing-all-entries-clear)
+        - [Exiting the program: `exit`](#exiting-the-program-exit)
+        - [Viewing help: `help`](#viewing-help-help)
+    - [Saving the Data](#saving-the-data)
+    - [Editing the Data File](#editing-the-data-file)
+5. [FAQ](#faq)
+6. [Known issues](#known-issues)
+7. [Glossary](#glossary)
+8. [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 ## Introduction
 
@@ -59,7 +105,7 @@ This section is designed to help users effectively navigate the User Guide for E
 
 - **Section Organization:** Each section is organized with headings and subheadings, breaking down information into manageable chunks. Users can easily locate specific topics or commands by scanning through the contents.
 
-### Sections: 
+### Sections:
 
 Below is a detailed overview of the main sections within this User Guide and what can be expected from each section. 
 
@@ -82,7 +128,7 @@ Below is a detailed overview of the main sections within this User Guide and wha
 For first-time users of the application, it is highly recommended for you to read through the Getting Started section before utilizing the application.
 </box>
 
-### Icons: 
+### Icons:
 
 As you navigate through this user guide, you'll encounter colored boxes containing valuable insights. Each box is adorned with an icon, indicating the type of information it holds.
 
@@ -266,13 +312,12 @@ Moreover, notice that `[TAG]` is followed by an ellipsis (`…`). This signifies
 * Any parameter supplied by the user must not contain the **/** character as it serves a distinct purpose in the application.
 </box>
 
-
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
 
 This section provides comprehensive guidance on how to use each command, detailing their functionalities and usage scenarios. For specific constraints related to each parameter, please refer to the [Parameter](#parameters) section for detailed information
 
-### Data Modification Commands: 
+### Data Modification Commands:
 
 #### Adding a student: `add`
 
@@ -293,7 +338,7 @@ Examples:
 * `add n/John Doe id/A2265901E p/1234567890 e/john.doe@example.com a/311, Clementi Ave 2, #02-25 in/2023 m/Computer Science t/Honors`
 * `add n/John Doe id/A2265901E p/1234567890 e/john.doe@example.com a/311, Clementi Ave 2, #02-25 in/2023 m/Computer Science t/Honors t/TA`
 
-#### Editing a student : `edit`
+#### Editing a student: `edit`
 
 > Edits an existing student in the EduLink-NUS application.
 
@@ -316,7 +361,7 @@ Examples:
 *  `edit 2 n/Betsy Crower in/2020` Edits the name of the 2nd student to be `Betsy Crower` and changes the intake to `2020`.
 
 
-#### Deleting a student : `delete`
+#### Deleting a student: `delete`
 
 > Deletes a specified or a group of students from the EduLink-NUS Application. 
 
@@ -452,7 +497,7 @@ Examples:
 
 ### Data Filtering Commands:
 
-#### Listing all students : `list`
+#### Listing all students: `list`
 
 > Shows a list of all Students in the EduLink-NUS application.
 
@@ -532,7 +577,7 @@ Examples:
 
 ### General Commands:
 
-#### Accessing the Recent Commands in CommandBox:
+#### Accessing the Recent Commands:
 
 > Access the 5 most recent successfully executed commands.
 
@@ -560,7 +605,7 @@ Command Details & Constraints:
 Examples:
 * `undo`
 
-#### Importing Students Data : `import`
+#### Importing Students Data: `import`
 
 > Imports data from a valid JSON file into the EduLink-NUS application.
 
@@ -577,7 +622,7 @@ Examples:
 * `import f/NUS-CS`
 * `import f/_Stanford`
 
-#### Exporting Students Data : `export`
+#### Exporting Students Data: `export`
 
 > Exports the students from the EduLink-NUS application to a CSV file.
 
@@ -595,7 +640,7 @@ Examples:
 * `export f/Mystudents`
 * `export f/NUS-CS`
 
-#### Clearing all entries : `clear`
+#### Clearing all entries: `clear`
 
 > Clears all entries from the EduLink-NUS application.
 
@@ -604,7 +649,7 @@ Format: `clear`
 Command Details & Constraints:
 * The command does not require any additional parameters; entered parameters will be disregarded.
 
-#### Exiting the program : `exit`
+#### Exiting the program: `exit`
 
 > Exits the EduLink-NUS application.
 
@@ -613,7 +658,7 @@ Format: `exit`
 Command Details & Constraints:
 * The command does not require any additional parameters; entered parameters will be disregarded.
 
-#### Viewing help : `help`
+#### Viewing help: `help`
 
 > Shows a message explaining how to access the help page.
 
