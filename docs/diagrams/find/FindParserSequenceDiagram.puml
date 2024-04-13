@@ -1,0 +1,56 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ": FindCommandParser" as findCommandParser LOGIC_COLOR
+participant ": FindCommand" as findCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ": IdAndNameContainsQueryIdAndNamePredicate" as idAndNameContainsQueryIdAndNamePredicate MODEL_COLOR_T1
+participant ": IdContainsQueryIdPredicate" as idContainsQueryIdPredicate MODEL_COLOR_T1
+participant ": NameContainsQueryNamePredicate" as nameContainsQueryNamePredicate MODEL_COLOR_T1
+end box
+
+[-> findCommandParser : parse("n/John D \n id/A123")
+activate findCommandParser
+
+alt Both Name and ID Prefix present
+create idAndNameContainsQueryIdAndNamePredicate
+findCommandParser -> idAndNameContainsQueryIdAndNamePredicate
+activate idAndNameContainsQueryIdAndNamePredicate
+return IdAndNameContainsQueryIdAndNamePredicate
+create findCommand
+findCommandParser -> findCommand : FindCommand(IdAndNameContainsQueryIdAndNamePredicate)
+activate findCommand
+|||
+return
+
+else Only ID Prefix present
+create idContainsQueryIdPredicate
+findCommandParser -> idContainsQueryIdPredicate
+activate idContainsQueryIdPredicate
+return IdContainsQueryIdPredicate
+create findCommand
+findCommandParser -> findCommand : FindCommand(IdContainsQueryIdPredicate)
+activate findCommand
+|||
+return
+
+else Only Name Prefix present
+create nameContainsQueryNamePredicate
+findCommandParser -> nameContainsQueryNamePredicate
+activate nameContainsQueryNamePredicate
+return NameContainsQueryNamePredicate
+create findCommand
+findCommandParser -> findCommand : FindCommand(NameContainsQueryNamePredicate)
+activate findCommand
+|||
+return
+
+end
+
+return FindCommand(Predicate)
+
+@enduml
