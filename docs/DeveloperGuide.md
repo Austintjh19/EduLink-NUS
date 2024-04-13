@@ -170,7 +170,6 @@ Below is a representing class diagram of the feature.
 <puml src="diagrams/find/FindClassDiagram.puml" alt="UML Class Diagram - Find"/>
 
 
-
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -341,17 +340,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `EduLink NUS` and the **Actor** is the `National University of Singapore professors and teaching assistants`, unless specified otherwise)
 
-**Use Case: Add a Tag to a Student's Profile**
+#### Use Case: Add Tags to a Student's Profile
 
 **MSS**
 
-1.  User request to list students.
-2.  AddressBook shows a list of all students.
-3.  User get to know the name or ID of a specific student.
-4.  User requests to add tag a specific student by inputting that student's ID and tag information.
-5.  The tag is successfully added to that student.
+1.  User requests to list all students. (UC XX)
+2.  EduLink-NUS shows a list of all students. 
+3.  User gets to know the ID of a specific student.
+4.  User requests to add tags a specific student by inputting that student's ID and tags.
+5.  The tags are successfully added to that student.
 
     Use case ends.
+
 **Extensions**
 * 2a. The list is empty.
 
@@ -359,18 +359,131 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. Invalid student ID entered
 
-    * 4a1. AddressBook inform user that student does not exist
+    * 4a1. EduLink-NUS informs user the constraints for student ID
     * 4a2. User enters new student ID and tag information
       Steps 4a1 - 4a2 are repeated till a valid student ID is given
 
       Use case resumes at step 5
 
-* 4b. Duplicate tag found
+* 4b. Duplicate tag(s) found
 
-    * 4b1. AddressBook inform user that tag already exist for the student specified
+    * 4b1. EduLink-NUS informs user that one or more tags to add are already exist in the student's profile 
+  * 4a2. User enters new student ID and tag information
+    Steps 4a1 - 4a2 are repeated till no tags to add are in the student's profile.
 
-      Use case ends
+    Use case resumes at step 5
 
+* 4c. Invalid tag(s) found
+
+    * 4b1. EduLink-NUS inform the constraints for tag
+  
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+  
+      Use case resumes at step 5
+
+#### Use Case: Edit a Student's tag
+
+**MSS**
+1.  User requests to list all students.
+2.  EduLink-NUS shows a list of all students.
+3.  User gets to know the ID of a specific student.
+4.  User requests to edit a specific student's tag by inputting that student's ID tag to be edited and resulting tag
+5.  The student's tag is successfully edited to the resulting tag.
+
+    Use case ends.
+
+ **Extensions**
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 4a. Invalid student ID entered
+
+    * 4a1. EduLink-NUS informs user the constraints for student ID
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+      Use case resumes at step 5
+* 4b. Can't find specified student
+
+    * 4a1. EduLink-NUS informs user that studentID is not found
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+      Use case resumes at step 5
+* 4c. Duplicate tag found (the resulting tag is already there)
+
+    * 4b1. EduLink-NUS informs user that resulting tag already exist for the student specified
+
+  * 4a2. User enters new student ID and tag information
+
+    Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+    Use case resumes at step 5
+
+* 4d. Invalid tag found
+
+    * 4b1. EduLink-NUS informs user the constraints for tag.
+
+    * 4a2. User enters new student ID and tag information
+     
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5
+     
+* 4e. Can't find the tag to edit
+
+    * 4b1. EduLink-NUS informs user that system can't find the tag to be edited.
+
+    * 4a2. User enters new tag.
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5
+
+#### Use Case: Delete tags from a Student's Profile
+
+**MSS**
+
+1.  User request to list all students.
+2.  EduLink-NUS shows a list of all students.
+3.  User gets to know the name or ID of a specific student.
+4.  User requests to delete tags from a specific student by inputting that student's ID and tags.
+5.  The tags are successfully deleted from that student.
+
+    Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 4a. Invalid student ID entered
+
+    * 4a1. EduLink-NUS informs user the constraints for student ID
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+      Use case resumes at step 5
+
+* 4b. Invalid tag found
+
+    * 4b1. EduLink-NUS informs user the constraints for tag
+
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5 
+
+* 4c. Can't find the tag to delete 
+
+    * 4b1. EduLink-NUS informs user that system can't find the tag to delete.
+
+    * 4a2. User enters new tags.
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5
+  
 **Use Case: Edit the Information of a Student**
 
 **MSS**
