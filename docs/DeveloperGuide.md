@@ -485,6 +485,95 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `EduLink NUS` and the **Actor** is the `National University of Singapore professors and teaching assistants`, unless specified otherwise)
 
+#### Use Case: Export Students data
+
+**MSS**
+
+1. Users executes any valid Command
+2. EduLink-NUS shows a list of students.
+3. User request to export the students data in a `.csv` file by inputting a filename (e.g. NUS-CS) (Output filename)
+4. Students data successfully exported and new file create in `[JAR_FILE_LOCATION]/exports/NUS-CS.csv`
+
+    Use case ends.
+
+**Extensions**
+* 3a. provided filename doesn't follow the Format.
+    
+    * 3a1. EduLink-NUS informs user the constraints for filename
+    * 3a2. User enters new filename
+      Steps 3a1-3a2 are repeated till a valid filename is given
+
+      Use case resumes at Step 4
+
+* 3a. Application was not able to create the file (e.g. Permissions Conflict)
+    
+    * 3a1. EduLink-NUS informs user that , Export was not successfully executed.
+    * 3a2. Users verifies the Permissions , etc.
+       Steps 3a1-3a2 are repeated till the issue is resolved
+        
+        Use case resumes at Step 4
+
+#### Use Case: Import Students data
+
+**MSS**
+
+1. EduLink-NUS shows list of students , but user wants to import another Student Database.
+2. User request to import the students data from a  valid `JSON` file by inputting a filename (e.g. NUS-CS) (Output filename)
+3. Students data successfully imported from the file located at`[JAR_FILE_LOCATION]/data/NUS-CS.json`
+
+   Use case ends.
+
+**Extensions**
+* 3a. provided filename doesn't follow the Format.
+
+    * 3a1. EduLink-NUS informs user the constraints for filename
+    * 3a2. User enters new filename
+      Steps 3a1-3a2 are repeated until a valid filename is given
+
+      Use case resumes at Step 4
+
+* 3a. Application was not able to import from the Provided file due to Invalid `JSON` file.
+
+    * 3a1. EduLink-NUS informs user that , Import was not successfully executed.
+    * 3a2. User places another `JSON` file.
+      Steps 3a1-3a2 are repeated until a valid `JSON` file is provided.
+
+      Use case resumes at Step 4
+  
+* 3a. Application was not able to import as file with input filename doesn't exist.
+
+    * 3a1. EduLink-NUS informs user that , Import was not successfully executed.
+    * 3a2. User verifies the file is present and/or resolve the issue.
+      Steps 3a1-3a2 are repeated util a valid `JSON` is not present with the given filename.
+
+      Use case resumes at Step 4
+
+
+#### Use Case: Undo a previous command
+
+**MSS**
+1. Users executes any valid Command that changes data of any student in the Application.
+2. EduLink-NUS shows a list of students.
+3. User realise that the previous command has introduced some data inconsistency.
+4. User request to `undo` the previous command.
+5. EduLink-NUS revert back to the previous state i.e. state before the execution of the last command.
+
+   Use case ends.
+
+**Extensions**
+* 4a. There is no History available i.e. No previous state available.
+
+    * 4a1. EduLink-NUS informs user that , There is no History available to reset.
+    
+    Use case ends
+    
+
+* 3a. User has reached maximum allowed `undo` commands i.e. reverted 20 previously executed commands.
+
+    * 3a1. EduLink-NUS informs user that , User have reached the maximum allowed `undo` commands.
+
+      Use case ends
+
 #### Use Case: Add Tags to a Student's Profile
 
 **MSS**
