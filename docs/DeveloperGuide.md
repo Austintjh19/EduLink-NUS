@@ -158,6 +158,11 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+
+
+
+
 ### Find feature
 
 This find feature enables the search for students in the EduLink-NUS application based on their Names, Student IDs, or Both.
