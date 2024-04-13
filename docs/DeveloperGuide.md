@@ -174,19 +174,33 @@ The search specification will vary depending on the search parameter. i.e. using
   * Only entries with IDs and names that match both criteria will be returned.
   * The constraints for matches, both for Name and ID, are applied the same as when searching by Name and ID individually.
 
-#### Proposed Implementation - Class Diagram:
+#### Implementation - Class Diagram:
 
 Below is a representative class diagram of the feature. The implementation of this feature involved the creation of three new classes, those being IdAndNameContainsQueryIdAndNamePredicate, IdContainsQueryIdPredicate, and NameContainsQueryNamePredicate.
 Each class is designed to address specific aspects of the search specifications outlined in the description. Essentially, they serve to encapsulate and modularize the logic for finding students based on different search criteria.
 
 <puml src="diagrams/find/FindClassDiagram.puml" alt="UML Class Diagram - Find"/>
 
-#### Proposed Implementation - Sequence Diagrams:
+#### Implementation - Sequence Diagrams:
 
 To illustrate how all these classes interact to form the find feature refer to the sequence diagram below, where `execute("find n/John D id/A123")` has invoked in the LogicManager, through the user entered commands.
 
 <puml src="diagrams/find/FindSequenceDiagram.puml" alt="UML Sequence Diagram - Find"/>
 
+### Export feature
+
+This export feature enables the user to effectively export the students data into nicely formatted CSV file, which users can use to port the data to other Applications such as Excel, Spreadsheet
+User just need to specify the `FileName` and successful execution will create the `FileName.csv` at `[JAR_FileLocation]/exports/Filename.csv`.
+
+#### Implementation - Class Diagram:
+
+Below is a representative class diagram of the feature. The implementation of this feature involved creation of one new class i.e CSVUtil , to handle the conversion between application data into CSV Format.
+
+<puml src="diagrams/export/ExportClassDiagram.puml" alt="UML Class Diagram - Export"/>
+
+#### Implementation - Sequence Diagrams:
+
+<puml src="diagrams/export/ExportSequenceDiagram.puml" alt="UML Sequence Diagram - Export"/>
 
 
 ### \[Proposed\] Undo/redo feature
