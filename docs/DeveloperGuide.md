@@ -156,7 +156,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented. 
+This section describes some noteworthy details on how certain features are implemented.
 
 <box type="info" seamless>
 Please note that certain aspects, such as UML classes, may have been <b>simplified</b> to fit within the diagram's constraints and <b>maintain readability</b>.
@@ -177,7 +177,7 @@ The below class diagram represents the key classes and their relationships invol
 <puml src="diagrams/add/AddClassDiagram.puml" alt="Class Diagram - Add"/>
 
 Some additional information:
-* ParserUtil Class: Helper classes used by the AddCommandParser for parsing and validation tasks. 
+* ParserUtil Class: Helper classes used by the AddCommandParser for parsing and validation tasks.
   * E.g. Automatic removal of additional whitespaces in user inputs. E.g. `John        Doe ` will be parsed as `John Doe`.
 * ArgumentMultimap Class: ArgumentMultimap helps in mapping command arguments, while ParserUtil provides utility methods for parsing different types of data.
 * AddCommand Class: Represents the command to add a new student to the application. Upon execution, it produces a CommandResult. It initializes and adds instances of the Student class.
@@ -192,12 +192,12 @@ Creating a new ParserUtil for Data Validation:
     * Description: he current implementation separates data validation into a dedicated ParserUtil class, providing a centralized location for validation functions.
     * Pros: Promotes code modularity and maintainability by isolating validation logic from other components, facilitating easier updates and modifications.
     * Cons: Introduces an additional layer of abstraction, potentially increasing complexity.
-* Alternative 2: 
+* Alternative 2:
   * Description: Incorporate validation functions directly within each relevant class, such as Student, Name, Email, etc., eliminating the need for a separate ParserUtil class.
   * Pros: Provides more context-specific validation, allowing each class to enforce its own constraints and behaviors tailored to its purpose.
-  * Cons May result in code duplication if similar validation logic is required across multiple classes, leading to potential maintenance challenges. 
+  * Cons May result in code duplication if similar validation logic is required across multiple classes, leading to potential maintenance challenges.
 
-  We chose Alternative 1 for its centralized validation logic in ParserUtil, promoting code modularity, consistency, and easier maintenance. This approach ensures uniformity across validation rules and We chose Alternative 1 due to the nature of our parameters; name, address, and major share similar validation requirements. 
+  We chose Alternative 1 for its centralized validation logic in ParserUtil, promoting code modularity, consistency, and easier maintenance. This approach ensures uniformity across validation rules and We chose Alternative 1 due to the nature of our parameters; name, address, and major share similar validation requirements.
 Centralized validation in ParserUtil ensures uniformity, simplifying maintenance and testing across classes, promoting code modularity, and enhancing consistency.
 
 
