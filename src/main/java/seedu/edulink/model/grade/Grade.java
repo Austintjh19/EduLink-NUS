@@ -13,7 +13,7 @@ import seedu.edulink.commons.util.ToStringBuilder;
  */
 public class Grade {
 
-    private final Grades grade;
+    private final LetterGrades grade;
 
     private final Module module;
 
@@ -40,7 +40,7 @@ public class Grade {
         return this.score;
     }
 
-    public Grades getGrade() {
+    public LetterGrades getGrade() {
         return this.grade;
     }
 
