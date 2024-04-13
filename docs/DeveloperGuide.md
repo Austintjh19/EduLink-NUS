@@ -118,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="650" />
 
 
 The `Model` component,
@@ -132,7 +132,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="650" />
 
 </box>
 
@@ -174,18 +174,23 @@ The search specification will vary depending on the search parameter. i.e. using
   * Only entries with IDs and names that match both criteria will be returned.
   * The constraints for matches, both for Name and ID, are applied the same as when searching by Name and ID individually.
 
-#### Proposed Implementation - Class Diagram:
+#### Implementation - Class Diagram:
 
 Below is a representative class diagram of the feature. The implementation of this feature involved the creation of three new classes, those being IdAndNameContainsQueryIdAndNamePredicate, IdContainsQueryIdPredicate, and NameContainsQueryNamePredicate.
 Each class is designed to address specific aspects of the search specifications outlined in the description. Essentially, they serve to encapsulate and modularize the logic for finding students based on different search criteria.
 
 <puml src="diagrams/find/FindClassDiagram.puml" alt="UML Class Diagram - Find"/>
 
-#### Proposed Implementation - Sequence Diagrams:
+#### Implementation - Sequence Diagrams:
 
 In the sequence diagram provided below, the interaction among various classes forming the foundation of the find feature is illustrated. The sequence is initiated when the user enters the command "find n/John D id/A123" into the command box, triggering the `execute("find n/John D id/A123")` method call in the LogicManager.
 
 <puml src="diagrams/find/FindSequenceDiagram.puml" alt="UML Sequence Diagram - Find"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 The sequence diagram above reveals that the `FindCommand` constructor requires a `Predicate` argument. The determination of which specific predicate to pass — `IdAndNameContainsQueryIdAndNamePredicate`, `IdContainsQueryIdPredicate`, or `NameContainsQueryNamePredicate` — is elucidated below:
 
@@ -225,6 +230,46 @@ Design of Matching Name Criteria Reasoning:
 Design of Matching ID Criteria Reasoning:
 * Partial matching for ID:
   * Allowing partial word matching for IDs enhances the flexibility of the search functionality. Users can search for IDs even if they don't remember the complete sequence, making it easier to find specific students.
+
+### Export feature
+
+This export feature enables the user to effectively export the students data into nicely formatted CSV file, which users can use to port the data to other Applications such as Excel, Spreadsheet
+User just need to specify the `FileName` and successful execution will create the `FileName.csv` at `[JAR_FileLocation]/exports/Filename.csv`.
+
+#### Implementation - Class Diagram:
+
+Below is a representative class diagram of the feature. The implementation of this feature involved creation of one new class i.e CSVUtil , to handle the conversion between application data into CSV Format.
+
+<puml src="diagrams/export/ExportClassDiagram.puml" alt="UML Class Diagram - Export"/>
+
+#### Implementation - Sequence Diagrams:
+
+<puml src="diagrams/export/ExportSequenceDiagram.puml" alt="UML Sequence Diagram - Export"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ExportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+### Import feature
+
+This import feature enables the user to import the students data into the application from a valid `JSON` file,
+User just need to specify the `FileName` and successful execution will import the data from `FileName.json` located at `[JAR_FileLocation]/data/Filename.json`.
+
+#### Implementation - Class Diagram:
+
+Below is a representative class diagram of the feature. The implementation of this feature didn't involved creation of any class , but it requires some new dependencies to be introduced in order to follow OOP Design. i.e Including `Storage` Object in the `ImportCommand`.
+
+<puml src="diagrams/import/ImportClassDiagram.puml" alt="UML Class Diagram - Import"/>
+
+#### Implementation - Sequence Diagrams:
+
+<puml src="diagrams/import/ImportSequenceDiagram.puml" alt="UML Sequence Diagram - Import"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ImportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 ### \[Proposed\] Undo/redo feature
 
