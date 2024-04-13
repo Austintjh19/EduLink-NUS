@@ -208,22 +208,22 @@ The below sequence diagram highlights this process:
 
 #### Proposed Implementation - Design Considerations:
 
-Design of Predicate: 
-* Alternative 1 (Current Implementation): 
-  * Description: Each search criteria (e.g., ID, Name) has its own dedicated predicate class (e.g., IdContainsQueryIdPredicate, NameContainsQueryNamePredicate). 
+Design of Predicate:
+* Alternative 1 (Current Implementation):
+  * Description: Each search criteria (e.g., ID, Name) has its own dedicated predicate class (e.g., IdContainsQueryIdPredicate, NameContainsQueryNamePredicate).
   * Pros: Encapsulates the logic for each search criterion in separate classes, ensuring modularity and maintainability.
   * Cons: Requires creating a significant number of predicate classes, potentially leading to codebase complexity.
 * Alternative 2: Create a single, more generalized predicate class capable of handling multiple search criteria.
   * Pros:  Reduces the number of classes needed, simplifying the codebase.
   * Cons: Combining multiple search criteria into a single class may reduce modularity, making it harder to isolate and maintain specific functionality.
 
-Design of Matching Name Criteria Reasoning: 
-* Partial word matching supported but must commence from fist letter: 
+Design of Matching Name Criteria Reasoning:
+* Partial word matching supported but must commence from fist letter:
   * Requiring matches to start from the first letter ensures that search results are precise and relevant. This prevents unrelated or unintended matches that might occur if partial matches were allowed to begin from any position within the name.
 * Sequential Combination Matching: Requiring the names to contain the same chronological combination and ordering of the keywords ensures precise matches.
 
 Design of Matching ID Criteria Reasoning:
-* Partial matching for ID: 
+* Partial matching for ID:
   * Allowing partial word matching for IDs enhances the flexibility of the search functionality. Users can search for IDs even if they don't remember the complete sequence, making it easier to find specific students.
 
 ### \[Proposed\] Undo/redo feature
