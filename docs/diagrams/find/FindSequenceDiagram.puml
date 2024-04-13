@@ -1,0 +1,54 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ": LogicManager" as logicManager LOGIC_COLOR
+participant ": AddressBookParser" as addressBookParser LOGIC_COLOR
+participant ": FindCommandParser" as findCommandParser LOGIC_COLOR
+participant ": FindCommand" as findCommand LOGIC_COLOR
+participant ": CommandResult" as commandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m: Model" as model MODEL_COLOR
+end box
+
+[-> logicManager : execute("find n/John D \n id/A123")
+activate logicManager
+
+logicManager -> addressBookParser : parseCommand("find n/John D \n id/A123")
+activate addressBookParser
+
+create findCommandParser
+addressBookParser -> findCommandParser
+activate findCommandParser
+
+addressBookParser -> findCommandParser : parse("n/John D \n id/A123")
+
+create findCommand
+findCommandParser -> findCommand
+activate findCommand
+returnCommand
+
+return Command
+destroy findCommandParser
+
+return Command
+
+logicManager -> findCommand : execute(m)
+activate findCommand
+findCommand -> model : updateFilteredPersonList(Predicate)
+activate model
+return
+
+|||
+
+create commandResult
+findCommand -> commandResult
+activate commandResult
+return commandResult
+
+return commandResult
+
+@enduml

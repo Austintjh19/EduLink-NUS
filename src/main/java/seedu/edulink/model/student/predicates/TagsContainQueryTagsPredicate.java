@@ -1,10 +1,11 @@
-package seedu.edulink.model.student;
+package seedu.edulink.model.student.predicates;
 
 import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.edulink.commons.util.StringUtil;
 import seedu.edulink.commons.util.ToStringBuilder;
+import seedu.edulink.model.student.Student;
 import seedu.edulink.model.tag.Tag;
 
 /**

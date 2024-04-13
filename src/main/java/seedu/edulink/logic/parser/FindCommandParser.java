@@ -6,9 +6,9 @@ import static seedu.edulink.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.edulink.logic.commands.FindCommand;
 import seedu.edulink.logic.parser.exceptions.ParseException;
-import seedu.edulink.model.student.IdAndNameContainsQueryIdAndNamePredicate;
-import seedu.edulink.model.student.IdContainsQueryIdPredicate;
-import seedu.edulink.model.student.NameContainsQueryNamePredicate;
+import seedu.edulink.model.student.predicates.IdAndNameContainsQueryIdAndNamePredicate;
+import seedu.edulink.model.student.predicates.IdContainsQueryIdPredicate;
+import seedu.edulink.model.student.predicates.NameContainsQueryNamePredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
