@@ -161,7 +161,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Find feature
 
 This find feature enables the search for students in the EduLink-NUS application based on their Names, Student IDs, or Both.
-The search specification will vary depending on the search parameter. i.e. using Names, Student IDs, or Both. Below is a brief summary: 
+The search specification will vary depending on the search parameter. i.e. using Names, Student IDs, or Both. Below is a brief summary:
 * Searching by Name - Single Word:
   * Partial word matching is supported when searching by a single word, but matches must commence from the first letter.
 * Searching by Name - Multiple Words:
