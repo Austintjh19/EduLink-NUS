@@ -672,9 +672,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User request to list students.
-2.  AddressBook shows a list of all students.
-3.  User get to know the name or ID of a specific student.
-4.  User prompt to delete that student by its ID.
+2.  EduLink-NUS shows a list of all students.
+3.  User get to know the name, ID or index of a specific student.
+4.  User prompts to delete the specified student by its ID or index.
 5.  That student is successfully deleted.
 
     Use case ends.
@@ -684,13 +684,140 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given student ID is invalid.
+* 4a. Can't find selected student.
 
-    * 3a1. AddressBook inform user that student does not exist.
+    * 4a1. EduLink-NUS inform user that student does not exist.
+    * 4a2. User enters new student ID 
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given
 
-      Use case resumes at step 2.
+      Use case resumes at step 5.
 
-*{More to be added}*
+* 4b. Detect error in delete command entered e.g. invalid ID, index or command
+
+    * 4b1. EduLink-NUS informs user about invalid format and reminds valid format.
+    * 4b2. User enters new updated command.
+      Steps 4b1 - 4b2 are repated till the data entered are correct.
+
+      Use case resumes at step 5.
+
+**Use Case: Delete All Students in Filtered List**
+
+**MSS**
+
+1. User filter students based on specific criteria e.g. find n/NAME or filter t/TAG.
+2. EduLink-NUS shows a list of students matching the filter criteria.
+3. User delete all students in the filtered list.
+4. All students in the filtered list are successfully deleted.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. No students match the filter criteria.
+
+  Use case ends.
+
+* 3a. User decides not to delete any students.
+
+  Use case ends.
+
+**Use Case: Add Grade to a Student**
+
+**MSS**
+
+1. User requests to list students.
+2. EduLink-NUS shows a list of all students.
+3. User identifies the student to whom they want to add a grade by ID.
+4. User prompt to add grade to a specific student by inputting that student's ID, module code and score.
+5. The new grade is successfully added to the student's record.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. User can't find the student he is looking for in the filtered list.
+
+  * 3a1. User requests to list students.
+  * 3a2. User filter students based on specific criteria.
+  * 3a3. EduLink-NUS shows a filterd list of students.
+    Steps 3a1 - 3a3 are repeated till the student is found in the list shown.
+
+    Use case resumes at step 4.
+
+* 4a. Can't find the selected student in the filtered list.
+
+  * 4a1. EduLink-NUS informs the user that the student does not exist.
+  * 4a2. User enters new student ID, together with the module code and score.
+    Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+    Use case resumes at step 5.
+
+* 4b. Detect error in grade command entered e.g. score out of range, invalid module code
+
+  * 4b1. EduLink-NUS informs user about invalid format and reminds valid format.
+  * 4b2. User enters new updated command.
+    Steps 4b1 - 4b2 are repated till the data entered are correct.
+
+    Use case resumes at step 5.
+
+* 4c. Duplicate module code to be graded found.
+
+  * 4c1. The grade for the specified module code is successfully edited with the new given score in the selected student's record.
+
+    Use case ends.
+
+**Use Case: Delete Grade from a Student**
+
+**MSS**
+
+1. User requests to list students.
+2. EduLink-NUS shows a list of all students.
+3. User identifies the student from whom they want to delete a grade by ID.
+4. User prompt to delete a grade from a specific student by inputting that student's ID and module code.
+5. The grade for the specified module is successfully delete from the student's record.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. User can't find the student he is looking for in the filtered list.
+
+  * 3a1. User requests to list students.
+  * 3a2. User filter students based on specific criteria.
+  * 3a3. EduLink-NUS shows a filterd list of students.
+    Steps 3a1 - 3a3 are repeated till the student is found in the list shown.
+
+    Use case resumes at step 4.
+
+* 4a. Can't find the student in the filtered list.
+
+  * 4a1. EduLink-NUS informs the user that the student does not exist.
+  * 4a2. User enters new student ID, together with the module code and score.
+    Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+    Use case resumes at step 5.
+
+* 4b. Detect error in grade command entered e.g. invalid module code
+
+  * 4b1. EduLink-NUS informs user about invalid format and reminds valid format.
+  * 4b2. User enters new updated command.
+    Steps 4b1 - 4b2 are repated till the data entered are correct.
+
+    Use case resumes at step 5.
+
+* 4c. The selected student does not have a grade recorded for the specified module code.
+
+  * 4c1. EduLink-NUS informd the user that there are no grades to delete for the specified module code in the selected student's record.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -700,6 +827,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  Should be responsive to user input, as user might have a series of commands to execute.
 5.  Should have a resizable UI as the user might work on different programs in parallel.
 6.  Should be able to use Offline (without Internet Connection).
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
