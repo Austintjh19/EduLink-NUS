@@ -10,8 +10,8 @@ import static seedu.edulink.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric"
-        + " and not more than 15 characters";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+        + " and not more than 20 characters. And should not be left empty.";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}{1,20}";
 
     public final String tagName;
 
@@ -45,7 +45,7 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.toLowerCase().equals(otherTag.tagName.toLowerCase());
     }
 
     public String getTagName() {
@@ -54,7 +54,7 @@ public class Tag {
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return tagName.toLowerCase().hashCode();
     }
 
     /**

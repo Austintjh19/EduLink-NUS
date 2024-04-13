@@ -30,12 +30,17 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             return new DeleteCommand();
         }
 
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_ID);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID);
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+
+            if (!ParserUtil.areValidPrefixes(argMultimap, args, PREFIX_ID)
+                || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            }
+
             String queryId = argMultimap.getValue(PREFIX_ID).get().trim();
             if (queryId.isEmpty()) {
                 throw new ParseException(

@@ -3,14 +3,17 @@ package seedu.edulink.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.commons.util.AppUtil.checkArgument;
 
+import seedu.edulink.commons.util.UserInputUtil;
+
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values except (/) forward"
-        + " slash, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses should consist of alphanumeric characters, "
+            + "whitespaces, and the special characters: comma (,), hash (#), and hyphen (-)."
+            + "The address must not exceed 100 characters in length.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -28,7 +31,7 @@ public class Address {
     public Address(String address) {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        value = address;
+        value = UserInputUtil.removeDuplicatedWhitespaces(address);
     }
 
     /**

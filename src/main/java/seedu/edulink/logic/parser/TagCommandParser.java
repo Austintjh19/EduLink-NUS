@@ -32,8 +32,8 @@ public class TagCommandParser implements Parser<TagCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID,
             PREFIX_TAG);
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_TAG)
-            || !argMultimap.getPreamble().isEmpty()) {
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID);
+        if (!ParserUtil.isValidCommandFormat(argMultimap, args, PREFIX_TAG, PREFIX_ID)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
         try {

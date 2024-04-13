@@ -84,21 +84,36 @@ public class StringUtil {
         checkArgument(!preppedWords.isEmpty(), "Word parameter cannot be empty");
 
         String[] wordsInPreppedSentence = preppedSentence.split(" ");
-        String[] wordsInPreppedWords = words.split("\\s+");
+        String[] wordsInPreppedWords = preppedWords.split("\\s+");
+
+        for (int i = 0; i < wordsInPreppedSentence.length; i++) {
+            wordsInPreppedSentence[i] = wordsInPreppedSentence[i].trim();
+        }
+
+        for (int i = 0; i < wordsInPreppedWords.length; i++) {
+            wordsInPreppedWords[i] = wordsInPreppedWords[i].trim();
+        }
 
         boolean matchFound = false;
 
+        StringBuilder queryWordsBuilder = new StringBuilder();
+        for (String word : wordsInPreppedWords) {
+            queryWordsBuilder.append(word).append(" ");
+        }
+        String queryWords = queryWordsBuilder.toString().trim();
+
         for (int i = 0; i < wordsInPreppedSentence.length - wordsInPreppedWords.length + 1; i++) {
-            StringBuilder testWordBuilder = new StringBuilder();
+            StringBuilder testWordsBuilder = new StringBuilder();
             for (int j = 0; j < wordsInPreppedWords.length; j++) {
-                testWordBuilder.append(wordsInPreppedSentence[i + j]).append(" ");
+                testWordsBuilder.append(wordsInPreppedSentence[i + j]).append(" ");
             }
-            String testWord = testWordBuilder.toString();
-            if (testWord.indexOf(preppedWords) == 0) {
+            String testWords = testWordsBuilder.toString();
+            if (testWords.indexOf(queryWords) == 0) {
                 matchFound = true;
                 break;
             }
         }
+
         return matchFound;
     }
 
@@ -139,7 +154,6 @@ public class StringUtil {
      *
      * @param s the string to be checked
      * @return true if {@code s} represents a valid double value, false otherwise
-     * @throws NullPointerException if {@code s} is null
      */
     public static boolean isDouble(String s) {
         requireNonNull(s);
@@ -149,5 +163,22 @@ public class StringUtil {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if {@code s} represents an invalid score with more than 2 decimal places.
+     * e.g. 100.000000000000000000001
+     * Will return false for valid inputs,
+     * e.g., "100.", "80.5", "89.67"
+     *
+     * @param s the string to be checked
+     * @return false if {@code s} represents a valid double value, true otherwise
+     */
+    public static boolean hasMoreThanTwoDecimalPlaces(String s) {
+        int dotIndex = s.indexOf('.');
+        if (dotIndex != -1 && s.length() - dotIndex > 3) {
+            return true;
+        }
+        return false;
     }
 }

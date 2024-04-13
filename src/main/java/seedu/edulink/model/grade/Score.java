@@ -11,7 +11,8 @@ import java.text.DecimalFormat;
  */
 public class Score {
     public static final String MESSAGE_CONSTRAINTS =
-        "Score should be a non-negative number between 0 and 100 inclusive";
+        "Score should be a non-negative number between 0 and 100 inclusive. "
+        + "Give up to 2 decimal places. Can't be left blank.";
     public static final double MIN_SCORE = 0;
     public static final double MAX_SCORE = 100;
 

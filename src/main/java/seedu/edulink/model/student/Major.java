@@ -3,14 +3,17 @@ package seedu.edulink.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.commons.util.AppUtil.checkArgument;
 
+import seedu.edulink.commons.util.UserInputUtil;
+
 /**
  * Represents a Student's Major in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMajor(String)}
  */
 public class Major {
     public static final String MESSAGE_CONSTRAINTS =
-        "Major should only contain alphabetic characters, and it should not be blank";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z\\s]+$";
+        "Major names should only contain alphabetical characters and white spaces. "
+                + "They are limited to 50 characters in length. Can't be left empty.";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z\\s]{1,50}$";
 
     public final String major;
 
@@ -22,7 +25,7 @@ public class Major {
     public Major(String major) {
         requireNonNull(major);
         checkArgument(isValidMajor(major), MESSAGE_CONSTRAINTS);
-        this.major = major;
+        this.major = UserInputUtil.removeDuplicatedWhitespaces(major);
     }
 
     public static boolean isValidMajor(String test) {

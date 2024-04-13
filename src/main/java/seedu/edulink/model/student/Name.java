@@ -3,6 +3,8 @@ package seedu.edulink.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.commons.util.AppUtil.checkArgument;
 
+import seedu.edulink.commons.util.UserInputUtil;
+
 /**
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -10,14 +12,14 @@ import static seedu.edulink.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Names should only contain alphanumeric characters and spaces but must"
-            + " start with an alphabet, and it should not be blank";
+            "Names must start with a letter and contain only alphanumeric characters and spaces. "
+                    + "They cannot exceed 100 characters in length, and the field must not be left empty.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z]([a-zA-Z0-9]* *[a-zA-Z0-9])*$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z][a-zA-Z0-9 ]{0,99}$";
 
     public final String fullName;
 
@@ -29,7 +31,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = UserInputUtil.removeDuplicatedWhitespaces(name);
     }
 
     /**
