@@ -156,11 +156,49 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features are implemented. 
+
+<box type="info" seamless>
+Please note that certain aspects, such as UML classes, may have been <b>simplified</b> to fit within the diagram's constraints and <b>maintain readability</b>.
+</box>
+
 
 ### Add feature
 
+This feature enables users to seamlessly integrate new student profiles into the EduLink-NUS application. To ensure data integrity and completeness, the system necessitates the inclusion of essential parameters such as Name, Student ID, Phone Number, Email, Address, Intake, and Major. Additionally, users have the option to include tags.
+The activity diagram below shows the sequence of action users will have to take to add a new Student Profile into the EduLink-NUS application.
 
+<puml src="diagrams/add/AddActivityDiagram.puml" alt="Activity Diagram - Add"/>
+
+#### Implementation - Sequence Diagrams:
+
+The below class diagram represents the key classes and their relationships involved in the implementation of the Add feature in the EduLink-NUS application.
+
+<puml src="diagrams/add/AddClassDiagram.puml" alt="Class Diagram - Add"/>
+
+Some additional information:
+* ParserUtil Class: Helper classes used by the AddCommandParser for parsing and validation tasks. 
+  * E.g. Automatic removal of additional whitespaces in user inputs. E.g. `John        Doe ` will be parsed as `John Doe`.
+* ArgumentMultimap Class: ArgumentMultimap helps in mapping command arguments, while ParserUtil provides utility methods for parsing different types of data.
+* AddCommand Class: Represents the command to add a new student to the application. Upon execution, it produces a CommandResult. It initializes and adds instances of the Student class.
+
+#### Implementation - Design Considerations:
+
+Automatic Removal of Additional Whitespaces reasoning:
+Storing extra whitespaces doesn't add any meaningful information and only introduces unnecessary complexity. By automatically removing these additional whitespaces, the system ensures that data is stored in a clean and consistent format, without sacrificing any essential information.
+
+Creating a new ParserUtil for Data Validation:
+* Alternative 1 (Current Implementation):
+    * Description: he current implementation separates data validation into a dedicated ParserUtil class, providing a centralized location for validation functions.
+    * Pros: Promotes code modularity and maintainability by isolating validation logic from other components, facilitating easier updates and modifications.
+    * Cons: Introduces an additional layer of abstraction, potentially increasing complexity.
+* Alternative 2: 
+  * Description: Incorporate validation functions directly within each relevant class, such as Student, Name, Email, etc., eliminating the need for a separate ParserUtil class.
+  * Pros: Provides more context-specific validation, allowing each class to enforce its own constraints and behaviors tailored to its purpose.
+  * Cons May result in code duplication if similar validation logic is required across multiple classes, leading to potential maintenance challenges. 
+
+  We chose Alternative 1 for its centralized validation logic in ParserUtil, promoting code modularity, consistency, and easier maintenance. This approach ensures uniformity across validation rules and We chose Alternative 1 due to the nature of our parameters; name, address, and major share similar validation requirements. 
+Centralized validation in ParserUtil ensures uniformity, simplifying maintenance and testing across classes, promoting code modularity, and enhancing consistency.
 
 
 ### Find feature
@@ -218,7 +256,8 @@ Design of Predicate:
   * Description: Each search criteria (e.g., ID, Name) has its own dedicated predicate class (e.g., IdContainsQueryIdPredicate, NameContainsQueryNamePredicate).
   * Pros: Encapsulates the logic for each search criterion in separate classes, ensuring modularity and maintainability.
   * Cons: Requires creating a significant number of predicate classes, potentially leading to codebase complexity.
-* Alternative 2: Create a single, more generalized predicate class capable of handling multiple search criteria.
+* Alternative 2: 
+  * Description: Create a single, more generalized predicate class capable of handling multiple search criteria.
   * Pros:  Reduces the number of classes needed, simplifying the codebase.
   * Cons: Combining multiple search criteria into a single class may reduce modularity, making it harder to isolate and maintain specific functionality.
 
