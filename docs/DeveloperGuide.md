@@ -202,6 +202,21 @@ Below is a representative class diagram of the feature. The implementation of th
 
 <puml src="diagrams/export/ExportSequenceDiagram.puml" alt="UML Sequence Diagram - Export"/>
 
+### Import feature
+
+This import feature enables the user to import the students data into the application from a valid `JSON` file,
+User just need to specify the `FileName` and successful execution will import the data from `FileName.json` located at `[JAR_FileLocation]/data/Filename.json`.
+
+#### Implementation - Class Diagram:
+
+Below is a representative class diagram of the feature. The implementation of this feature didn't involved creation of any class , but it requires some new dependencies to be introduced in order to follow OOP Design. i.e Including `Storage` Object in the `ImportCommand`.
+
+<puml src="diagrams/import/ImportClassDiagram.puml" alt="UML Class Diagram - Import"/>
+
+#### Implementation - Sequence Diagrams:
+
+<puml src="diagrams/import/ImportSequenceDiagram.puml" alt="UML Sequence Diagram - Import"/>
+
 
 ### \[Proposed\] Undo/redo feature
 
