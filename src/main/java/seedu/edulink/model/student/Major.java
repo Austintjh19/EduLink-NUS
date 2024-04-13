@@ -1,5 +1,7 @@
 package seedu.edulink.model.student;
 
+import seedu.edulink.commons.util.UserInputUtil;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.commons.util.AppUtil.checkArgument;
 
@@ -23,7 +25,7 @@ public class Major {
     public Major(String major) {
         requireNonNull(major);
         checkArgument(isValidMajor(major), MESSAGE_CONSTRAINTS);
-        this.major = major;
+        this.major = UserInputUtil.removeDuplicatedWhiteSpaces(major);
     }
 
     public static boolean isValidMajor(String test) {
