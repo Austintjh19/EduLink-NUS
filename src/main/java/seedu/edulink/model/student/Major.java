@@ -9,8 +9,9 @@ import static seedu.edulink.commons.util.AppUtil.checkArgument;
  */
 public class Major {
     public static final String MESSAGE_CONSTRAINTS =
-        "Major should only contain alphabetic characters, and it should not be blank";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z\\s]+$";
+        "Major names should only contain alphabetical characters and white spaces. "
+                + "They are limited to 50 characters in length. Can't be left empty.";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z\\s]{1,50}$";
 
     public final String major;
 

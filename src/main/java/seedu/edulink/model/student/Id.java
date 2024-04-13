@@ -10,9 +10,10 @@ import static seedu.edulink.commons.util.AppUtil.checkArgument;
 public class Id {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "ID should only contain alphanumeric characters starting with Alphabet followed"
-            + " by 7 digits and ending with an alphabet"
-            + " e.g A0265801R, and it should not be blank";
+        "Student IDs must consist of alphanumeric characters only and follow a specific format. "
+            + "Specifically, IDs must start with a letter, followed by exactly seven digits, "
+                + "and end with another letter."
+            + " For example, 'A0265801R'. The ID field cannot be left empty.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z]\\d{7}[a-zA-Z]$";
 
     public final String id;
