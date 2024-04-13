@@ -25,7 +25,7 @@ public class Major {
     public Major(String major) {
         requireNonNull(major);
         checkArgument(isValidMajor(major), MESSAGE_CONSTRAINTS);
-        this.major = UserInputUtil.removeDuplicatedWhiteSpaces(major);
+        this.major = UserInputUtil.removeDuplicatedWhitespaces(major);
     }
 
     public static boolean isValidMajor(String test) {

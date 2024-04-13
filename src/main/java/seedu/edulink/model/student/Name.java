@@ -31,7 +31,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = UserInputUtil.removeDuplicatedWhiteSpaces(name);
+        fullName = UserInputUtil.removeDuplicatedWhitespaces(name);
     }
 
     /**

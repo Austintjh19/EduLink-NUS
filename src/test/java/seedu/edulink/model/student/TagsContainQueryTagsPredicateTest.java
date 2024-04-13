@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.edulink.model.student.predicates.TagsContainQueryTagsPredicate;
 import seedu.edulink.model.tag.Tag;
 import seedu.edulink.testutil.PersonBuilder;
 

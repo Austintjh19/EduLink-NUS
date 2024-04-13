@@ -11,7 +11,7 @@ public class UserInputUtil {
      * @param str The input string from which duplicate whitespaces are to be removed.
      * @return A new string with duplicate whitespaces replaced by a single whitespace.
      */
-    public static String removeDuplicatedWhiteSpaces(String str) {
+    public static String removeDuplicatedWhitespaces(String str) {
         str = str.replaceAll("\\s+", " ");
         return str;
     }
