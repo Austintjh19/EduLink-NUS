@@ -1,0 +1,39 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Package " "<<Rectangle>>{
+Class "  <<interface>>  \nParser" as Parser<ExportCommand>
+Class ExportCommandParser {
+    +parse(): ExportCommand
+}
+
+
+Class ParserException
+class CSVUtil {
+ +convertToCsv(filename) : void
+}
+class ExportCommand{
+    -String:filename
+    +execute(model: Model): CommandResult
+}
+class CommandResult
+}
+
+file "filename.csv" as file_icon <<file>> {
+}
+
+
+
+ExportCommandParser .up.|> Parser
+Parser .right.> ParserException: throws >
+ExportCommandParser .right.> ParserException: throws >
+
+ExportCommandParser .down.> ExportCommand: initialize >
+ExportCommand -right-> CSVUtil: convertToCsv >
+
+ExportCommand .down.> CommandResult: returns >
+CSVUtil .> file_icon
+
+
+@enduml

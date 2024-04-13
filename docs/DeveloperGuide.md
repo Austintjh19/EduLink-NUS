@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# EduLink-NUS Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -118,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="650" />
 
 
 The `Model` component,
@@ -132,7 +132,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="650" />
 
 </box>
 
@@ -158,18 +158,162 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<box type="info" seamless>
+Please note that certain aspects, such as UML classes, may have been <b>simplified</b> to fit within the diagram's constraints and <b>maintain readability</b>.
+</box>
+
+
+### Add feature
+
+This feature enables users to seamlessly integrate new student profiles into the EduLink-NUS application. To ensure data integrity and completeness, the system necessitates the inclusion of essential parameters such as Name, Student ID, Phone Number, Email, Address, Intake, and Major. Additionally, users have the option to include tags.
+The activity diagram below shows the sequence of action users will have to take to add a new Student Profile into the EduLink-NUS application.
+
+<puml src="diagrams/add/AddActivityDiagram.puml" alt="Activity Diagram - Add"/>
+
+#### Implementation - Sequence Diagrams:
+
+The below class diagram represents the key classes and their relationships involved in the implementation of the Add feature in the EduLink-NUS application.
+
+<puml src="diagrams/add/AddClassDiagram.puml" alt="Class Diagram - Add"/>
+
+Some additional information:
+* ParserUtil Class: Helper classes used by the AddCommandParser for parsing and validation tasks.
+  * E.g. Automatic removal of additional whitespaces in user inputs. E.g. `John        Doe ` will be parsed as `John Doe`.
+* ArgumentMultimap Class: ArgumentMultimap helps in mapping command arguments, while ParserUtil provides utility methods for parsing different types of data.
+* AddCommand Class: Represents the command to add a new student to the application. Upon execution, it produces a CommandResult. It initializes and adds instances of the Student class.
+
+#### Implementation - Design Considerations:
+
+Automatic Removal of Additional Whitespaces reasoning:
+Storing extra whitespaces doesn't add any meaningful information and only introduces unnecessary complexity. By automatically removing these additional whitespaces, the system ensures that data is stored in a clean and consistent format, without sacrificing any essential information.
+
+Creating a new ParserUtil for Data Validation:
+* Alternative 1 (Current Implementation):
+    * Description: he current implementation separates data validation into a dedicated ParserUtil class, providing a centralized location for validation functions.
+    * Pros: Promotes code modularity and maintainability by isolating validation logic from other components, facilitating easier updates and modifications.
+    * Cons: Introduces an additional layer of abstraction, potentially increasing complexity.
+* Alternative 2:
+  * Description: Incorporate validation functions directly within each relevant class, such as Student, Name, Email, etc., eliminating the need for a separate ParserUtil class.
+  * Pros: Provides more context-specific validation, allowing each class to enforce its own constraints and behaviors tailored to its purpose.
+  * Cons May result in code duplication if similar validation logic is required across multiple classes, leading to potential maintenance challenges.
+
+  We chose Alternative 1 for its centralized validation logic in ParserUtil, promoting code modularity, consistency, and easier maintenance. This approach ensures uniformity across validation rules and We chose Alternative 1 due to the nature of our parameters; name, address, and major share similar validation requirements.
+Centralized validation in ParserUtil ensures uniformity, simplifying maintenance and testing across classes, promoting code modularity, and enhancing consistency.
+
+
 ### Find feature
 
-The find feature has been purposefully designed to allow for searches with Student ID, Name, or both. Searching using a name returns only the individuals whose name is an ordered super string of the search term.
-Searching using student ID returns only the Individuals whose Student ID is a super string of the search id, disregarding ordering. Searching by name and id returns only the individuals who satisfy the two search values.
+This find feature enables the search for students in the EduLink-NUS application based on their Names, Student IDs, or Both.
+The search specification will vary depending on the search parameter. i.e. using Names, Student IDs, or Both. Below is a brief summary:
+* Searching by Name - Single Word:
+  * Partial word matching is supported when searching by a single word, but matches must commence from the first letter.
+* Searching by Name - Multiple Words:
+  * Only Student Names which contains the same chronological combination and ordering of those search words will be returned.
+  * Specific location of the match is disregarded.
+  Only the last search word will allow for partial word matching, but matches must commence from the first letter.
+* Searching by ID:
+  * Partial word matching is supported and matches need not commence from the first letter.
+* Searching by both ID & Name:
+  * Only entries with IDs and names that match both criteria will be returned.
+  * The constraints for matches, both for Name and ID, are applied the same as when searching by Name and ID individually.
 
-#### Proposed Implementation
+#### Implementation - Class Diagram:
 
-Below is a representing class diagram of the feature.
+Below is a representative class diagram of the feature. The implementation of this feature involved the creation of three new classes, those being IdAndNameContainsQueryIdAndNamePredicate, IdContainsQueryIdPredicate, and NameContainsQueryNamePredicate.
+Each class is designed to address specific aspects of the search specifications outlined in the description. Essentially, they serve to encapsulate and modularize the logic for finding students based on different search criteria.
 
 <puml src="diagrams/find/FindClassDiagram.puml" alt="UML Class Diagram - Find"/>
 
+#### Implementation - Sequence Diagrams:
 
+In the sequence diagram provided below, the interaction among various classes forming the foundation of the find feature is illustrated. The sequence is initiated when the user enters the command "find n/John D id/A123" into the command box, triggering the `execute("find n/John D id/A123")` method call in the LogicManager.
+
+<puml src="diagrams/find/FindSequenceDiagram.puml" alt="UML Sequence Diagram - Find"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+The sequence diagram above reveals that the `FindCommand` constructor requires a `Predicate` argument. The determination of which specific predicate to pass — `IdAndNameContainsQueryIdAndNamePredicate`, `IdContainsQueryIdPredicate`, or `NameContainsQueryNamePredicate` — is elucidated below:
+
+1. Parsing and Determination by FindCommandParser:
+    - The `FindCommandParser` is responsible for parsing the command string and extracting relevant search criteria.
+    - Based on the parsed criteria, such as name and ID prefixes in the command string, the `FindCommandParser` determines the appropriate predicate to use for the search.
+
+2. Predicate Selection Criteria:
+    - If the command includes both name and ID criteria (`n/John` and `id/A123`), the `FindCommandParser` selects `IdAndNameContainsQueryIdAndNamePredicate`.
+    - If only the ID criterion is present (`id/A123`), the `FindCommandParser` selects `IdContainsQueryIdPredicate`.
+    - If only the name criterion is present (`n/John`), the `FindCommandParser` selects `NameContainsQueryNamePredicate`.
+
+3. Passing Predicate to FindCommand:
+    - Once the appropriate predicate is determined, the `FindCommandParser` instantiates a `FindCommand` object, passing the selected predicate as an argument to its constructor.
+    - This ensures that the `FindCommand` is equipped with the correct predicate for executing the search operation effectively.
+
+The below sequence diagram highlights this process:
+
+<puml src="diagrams/find/FindParserSequenceDiagram.puml" alt="UML Sequence Diagram - Find Parser"/>
+
+#### Proposed Implementation - Design Considerations:
+
+Design of Predicate:
+* Alternative 1 (Current Implementation):
+  * Description: Each search criteria (e.g., ID, Name) has its own dedicated predicate class (e.g., IdContainsQueryIdPredicate, NameContainsQueryNamePredicate).
+  * Pros: Encapsulates the logic for each search criterion in separate classes, ensuring modularity and maintainability.
+  * Cons: Requires creating a significant number of predicate classes, potentially leading to codebase complexity.
+* Alternative 2: 
+  * Description: Create a single, more generalized predicate class capable of handling multiple search criteria.
+  * Pros:  Reduces the number of classes needed, simplifying the codebase.
+  * Cons: Combining multiple search criteria into a single class may reduce modularity, making it harder to isolate and maintain specific functionality.
+
+Design of Matching Name Criteria Reasoning:
+* Partial word matching supported but must commence from fist letter:
+  * Requiring matches to start from the first letter ensures that search results are precise and relevant. This prevents unrelated or unintended matches that might occur if partial matches were allowed to begin from any position within the name.
+* Sequential Combination Matching: Requiring the names to contain the same chronological combination and ordering of the keywords ensures precise matches.
+
+Design of Matching ID Criteria Reasoning:
+* Partial matching for ID:
+  * Allowing partial word matching for IDs enhances the flexibility of the search functionality. Users can search for IDs even if they don't remember the complete sequence, making it easier to find specific students.
+
+### Export feature
+
+This export feature enables the user to effectively export the students data into nicely formatted CSV file, which users can use to port the data to other Applications such as Excel, Spreadsheet
+User just need to specify the `FileName` and successful execution will create the `FileName.csv` at `[JAR_FileLocation]/exports/Filename.csv`.
+
+#### Implementation - Class Diagram:
+
+Below is a representative class diagram of the feature. The implementation of this feature involved creation of one new class i.e CSVUtil , to handle the conversion between application data into CSV Format.
+
+<puml src="diagrams/export/ExportClassDiagram.puml" alt="UML Class Diagram - Export"/>
+
+#### Implementation - Sequence Diagrams:
+
+<puml src="diagrams/export/ExportSequenceDiagram.puml" alt="UML Sequence Diagram - Export"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ExportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+### Import feature
+
+This import feature enables the user to import the students data into the application from a valid `JSON` file,
+User just need to specify the `FileName` and successful execution will import the data from `FileName.json` located at `[JAR_FileLocation]/data/Filename.json`.
+
+#### Implementation - Class Diagram:
+
+Below is a representative class diagram of the feature. The implementation of this feature didn't involved creation of any class , but it requires some new dependencies to be introduced in order to follow OOP Design. i.e Including `Storage` Object in the `ImportCommand`.
+
+<puml src="diagrams/import/ImportClassDiagram.puml" alt="UML Class Diagram - Import"/>
+
+#### Implementation - Sequence Diagrams:
+
+<puml src="diagrams/import/ImportSequenceDiagram.puml" alt="UML Sequence Diagram - Import"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ImportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -341,17 +485,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `EduLink NUS` and the **Actor** is the `National University of Singapore professors and teaching assistants`, unless specified otherwise)
 
-**Use Case: Add a Tag to a Student's Profile**
+#### Use Case: Add Tags to a Student's Profile
 
 **MSS**
 
-1.  User request to list students.
-2.  AddressBook shows a list of all students.
-3.  User get to know the name or ID of a specific student.
-4.  User requests to add tag a specific student by inputting that student's ID and tag information.
-5.  The tag is successfully added to that student.
+1.  User requests to list all students. (UC XX)
+2.  EduLink-NUS shows a list of all students. 
+3.  User gets to know the ID of a specific student.
+4.  User requests to add tags a specific student by inputting that student's ID and tags.
+5.  The tags are successfully added to that student.
 
     Use case ends.
+
 **Extensions**
 * 2a. The list is empty.
 
@@ -359,18 +504,131 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. Invalid student ID entered
 
-    * 4a1. AddressBook inform user that student does not exist
+    * 4a1. EduLink-NUS informs user the constraints for student ID
     * 4a2. User enters new student ID and tag information
       Steps 4a1 - 4a2 are repeated till a valid student ID is given
 
       Use case resumes at step 5
 
-* 4b. Duplicate tag found
+* 4b. Duplicate tag(s) found
 
-    * 4b1. AddressBook inform user that tag already exist for the student specified
+    * 4b1. EduLink-NUS informs user that one or more tags to add are already exist in the student's profile 
+  * 4a2. User enters new student ID and tag information
+    Steps 4a1 - 4a2 are repeated till no tags to add are in the student's profile.
 
-      Use case ends
+    Use case resumes at step 5
 
+* 4c. Invalid tag(s) found
+
+    * 4b1. EduLink-NUS inform the constraints for tag
+  
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+  
+      Use case resumes at step 5
+
+#### Use Case: Edit a Student's tag
+
+**MSS**
+1.  User requests to list all students.
+2.  EduLink-NUS shows a list of all students.
+3.  User gets to know the ID of a specific student.
+4.  User requests to edit a specific student's tag by inputting that student's ID tag to be edited and resulting tag
+5.  The student's tag is successfully edited to the resulting tag.
+
+    Use case ends.
+
+ **Extensions**
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 4a. Invalid student ID entered
+
+    * 4a1. EduLink-NUS informs user the constraints for student ID
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+      Use case resumes at step 5
+* 4b. Can't find specified student
+
+    * 4a1. EduLink-NUS informs user that studentID is not found
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+      Use case resumes at step 5
+* 4c. Duplicate tag found (the resulting tag is already there)
+
+    * 4b1. EduLink-NUS informs user that resulting tag already exist for the student specified
+
+  * 4a2. User enters new student ID and tag information
+
+    Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+    Use case resumes at step 5
+
+* 4d. Invalid tag found
+
+    * 4b1. EduLink-NUS informs user the constraints for tag.
+
+    * 4a2. User enters new student ID and tag information
+     
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5
+     
+* 4e. Can't find the tag to edit
+
+    * 4b1. EduLink-NUS informs user that system can't find the tag to be edited.
+
+    * 4a2. User enters new tag.
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5
+
+#### Use Case: Delete tags from a Student's Profile
+
+**MSS**
+
+1.  User request to list all students.
+2.  EduLink-NUS shows a list of all students.
+3.  User gets to know the name or ID of a specific student.
+4.  User requests to delete tags from a specific student by inputting that student's ID and tags.
+5.  The tags are successfully deleted from that student.
+
+    Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 4a. Invalid student ID entered
+
+    * 4a1. EduLink-NUS informs user the constraints for student ID
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+      Use case resumes at step 5
+
+* 4b. Invalid tag found
+
+    * 4b1. EduLink-NUS informs user the constraints for tag
+
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5 
+
+* 4c. Can't find the tag to delete 
+
+    * 4b1. EduLink-NUS informs user that system can't find the tag to delete.
+
+    * 4a2. User enters new tags.
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5
+  
 **Use Case: Edit the Information of a Student**
 
 **MSS**

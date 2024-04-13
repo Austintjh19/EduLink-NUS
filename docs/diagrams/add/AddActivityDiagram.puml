@@ -1,0 +1,29 @@
+@startuml
+
+|User|
+start
+:Add student command entered;
+|System|
+if (Is Command format valid?) then (no)
+    |User|
+    :Receive error message;
+else (yes)
+    |System|
+    :Parse command parameters;
+    :Create Student object;
+    |System|
+
+    if (Is Duplicate student?) then (yes)
+        |User|
+        :Receive error message;
+    else (no)
+        |System|
+        :Add student to address book;
+        |User|
+        :Receive success message;
+    endif
+endif
+
+stop
+
+@enduml

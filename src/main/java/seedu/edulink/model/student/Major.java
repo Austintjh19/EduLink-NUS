@@ -3,6 +3,8 @@ package seedu.edulink.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.commons.util.AppUtil.checkArgument;
 
+import seedu.edulink.commons.util.UserInputUtil;
+
 /**
  * Represents a Student's Major in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMajor(String)}
@@ -23,7 +25,7 @@ public class Major {
     public Major(String major) {
         requireNonNull(major);
         checkArgument(isValidMajor(major), MESSAGE_CONSTRAINTS);
-        this.major = major;
+        this.major = UserInputUtil.removeDuplicatedWhitespaces(major);
     }
 
     public static boolean isValidMajor(String test) {

@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.edulink.commons.core.GuiSettings;
-import seedu.edulink.model.student.NameContainsQueryNamePredicate;
+import seedu.edulink.model.student.predicates.NameContainsQueryNamePredicate;
 import seedu.edulink.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

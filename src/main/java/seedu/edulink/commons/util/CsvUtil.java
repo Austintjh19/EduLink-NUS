@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.edulink.commons.core.LogsCenter;
+import seedu.edulink.model.grade.Grade;
 import seedu.edulink.model.student.Student;
 import seedu.edulink.model.tag.Tag;
 
@@ -30,7 +31,7 @@ public class CsvUtil {
      */
     public static void convertToCsv(List<Student> students, String fileName) throws IOException {
         StringBuilder csvContent = new StringBuilder();
-        csvContent.append("id,name,phone,email,address,major,intake,tags\n");
+        csvContent.append("id,name,phone,email,address,major,intake,tags,grades\n");
         for (Student student : students) {
             csvContent.append(student.getId().toString()).append(",")
                 .append(student.getName().toString()).append(",")
@@ -40,7 +41,9 @@ public class CsvUtil {
                 .append(student.getMajor().toString()).append(",")
                 .append(student.getIntake().toString()).append(",")
                 .append(student.getTags().stream()
-                   .map(Tag::getTagName).collect(Collectors.joining(" | ")))
+                   .map(Tag::getTagName).collect(Collectors.joining(" | "))).append(",")
+                .append(student.getGrades().stream()
+                        .map(Grade::getModuleScore).collect(Collectors.joining(" | ")))
                 .append("\n");
         }
         Path filePath = Paths.get(FOLDER_PATH + fileName);

@@ -2,7 +2,7 @@ package seedu.edulink.commons.util;
 
 import java.util.function.Predicate;
 
-import seedu.edulink.model.grade.Grades;
+import seedu.edulink.model.grade.LetterGrades;
 import seedu.edulink.model.grade.Score;
 
 /**
@@ -23,22 +23,22 @@ public class GradeUtil {
      * @param score The score to parse.
      * @return The grade corresponding to the score.
      */
-    public static Grades parseGrade(Score score) {
+    public static LetterGrades parseGrade(Score score) {
         double scoreValue = score.score;
 
         // Check the score against the predicates and return the corresponding grade
         if (isGradeA.test(scoreValue)) {
-            return Grades.A;
+            return LetterGrades.A;
         } else if (isGradeB.test(scoreValue)) {
-            return Grades.B;
+            return LetterGrades.B;
         } else if (isGradeC.test(scoreValue)) {
-            return Grades.C;
+            return LetterGrades.C;
         } else if (isGradeD.test(scoreValue)) {
-            return Grades.D;
+            return LetterGrades.D;
         } else if (isGradeF.test(scoreValue)) {
-            return Grades.F;
+            return LetterGrades.F;
         } else {
-            return Grades.N;
+            return LetterGrades.N;
         }
     }
 }

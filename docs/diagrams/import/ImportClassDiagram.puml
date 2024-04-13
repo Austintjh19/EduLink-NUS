@@ -1,0 +1,49 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Package " "<<Rectangle>>{
+Class "  <<interface>>  \nParser" as Parser<ImportCommand>
+Class ImportCommandParser {
+    +parse(): ImportCommand
+}
+class Storage {
++setAddressBookFilePath():void
+}
+
+class JsonAddressBookStorage {
++readAddressBook():void
+}
+
+
+
+Class ParserException
+Class DataLoadingException
+
+
+class ImportCommand{
+    -String:filename
+    -Storage:storage
+    +execute(model: Model): CommandResult
+}
+class CommandResult
+}
+
+file "filename.json" as file_icon <<file>> {
+}
+
+
+JsonAddressBookStorage  .right.> DataLoadingException: throws >
+ImportCommandParser .up.|> Parser
+Parser .right.> ParserException: throws >
+ImportCommandParser .right.> ParserException: throws >
+
+ImportCommandParser .down.> ImportCommand: initialize >
+ImportCommand -right-> JsonAddressBookStorage : readAddressBook >
+ImportCommand -right-> Storage : setAddressBookFilePath >
+
+ImportCommand .down.> CommandResult: returns >
+JsonAddressBookStorage .> file_icon
+
+
+@enduml

@@ -10,12 +10,23 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 
 UniqueTagList -right-> "*" Tag
-UniquePersonList -right-> Person
+UniquePersonList -right-> Student
 
-Person -up-> "*" Tag
+Student -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Student *--> Id
+Student *--> Name
+Student *--> Phone
+Student *--> Email
+Student *--> Address
+Student *--> Intake
+Student *--> Major
+Student *--> Grade
+
+Grade *--> Score
+Grade *--> Module
+Grade *--> LetterGrades
+
+
+
 @enduml
