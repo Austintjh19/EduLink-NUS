@@ -1,9 +1,9 @@
 package seedu.edulink.model.student;
 
-import seedu.edulink.commons.util.UserInputUtil;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.commons.util.AppUtil.checkArgument;
+
+import seedu.edulink.commons.util.UserInputUtil;
 
 /**
  * Represents a Student's Major in the address book.
