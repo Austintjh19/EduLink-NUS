@@ -3,7 +3,7 @@
   title: "Kumar Prabhat's Project Portfolio Page"
 ---
 
-### Project: EduLink-NUS  
+### Project: EduLink-NUS
 
 EduLink NUS is a desktop application for Educators to keep track of their past Students. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 Given below are my contributions to the project.
@@ -23,11 +23,11 @@ Given below are my contributions to the project.
   * HighLights: This implementation would require some changes based on the changes done in `Model` i.e Student e.g adding a new field for the Student. Complexity wise it was a bit challenging ensuring that feature works well in all the Operating Systems Smoothly which resulted in limit the putting restrictions on the exported Filename.
 * **New Feature**: Added the ability to import the students data from a Compatible JSON File.
   * What it does: allows user to import another JSON file apart from the default `addressbook.json`.
-  * Justification: User can now separate Groups of Student in different File , allowing them managing multiple databases (Local) sequentially. 
+  * Justification: User can now separate Groups of Student in different File , allowing them managing multiple databases (Local) sequentially.
   * HighLights: Complexity wise it was a bit challenging as just by changing the current view of students with the imported file doesn't work, need to ensure that any changes made after import are reflected in the imported file instead of the default one.
 
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s2.github.io/tp-dashboard/?search=dedsecrattle&breakdown=true) 
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s2.github.io/tp-dashboard/?search=dedsecrattle&breakdown=true)
 
 * **Project management**:
   * Managed releases `v1.2` - `v1.4` (3 releases) on GitHub

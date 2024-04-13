@@ -84,21 +84,36 @@ public class StringUtil {
         checkArgument(!preppedWords.isEmpty(), "Word parameter cannot be empty");
 
         String[] wordsInPreppedSentence = preppedSentence.split(" ");
-        String[] wordsInPreppedWords = words.split("\\s+");
+        String[] wordsInPreppedWords = preppedWords.split("\\s+");
+
+        for (int i = 0; i < wordsInPreppedSentence.length; i++) {
+            wordsInPreppedSentence[i] = wordsInPreppedSentence[i].trim();
+        }
+
+        for (int i = 0; i < wordsInPreppedWords.length; i++) {
+            wordsInPreppedWords[i] = wordsInPreppedWords[i].trim();
+        }
 
         boolean matchFound = false;
 
+        StringBuilder queryWordsBuilder = new StringBuilder();
+        for (String word : wordsInPreppedWords) {
+            queryWordsBuilder.append(word).append(" ");
+        }
+        String queryWords = queryWordsBuilder.toString().trim();
+
         for (int i = 0; i < wordsInPreppedSentence.length - wordsInPreppedWords.length + 1; i++) {
-            StringBuilder testWordBuilder = new StringBuilder();
+            StringBuilder testWordsBuilder = new StringBuilder();
             for (int j = 0; j < wordsInPreppedWords.length; j++) {
-                testWordBuilder.append(wordsInPreppedSentence[i + j]).append(" ");
+                testWordsBuilder.append(wordsInPreppedSentence[i + j]).append(" ");
             }
-            String testWord = testWordBuilder.toString();
-            if (testWord.indexOf(preppedWords) == 0) {
+            String testWords = testWordsBuilder.toString();
+            if (testWords.indexOf(queryWords) == 0) {
                 matchFound = true;
                 break;
             }
         }
+
         return matchFound;
     }
 
