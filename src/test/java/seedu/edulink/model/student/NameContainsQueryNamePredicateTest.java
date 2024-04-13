@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.edulink.model.student.predicates.NameContainsQueryNamePredicate;
 import seedu.edulink.testutil.PersonBuilder;
 
 public class NameContainsQueryNamePredicateTest {

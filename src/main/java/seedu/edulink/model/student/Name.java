@@ -3,6 +3,8 @@ package seedu.edulink.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulink.commons.util.AppUtil.checkArgument;
 
+import seedu.edulink.commons.util.UserInputUtil;
+
 /**
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -29,7 +31,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = UserInputUtil.removeDuplicatedWhitespaces(name);
     }
 
     /**

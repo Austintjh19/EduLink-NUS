@@ -22,7 +22,7 @@ import seedu.edulink.model.Model;
 import seedu.edulink.model.ModelManager;
 import seedu.edulink.model.UserPrefs;
 import seedu.edulink.model.student.Student;
-import seedu.edulink.model.student.TagsContainQueryTagsPredicate;
+import seedu.edulink.model.student.predicates.TagsContainQueryTagsPredicate;
 import seedu.edulink.model.tag.Tag;
 
 public class FilterCommandTest {
