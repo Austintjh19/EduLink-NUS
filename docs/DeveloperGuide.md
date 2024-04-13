@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# EduLink-NUS Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -160,16 +160,71 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find feature
 
-The find feature has been purposefully designed to allow for searches with Student ID, Name, or both. Searching using a name returns only the individuals whose name is an ordered super string of the search term.
-Searching using student ID returns only the Individuals whose Student ID is a super string of the search id, disregarding ordering. Searching by name and id returns only the individuals who satisfy the two search values.
+This find feature enables the search for students in the EduLink-NUS application based on their Names, Student IDs, or Both.
+The search specification will vary depending on the search parameter. i.e. using Names, Student IDs, or Both. Below is a brief summary:
+* Searching by Name - Single Word:
+  * Partial word matching is supported when searching by a single word, but matches must commence from the first letter.
+* Searching by Name - Multiple Words:
+  * Only Student Names which contains the same chronological combination and ordering of those search words will be returned.
+  * Specific location of the match is disregarded.
+  Only the last search word will allow for partial word matching, but matches must commence from the first letter.
+* Searching by ID:
+  * Partial word matching is supported and matches need not commence from the first letter.
+* Searching by both ID & Name:
+  * Only entries with IDs and names that match both criteria will be returned.
+  * The constraints for matches, both for Name and ID, are applied the same as when searching by Name and ID individually.
 
-#### Proposed Implementation
+#### Proposed Implementation - Class Diagram:
 
-Below is a representing class diagram of the feature.
+Below is a representative class diagram of the feature. The implementation of this feature involved the creation of three new classes, those being IdAndNameContainsQueryIdAndNamePredicate, IdContainsQueryIdPredicate, and NameContainsQueryNamePredicate.
+Each class is designed to address specific aspects of the search specifications outlined in the description. Essentially, they serve to encapsulate and modularize the logic for finding students based on different search criteria.
 
 <puml src="diagrams/find/FindClassDiagram.puml" alt="UML Class Diagram - Find"/>
 
+#### Proposed Implementation - Sequence Diagrams:
 
+In the sequence diagram provided below, the interaction among various classes forming the foundation of the find feature is illustrated. The sequence is initiated when the user enters the command "find n/John D id/A123" into the command box, triggering the `execute("find n/John D id/A123")` method call in the LogicManager.
+
+<puml src="diagrams/find/FindSequenceDiagram.puml" alt="UML Sequence Diagram - Find"/>
+
+The sequence diagram above reveals that the `FindCommand` constructor requires a `Predicate` argument. The determination of which specific predicate to pass — `IdAndNameContainsQueryIdAndNamePredicate`, `IdContainsQueryIdPredicate`, or `NameContainsQueryNamePredicate` — is elucidated below:
+
+1. Parsing and Determination by FindCommandParser:
+    - The `FindCommandParser` is responsible for parsing the command string and extracting relevant search criteria.
+    - Based on the parsed criteria, such as name and ID prefixes in the command string, the `FindCommandParser` determines the appropriate predicate to use for the search.
+
+2. Predicate Selection Criteria:
+    - If the command includes both name and ID criteria (`n/John` and `id/A123`), the `FindCommandParser` selects `IdAndNameContainsQueryIdAndNamePredicate`.
+    - If only the ID criterion is present (`id/A123`), the `FindCommandParser` selects `IdContainsQueryIdPredicate`.
+    - If only the name criterion is present (`n/John`), the `FindCommandParser` selects `NameContainsQueryNamePredicate`.
+
+3. Passing Predicate to FindCommand:
+    - Once the appropriate predicate is determined, the `FindCommandParser` instantiates a `FindCommand` object, passing the selected predicate as an argument to its constructor.
+    - This ensures that the `FindCommand` is equipped with the correct predicate for executing the search operation effectively.
+
+The below sequence diagram highlights this process:
+
+<puml src="diagrams/find/FindParserSequenceDiagram.puml" alt="UML Sequence Diagram - Find Parser"/>
+
+#### Proposed Implementation - Design Considerations:
+
+Design of Predicate:
+* Alternative 1 (Current Implementation):
+  * Description: Each search criteria (e.g., ID, Name) has its own dedicated predicate class (e.g., IdContainsQueryIdPredicate, NameContainsQueryNamePredicate).
+  * Pros: Encapsulates the logic for each search criterion in separate classes, ensuring modularity and maintainability.
+  * Cons: Requires creating a significant number of predicate classes, potentially leading to codebase complexity.
+* Alternative 2: Create a single, more generalized predicate class capable of handling multiple search criteria.
+  * Pros:  Reduces the number of classes needed, simplifying the codebase.
+  * Cons: Combining multiple search criteria into a single class may reduce modularity, making it harder to isolate and maintain specific functionality.
+
+Design of Matching Name Criteria Reasoning:
+* Partial word matching supported but must commence from fist letter:
+  * Requiring matches to start from the first letter ensures that search results are precise and relevant. This prevents unrelated or unintended matches that might occur if partial matches were allowed to begin from any position within the name.
+* Sequential Combination Matching: Requiring the names to contain the same chronological combination and ordering of the keywords ensures precise matches.
+
+Design of Matching ID Criteria Reasoning:
+* Partial matching for ID:
+  * Allowing partial word matching for IDs enhances the flexibility of the search functionality. Users can search for IDs even if they don't remember the complete sequence, making it easier to find specific students.
 
 ### \[Proposed\] Undo/redo feature
 
