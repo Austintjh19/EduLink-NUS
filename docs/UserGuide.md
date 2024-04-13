@@ -220,7 +220,7 @@ Some parameters to not come along with their own Parameter Prefix. E.g. KEYWORD 
 | `TAG`          | `t/`             | Specifies the tag to categorize a student under. <br/><br/> - Tags names should be alphanumeric. <br/> - Tags are restricted to 15 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 
 | `MODULE`       | `mod/`           | Specifies the module code of an associated grade score for a student. <br/><br/> - Module code should be in the format LLDDDD[L] where L represents a letter and D represents a digit. <br/> - [L] represents optional letter at the end of the code.                                                                                                                                                                                                                                                                                                                                                                                                                               | 
 | `MODULE_SCORE` | `s/`             | Specifies the module score for an associated module grade for a student. <br/><br/> - Module score should be a non-negative number between 0 and 100 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 
-| `FILENAME`     | `f/`             | Specifies the file to import or export from. <br/><br/> - File names can only contain alphanumeric characters and the special characters: `-` and `_`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 
+| `FILENAME`     | `f/`             | Specifies the file to import or export from. <br/><br/> - Filenames can only contain alphanumeric characters and the special characters: `-` and `_`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 
 | `KEYWORD`      | Not Applicable   | Specifies the keywords to search for when finding students.  <br/><br/> - Can contain alphanumeric characters and any special characters, except the special character: `/`. No whitespaces allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 
 | `INDEX`        | Not Applicable   | Refers to the index number shown in the Student List Panel.  <br/><br/> -  Must be a positive whole number, e.g. 1, 2, 3. And fall withing the range of 1 to 2,147,483,647.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 
 
@@ -295,6 +295,8 @@ Moreover, notice that `[TAG]` is followed by an ellipsis (`…`). This signifies
 
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
+
+This section provides comprehensive guidance on how to use each command, detailing their functionalities and usage scenarios. For specific constraints related to each parameter, please refer to the [Parameter](#parameters) section for detailed information
 
 ### Data Modification Commands: 
 
@@ -474,7 +476,6 @@ Examples:
 
 
 
-
 ### Data Filtering Commands:
 
 #### Listing all students : `list`
@@ -559,96 +560,109 @@ Examples:
 
 #### Accessing the Recent Commands in CommandBox:
 
-> Access the 5 most Recent Successful Commands in the CommandBox.
+> Access the 5 most recent successfully executed commands.
 
 ![Ui](images/RecentCommands.png)
 
 Command Details & Constraints:
 * **Method 1 -  Using GUI**:
   * Left-Click with Mouse on the desired Recent Command (any one of the command marked with Red Rectangle).
+  * The command will be displayed in the command box.
 * **Method 2 -  Using CLI**:
   * Press `TAB` on your Keyboard to access the RecentCommands in the order shown in the Image above starting from left to right i.e (Most RecentCommand First)
+  * The command will be displayed in the command box.
 
-### Undo Changes: `undo`
+#### Undo Changes: `undo`
 
 > Undoes the last command executed and reverts the application to the previous state.
 
 Format: `undo`
 
+Command Details & Constraints:
 * The `undo` command revert the changes done by last **Data changing command** i.e. command that changes (adds, edits or deletes) information for any Student in the Application.
 * The application stores up to 20 previous states, allowing you to undo up to the last 20 commands.
-* If there are no commands to undo or else you already executed `undo` for 20 commands , an error message will be displayed.
+* If there are no commands to undo or else you already executed `undo` for 20 commands, an error message will be displayed.
 
 Examples:
 * `undo`
-* 
-### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+#### Importing Students Data : `import`
 
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-* The format does not require any additional parameters; entering parameters will be disregarded.
-* The help message image provided offers clear instructions for users seeking assistance.
-
-
-
-### Exporting Students Data : `export`
-
-Exports the students from the address book in a CSV file.
-
-Format: `export f/[FILENAME]`
-
-* Exports the Students Data in a CSV file named `FILENAME.csv` in the **exports** directory i.e `[JAR_FILE_LOCATION]/exports/FILENAME.csv`
-* Multiple values within an attribute is separated with a `|` e.g Tags -> `Potenial TA | Honours` in the CSV File.
-* `FILENAME` must be alphanumeric and it can include ` _ (Underscore)` and `- (Hyphen)`.
-
-Examples:
-* `export f/Mystudents`
-* `export f/NUS-CS`
-
-### Importing Students Data : `import`
-
-Imports data from a valid JSON file into the Application
+> Imports data from a valid JSON file into the EduLink-NUS application.
 
 Format: `import f/[FILENAME]`
 
+Command Details & Constraints:
 * Imports Students Data from JSON file named `FILENAME.json` in the **data** directory i.e `[JAR_FILE_LOCATION]/data/FILENAME.json`.
-* `FILENAME` must be alphanumeric and it can include ` _ (Underscore)` and `- (Hyphen)`.
-* If you try to import an invalid JSON file, it will display an error message.
+* The `FILENAME` parameter must satisfy its corresponding [parameter constraints](#parameters).
+  * Filenames can only contain alphanumeric characters and the special characters: `-`and `_`.
+* An error message will be displayed when there is an attempt to import an invalid JSON file. 
 
 Examples:
 * `import f/Mystudents`
 * `import f/NUS-CS`
 * `import f/_Stanford`
 
-### Clearing all entries : `clear`
+#### Exporting Students Data : `export`
 
-Clears all entries from the address book.
+> Exports the students from the EduLink-NUS application to a CSV file.
+
+Format: `export f/[FILENAME]`
+
+Command Details & Constraints:
+* Exports the Students Data in a CSV file named `FILENAME.csv` in the **exports** directory i.e `[JAR_FILE_LOCATION]/exports/FILENAME.csv`
+* Multiple values within an attribute is separated with a `|`. 
+  * E.g. Tags: `Potenial TA | Honours` in the CSV File. 
+  * E.g. Grades: `CS2030 - 80 | CS2040 - 78` in the CSV File.
+* The `FILENAME` parameter must satisfy its corresponding [parameter constraints](#parameters).
+  * Filenames can only contain alphanumeric characters and the special characters: `-`and `_`.
+
+Examples:
+* `export f/Mystudents`
+* `export f/NUS-CS`
+
+#### Clearing all entries : `clear`
+
+> Clears all entries from the EduLink-NUS application.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+Command Details & Constraints:
+* The command does not require any additional parameters; entered parameters will be disregarded.
 
-Exits the program.
+#### Exiting the program : `exit`
+
+> Exits the EduLink-NUS application.
 
 Format: `exit`
 
+Command Details & Constraints:
+* The command does not require any additional parameters; entered parameters will be disregarded.
+
+#### Viewing help : `help`
+
+> Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
+Command Details & Constraints:
+* The command does not require any additional parameters; entered parameters will be disregarded.
+* The help message image provided offers clear instructions for users seeking assistance.
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+The data in the EduLink-NUS application are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
-
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, the EduLink-NUS application will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -656,7 +670,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduLink-NUS home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -667,34 +681,37 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
-Term    | Definition and or Explanation
---------|----------------------------------------------------------------------
-**CSV** | **Comma-Seperated Values** , a file format generally used to import data in Spreadsheets and Do analysis
-**JSON** | **JavaScript Object Notation**, a standard file format for data interchange
-**Data Changing Command** | Commands in the Application that modifies the Students Data e.g Delete, Edit, Tag, etc
-**NUS** | National University of Singapore , A University Located in Central Singapore
-**Student ID** | A particular format of ID followed in NUS, Starting with a Alphabet followed by 7 digits and ending with an Alphabet e.g A0252195L
-**GUI** | Graphical User Interface , all the part of the application which you can interact with your mouse
-**CLI** | Command Line Interface , part of application which can only be used with commands from the Keyboard
+| Term                      | Definition and or Explanation                                                                                                      |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| **CSV**                   | **Comma-Seperated Values** , a file format generally used to import data in Spreadsheets and Do analysis                           |
+| **JSON**                  | **JavaScript Object Notation**, a standard file format for data interchange                                                        |
+| **Data Changing Command** | Commands in the Application that modifies the Students Data e.g Delete, Edit, Tag, etc                                             |
+| **NUS**                   | National University of Singapore , A University Located in Central Singapore                                                       |
+| **Student ID**            | A particular format of ID followed in NUS, Starting with a Alphabet followed by 7 digits and ending with an Alphabet e.g A0252195L |
+| **GUI**                   | Graphical User Interface , all the part of the application which you can interact with your mouse                                  |
+| **CLI**                   | Command Line Interface , part of application which can only be used with commands from the Keyboard                                |
 
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add id/ID n/NAME p/PHONE_NUMBER e/EMAIL  m/MAJOR in/INTAKE a/ADDRESS [t/Tag]…​` <br> e.g., `add id/A0265901E n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 m/Computer Science in/2020 t/Sincere`
-**Clear**  | `clear`
-**Delete** | `delete INDEX` **OR** `delete id/STUDENT_ID` **OR** `delete all` <br> e.g., `delete 3`, `delete id/A026273X`, `delete all`
-**Edit**   | `edit INDEX [id/ID] [m/MAJOR] [in/INTAKE] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` ,`edit 1 id/A0267901E`
-**Find**   | `find n/NAME`  **OR**  `find id/STUDENT_ID` **OR** `find n/NAME id/STUDENT_ID` <br> e.g. `find n/John`, `find id/A123`, `find id/234 n/John D`
-**Filter** | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`
-**Add Tag/Tags** | `tag id/ID t/TAG t/TAG` <br> e.g, `tag id/A0257418E t/potentialTA t/Active`
-**List**   | `list`
-**Undo**   | `undo`
-**Export**   | `export f/FILENAME` <br> e.g, `export f/mystudents`
-**Import**   | `import f/FILENAME` <br> e.g,`import f/NTU-CS`
-**Delete tag/tags**   | `dtag id/STUDENT_ID t/TAG` <br> e.g,`dtag id/A0257418E t/potentialTA`
-**Edit tag/tags** | `etag id/STUDENT_ID t/TAG t/RESULTING_TAG` <br> e.g `etag id/A0265901E t/Honors t/Scholar`
-**Grade** | `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE` <br> e.g `grade id/A0262733X mod/CS2103T s/77`
-**Delete Grade** | `dgrade id/STUDENT_ID mod/MODULE_CODE` <br> e.g `dgrade id/A0262733X mod/CS2103T`
-**Help**   | `help`
+| Action              | Format, Examples                                                                                                                                                                                                            |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add id/ID n/NAME p/PHONE_NUMBER e/EMAIL  m/MAJOR in/INTAKE a/ADDRESS [t/Tag]…​` <br> e.g., `add id/A0265901E n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 m/Computer Science in/2020 t/Sincere` |
+| **Clear**           | `clear`                                                                                                                                                                                                                     |
+| **Delete**          | `delete INDEX` **OR** `delete id/STUDENT_ID` **OR** `delete all` <br> e.g., `delete 3`, `delete id/A026273X`, `delete all`                                                                                                  |
+| **Edit**            | `edit INDEX [id/ID] [m/MAJOR] [in/INTAKE] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` ,`edit 1 id/A0267901E`                                                    |
+| **Find**            | `find n/NAME`  **OR**  `find id/STUDENT_ID` **OR** `find n/NAME id/STUDENT_ID` <br> e.g. `find n/John`, `find id/A123`, `find id/234 n/John D`                                                                              |
+| **Filter**          | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`                                                                                                                                             |
+| **Add Tag/Tags**    | `tag id/ID t/TAG t/TAG` <br> e.g, `tag id/A0257418E t/potentialTA t/Active`                                                                                                                                                 |
+| **List**            | `list`                                                                                                                                                                                                                      |
+| **Undo**            | `undo`                                                                                                                                                                                                                      |
+| **Export**          | `export f/FILENAME` <br> e.g, `export f/mystudents`                                                                                                                                                                         |
+| **Import**          | `import f/FILENAME` <br> e.g,`import f/NTU-CS`                                                                                                                                                                              |
+| **Delete tag/tags** | `dtag id/STUDENT_ID t/TAG` <br> e.g,`dtag id/A0257418E t/potentialTA`                                                                                                                                                       |
+| **Edit tag/tags**   | `etag id/STUDENT_ID t/TAG t/RESULTING_TAG` <br> e.g `etag id/A0265901E t/Honors t/Scholar`                                                                                                                                  |
+| **Grade**           | `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE` <br> e.g `grade id/A0262733X mod/CS2103T s/77`                                                                                                                                |
+| **Delete Grade**    | `dgrade id/STUDENT_ID mod/MODULE_CODE` <br> e.g `dgrade id/A0262733X mod/CS2103T`                                                                                                                                           |
+| **Help**            | `help`                                                                                                                                                                                                                      |
+
+--------------------------------------------------------------------------------------------------------------------
