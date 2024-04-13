@@ -221,7 +221,7 @@ Some parameters to not come along with their own Parameter Prefix. E.g. KEYWORD 
 | `MODULE`       | `mod/`           | Specifies the module code of an associated grade score for a student. <br/><br/> - Module code should be in the format LLDDDD[L] where L represents a letter and D represents a digit. <br/> - [L] represents optional letter at the end of the code.                                                                                                                                                                                                                                                                                                                                                                                                                               | 
 | `MODULE_SCORE` | `s/`             | Specifies the module score for an associated module grade for a student. <br/><br/> - Module score should be a non-negative number between 0 and 100 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 
 | `FILENAME`     | `f/`             | Specifies the file to import or export from. <br/><br/> - File names can only contain alphanumeric characters and the special characters: `-` and `_`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 
-| `KEYWORD`      | Not Applicable   | Specifies the keywords to search for when finding students.  <br/><br/> - Can contain alphanumeric characters, spaces, and any special characters, except the special character: `/`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 
+| `KEYWORD`      | Not Applicable   | Specifies the keywords to search for when finding students.  <br/><br/> - Can contain alphanumeric characters and any special characters, except the special character: `/`. No whitespaces allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 
 | `INDEX`        | Not Applicable   | Refers to the index number shown in the Student List Panel.  <br/><br/> -  Must be a positive whole number, e.g. 1, 2, 3. And fall withing the range of 1 to 2,147,483,647.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 
 
 #### Command Format:
@@ -296,7 +296,7 @@ Moreover, notice that `[TAG]` is followed by an ellipsis (`…`). This signifies
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
 
-### Student Data Modification Commands: 
+### Data Modification Commands: 
 
 #### Adding a student: `add`
 
@@ -311,7 +311,7 @@ Format: `add n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS in/INTAKE m/M
 Command Details & Constraints:
 * Adds a new student data to the EduLink-NUS application. Will be located at the end of the Student List Panel. 
 * Command will only be executed, if there is no preexisting student data within the EduLink-NUS application with the same `STUDENT_ID`.
-* All parameters must satisfy their corresponding parameter constraints.
+* All parameters must satisfy their corresponding [parameter constraints](#parameters).
 
 Examples:
 * `add n/John Doe id/A2265901E p/1234567890 e/john.doe@example.com a/311, Clementi Ave 2, #02-25 in/2023 m/Computer Science t/Honors`
@@ -319,7 +319,7 @@ Examples:
 
 #### Editing a student : `edit`
 
-> Edits an existing student in the address book, using the Student List Panel index.
+> Edits an existing student in the EduLink-NUS application.
 
 ![Index Location](images/Index.png)
 
@@ -333,13 +333,255 @@ Command Details & Constraints:
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the Student List Panel.
 * At least one of the optional fields must be provided.
 * Existing values will be updated with the input parameter values. 
-* All parameters must satisfy their corresponding parameter constraints.
+* All parameters must satisfy their corresponding [parameter constraints](#parameters).
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student on the Student List Panel to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower in/2020` Edits the name of the 2nd student to be `Betsy Crower` and changes the intake to `2020`.
 
 
+#### Deleting a student : `delete`
+
+> Deletes a specified or a group of students from the EduLink-NUS Application. 
+
+Format: `delete INDEX` **OR** `delete id/STUDENT_ID` **OR** `delete all`
+
+![Delete All](images/deleteAll.png)
+
+Command Details & Constraints:
+* Able to delete an individual student through:
+  1. A specified `INDEX` associated with a student displayed in the Student List Panel. 
+  2. A specified `STUDENT_ID` within the EduLink-NUS Application. This allows the deletion of students outside the Student List Panel. 
+     * The `STUDENT_ID` must exist within the system.
+* Able to delete a group of students through:
+  1. The case-insensitive `delete all` command. It deletes all students currently displayed on the Student List Panel. 
+* All parameters must satisfy their corresponding [parameter constraints](#parameters).
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `delete id/A026273X` deletes the student with Student ID A026273X, even if it is not currently on displayed on the Student List Panel.
+* `filter t/TA` followed by `delete all` deletes all students with the `TA` tag. I.e. it removes all students currently displayed on the Student List Panel.
+
+#### Adding or Editing a Module Score to a Student: `grade`
+
+> Add and Edit a student's Module Score in the EduLink-NUS application.
+
+Format: `grade id/STUDENT_ID mod/MODULE s/SCORE`
+
+<box type="info" seamless>
+**Info:** For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes. 
+</box>
+
+Command Details & Constraints:
+* Adds a Module Score to a student specified by the `STUDENT_ID`.
+  * The specified student via `STUDENT_ID` must be displayed on the Student List Panel.
+* Command will **edit** the score of a specified module if `MODULE` already exists.
+* For each execution, the command can only **add** or **edit** a single module score for a particular student.
+* All parameters must satisfy their corresponding [parameter constraints](#parameters).
+
+Examples:
+* `grade id/A0265901E mod/CS2103T s/77.5` grades the student with Student ID A0265901E for module CS2103T if found in the filtered list. 77.5 will be the displayed grade.
+* `grade id/A0265901E mod/CS2103T s/77.5` then `grade id/A0265901E mod/CS2103T s/85` edits the student with Student ID A0262743X's grade for module CS2103T because a grade for it already exists. 85 will be the displayed grade.
+
+#### Deleting a Module Score for a Student: `dgrade`
+
+> Deletes a Module Score for a student in the EduLink-NUS application.
+
+Format: `dgrade id/STUDENT_ID mod/MODULE`
+
+<box type="info" seamless>
+**Info:** For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes. 
+</box>
+
+Command Details & Constraints:
+* Deletes a Module Score for a student specified by the specified `STUDENT_ID`.
+  * The specified student via `STUDENT_ID` must be displayed on the Student List Panel.
+* The `MODULE` must already exist for that particular student.
+* For each execution, the command can only **delete** a single module grade entry for one particular student.
+* All parameters must satisfy their corresponding [parameter constraints](#parameters).
+
+Examples:
+* `dgrade id/A026273X mod/CS2103T` deletes the grade of the student with Student ID A026273X for module CS2103T.
+
+#### Tagging a Student: `tag`
+
+> Tags a specified student in the EduLink-NUS application.
+
+Format: `tag id/STUDENT_ID t/TAG [t/TAG] …​`
+
+<box type="info" seamless>
+**Info:** For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes. 
+</box>
+
+<box type="tip" seamless>
+**Tip:** You can tag the specified student with any number of `TAG`s.
+</box>
+
+Command Details & Constraints:
+* Adds a tag or multiple tags to the student with id `STUDENT_ID`.
+  * The specified student via `STUDENT_ID` must be displayed on the Student List Panel.
+* `TAG` is case-insensitive: TA and ta are the same.
+  * EduLink-NUS prevents the entry of duplicated tags. 
+* All parameters must satisfy their corresponding [parameter constraints](#parameters).
+
+Examples:
+* `tag id/A0257418E t/potentialTA`
+* `tag id/A0257418E t/potentialTA t/Active`
+
+#### Editing tags for a Student: `etag`
+
+> Edits the tag of a specific student in the EduLink-NUS application.
+
+Format: `etag id/STUDENT_ID t/EXISTING_TAG t/RESULTING_TAG`
+
+<box type="info" seamless>
+**Info:** For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes. 
+</box>
+
+Command Details & Constraints:
+* Edits the tag of the student with id `STUDENT_ID`.
+  * The specified student via `STUDENT_ID` must be displayed on the Student List Panel.
+* `EXISTING_TAG` is the existing tag that you intend to edit. It is case-insensitive.
+* `RESULTING_TAG` is the new tag that will replace the existing tag.
+* Both the `EXISTING_TAG` and `RESULTING_TAG` must be not more than 15 characters long with no space in between.
+* Both the `EXISTING_TAG` and `RESULTING_TAG` much be alphanumeric, and they are case-insensitive.
+* For each execution, the command can only **edit** a single tag for one particular student.
+
+Examples:
+* `etag id/A0265901E t/Honors t/Scholar` updates the tag from `Honors` to `Scholar` for the student with ID `A0265901E`.
+
+#### Deleting a tag from a student: `dtag`
+
+> Remove a list of specified tags for a particular student in the EduLink-NUS application.
+
+Format: `dtag id/STUDENT_ID t/TAG [t/TAG] …​`
+
+<box type="info" seamless>
+**Info:** For the command to be valid. The student specified by the `STUDENT_ID` must be displayed in the Student List Panel. This is to ensure data integrity is maintained and prevent any accidental changes. 
+</box>
+
+Command Details & Constraints:
+* Deletes specified tags of the student with id `STUDENT_ID`.
+  * The specified student via `STUDENT_ID` must be displayed on the Student List Panel.
+* `TAG` is case-insensitive: TA and ta are the same.
+* All parameters must satisfy their corresponding [parameter constraints](#parameters).
+
+Examples:
+* `dtag id/A0257418E t/potentialTA t/Active` deletes tags `potentialTA` and `Active` for the student with the Student ID `A0257418E`.
+
+
+
+
+
+
+### Data Filtering Commands:
+
+#### Listing all students : `list`
+
+> Shows a list of all Students in the EduLink-NUS application.
+
+Format: `list`
+
+Command Details & Constraints:
+* Displays the list of all students stored within EduLink NUS on the Student List Panel.
+* No parameters are required for this command, and any parameter added will be ignored.
+
+#### Viewing a Student on the Student Card:
+
+> View a single student's details in a formatted and organized manner.
+
+Method: Left-click on a specific Student Panel Card within the Student List Panel of the EduLink NUS User Interface.
+
+Command Details & Constraints:
+* The Student Card will display the currently selected student from the Student List Panel.
+* The Student Card will display the details of the first student on the Student List Panel, when a specific student is not selected from the Student List Panel.
+* The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the data within Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter`, `edit`, `tag` ...
+* If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
+
+#### Search Students by Name or ID: `find`
+
+> This command facilitates the search for students in the EduLink-NUS application based on their **Names**, **Student IDs**, or **Both**.
+
+Formats: `find n/KEYWORD [KEYWORD] …​` **OR** `find id/KEYWORD` **OR** `find n/KEYWORD [KEYWORD] …​ id/KEYWORD`
+
+Command Details & Constraints:
+* The parameter prefix `n/` is used to search by **Name**. The parameter prefix `id/` is used to search by **Student ID**.
+* Students who meet the specified criteria will be displayed on the Student List Panel.
+* The search is case-insensitive. e.g `john` will match `John`, `a1234567x` will match `A1234567X`.
+* **Searching by Name - Single Keyword:**
+  * Partial word matching is supported when searching by a single `KEYWORD`, but matches must commence from the first letter. 
+  * E.g. `John` will match `Jonathan`. And `nathan` will not match with `Jonathan`.
+* **Searching by Name - Multiple Keywords:**
+  * Only Student Names which contains the same chronological combination and ordering of those `KEYWORD`s will be returned. 
+  * Specific location of the match is disregarded.
+  * Only the last `KEYWORD` will allow for partial word matching, but matches must commence from the first letter.
+  * E.g. `Li A` will successfully match `John Li An`. Additionally, `Hans Bo` will return `Hans Bober`, `Hans Bober` and not `Hans Mayer`
+* **Searching by ID:**
+  * Partial word matching is supported and matches need not commence from the first letter. 
+  * E.g. `A123` will match `A1234567X`. And `2345` will match with `A1234567X`.
+* **Searching by both ID & Name:** 
+  * Only entries with IDs and names that match both criteria will be returned. 
+  * The constraints for matches, both for Name and ID, are applied the same as when searching by Name and ID individually.
+  * E.g. `Hans Bo` and `A1234` will return entries that has names that includes `Hans Bo` and IDs with `A1234`.
+
+Examples:
+* `find n/John` returns `john`, `John Doe`, `Johnathan`
+* `find n/alex david` returns `Alex David`, `Alex Davidson`
+* `find id/A1234567X` returns a person with ID `A12345678X`
+* `find id/A123` returns entries with IDs with `A123`
+* `find id/A1234567X n/John Doe` returns a person `John Doe` with ID `A12345678X` 
+* `find id/234 n/John D` returns a person `Jeff John Doe Leong` with ID `A12345678X`
+
+#### Filtering List of Students: `filter`
+
+> Filters all students based on tags in the EduLink-NUS application.
+
+Format: `filter t/TAG [t/TAG] …​`
+
+Command Details & Constraints:
+* Students who meet the specified criteria will be displayed on the Student List Panel.
+* Tag names are case-insensitive. e.g `TA` will match `Ta`
+* The order of the tags does not matter. e.g. result for `TA` and `Knowledgeable` will match `Knowledgeable` and `TA`.
+* Only full words will be matched, no support for partial word matches. e.g. `TA` will not match `TAPotential`.
+* Persons matching all tags listed will be returned. E.g. Person with `TA` tag only will not be returned, if tags
+  specified includes `TA` and `Year 2`.
+
+Examples:
+* `filter t/CS2103T` will display only people that have been tagged with `CS2103T`.
+* `filter t/CS2103T t/TA` wil display only people that have been tagged with `CS2103T` and `TA`.
+
+
+
+
+
+### General Commands:
+
+#### Accessing the Recent Commands in CommandBox:
+
+> Access the 5 most Recent Successful Commands in the CommandBox.
+
+![Ui](images/RecentCommands.png)
+
+Command Details & Constraints:
+* **Method 1 -  Using GUI**:
+  * Left-Click with Mouse on the desired Recent Command (any one of the command marked with Red Rectangle).
+* **Method 2 -  Using CLI**:
+  * Press `TAB` on your Keyboard to access the RecentCommands in the order shown in the Image above starting from left to right i.e (Most RecentCommand First)
+
+### Undo Changes: `undo`
+
+> Undoes the last command executed and reverts the application to the previous state.
+
+Format: `undo`
+
+* The `undo` command revert the changes done by last **Data changing command** i.e. command that changes (adds, edits or deletes) information for any Student in the Application.
+* The application stores up to 20 previous states, allowing you to undo up to the last 20 commands.
+* If there are no commands to undo or else you already executed `undo` for 20 commands , an error message will be displayed.
+
+Examples:
+* `undo`
+* 
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -351,183 +593,7 @@ Format: `help`
 * The format does not require any additional parameters; entering parameters will be disregarded.
 * The help message image provided offers clear instructions for users seeking assistance.
 
-### Deleting a student : `delete`
 
-Deletes a specified or a group of individual from the EduLink NUS system. Either through the student ID, Student List Panel index, or Student List Panel.
-
-Format: `delete INDEX` **OR** `delete id/STUDENT_ID` **OR** `delete all`
-
-![Delete All](images/deleteAll.png)
-
-* Deletes the student at the specified `INDEX` or deletes the student identified by the specified `STUDENT_ID`.
-* The index refers to the index number shown in the Student List Panel.
-* The `STUDENT_ID` refers to the unique identification string associated with individuals stored in EduLink NUS.
-* The INDEX **must be a positive integer** 1, 2, 3, …​
-* The STUDENT_ID **must exist within the system**
-* Using the `all` keyword removes all the current students displayed within the Student List Panel from EduLink NUS.
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
-* `delete id/A026273X` deletes the student with Student ID A026273X, even if it is not currently on displayed on the Student List Panel.
-* `filter t/TA` followed by `delete all` deletes all students with the `TA` tag. I.e. it removes all students currently displayed on the Student List Panel.
-
-### Listing all students : `list`
-
-Shows a list of all Students in the EduLink NUS.
-
-Format: `list`
-
-* Displays the list of all students stored within EduLink NUS on the Student List Panel.
-* No parameters are required for this command, and any parameter added will be ignored.
-
-### Viewing a Student on the Student Card:
-
-View a single student's details in a formatted and organized manner.
-
-Method: Left-click on a specific Student Panel Card within the Student List Panel of the EduLink NUS User Interface.
-
-* The Student Card will display the currently selected student from the Student List Panel.
-* The Student Card will display the details of the first student on the Student List Panel, when a specific student is not selected from the Student List Panel.
-* The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter` ...
-* If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
-
-### Accessing the Recent Commands in CommandBox:
-
-Access the 5 most Recent Successful Commands in the CommandBox.
-
-![Ui](images/RecentCommands.png)
-
-**Method 1 -  Using GUI**:
-Left-Click with Mouse on the desired Recent Command (any one of the command marked with Red Rectangle).
-
-**Method 2 -  Using CLI**:Press `TAB` on your Keyboard to access the RecentCommands in the order shown in the Image above
-starting from left to right i.e (Most RecentCommand First)
-
-
-### Search Students by Name or ID: `find`
-
-This command facilitates the search for students in the EduLink NUS application based on their **Names**, **Student IDs**, or **Both**. Matching students will be displayed on the Student List Panel.
-
-Formats: `find n/NAME`, `find id/STUDENT_ID`, **OR** `find n/NAME id/STUDENT_ID`
-
-* The search is case-insensitive. e.g `john` will match `John`, `a1234567x` will match `A1234567X`
-* The search by name supports partial word matching, but must be in chronological order e.g. `John` will match `Jonathan`. And `nathan` will not match with `Jonathan`.
-* When searching by name with multiple words, only entries with the same chronological combination of the search words will match. It disregards the specific location of the match. e.g. `Li A` will successfully match `John Li An`.
-  Additionally, `Hans Bo` will return `Hans Bober`, `Hans Bober` and not `Hans Mayer`
-* The search by ID supports partial word matching and does not need to be in chronological order e.g. `A123` will match `A1234567X`. And `2345` will match with `A1234567X`.
-* When searching by both ID and name, only entries with IDs and names that match both criteria will be returned.
- e.g. `Hans Bo` and `A1234` will return entries that has names that includes `Hans Bo` and IDs with `A1234`.
-
-Examples:
-* `find n/John` returns `john`, `John Doe`, `Johnathan`
-* `find n/alex david` returns `Alex David`, `Alex Davidson`
-* `find id/A1234567X` returns a person with ID `A12345678X`
-* `find id/A123` returns entries with IDs with `A123`
-* `find id/A1234567X n/John Doe` returns a person `John Doe` with ID `A12345678X`
-* `find id/234 n/John D` returns a person `Jeff John Doe Leong` with ID `A12345678X`
-
-
-### Filtering List of Students: `filter`
-
-Filter displayed list of students on the Student List Panel based on a tag or tags.
-
-Format: `filter t/TAG [t/TAG] …​`
-
-* Tag names are case-insensitive. e.g `TA` will match `Ta`
-* The order of the tags does not matter. e.g. result for `TA` and `Knowledgeable` will match `Knowledgeable` and `TA`.
-* Only full words will be matched, no support for partial word matches. e.g. `TA` will not match `TAPotential`.
-* Persons matching all tags listed will be returned. E.g. Person with `TA` tag only will not be returned, if tags
-  specified includes `TA` and `Year 2`.
-
-Examples:
-* `filter t/CS2103T` will display only people that have been tagged with `CS2103T`.
-* `filter t/CS2103T t/TA` wil display only people that have been tagged with `CS2103T` and `TA`.
-
-### Adding or Editing Module Grade to a Student: `grade`
-
-Adds a Module Grade for an individual from the EduLink NUS system, using the Student ID. 
-
-Format: `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE`
-
-* Adds a Module Grade to a student identified by the specified STUDENT_ID in the **filtered** list and not full list. 
-* The `STUDENT_ID` must exist within the system
-* The `MODULE_CODE` must be valid i.e. matches [min. 2 to max 4. letters] followed by [4 digits] then [an optional letter]
-* The SCORE must be within 0 to 100 and can only be given up to 2 decimal places.
-* Command will **edit** the grade of a specified module if `MODULE_CODE` already exists. 
-* For each execution the Command can only **add** or **edit** a single module grade for one particular student.
-
-Examples:
-* `grade id/A0265901E mod/CS2103T s/77.5` grades the student with Student ID A0265901E for module CS2103T if found in the filtered list. 77.5 will be the displayed grade.
-* `grade id/id/A0265901E mod/CS2103T s/85` edits the student with Student ID A0262743X's grade for module CS2103T because a grade for it already exists. 85 will be the displayed grade.
-
-
-### Deleting Module Grade to a Student: `dgrade`
-
-Deletes a Module Grade for an individual from the EduLink NUS system, using the Student ID.
-
-Format: `dgrade id/STUDENT_ID mod/MODULE_CODE `
-
-* Deletes a Module Grade for a student identified by the specified STUDENT_ID in the **filtered** list and not full list.
-* The `STUDENT_ID` must exist within the system
-* The `MODULE_CODE` must be valid i.e. matches [min. 2 to max 4. letters] followed by [4 digits] then [an optional letter]
-* The `MODULE_CODE` must already exist for that particular student.
-* For each execution the Command can only **delete** a single module grade entry for one particular student.
-
-Examples:
-* `dgrade id/A026273X mod/CS2103T` deletes the grade of the student with Student ID A026273X for module CS2103T.
-
-### Tagging a student : `tag`
-
-Tags the specified student from the address book.
-
-Format: `tag id/STUDENT_ID t/TAG [t/TAG] …​`
-
-* Adds a tag or multiple tags to the student with id `STUDENT_ID`.
-* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
-* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* Each `TAG` should be alphanumeric, not more than 15 characters long, with no space in between. 
-* `Tag` is case-insensitive: TA and ta are the same.
-  * If add two same tag, only one will be added.
-  * Can't add tag that the student already have.
-
-Examples:
-* `tag id/A0257418E t/potentialTA t/Active`
-
-### Editing tags for a Student: `etag`
-
-Edits the tag of a specific student in EduLink NUS
-
-Format: `etag id/STUDENT_ID t/EXISTING_TAG t/RESULTING_TAG`
-
-* Edits the tag of the student with id `STUDENT_ID`.
-* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
-* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* `EXISTING_TAG` It is the existing tag
-that you intend to edit. It is case-insensitive.
-* `RESULTING_TAG` is the new tag that will replace the existing tag.
-* Both the `EXISTING_TAG` and `RESULTING_TAG` must be not more than 15 characters long with no space in between.
-* Both the `EXISTING_TAG` and `RESULTING_TAG` much be alphanumeric, and they are case-insensitive.
-
-Examples:
-* `etag id/A0265901E t/Honors t/Scholar` updates the tag from `Honors` to `Scholar` for the student with ID `A0265901E`.
-
-### Deleting a tag from a student : `dtag`
-
-Remove a list of specified tags from a student's profile.
-
-Format: `dtag id/STUDENT_ID t/TAG [t/TAG] …​`
-
-* Deletes tags of the student with id `STUDENT_ID`.
-* The `STUDENT_ID` refers to the alphanumeric string on the left of Name
-* The `STUDENT_ID` must start with an alphabet followed by 7 digits and ending with an alphabet e.g A0265901E
-* Each `TAG` should be alphanumeric, not more than 15 characters long, with no space in between.
-* `Tag` is case-insensitive: TA and ta are the same.
-  * If add two same tag, only one of them will be added.
-  * Can't add tag that the student already have.
-
-Examples:
-* `dtag id/A0257418E t/potentialTA t/Active`
 
 ### Exporting Students Data : `export`
 
@@ -557,51 +623,6 @@ Examples:
 * `import f/Mystudents`
 * `import f/NUS-CS`
 * `import f/_Stanford`
-
-### Undo Changes: `undo`
-
-Undoes the last command executed and reverts the application to the previous state.
-
-Format: `undo`
-
-* The `undo` command revert the changes done by last **Data changing command** i.e. command that changes (adds, edits or deletes) information for any Student in the Application.
-* The application stores up to 20 previous states, allowing you to undo up to the last 20 commands.
-* If there are no commands to undo or else you already executed `undo` for 20 commands , an error message will be displayed.
-
-Examples:
-* `undo`
-
-### Grading a student : `grade`
-
-Grades the specified individual from the EduLink NUS system for a specified module
-
-Format: `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE`
-
-* Grades the student identified by the specified `STUDENT_ID`.
-* The STUDENT_ID refers to the unique identification string associated with individuals stored in EduLink NUS.
-* Edit's the student identified by the specified `STUDENT_ID`'s grade if a grade for the specified `MODULE` already exists.
-* The STUDENT_ID **must exist within the system**
-* The MODULE_CODE **must be valid i.e. matches [2 letters] followed by [4 digits] then [a optional letter]**
-* The SCORE **must be within 0 to 100**. 0 stands up **Not Available**.
-
-Examples:
-* `grade id/A026273X mod/CS2103T s/77` grades the student with Student ID A026273X for module CS2103T. 77 out of 100 is translated to grade B.
-* `grade id/A026273X mod/CS2103T s/85` edits the student with Student ID A026273X's grade for module CS2103T because a grade for it already. 85 out of 100 is now translated to grade A.
-
-### Deleting a grade for a student : `dgrade`
-
-Deletes the grade of the specified individual from the EduLink NUS system for the specified module.
-
-Format: `dgrade id/STUDENT_ID mod/MODULE_CODE`
-
-* Deletes grade of the student identified by the specified `STUDENT_ID` for the specified `MODULE_CODE`.
-* The STUDENT_ID refers to the unique identification string associated with individuals stored in EduLink NUS.
-* The STUDENT_ID **must exist within the system**
-* The MODULE_CODE **must be valid i.e. matches [2 letters] followed by [4 digits] then [a optional letter]**
-* The MODULE_CODE **must exist within the student's list of grades**
-
-Examples:
-* `dgrade id/A026273X mod/CS2103T` deletes the grade of the student with Student ID A026273X for module CS2103T.
 
 ### Clearing all entries : `clear`
 
