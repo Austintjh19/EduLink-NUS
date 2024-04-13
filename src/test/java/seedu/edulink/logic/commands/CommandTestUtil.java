@@ -19,9 +19,10 @@ import seedu.edulink.commons.core.index.Index;
 import seedu.edulink.logic.commands.exceptions.CommandException;
 import seedu.edulink.model.AddressBook;
 import seedu.edulink.model.Model;
-import seedu.edulink.model.student.predicates.NameContainsQueryNamePredicate;
 import seedu.edulink.model.student.Student;
+import seedu.edulink.model.student.predicates.NameContainsQueryNamePredicate;
 import seedu.edulink.testutil.EditPersonDescriptorBuilder;
+
 
 /**
  * Contains helper methods for testing commands.

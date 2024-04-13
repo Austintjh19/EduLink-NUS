@@ -21,10 +21,10 @@ import org.junit.jupiter.api.Test;
 import seedu.edulink.model.Model;
 import seedu.edulink.model.ModelManager;
 import seedu.edulink.model.UserPrefs;
+import seedu.edulink.model.student.Student;
 import seedu.edulink.model.student.predicates.IdAndNameContainsQueryIdAndNamePredicate;
 import seedu.edulink.model.student.predicates.IdContainsQueryIdPredicate;
 import seedu.edulink.model.student.predicates.NameContainsQueryNamePredicate;
-import seedu.edulink.model.student.Student;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
