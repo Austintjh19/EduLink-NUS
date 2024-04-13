@@ -44,7 +44,7 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
         - [Deleting a tag from a student: `dtag`](#deleting-a-tag-from-a-student-dtag)
     - [Data Filtering Commands](#data-filtering-commands)
         - [Listing all students: `list`](#listing-all-students-list)
-        - [Search Students by Name or ID: `find`](#search-students-by-name-or-id-find)
+        - [Find Students by Name or ID: `find`](#find-students-by-name-or-id-find)
         - [Filtering List of Students: `filter`](#filtering-list-of-students-filter)
     - [General Commands](#general-commands)
         - [Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
@@ -515,7 +515,7 @@ Command Details & Constraints:
 * Displays the list of all students stored within EduLink NUS on the Student List Panel.
 * No parameters are required for this command, and any parameter added will be ignored.
 
-#### Search Students by Name or ID: `find`
+#### Find Students by Name or ID: `find`
 
 > This command facilitates the search for students in the EduLink-NUS application based on their **Names**, **Student IDs**, or **Both**.
 

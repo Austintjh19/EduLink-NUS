@@ -160,14 +160,32 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find feature
 
-The find feature has been purposefully designed to allow for searches with Student ID, Name, or both. Searching using a name returns only the individuals whose name is an ordered super string of the search term.
-Searching using student ID returns only the Individuals whose Student ID is a super string of the search id, disregarding ordering. Searching by name and id returns only the individuals who satisfy the two search values.
+This find feature enables the search for students in the EduLink-NUS application based on their Names, Student IDs, or Both.
+The search specification will vary depending on the search parameter. i.e. using Names, Student IDs, or Both. Below is a brief summary:
+* Searching by Name - Single Word:
+  * Partial word matching is supported when searching by a single word, but matches must commence from the first letter.
+* Searching by Name - Multiple Words:
+  * Only Student Names which contains the same chronological combination and ordering of those search words will be returned.
+  * Specific location of the match is disregarded.
+  Only the last search word will allow for partial word matching, but matches must commence from the first letter.
+* Searching by ID:
+  * Partial word matching is supported and matches need not commence from the first letter.
+* Searching by both ID & Name:
+  * Only entries with IDs and names that match both criteria will be returned.
+  * The constraints for matches, both for Name and ID, are applied the same as when searching by Name and ID individually.
 
-#### Proposed Implementation
+#### Proposed Implementation - Class Diagram:
 
-Below is a representing class diagram of the feature.
+Below is a representative class diagram of the feature. The implementation of this feature involved the creation of three new classes, those being IdAndNameContainsQueryIdAndNamePredicate, IdContainsQueryIdPredicate, and NameContainsQueryNamePredicate.
+Each class is designed to address specific aspects of the search specifications outlined in the description. Essentially, they serve to encapsulate and modularize the logic for finding students based on different search criteria.
 
 <puml src="diagrams/find/FindClassDiagram.puml" alt="UML Class Diagram - Find"/>
+
+#### Proposed Implementation - Sequence Diagrams:
+
+To illustrate how all these classes interact to form the find feature refer to the sequence diagram below, where `execute("find n/John D id/A123")` has invoked in the LogicManager, through the user entered commands.
+
+<puml src="diagrams/find/FindSequenceDiagram.puml" alt="UML Sequence Diagram - Find"/>
 
 
 
