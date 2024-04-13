@@ -26,6 +26,7 @@ Class Grade
 Class Score
 Class Module
 Class LetterGrades
+Class RecentCommands
 
 Class I #FFFFFF
 }
