@@ -170,7 +170,7 @@ The activity diagram below shows the sequence of action users will have to take 
 
 <puml src="diagrams/add/AddActivityDiagram.puml" alt="Activity Diagram - Add"/>
 
-#### Implementation - Sequence Diagrams:
+#### Implementation - Class Diagram:
 
 The below class diagram represents the key classes and their relationships involved in the implementation of the Add feature in the EduLink-NUS application.
 
@@ -314,6 +314,78 @@ Below is a representative class diagram of the feature. The implementation of th
 
 **Note:** The lifeline for `ImportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+
+### Grade Feature
+
+The Grade feature allows users to efficiently manage and update student grades within the EduLink-NUS application. To maintain data integrity and completeness, the system requires the inclusion of essential parameters such as Student ID, Module Code and Score. The feature adds or edits depending on the existence of the grade for the specified module and student.
+* if a grade record for the specified student and module already exists:
+  * Updates existing record with the new score.
+* if a grade record for the specified student and module does not exist:
+  * Adds new grade record to the student's record.
+
+The activity diagram below illustrates the sequence of actions users will undertake to add or update student grades within the EduLink-NUS application.
+
+<puml src="diagrams/grade/GradeActivityDiagram.puml" alt="Activity Diagram - Grade"/>
+
+#### Implementation - Class Diagrams:
+
+Below is a representative class diagram of the feature. The implementation of this feature involved the creation of five new classes:
+* Grade: represents grade record for a student within EduLink-NUS.
+* Module, Score and LetterGrade: represents the essential information to stored in the grade record.
+* GradeUtil: to handle the conversion from numerical Score to LetterGrade.
+
+<puml src="diagrams/grade/GradeClassDiagram.puml" alt="UML Class Diagram - Grade"/>
+
+#### Implementation - Sequence Diagrams:
+
+In the sequence diagram provided below, the interaction among various classes forming the foundation of the grade feature is illustrated. 
+
+<puml src="diagrams/grade/GradeSequenceDiagram.puml" alt="UML Sequence Diagram - Grade"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `GradeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+The sequence diagram reveals that the `GradeCommand` constructor requires `ID` and `Grade` arguments. The `Grade` argument contains a numerical value representing the grade. This numerical grade is to be processed by the `GradeUtil` class to generate the corresponding letter grade using predefined predicates.
+
+Additional Information:
+- **ParserUtil Class**: This class serves as a helper for the GradeCommandParser, facilitating parsing and validation tasks related to grade data inputs. 
+- **ArgumentMultimap Class**: ArgumentMultimap aids in mapping command arguments for grade-related operations, while ParserUtil offers utility methods for parsing different types of grade data.
+- **GradeCommand Class**: Represents the command to add or update a student's grade within the application. Upon execution, it generates a CommandResult. It initializes and manages instances of the Grade class.
+- **GradeUtil Class**: This class serves as a helper for the Grade, generating letter grade based on predefined predicate for score range of each letter grade automatically.
+
+#### Implementation - Design Considerations:
+
+Design of Parsing Grade Data Input:
+* **Current Implementation (Alternative 1)**:
+  - **Description**: Validation tasks are centralized within the ParserUtil class, offering a modular and maintainable approach.
+  - **Pros**: Promotes code modularity and ease of maintenance by isolating validation logic from other components. Facilitates seamless updates and modifications.
+  - **Cons**: Introduces an additional layer of abstraction, potentially increasing complexity.
+* **Alternative 2**:
+  - **Description**: Embed validation functions directly within relevant classes, such as Grade, Module and Score, eliminating the need for a separate ParserUtil class.
+  - **Pros**: Provides context-specific validation, allowing each class to enforce its constraints and behaviors independently.
+  - **Cons**: May lead to code duplication if similar validation logic is required across multiple classes, posing maintenance challenges.
+
+Design of Parsing Letter Grade:
+* **Current Implementation (Alternative 1)**:
+  - **Description**: Score range for each letter range are set and centralized within the GradeUtil class using predicate, offering a modular and maintainable approach.
+  - **Pros**: Promotes code modularity and ease of maintenance by isolating validation logic from other components. Facilitates seamless updates and modifications.
+  - **Cons**: Introduces an additional layer of abstraction, potentially increasing complexity.
+* **Alternative 2**:
+  - **Description**: Having the user input the letter grade directly in the command without calculating it based on the numerical score.
+  - **Pros**: Simplifies the input process for users, as they can directly specify the letter grade without needing to know the corresponding numerical score. Avoids the need for complex validation and conversion logic within the application.
+  - **Cons**: Relies heavily on user input accuracy and understanding, potentially leading to input errors Not suitable if the application needs to perform calculations or analyses based on numerical scores rather than letter grades such as finding the Mean, Median, Maximum and Minimum.
+
+Design of Editing Grade:
+* **Current Implementation (Alternative 1)**:
+  - **Description**: The GradeCommand is responsible for both adding new grade records and editing existing ones.
+  - **Pros**: Centralized logic within the GradeCommand class simplifies the codebase and reduces redundancy. Users interact with a single command for both adding and editing grades, not having to remember one more command word.
+  - **Cons**: May lead to complexity within the GradeCommand class, especially as additional editing functionalities are introduced.
+* **Alternative 2**:
+  - **Description**: Create a new EditGradeCommand class dedicated to editing existing grade records.
+  - **Pros**: Editing logic is isolated in its own command class, promoting code organization and maintainability. Each command class has a single responsibility, making it easier to understand and modify.
+  - **Cons**: Requires additional command classes. Users may need to remember separate commands for adding and editing grades, which could impact usability.
 
 ### \[Proposed\] Undo/redo feature
 
