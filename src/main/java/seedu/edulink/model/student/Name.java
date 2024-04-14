@@ -12,7 +12,7 @@ import seedu.edulink.commons.util.UserInputUtil;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names must start with a letter and contain only alphanumeric characters and spaces. "
+            "Names must start with a letter and contain only alphanumeric characters , whitespaces and | i.e. pipe character. "
                     + "They cannot exceed 100 characters in length, and the field must not be left empty.";
 
     /*
