@@ -387,6 +387,54 @@ Design of Editing Grade:
   - **Pros**: Editing logic is isolated in its own command class, promoting code organization and maintainability. Each command class has a single responsibility, making it easier to understand and modify.
   - **Cons**: Requires additional command classes. Users may need to remember separate commands for adding and editing grades, which could impact usability.
 
+### Tag Feature
+
+The Tag feature allows users to add tags to a student's profile. The user needs to specify the student to tag by inputting the student's ID. Users can add several tags at once to improve working efficiency. 
+* If one or more tags the user want to add are already there, the system will display an error message to inform the user.
+* If the ID/tag user inputs are invalid, the system will display the constraints for parameters.
+* Tags are designed to be case-insensitive. If the user adds several equivalent tags at once, only one of them will be added to prevent duplication.
+
+#### Implementation - Class Diagrams:
+
+Below is a representative class diagram of the `tag` feature. 
+
+<puml src="diagrams/tag/TagClassDiagram.puml" alt="UML Class Diagram - Tag"/>
+
+#### Implementation - Sequence Diagrams:
+
+The sequence diagram below shows the interaction of different classes to execute add tag command.
+
+<puml src="diagrams/tag/TagSequenceDiagram.puml" alt="UML Sequence Diagram - Tag"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `TagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+</box>
+
+#### Implementation - Design Considerations:
+
+Design of Parsing Tag Input:
+* **Current Implementation (Alternative 1)**:
+    - **Description**: Validation tasks are centralized within the ParserUtil class, offering a modular and maintainable approach.
+    - **Pros**: Promotes code modularity and ease of maintenance by isolating validation logic from other components. Facilitates seamless updates and modifications.
+    - **Cons**: Introduces an additional layer of abstraction, potentially increasing complexity.
+* **Alternative 2**:
+    - **Description**: Embed validation functions directly within TagCommandParser.
+    - **Pros**: More straightforward and independent from the rest of the code.
+    - **Cons**: Inconsistent with the rest code base, harder to maintain and reuse.
+
+
+Design of Tag message:
+* **Current Implementation (Alternative 1)**:
+    - **Description**: Tags names should be alphanumeric. Tags are restricted to 20 characters long.  Tags are case-insensitive: TA and ta are the same.
+    - **Pros**: Make sure tags messages are brief, and work like tag. Standardize tags.
+    - **Cons**: User loses some freedom to customize their tag.
+* **Alternative 2**:
+    - **Description**: User can input whatever they s/he wants as the tag message. 
+    - **Pros**: User has more freedom. 
+    - **Cons**: Harder to manage user input. Less bug-provoking. 
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Implementation - Class Diagram:
@@ -460,7 +508,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `**`     | user     | sort student data by various criteria such as grade and cohort                                                     | organize student information efficiently and make informed decisions                          |
 | `**`     | user     | filter data based on specific criteria                                                                             | tailor information retrieval to meet diverse academic and administrative needs                |
 | `***`    | user     | search for students by their name or Student ID                                                                    | quickly locate specific individuals within the system                                         |
-| `***`    | user     | add tags to students and classify them based on various criteria such as “Potential Teaching Assistant”            | easily identify and group students based on specific attributes or characteristics            |
+| `***`    | user     | add tags to students and classify them based on various criteria such as “PotentialTA”                             | easily identify and group students based on specific attributes or characteristics            |
 | `*`      | user     | check the number of students in the database based on specific criteria, such as those belonging to a specific tag | assess the scope and distribution of students across various criteria                         |
 | `*`      | user     | add notes or comments to a student's profile                                                                       | maintain a comprehensive record of student achievements, and challenges                       |
 | `*`      | user     | have automatic tagging, e.g. students below a certain grade threshold are tagged with "high priority student"      | save time and resources by automating the identification and classification of students       |
