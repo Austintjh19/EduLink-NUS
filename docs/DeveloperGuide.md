@@ -415,11 +415,6 @@ Below is a representative class diagram of the feature. The implementation of th
 
 We decided to limit the number of Past History Saved to 20 i.e. User can only revert back from last 20 commands only to avoid the Performance issue and keep the implementation Simple.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
