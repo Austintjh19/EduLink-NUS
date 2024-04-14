@@ -136,22 +136,22 @@ mark {
 
   /* Reduce font size when printing */
   h1 {
-      font-size: 1.2rem !important;
+      font-size: 50px !important;
   }
   h2 {
-      font-size: 1.0rem !important;
+      font-size:  45px !important;
   }
   h3 {
-      font-size: 0.8rem !important;
+      font-size: 30px !important;
   }
   h4 {
-      font-size: 0.5rem !important;
+      font-size: 20px !important;
   }
   h5 {
-      font-size: 0.5rem !important;
+      font-size: 20px !important;
   }
   body {
-      font-size: 0.5rem !important;
+      font-size: 16px !important;
   }
   .btn {
       font-size: 0.65rem !important;
