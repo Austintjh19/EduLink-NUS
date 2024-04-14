@@ -286,8 +286,6 @@ To understand how a full command is interpreted, we will utilise the following e
 | **`n/`**    | Parameter Prefix  | Distinguishes `NAME` from other input fields.                  |
 | **`NAME`**  | Parameter         | Represents placeholder for name of the student.                |
 
-Certainly, here's a revised version:
-
 You'll notice that `[TAG]` is wrapped in square brackets, indicating that it's an optional component.
 
 - For example, in `n/STUDENT_NAME [TAG]`, you can include a tag like `n/John t/TA` or simply input the student's name as `n/John`.

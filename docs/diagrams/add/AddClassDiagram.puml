@@ -31,13 +31,13 @@ AddCommand .down.> CommandResult: outputs >
 
 AddCommand -right-> Student: adds >
 
-Student -down-> Name: has >
-Student -down-> Id: has >
-Student -down-> Phone: has >
-Student -down-> Email: has >
-Student -down-> Address: has >
-Student -down-> Intake: has >
-Student -down-> Major: has >
-Student -down-> Tag: has >
+Student *-down-> Name: has >
+Student *-down-> Id: has >
+Student *-down-> Phone: has >
+Student *-down-> Email: has >
+Student *-down-> Address: has >
+Student *-down-> Intake: has >
+Student *-down-> Major: has >
+Student *-down-> Tag: has >
 
 @enduml
