@@ -12,14 +12,15 @@ import seedu.edulink.commons.util.UserInputUtil;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names must start with a letter and contain only alphanumeric characters and spaces. "
+            "Names must start with a letter and contain only alphanumeric characters ,"
+                + " whitespaces and | i.e. pipe character. "
                     + "They cannot exceed 100 characters in length, and the field must not be left empty.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z][a-zA-Z0-9 ]{0,99}$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z][a-zA-Z0-9 |]{0,99}$";
 
     public final String fullName;
 

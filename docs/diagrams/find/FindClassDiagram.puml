@@ -6,7 +6,6 @@ Class "  <<interface>>  \nParser" as Parser<FindCommand>
 Class FindCommandParser {
     +parse(): FindCommand
 }
-Class ParserException
 
 class "  <<interface>>  \nPredicate" as Predicate<Person>
 class IdAndNameContainsQueryIdAndNamePredicate{
@@ -30,7 +29,6 @@ class NameContainsQueryNamePredicate{
 }
 
 class FindCommand{
-    -Predicate<Person>:predicate
     +execute(model: Model): CommandResult
 }
 
@@ -42,13 +40,11 @@ NameContainsQueryNamePredicate .up.|> Predicate
 
 
 FindCommandParser .up.|> Parser
-Parser .right.> ParserException: throws >
-FindCommandParser .right.> ParserException: throws >
 
 FindCommandParser .down.> FindCommand: initialize >
 FindCommand -right-> Predicate: test >
 
-FindCommand .down.> CommandResult: returns >
+FindCommand .down.> CommandResult: outputs >
 
 
 @enduml
