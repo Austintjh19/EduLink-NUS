@@ -107,7 +107,7 @@ This guide is more than just a manual, it is a gateway to maximize your experien
 We're excited to embark on this journey with you and help you make the most out of your academic engagement at NUS with EduLink-NUS. So let's dive in and unleash the full potential of EduLink-NUS together!
 
 --------------------------------------------------------------------------------------------------------------------
-## 2.0 How to use this User Guide
+## 2. How to use this User Guide
 <a id="how-to-use-this-user-guide"></a>
 
 This section is designed to help users effectively navigate the User Guide for EduLink-NUS. Below, you'll find information on how to interpret icons, formatting, and instructions provided throughout the document.
@@ -156,7 +156,7 @@ As you navigate through this user guide, you'll encounter colored boxes containi
 | <box type="warning" seamless>   </box> | Warnings that may corrupt your app and data if not followed. |
 
 --------------------------------------------------------------------------------------------------------------------
-## 3.0 Getting Started
+## 3. Getting Started
 <a id="getting-started"></a>
 
 ### 3.1 Installation
@@ -348,7 +348,7 @@ Moreover, notice that `[TAG]` is followed by an ellipsis (`…`). This signifies
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
-## 4.0 Commands
+## 4. Commands
 <a id="commands"></a>
 
 This section provides comprehensive guidance on how to use each command, detailing their functionalities and usage scenarios. For specific constraints related to each parameter, please refer to the [Parameter](#parameters) section for detailed information
@@ -754,7 +754,7 @@ Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 5.0 FAQ
+## 5. FAQ
 <a id="faq"></a>
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -762,14 +762,14 @@ Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 6.0 Known issues
+## 6 Known issues
 <a id="known-issues"></a>
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **`NAME` Parameter**, if you try to enter a name that contains `/` the application will show error message about invalid format for `NAME` but someone can have `/` in their legal name e.g `Prabhat S/O Radhe`, this limitation arises due to usage of `/` character for Internal use within the Application. The remedy is to use `|` i.e. pipe character in place of `/`. We Understand that this format doesn't comply with their Legal Names but Since Our Application identifies students based on their StudentID , this remedy doesn't limit the Capabilities of EduLink-NUS in any possible way. 
 
 --------------------------------------------------------------------------------------------------------------------
-## 7.0 Glossary
+## 7. Glossary
 <a id="glossary"></a>
 
 | Term                      | Definition and or Explanation                                                                                                      |
@@ -784,7 +784,7 @@ Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 8.0 Command summary
+## 8. Command summary
 <a id="command-summary"></a>
 
 | Action              | Format, Examples                                                                                                                                                                                                            |
