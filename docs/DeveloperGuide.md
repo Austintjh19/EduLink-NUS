@@ -389,81 +389,15 @@ Design of Editing Grade:
 
 ### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation - Class Diagram:
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Below is a representative class diagram of the feature. The implementation of this feature didn't involved creation of any class, but some additional fields in the preexisting classes and changes in methods.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+<puml src="diagrams/undo/UndoClassDiagram.puml" alt="UML Class Diagram - Undo"/>
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+#### Implementation - Sequence Diagram:
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/undo/UndoClassDiagram.puml" alt="UML Class Diagram - Undo"/>
 
 #### Design considerations:
 
@@ -478,7 +412,8 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+
+We decided to limit the number of Past History Saved to 20 i.e. User can only revert back from last 20 commands only to avoid the Performance issue and keep the implementation Simple.
 
 ### \[Proposed\] Data archiving
 
@@ -556,6 +491,114 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `EduLink NUS` and the **Actor** is the `National University of Singapore professors and teaching assistants`, unless specified otherwise)
+
+#### Use Case: Export Students data
+
+**MSS**
+
+1. Users executes any valid Command
+2. EduLink-NUS shows a list of students.
+3. User request to export the students data in a `.csv` file by inputting a filename (e.g. NUS-CS) (Output filename)
+4. Students data successfully exported and new file create in `[JAR_FILE_LOCATION]/exports/NUS-CS.csv`
+
+    Use case ends.
+
+**Extensions**
+* 3a. provided filename doesn't follow the Format.
+    
+    * 3a1. EduLink-NUS informs user the constraints for filename
+    * 3a2. User enters new filename
+      Steps 3a1-3a2 are repeated till a valid filename is given
+
+      Use case resumes at Step 4
+
+* 3a. Application was not able to create the file (e.g. Permissions Conflict)
+    
+    * 3a1. EduLink-NUS informs user that , Export was not successfully executed.
+    * 3a2. Users verifies the Permissions , etc.
+       Steps 3a1-3a2 are repeated till the issue is resolved
+        
+        Use case resumes at Step 4
+
+#### Use Case: Import Students data
+
+**MSS**
+
+1. EduLink-NUS shows list of students , but user wants to import another Student Database.
+2. User request to import the students data from a  valid `JSON` file by inputting a filename (e.g. NUS-CS) (Output filename)
+3. Students data successfully imported from the file located at`[JAR_FILE_LOCATION]/data/NUS-CS.json`
+
+   Use case ends.
+
+**Extensions**
+* 3a. provided filename doesn't follow the Format.
+
+    * 3a1. EduLink-NUS informs user the constraints for filename
+    * 3a2. User enters new filename
+      Steps 3a1-3a2 are repeated until a valid filename is given
+
+      Use case resumes at Step 4
+
+* 3a. Application was not able to import from the Provided file due to Invalid `JSON` file.
+
+    * 3a1. EduLink-NUS informs user that , Import was not successfully executed.
+    * 3a2. User places another `JSON` file.
+      Steps 3a1-3a2 are repeated until a valid `JSON` file is provided.
+
+      Use case resumes at Step 4
+  
+* 3a. Application was not able to import as file with input filename doesn't exist.
+
+    * 3a1. EduLink-NUS informs user that , Import was not successfully executed.
+    * 3a2. User verifies the file is present and/or resolve the issue.
+      Steps 3a1-3a2 are repeated util a valid `JSON` is not present with the given filename.
+
+      Use case resumes at Step 4
+
+
+#### Use Case: Undo a previous command
+
+**MSS**
+1. Users executes any valid Command that changes data of any student in the Application.
+2. EduLink-NUS shows a list of students.
+3. User realise that the previous command has introduced some data inconsistency.
+4. User request to `undo` the previous command.
+5. EduLink-NUS revert back to the previous state i.e. state before the execution of the last command.
+
+   Use case ends.
+
+**Extensions**
+* 4a. There is no History available i.e. No previous state available.
+
+    * 4a1. EduLink-NUS informs user that , There is no History available to reset.
+    
+    Use case ends
+    
+
+* 3a. User has reached maximum allowed `undo` commands i.e. reverted 20 previously executed commands.
+
+    * 3a1. EduLink-NUS informs user that , User have reached the maximum allowed `undo` commands.
+
+      Use case ends
+
+#### Use Case: Fetch the Recent Commands
+
+**MSS**
+1. Users executes any valid Command.
+2. EduLink-NUS shows a list of students.
+3. User realise that the new command he/she wants to execute is almost same as the previous one.
+4. User requests for the Recent Command either by GUI or CLI.
+5. Recent Command appears in the CommandBox.
+
+   Use case ends.
+
+**Extensions**
+* 4a. No History of Recent Command available
+
+    * 4a1. CommandBox remain Blank.
+
+  Use case ends
+
 
 #### Use Case: Add Tags to a Student's Profile
 
