@@ -1,0 +1,33 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+package Model {
+}
+
+Package " "<<Rectangle>>{
+Class "  <<interface>>  \nParser" as Parser<UndoCommand>
+Class UndoCommandParser {
+    +parse(): UndoCommand
+}
+
+
+Class ParserException
+
+class UndoCommand{
+    +execute(model: Model): CommandResult
+}
+class CommandResult
+}
+
+UndoCommandParser .up.|> Parser
+Parser .right.> ParserException: throws >
+UndoCommandParser .right.> ParserException: throws >
+
+UndoCommandParser .down.> UndoCommand: initialize >
+UndoCommand .left.> CommandResult: returns >
+UndoCommand .right.> Model: resetToPreviousState()
+
+
+
+@enduml
