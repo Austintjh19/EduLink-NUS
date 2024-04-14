@@ -7,6 +7,8 @@ skinparam classBackgroundColor LOGIC_COLOR
 Class "{abstract}\nCommand" as Command
 Class XYZCommand
 
+package Storage {}
+
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
 Class AddressBookParser
@@ -22,12 +24,14 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> AddressBookParser
 
 AddressBookParser .down.> XYZCommandParser: <<create>>
+AddressBookParser .down.> Storage: <<use>>
 
 XYZCommandParser ..> XYZCommand : <<create>>
 AddressBookParser ..> Command : <<use>>
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
+XYZCommandParser ..> Storage : 0..1
 ArgumentTokenizer .left.> ArgumentMultimap
 XYZCommandParser ..> CliSyntax
 CliSyntax ..> Prefix
