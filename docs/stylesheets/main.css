@@ -164,6 +164,7 @@ mark {
 h1 {
   font-size: 50px;
   font-weight: bold;
+  margin-bottom: 50px;
 }
 
 h2,
@@ -173,18 +174,19 @@ h5,
 h6 {
   color: #7333E0;
   font-weight: bold;
+  margin: 30px 0px;
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 45px;
 }
 
 h3 {
-  font-size: 25px;
+  font-size: 30px;
 }
 
 h4 {
-  font-size: 16px;
+  font-size: 20px;
 }
 
 body {
