@@ -612,10 +612,6 @@ Examples:
 * `filter t/CS2103T` will display only people that have been tagged with `CS2103T`.
 * `filter t/CS2103T t/TA` wil display only people that have been tagged with `CS2103T` and `TA`.
 
-
-
-
-
 ### 4.3 General Commands:
 <a id="general-commands"></a>
 
@@ -633,7 +629,6 @@ Command Details & Constraints:
 * The Student Card will display the details of the first student on the Student List Panel, when a specific student is not selected from the Student List Panel.
 * The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the data within Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter`, `edit`, `tag` ...
 * If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
-
 
 #### 4.3.2 Accessing the Recent Commands:
 <a id="accessing-the-recent-commands"></a>
@@ -661,7 +656,6 @@ Command Details & Constraints:
 * The `undo` command revert the changes done by last **Data changing command** i.e. command that changes (adds, edits or deletes) information for any Student in the Application.
 * The application stores up to 20 previous states, allowing you to undo up to the last 20 commands.
 * If there are no commands to undo or else you already executed `undo` for 20 commands, an error message will be displayed.
-* 
 
 Examples:
 * `undo`

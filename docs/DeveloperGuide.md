@@ -170,7 +170,7 @@ The activity diagram below shows the sequence of action users will have to take 
 
 <puml src="diagrams/add/AddActivityDiagram.puml" alt="Activity Diagram - Add"/>
 
-#### Implementation - Sequence Diagrams:
+#### Implementation - Class Diagram:
 
 The below class diagram represents the key classes and their relationships involved in the implementation of the Add feature in the EduLink-NUS application.
 
@@ -261,7 +261,7 @@ Design of Predicate:
   * Description: Each search criteria (e.g., ID, Name) has its own dedicated predicate class (e.g., IdContainsQueryIdPredicate, NameContainsQueryNamePredicate).
   * Pros: Encapsulates the logic for each search criterion in separate classes, ensuring modularity and maintainability.
   * Cons: Requires creating a significant number of predicate classes, potentially leading to codebase complexity.
-* Alternative 2: 
+* Alternative 2:
   * Description: Create a single, more generalized predicate class capable of handling multiple search criteria.
   * Pros:  Reduces the number of classes needed, simplifying the codebase.
   * Cons: Combining multiple search criteria into a single class may reduce modularity, making it harder to isolate and maintain specific functionality.
@@ -315,7 +315,79 @@ Below is a representative class diagram of the feature. The implementation of th
 **Note:** The lifeline for `ImportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-###  Undo feature
+### Grade Feature
+
+The Grade feature allows users to efficiently manage and update student grades within the EduLink-NUS application. To maintain data integrity and completeness, the system requires the inclusion of essential parameters such as Student ID, Module Code and Score. The feature adds or edits depending on the existence of the grade for the specified module and student.
+* if a grade record for the specified student and module already exists:
+  * Updates existing record with the new score.
+* if a grade record for the specified student and module does not exist:
+  * Adds new grade record to the student's record.
+
+The activity diagram below illustrates the sequence of actions users will undertake to add or update student grades within the EduLink-NUS application.
+
+<puml src="diagrams/grade/GradeActivityDiagram.puml" alt="Activity Diagram - Grade"/>
+
+#### Implementation - Class Diagrams:
+
+Below is a representative class diagram of the feature. The implementation of this feature involved the creation of five new classes:
+* Grade: represents grade record for a student within EduLink-NUS.
+* Module, Score and LetterGrade: represents the essential information to stored in the grade record.
+* GradeUtil: to handle the conversion from numerical Score to LetterGrade.
+
+<puml src="diagrams/grade/GradeClassDiagram.puml" alt="UML Class Diagram - Grade"/>
+
+#### Implementation - Sequence Diagrams:
+
+In the sequence diagram provided below, the interaction among various classes forming the foundation of the grade feature is illustrated.
+
+<puml src="diagrams/grade/GradeSequenceDiagram.puml" alt="UML Sequence Diagram - Grade"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `GradeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+The sequence diagram reveals that the `GradeCommand` constructor requires `ID` and `Grade` arguments. The `Grade` argument contains a numerical value representing the grade. This numerical grade is to be processed by the `GradeUtil` class to generate the corresponding letter grade using predefined predicates.
+
+Additional Information:
+- **ParserUtil Class**: This class serves as a helper for the GradeCommandParser, facilitating parsing and validation tasks related to grade data inputs.
+- **ArgumentMultimap Class**: ArgumentMultimap aids in mapping command arguments for grade-related operations, while ParserUtil offers utility methods for parsing different types of grade data.
+- **GradeCommand Class**: Represents the command to add or update a student's grade within the application. Upon execution, it generates a CommandResult. It initializes and manages instances of the Grade class.
+- **GradeUtil Class**: This class serves as a helper for the Grade, generating letter grade based on predefined predicate for score range of each letter grade automatically.
+
+#### Implementation - Design Considerations:
+
+Design of Parsing Grade Data Input:
+* **Current Implementation (Alternative 1)**:
+  - **Description**: Validation tasks are centralized within the ParserUtil class, offering a modular and maintainable approach.
+  - **Pros**: Promotes code modularity and ease of maintenance by isolating validation logic from other components. Facilitates seamless updates and modifications.
+  - **Cons**: Introduces an additional layer of abstraction, potentially increasing complexity.
+* **Alternative 2**:
+  - **Description**: Embed validation functions directly within relevant classes, such as Grade, Module and Score, eliminating the need for a separate ParserUtil class.
+  - **Pros**: Provides context-specific validation, allowing each class to enforce its constraints and behaviors independently.
+  - **Cons**: May lead to code duplication if similar validation logic is required across multiple classes, posing maintenance challenges.
+
+Design of Parsing Letter Grade:
+* **Current Implementation (Alternative 1)**:
+  - **Description**: Score range for each letter range are set and centralized within the GradeUtil class using predicate, offering a modular and maintainable approach.
+  - **Pros**: Promotes code modularity and ease of maintenance by isolating validation logic from other components. Facilitates seamless updates and modifications.
+  - **Cons**: Introduces an additional layer of abstraction, potentially increasing complexity.
+* **Alternative 2**:
+  - **Description**: Having the user input the letter grade directly in the command without calculating it based on the numerical score.
+  - **Pros**: Simplifies the input process for users, as they can directly specify the letter grade without needing to know the corresponding numerical score. Avoids the need for complex validation and conversion logic within the application.
+  - **Cons**: Relies heavily on user input accuracy and understanding, potentially leading to input errors Not suitable if the application needs to perform calculations or analyses based on numerical scores rather than letter grades such as finding the Mean, Median, Maximum and Minimum.
+
+Design of Editing Grade:
+* **Current Implementation (Alternative 1)**:
+  - **Description**: The GradeCommand is responsible for both adding new grade records and editing existing ones.
+  - **Pros**: Centralized logic within the GradeCommand class simplifies the codebase and reduces redundancy. Users interact with a single command for both adding and editing grades, not having to remember one more command word.
+  - **Cons**: May lead to complexity within the GradeCommand class, especially as additional editing functionalities are introduced.
+* **Alternative 2**:
+  - **Description**: Create a new EditGradeCommand class dedicated to editing existing grade records.
+  - **Pros**: Editing logic is isolated in its own command class, promoting code organization and maintainability. Each command class has a single responsibility, making it easier to understand and modify.
+  - **Cons**: Requires additional command classes. Users may need to remember separate commands for adding and editing grades, which could impact usability.
+
+### \[Proposed\] Undo/redo feature
 
 #### Implementation - Class Diagram:
 
@@ -342,11 +414,6 @@ Below is a representative class diagram of the feature. The implementation of th
 
 
 We decided to limit the number of Past History Saved to 20 i.e. User can only revert back from last 20 commands only to avoid the Performance issue and keep the implementation Simple.
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -433,7 +500,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 3a. provided filename doesn't follow the Format.
-    
+
     * 3a1. EduLink-NUS informs user the constraints for filename
     * 3a2. User enters new filename
       Steps 3a1-3a2 are repeated till a valid filename is given
@@ -441,11 +508,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at Step 4
 
 * 3a. Application was not able to create the file (e.g. Permissions Conflict)
-    
+
     * 3a1. EduLink-NUS informs user that , Export was not successfully executed.
     * 3a2. Users verifies the Permissions , etc.
        Steps 3a1-3a2 are repeated till the issue is resolved
-        
+
         Use case resumes at Step 4
 
 #### Use Case: Import Students data
@@ -474,7 +541,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 3a1-3a2 are repeated until a valid `JSON` file is provided.
 
       Use case resumes at Step 4
-  
+
 * 3a. Application was not able to import as file with input filename doesn't exist.
 
     * 3a1. EduLink-NUS informs user that , Import was not successfully executed.
@@ -499,9 +566,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 4a. There is no History available i.e. No previous state available.
 
     * 4a1. EduLink-NUS informs user that , There is no History available to reset.
-    
+
     Use case ends
-    
 
 * 3a. User has reached maximum allowed `undo` commands i.e. reverted 20 previously executed commands.
 
@@ -533,7 +599,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list all students. (UC XX)
-2.  EduLink-NUS shows a list of all students. 
+2.  EduLink-NUS shows a list of all students.
 3.  User gets to know the ID of a specific student.
 4.  User requests to add tags a specific student by inputting that student's ID and tags.
 5.  The tags are successfully added to that student.
@@ -547,27 +613,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. Invalid student ID entered
 
-    * 4a1. EduLink-NUS informs user the constraints for student ID
-    * 4a2. User enters new student ID and tag information
-      Steps 4a1 - 4a2 are repeated till a valid student ID is given
+    * 4a1. EduLink-NUS informs user the constraints for student ID.
+    * 4a2. User enters new student ID and tag information.
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given.
 
       Use case resumes at step 5
 
 * 4b. Duplicate tag(s) found
 
-    * 4b1. EduLink-NUS informs user that one or more tags to add are already exist in the student's profile 
-  * 4a2. User enters new student ID and tag information
+    * 4b1. EduLink-NUS informs user that one or more tags to add are already exist in the student's profile.
+    * 4a2. User enters new student ID and tag information.
     Steps 4a1 - 4a2 are repeated till no tags to add are in the student's profile.
 
     Use case resumes at step 5
 
 * 4c. Invalid tag(s) found
 
-    * 4b1. EduLink-NUS inform the constraints for tag
-  
-    * 4a2. User enters new student ID and tag information
-      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
-  
+    * 4b1. EduLink-NUS inform the constraints for tag.
+
+    * 4a2. User enters new student ID and tag information.
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid.
+
       Use case resumes at step 5
 
 #### Use Case: Edit a Student's tag
@@ -615,11 +681,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4b1. EduLink-NUS informs user the constraints for tag.
 
     * 4a2. User enters new student ID and tag information
-     
+
       Steps 4a1 - 4a2 are repeated till all inputted tags are valid
 
       Use case resumes at step 5
-     
+
 * 4e. Can't find the tag to edit
 
     * 4b1. EduLink-NUS informs user that system can't find the tag to be edited.
@@ -661,9 +727,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a2. User enters new student ID and tag information
       Steps 4a1 - 4a2 are repeated till all inputted tags are valid
 
-      Use case resumes at step 5 
+      Use case resumes at step 5
 
-* 4c. Can't find the tag to delete 
+* 4c. Can't find the tag to delete
 
     * 4b1. EduLink-NUS informs user that system can't find the tag to delete.
 
@@ -671,7 +737,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 4a1 - 4a2 are repeated till all inputted tags are valid
 
       Use case resumes at step 5
-  
+
 **Use Case: Edit the Information of a Student**
 
 **MSS**
@@ -730,7 +796,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 4a. Can't find selected student.
 
     * 4a1. EduLink-NUS inform user that student does not exist.
-    * 4a2. User enters new student ID 
+    * 4a2. User enters new student ID
       Steps 4a1 - 4a2 are repeated till a valid student ID is given
 
       Use case resumes at step 5.
