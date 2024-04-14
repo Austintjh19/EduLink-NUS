@@ -6,7 +6,7 @@
 
 # EduLink-NUS User Guide
 
-### Welcome to the EduLink-NUS User Guide!
+## Welcome to the EduLink-NUS User Guide!
 
 Welcome to the **EduLink NUS User Guide** – your essential companion in unlocking the full potential of academic contacts and data management at the National University of Singapore (NUS).
 
@@ -612,6 +612,7 @@ Command Details & Constraints:
 * The `undo` command revert the changes done by last **Data changing command** i.e. command that changes (adds, edits or deletes) information for any Student in the Application.
 * The application stores up to 20 previous states, allowing you to undo up to the last 20 commands.
 * If there are no commands to undo or else you already executed `undo` for 20 commands, an error message will be displayed.
+* 
 
 Examples:
 * `undo`
