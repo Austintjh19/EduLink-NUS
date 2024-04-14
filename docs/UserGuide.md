@@ -15,56 +15,66 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 
-1. [Introduction](#introduction)
-  - [What is EduLink-NUS](#what-is-edulink-nus)
-  - [User Proficiency and Expectations](#user-proficiency-and-expectations)
-  - [Why This Guide Matters](#why-this-guide-matters)
-2. [How to use this User Guide](#how-to-use-this-user-guide)
-  - [Navigating the Document](#navigating-the-document)
-  - [Sections](#sections)
-  - [Icons](#icons)
-3. [Getting Started](#getting-started)
-  - [Installation](#installation)
-  - [Graphical User Interface Layout](#graphical-user-interface-layout)
-    - [User Interface Overview](#user-interface-overview)
-    - [Additional UI Components](#additional-ui-components)
-  - [How to use EduLink-NUS commands](#how-to-use-edulink-nus-commands)
-    - [Parameter Prefixes](#parameter-prefixes)
-    - [Parameters](#parameters)
-    - [Command Format](#command-format)
-4. [Commands](#commands)
-    - [Data Modification Commands](#data-modification-commands)
-        - [Adding a student: `add`](#adding-a-student-add)
-        - [Editing a student: `edit`](#editing-a-student-edit)
-        - [Deleting a student: `delete`](#deleting-a-student-delete)
-        - [Adding or Editing a Module Score to a Student: `grade`](#adding-or-editing-a-module-score-to-a-student-grade)
-        - [Deleting a Module Score for a Student: `dgrade`](#deleting-a-module-score-for-a-student-dgrade)
-        - [Tagging a Student: `tag`](#tagging-a-student-tag)
-        - [Editing tags for a Student: `etag`](#editing-tags-for-a-student-etag)
-        - [Deleting a tag from a student: `dtag`](#deleting-a-tag-from-a-student-dtag)
-    - [Data Filtering Commands](#data-filtering-commands)
-        - [Listing all students: `list`](#listing-all-students-list)
-        - [Find Students by Name or ID: `find`](#find-students-by-name-or-id-find)
-        - [Filtering List of Students: `filter`](#filtering-list-of-students-filter)
-    - [General Commands](#general-commands)
-        - [Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
-        - [Accessing the Recent Commands](#accessing-the-recent-commands)
-        - [Undo Changes: `undo`](#undo-changes-undo)
-        - [Importing Students Data: `import`](#importing-students-data-import)
-        - [Exporting Students Data: `export`](#exporting-students-data-export)
-        - [Clearing all entries: `clear`](#clearing-all-entries-clear)
-        - [Exiting the program: `exit`](#exiting-the-program-exit)
-        - [Viewing help: `help`](#viewing-help-help)
-    - [Saving the Data](#saving-the-data)
-    - [Editing the Data File](#editing-the-data-file)
-5. [FAQ](#faq)
-6. [Known issues](#known-issues)
-7. [Glossary](#glossary)
-8. [Command summary](#command-summary)
---------------------------------------------------------------------------------------------------------------------
-## Introduction
+[1. Introduction](#introduction)
+  - [1.1 What is EduLink-NUS](#what-is-edulink-nus)
+  - [1.2 User Proficiency and Expectations](#user-proficiency-and-expectations)
+  - [1.3 Why This Guide Matters](#why-this-guide-matters)
 
-### What is EduLink-NUS
+[2. How to use this User Guide](#how-to-use-this-user-guide)
+  - [2.1 Navigating the Document](#navigating-the-document)
+  - [2.2 Sections](#sections)
+  - [2.3 Icons](#icons)
+
+[3. Getting Started](#getting-started)
+  - [3.1 Installation](#installation)
+  - [3.2 Graphical User Interface Layout](#graphical-user-interface-layout)
+    - [3.2.1 User Interface Overview](#user-interface-overview)
+    - [3.2.2 Additional UI Components](#additional-ui-components)
+  - [3.3 How to use EduLink-NUS commands](#how-to-use-edulink-nus-commands)
+    - [3.3.1 Parameter Prefixes](#parameter-prefixes)
+    - [3.3.2 Parameters](#parameters)
+    - [3.3.3 Command Format](#command-format)
+
+[4. Commands](#commands)
+- [4.1 Data Modification Commands](#data-modification-commands)
+  - [4.1.1 Adding a student: `add`](#adding-a-student-add)
+  - [4.1.2 Editing a student: `edit`](#editing-a-student-edit)
+  - [4.1.3 Deleting a student: `delete`](#deleting-a-student-delete)
+  - [4.1.4 Adding or Editing a Module Score to a Student: `grade`](#adding-or-editing-a-module-score-to-a-student-grade)
+  - [4.1.5 Deleting a Module Score for a Student: `dgrade`](#deleting-a-module-score-for-a-student-dgrade)
+  - [4.1.6 Tagging a Student: `tag`](#tagging-a-student-tag)
+  - [4.1.7 Editing tags for a Student: `etag`](#editing-tags-for-a-student-etag)
+  - [4.1.8 Deleting a tag from a student: `dtag`](#deleting-a-tag-from-a-student-dtag)
+- [4.2 Data Filtering Commands](#data-filtering-commands)
+    - [4.2.1 Listing all students: `list`](#listing-all-students-list)
+    - [4.2.2 Find Students by Name or ID: `find`](#find-students-by-name-or-id-find)
+    - [4.2.3 Filtering List of Students: `filter`](#filtering-list-of-students-filter)
+- [4.3 General Commands](#general-commands)
+    - [4.3.1 Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
+    - [4.3.2 Accessing the Recent Commands](#accessing-the-recent-commands)
+    - [4.3.3 Undo Changes: `undo`](#undo-changes-undo)
+    - [4.3.4 Importing Students Data: `import`](#importing-students-data-import)
+    - [4.3.5 Exporting Students Data: `export`](#exporting-students-data-export)
+    - [4.3.6 Clearing all entries: `clear`](#clearing-all-entries-clear)
+    - [4.3.7 Exiting the program: `exit`](#exiting-the-program-exit)
+    - [4.3.8 Viewing help: `help`](#viewing-help-help)
+- [4.4 Saving the Data](#saving-the-data)
+- [4.5 Editing the Data File](#editing-the-data-file)
+
+[5. FAQ](#faq)
+
+[6. Known issues](#known-issues)
+
+[7. Glossary](#glossary)
+
+[8. Command summary](#command-summary)
+
+--------------------------------------------------------------------------------------------------------------------
+## 1. Introduction
+<a id="introduction"></a>
+
+### 1.1 What is EduLink-NUS
+<a id="what-is-edulink-nus"></a>
 
 EduLink-NUS serves as a **desktop application tailored specifically for academic instructors** at the National University of Singapore (NUS). It is a powerful tool that can assists in **managing academic contacts and data**. With its purposefully designed Command Line Interface (CLI) and Graphical User Interface (GUI), users have no trouble in integrating it into workflows for efficient academic administration.
 
@@ -75,7 +85,8 @@ Overview of Main Features:
 - Export and Import Functionality: Seamlessly export student data to CSV files for external use and import data from JSON files for easier management of diverse organizational data.
 - Undo Functionality: Safeguard against accidental changes with the ability to undo the last action.
 
-### User Proficiency and Expectations
+### 1.2 User Proficiency and Expectations
+<a id="user-proficiency-and-expectations"></a>
 
 - Level of Relatedness: Users of EduLink-NUS are assumed to have a direct relationship with NUS and are actively engaged in academic activities, including teaching, student mentoring, and administrative tasks related to student management.
 
@@ -88,24 +99,29 @@ Overview of Main Features:
 
 - Desire for Efficiency: Users of EduLink-NUS prioritize efficiency and productivity in their academic administration tasks.
 
-### Why This Guide Matters
+### 1.3 Why This Guide Matters
+<a id="why-this-guide-matters"></a>
 
 This guide is more than just a manual, it is a gateway to maximize your experience with EduLink-NUS. By following the instructions and insights provided here, you'll discover shortcuts, tips, and strategies to streamline your workflow and enhance productivity. Whether you're a seasoned user or just getting started, this guide will equip you with the knowledge and skills to leverage EduLink-NUS effectively.
 
 We're excited to embark on this journey with you and help you make the most out of your academic engagement at NUS with EduLink-NUS. So let's dive in and unleash the full potential of EduLink-NUS together!
 
 --------------------------------------------------------------------------------------------------------------------
-## How to use this User Guide
+## 2. How to use this User Guide
+<a id="how-to-use-this-user-guide"></a>
 
 This section is designed to help users effectively navigate the User Guide for EduLink-NUS. Below, you'll find information on how to interpret icons, formatting, and instructions provided throughout the document.
 
-### Navigating the Document:
+### 2.1 Navigating the Document:
+<a id="navigating-the-document"></a>
+
 - **Table of Contents:** Located at the beginning of the document, the Table of Contents provides an overview of the topics covered. Users can click on any section title to jump directly to that part of the guide.
 
 
 - **Section Organization:** Each section is organized with headings and subheadings, breaking down information into manageable chunks. Users can easily locate specific topics or commands by scanning through the contents.
 
-### Sections:
+### 2.2 Sections:
+<a id="sections"></a>
 
 Below is a detailed overview of the main sections within this User Guide and what can be expected from each section.
 
@@ -128,7 +144,8 @@ Below is a detailed overview of the main sections within this User Guide and wha
 For first-time users of the application, it is highly recommended for you to read through the Getting Started section before utilizing the application.
 </box>
 
-### Icons:
+### 2.3 Icons:
+<a id="icons"></a>
 
 As you navigate through this user guide, you'll encounter colored boxes containing valuable insights. Each box is adorned with an icon, indicating the type of information it holds.
 
@@ -139,9 +156,11 @@ As you navigate through this user guide, you'll encounter colored boxes containi
 | <box type="warning" seamless>   </box> | Warnings that may corrupt your app and data if not followed. |
 
 --------------------------------------------------------------------------------------------------------------------
-## Getting Started
+## 3. Getting Started
+<a id="getting-started"></a>
 
-### Installation
+### 3.1 Installation
+<a id="installation"></a>
 
 1. Ensure you have Java `11` installed in your Computer. EduLink-NUS is optimized for this version, and while it may function on other versions, we cannot guarantee smooth operation outside of Java 11.
 
@@ -167,9 +186,11 @@ As you navigate through this user guide, you'll encounter colored boxes containi
 
 1. Refer to the [Command Section](#commands) below for details of all commands supported by EduLink-NUS. Alternatively, refer to the [Command Summary](#command-summary) for a quick summary.
 
-### Graphical User Interface Layout:
+### 3.2 Graphical User Interface Layout:
+<a id="graphical-user-interface-layout"></a>
 
-#### User Interface Overview:
+#### 3.2.1 User Interface Overview:
+<a id="user-interface-overview"></a>
 
 EduLink NUS's user interface can be split into 7 main components, as shown below:
 
@@ -186,7 +207,8 @@ Please refer below for a comprehensive description of each component.
   * Student Panel Card: Within the Student List Panel, each student is represented by a concise overview encapsulated in a card format.
 * Student Card: For more detailed information about an individual student stored in the system, users can refer to the Student Card, providing comprehensive insights.
 
-#### Additional UI Components:
+#### 3.2.2 Additional UI Components:
+<a id="additional-ui-components"></a>
 
 ![Ui](images/UiLayout2.png)
 
@@ -196,11 +218,13 @@ Please refer below for a comprehensive description of each component.
 * Student Grade: Highlighted in pink, the Student Grade appears in both the Student Card and Student Panel Card, providing information about the academic performance of each student. Like tags, students can have multiple grades associated with them.
 * Selected Student Highlight: Highlighted with a purple outline, this component indicates the selected Student Panel Card for viewing in the Student Card.
 
-### How to use EduLink-NUS commands:
+### 3.3 How to use EduLink-NUS commands:
+<a id="how-to-use-edulink-nus-commands"></a>
 
 EduLink-NUS operates primarily through text-based commands. Before we explore the specific commands in detail in the Commands section, let’s familiarize ourselves with the basic components and format of a command.
 
-#### Parameter Prefixes:
+#### 3.3.1 Parameter Prefixes:
+<a id="parameter-prefixes"></a>
 
 In EduLink-NUS, a parameter prefix acts as a delimiter for specifying different types of parameters in commands. Here's a reference table for common parameter prefixes and their corresponding parameters:
 
@@ -218,7 +242,8 @@ In EduLink-NUS, a parameter prefix acts as a delimiter for specifying different 
 | `s/`             | `MODULE_SCORE`          |
 | `f/`             | `FILENAME`              |
 
-#### Parameters:
+#### 3.3.2 Parameters:
+<a id="parameters"></a>
 
 In EduLink-NUS, a parameter represents a placeholder where users input data. Parameters typically follow immediately after their corresponding Parameter Prefixes. Essentially they are to be supplied by the user.
 
@@ -248,7 +273,8 @@ Some parameters to not come along with their own Parameter Prefix. E.g. KEYWORD 
 System date can be modified as to allow for `INTAKE` to be of any year after the current year.
 </box>
 
-#### Command Format:
+#### 3.3.3 Command Format:
+<a id="command-format"></a>
 
 To understand how a full command is interpreted, we will utilise the following example.
 
@@ -322,13 +348,16 @@ Moreover, notice that `[TAG]` is followed by an ellipsis (`…`). This signifies
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
-## Commands
+## 4. Commands
+<a id="commands"></a>
 
 This section provides comprehensive guidance on how to use each command, detailing their functionalities and usage scenarios. For specific constraints related to each parameter, please refer to the [Parameter](#parameters) section for detailed information
 
-### Data Modification Commands:
+### 4.1 Data Modification Commands:
+<a id="data-modification-commands"></a>
 
-#### Adding a student: `add`
+#### 4.1.1 Adding a student: `add`
+<a id="adding-a-student-add"></a>
 
 > Adds a Student to the EduLink-NUS application.
 
@@ -351,7 +380,8 @@ Examples:
 * `add n/John Doe id/A2265901E p/1234567890 e/john.doe@example.com a/311, Clementi Ave 2, #02-25 in/2023 m/Computer Science t/Honors`
 * `add n/John Doe id/A2265901E p/1234567890 e/john.doe@example.com a/311, Clementi Ave 2, #02-25 in/2023 m/Computer Science t/Honors t/TA`
 
-#### Editing a student: `edit`
+#### 4.1.2 Editing a student: `edit`
+<a id="editing-a-student-edit"></a>
 
 > Edits an existing student in the EduLink-NUS application.
 
@@ -374,7 +404,8 @@ Examples:
 *  `edit 2 n/Betsy Crower in/2020` Edits the name of the 2nd student to be `Betsy Crower` and changes the intake to `2020`.
 
 
-#### Deleting a student: `delete`
+#### 4.1.3 Deleting a student: `delete`
+<a id="deleting-a-student-delete"></a>
 
 > Deletes a specified or a group of students from the EduLink-NUS Application.
 
@@ -397,7 +428,8 @@ Examples:
 * `delete id/A026273X` deletes the student with Student ID A026273X, even if it is not currently on displayed on the Student List Panel.
 * `filter t/TA` followed by `delete all` deletes all students with the `TA` tag. I.e. it removes all students currently displayed on the Student List Panel.
 
-#### Adding or Editing a Module Score to a Student: `grade`
+#### 4.1.4 Adding or Editing a Module Score to a Student: `grade`
+<a id="adding-or-editing-a-module-score-to-a-student-grade"></a>
 
 > Add and Edit a student's Module Score in the EduLink-NUS application.
 
@@ -418,7 +450,8 @@ Examples:
 * `grade id/A0265901E mod/CS2103T s/77.5` grades the student with Student ID A0265901E for module CS2103T if found in the filtered list. 77.5 will be the displayed grade.
 * `grade id/A0265901E mod/CS2103T s/77.5` then `grade id/A0265901E mod/CS2103T s/85` edits the student with Student ID A0262743X's grade for module CS2103T because a grade for it already exists. 85 will be the displayed grade.
 
-#### Deleting a Module Score for a Student: `dgrade`
+#### 4.1.5 Deleting a Module Score for a Student: `dgrade`
+<a id="deleting-a-module-score-for-a-student-dgrade"></a>
 
 > Deletes a Module Score for a student in the EduLink-NUS application.
 
@@ -438,7 +471,8 @@ Command Details & Constraints:
 Examples:
 * `dgrade id/A026273X mod/CS2103T` deletes the grade of the student with Student ID A026273X for module CS2103T.
 
-#### Tagging a Student: `tag`
+#### 4.1.6 Tagging a Student: `tag`
+<a id="tagging-a-student-tag"></a>
 
 > Tags a specified student in the EduLink-NUS application.
 
@@ -463,7 +497,8 @@ Examples:
 * `tag id/A0257418E t/potentialTA`
 * `tag id/A0257418E t/potentialTA t/Active`
 
-#### Editing tags for a Student: `etag`
+#### 4.1.7 Editing tags for a Student: `etag`
+<a id="editing-tags-for-a-student-etag"></a>
 
 > Edits the tag of a specific student in the EduLink-NUS application.
 
@@ -485,7 +520,8 @@ Command Details & Constraints:
 Examples:
 * `etag id/A0265901E t/Honors t/Scholar` updates the tag from `Honors` to `Scholar` for the student with ID `A0265901E`.
 
-#### Deleting a tag from a student: `dtag`
+#### 4.1.8 Deleting a tag from a student: `dtag`
+<a id="deleting-a-tag-from-a-student-dtag"></a>
 
 > Remove a list of specified tags for a particular student in the EduLink-NUS application.
 
@@ -508,9 +544,11 @@ Examples:
 
 
 
-### Data Filtering Commands:
+### 4.2 Data Filtering Commands:
+<a id="data-filtering-commands"></a>
 
-#### Listing all students: `list`
+#### 4.2.1 Listing all students: `list`
+<a id="listing-all-students-list"></a>
 
 > Shows a list of all Students in the EduLink-NUS application.
 
@@ -520,7 +558,8 @@ Command Details & Constraints:
 * Displays the list of all students stored within EduLink NUS on the Student List Panel.
 * No parameters are required for this command, and any parameter added will be ignored.
 
-#### Find Students by Name or ID: `find`
+#### 4.2.2 Find Students by Name or ID: `find`
+<a id="find-students-by-name-or-id-find"></a>
 
 > This command facilitates the search for students in the EduLink-NUS application based on their **Names**, **Student IDs**, or **Both**.
 
@@ -554,7 +593,8 @@ Examples:
 * `find id/A1234567X n/John Doe` returns a person `John Doe` with ID `A12345678X`
 * `find id/234 n/John D` returns a person `Jeff John Doe Leong` with ID `A12345678X`
 
-#### Filtering List of Students: `filter`
+#### 4.2.3 Filtering List of Students: `filter`
+<a id="filtering-list-of-students-filter"></a>
 
 > Filters all students based on tags in the EduLink-NUS application.
 
@@ -576,9 +616,11 @@ Examples:
 
 
 
-### General Commands:
+### 4.3 General Commands:
+<a id="general-commands"></a>
 
-#### Viewing a Student on the Student Card:
+#### 4.3.1 Viewing a Student on the Student Card:
+<a id="viewing-a-student-on-the-student-card"></a>
 
 > View a single student's details in a formatted and organized manner.
 
@@ -593,7 +635,8 @@ Command Details & Constraints:
 * If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
 
 
-#### Accessing the Recent Commands:
+#### 4.3.2 Accessing the Recent Commands:
+<a id="accessing-the-recent-commands"></a>
 
 > Access the 5 most recent successfully executed commands.
 
@@ -607,7 +650,8 @@ Command Details & Constraints:
 Command Details & Constraints:
 * The selected command will be copied into the command box for use.
 
-#### Undo Changes: `undo`
+#### 4.3.3 Undo Changes: `undo`
+<a id="undo-changes-undo"></a>
 
 > Undoes the last command executed and reverts the application to the previous state.
 
@@ -622,7 +666,8 @@ Command Details & Constraints:
 Examples:
 * `undo`
 
-#### Importing Students Data: `import`
+#### 4.3.4 Importing Students Data: `import`
+<a id="importing-students-data-import"></a>
 
 > Imports data from a valid JSON file into the EduLink-NUS application.
 
@@ -639,7 +684,8 @@ Examples:
 * `import f/NUS-CS`
 * `import f/_Stanford`
 
-#### Exporting Students Data: `export`
+#### 4.3.5 Exporting Students Data: `export`
+<a id="exporting-students-data-export"></a>
 
 > Exports the students from the EduLink-NUS application to a CSV file.
 
@@ -657,7 +703,8 @@ Examples:
 * `export f/Mystudents`
 * `export f/NUS-CS`
 
-#### Clearing all entries: `clear`
+#### 4.3.6 Clearing all entries: `clear`
+<a id="clearing-all-entries-clear"></a>
 
 > Clears all entries from the EduLink-NUS application.
 
@@ -666,7 +713,8 @@ Format: `clear`
 Command Details & Constraints:
 * The command does not require any additional parameters; entered parameters will be disregarded.
 
-#### Exiting the program: `exit`
+#### 4.3.7 Exiting the program: `exit`
+<a id="exiting-the-program-exit"></a>
 
 > Exits the EduLink-NUS application.
 
@@ -675,7 +723,8 @@ Format: `exit`
 Command Details & Constraints:
 * The command does not require any additional parameters; entered parameters will be disregarded.
 
-#### Viewing help: `help`
+#### 4.3.8 Viewing help: `help`
+<a id="viewing-help-help"></a>
 
 > Shows a message explaining how to access the help page.
 
@@ -687,11 +736,13 @@ Command Details & Constraints:
 * The command does not require any additional parameters; entered parameters will be disregarded.
 * The help message image provided offers clear instructions for users seeking assistance.
 
-### Saving the data
+### 4.4 Saving the data
+<a id="saving-the-data"></a>
 
 The data in the EduLink-NUS application are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### 4.5 Editing the data file
+<a id="editing-the-data-file"></a>
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -703,20 +754,23 @@ Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 5. FAQ
+<a id="faq"></a>
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduLink-NUS home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## 6 Known issues
+<a id="known-issues"></a>
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **`NAME` Parameter**, if you try to enter a name that contains `/` the application will show error message about invalid format for `NAME` but someone can have `/` in their legal name e.g `Prabhat S/O Radhe`, this limitation arises due to usage of `/` character for Internal use within the Application. The remedy is to use `|` i.e. pipe character in place of `/`. We Understand that this format doesn't comply with their Legal Names but Since Our Application identifies students based on their StudentID , this remedy doesn't limit the Capabilities of EduLink-NUS in any possible way. 
 
 --------------------------------------------------------------------------------------------------------------------
-## Glossary
+## 7. Glossary
+<a id="glossary"></a>
 
 | Term                      | Definition and or Explanation                                                                                                      |
 |---------------------------|------------------------------------------------------------------------------------------------------------------------------------|
@@ -730,7 +784,8 @@ Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 8. Command summary
+<a id="command-summary"></a>
 
 | Action              | Format, Examples                                                                                                                                                                                                            |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -738,7 +793,7 @@ Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected way
 | **Clear**           | `clear`                                                                                                                                                                                                                     |
 | **Delete**          | `delete INDEX` **OR** `delete id/STUDENT_ID` **OR** `delete all` <br> e.g., `delete 3`, `delete id/A026273X`, `delete all`                                                                                                  |
 | **Edit**            | `edit INDEX [id/ID] [m/MAJOR] [in/INTAKE] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` ,`edit 1 id/A0267901E`                                                    |
-| **Find**            | `find n/NAME`  **OR**  `find id/STUDENT_ID` **OR** `find n/NAME id/STUDENT_ID` <br> e.g. `find n/John`, `find id/A123`, `find id/234 n/John D`                                                                              |
+| **Find**            | `find n/KEYWORD [KEYWORD] …​` **OR** `find id/KEYWORD` **OR** `find n/KEYWORD [KEYWORD] …​ id/KEYWORD` <br> e.g. `find n/John`, `find id/A123`, `find id/234 n/John D`                                                      |
 | **Filter**          | `filter t/TAG [t/TAG] …​`<br> e.g., `filter t/CS2103T`, `filter t/CS2103T t/TA`                                                                                                                                             |
 | **Add Tag/Tags**    | `tag id/ID t/TAG t/TAG` <br> e.g, `tag id/A0257418E t/potentialTA t/Active`                                                                                                                                                 |
 | **List**            | `list`                                                                                                                                                                                                                      |
