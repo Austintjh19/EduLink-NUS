@@ -277,6 +277,10 @@ Moreover, notice that `[TAG]` is followed by an ellipsis (`…`). This signifies
 
 * Duplicate student entires is defined as 2 person who have identical `STUDENT_ID`.
 
+* All the previous History for `undo` will be cleared after you exit the Application i.e. You can't undo a Command if you exit EduLink-NUS and Start again.
+
+* All Recent Commands will be cleared after you exit the Application i.e. You can't fetch recent commands if you exit EduLink-NUS and start again.
+
 * Unless explicitly stated otherwise, when indicating character limitations, spaces between words are counted within the total character count, while any leading or trailing spaces are not included in the calculation.
 
 </box>
