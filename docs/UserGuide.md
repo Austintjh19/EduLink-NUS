@@ -43,8 +43,8 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
   - [4.1.4 Adding or Editing a Module Score to a Student: `grade`](#adding-or-editing-a-module-score-to-a-student-grade)
   - [4.1.5 Deleting a Module Score for a Student: `dgrade`](#deleting-a-module-score-for-a-student-dgrade)
   - [4.1.6 Tagging a Student: `tag`](#tagging-a-student-tag)
-  - [4.1.7 Editing tags for a Student: `etag`](#editing-tags-for-a-student-etag)
-  - [4.1.8 Deleting a tag from a student: `dtag`](#deleting-a-tag-from-a-student-dtag)
+  - [4.1.7 Editing a tag for a Student: `etag`](#417-editing-tag-for-a-student-etag)
+  - [4.1.8 Deleting tags from a student: `dtag`](#418-deleting-tags-from-a-student-dtag)
 - [4.2 Data Filtering Commands](#data-filtering-commands)
     - [4.2.1 Listing all students: `list`](#listing-all-students-list)
     - [4.2.2 Find Students by Name or ID: `find`](#find-students-by-name-or-id-find)
@@ -253,21 +253,21 @@ Each parameter has unique constraints, which restrict what users can input for t
 Some parameters to not come along with their own Parameter Prefix. E.g. KEYWORD and INDEX.
 </box>
 
-| Parameter      | Parameter Prefix | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|----------------|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `STUDENT_ID`   | `id/`            | Specifies the Student ID of a student. <br/><br/> - IDs must contain only alphanumeric characters. <br/> - The ID must start with a letter, followed by exactly 7 digits, and end with a letter.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `NAME`         | `n/`             | Specifies the Name of a student. <br/><br/> - Names must contain only alphanumeric characters , whitespaces and pipe character i.e. `\|`  <br/> - The name must start with a letter. <br/> - Names are restricted to a 100 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `PHONE_NUMBER` | `p/`             | Specifies the Phone Number of a student. <br/><br/> - Phone numbers must contain only numerical digits. <br/> - Phone numbers must be at least 3 digits long. <br/> - Phone numbers are restricted to 15 digits.                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Parameter      | Parameter Prefix | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|----------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `STUDENT_ID`   | `id/`            | Specifies the Student ID of a student. <br/><br/> - IDs must contain only alphanumeric characters. <br/> - The ID must start with a letter, followed by exactly 7 digits, and end with a letter.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `NAME`         | `n/`             | Specifies the Name of a student. <br/><br/> - Names must contain only alphanumeric characters , whitespaces and pipe character i.e. `\|`  <br/> - The name must start with a letter. <br/> - Names are restricted to a 100 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `PHONE_NUMBER` | `p/`             | Specifies the Phone Number of a student. <br/><br/> - Phone numbers must contain only numerical digits. <br/> - Phone numbers must be at least 3 digits long. <br/> - Phone numbers are restricted to 15 digits.                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `EMAIL`        | `e/`             | Specifies the Email of a student. <br/><br/> - Emails should be of the format `local-part@domain`. <br/> - local-part should only contain alphanumeric characters and these characters: `+` `_` `.` `-`  <br/> - The local-part must be followed by a '@' and then a domain name. <br/> -  The domain name is made up of domain labels separated by periods. <br/> - The domain name must end with a domain label at least 2 characters long. <br/> - Each domain label must start and end with alphanumeric characters. <br/> -  Each domain label consists of alphanumeric characters, separated only by hyphens, if any. <br/> - Emails are restricted to a 100 characters long. |
-| `ADDRESS`      | `a/`             | Specifies the Address of a student. <br/><br/> - Addresses can contain only alphanumeric characters, whitespaces, and the following special characters: `,` `#` `-`.  <br/> - Addresses are restricted to a 100 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `MAJOR`        | `m/`             | Specifies the Major of a student. <br/><br/> - Majors must contain only alphabetical characters and whitespaces.  <br/> - Majors are restricted to 50 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `INTAKE`       | `in/`            | Specifies the Intake of a student. <br/><br/> - Intake should contain Year in the form YYYY. <br/> - Intakes can't be after the current year.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `TAG`          | `t/`             | Specifies the tag to categorize a student under. <br/><br/> - Tags names should be alphanumeric. <br/> - Tags are restricted to 20 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `MODULE`       | `mod/`           | Specifies the module code of an associated grade score for a student. <br/><br/> - Module code should only contain alphanumeric characters starting with minimum 2 to maximum 4 letters. Followed by 4 digits and may end with an optional letter.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `MODULE_SCORE` | `s/`             | Specifies the module score for an associated module grade for a student. <br/><br/> - Module score should be a non-negative number between 0 and 100 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `FILENAME`     | `f/`             | Specifies the file to import or export from. <br/><br/> - Filenames can only contain alphanumeric characters and the special characters: `-` and `_`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `KEYWORD`      | Not Applicable   | Specifies the keywords to search for when finding students.  <br/><br/> - Can contain alphanumeric characters and any special characters, except the special character: `/`. No whitespaces allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `INDEX`        | Not Applicable   | Refers to the index number shown in the Student List Panel.  <br/><br/> -  Must be a positive whole number, e.g. 1, 2, 3. And fall withing the range of 1 to 2,147,483,647.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `ADDRESS`      | `a/`             | Specifies the Address of a student. <br/><br/> - Addresses can contain only alphanumeric characters, whitespaces, and the following special characters: `,` `#` `-`.  <br/> - Addresses are restricted to a 100 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `MAJOR`        | `m/`             | Specifies the Major of a student. <br/><br/> - Majors must contain only alphabetical characters and whitespaces.  <br/> - Majors are restricted to 50 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `INTAKE`       | `in/`            | Specifies the Intake of a student. <br/><br/> - Intake should contain Year in the form YYYY. <br/> - Intakes can't be after the current year.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `TAG`          | `t/`             | Specifies the tag to categorize a student under. <br/><br/> - Tags names should be alphanumeric. <br/> - Tags are restricted to 20 characters long.  <br/> - Tags are case-insensitive: TA and ta are the same.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `MODULE`       | `mod/`           | Specifies the module code of an associated grade score for a student. <br/><br/> - Module code should only contain alphanumeric characters starting with minimum 2 to maximum 4 letters. Followed by 4 digits and may end with an optional letter.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `MODULE_SCORE` | `s/`             | Specifies the module score for an associated module grade for a student. <br/><br/> - Module score should be a non-negative number between 0 and 100 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `FILENAME`     | `f/`             | Specifies the file to import or export from. <br/><br/> - Filenames can only contain alphanumeric characters and the special characters: `-` and `_`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `KEYWORD`      | Not Applicable   | Specifies the keywords to search for when finding students.  <br/><br/> - Can contain alphanumeric characters and any special characters, except the special character: `/`. No whitespaces allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `INDEX`        | Not Applicable   | Refers to the index number shown in the Student List Panel.  <br/><br/> -  Must be a positive whole number, e.g. 1, 2, 3. And fall withing the range of 1 to 2,147,483,647.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 <box type="info" seamless>
 System date can be modified as to allow for `INTAKE` to be of any year after the current year.
@@ -288,13 +288,13 @@ To understand how a full command is interpreted, we will utilise the following e
 
 Certainly, here's a revised version:
 
-You'll notice that `[TAG]` is wrapped in square brackets, indicating that it's an optional component.
+You'll notice that `[t/TAG]` is wrapped in square brackets, indicating that it's an optional component.
 
-- For example, in `n/STUDENT_NAME [TAG]`, you can include a tag like `n/John t/TA` or simply input the student's name as `n/John`.
+- For example, in `n/STUDENT_NAME [t/TAG]`, you can include a tag like `n/John t/TA` or simply input the student's name as `n/John`.
 
-Moreover, notice that `[TAG]` is followed by an ellipsis (`…`). This signifies that items followed by an ellipsis can be entered multiple times, including zero times.
+Moreover, notice that `[t/TAG]` is followed by an ellipsis (`…`). This signifies that items followed by an ellipsis can be entered multiple times, including zero times.
 
-- As an illustration, `n/STUDENT_NAME [TAG]…` can be used with no tags at all, like `n/John`, or with multiple tags, such as `n/John t/Math t/TA`.
+- As an illustration, `n/STUDENT_NAME [t/TAG]…` can be used with no tags at all, like `n/John`, or with multiple tags, such as `n/John t/Math t/TA`.
 
 
 <box type="info" seamless>
@@ -483,13 +483,13 @@ Format: `tag id/STUDENT_ID t/TAG [t/TAG] …​`
 </box>
 
 <box type="tip" seamless>
+
 **Tip:** You can tag the specified student with any number of `TAG`s.
 </box>
 
 Command Details & Constraints:
 * Adds a tag or multiple tags to the student with id `STUDENT_ID`.
-  * The specified student via `STUDENT_ID` must be displayed on the Student List Panel.
-* `TAG` is case-insensitive: TA and ta are the same.
+  * `TAG` is case-insensitive: TA and ta are the same.
   * EduLink-NUS prevents the entry of duplicated tags.
 * All parameters must satisfy their corresponding [parameter constraints](#parameters).
 
@@ -497,10 +497,10 @@ Examples:
 * `tag id/A0257418E t/potentialTA`
 * `tag id/A0257418E t/potentialTA t/Active`
 
-#### 4.1.7 Editing tags for a Student: `etag`
+#### 4.1.7 Editing Tag for a Student: `etag`
 <a id="editing-tags-for-a-student-etag"></a>
 
-> Edits the tag of a specific student in the EduLink-NUS application.
+> Edits a tag of a specific student in the EduLink-NUS application.
 
 Format: `etag id/STUDENT_ID t/EXISTING_TAG t/RESULTING_TAG`
 
@@ -510,17 +510,17 @@ Format: `etag id/STUDENT_ID t/EXISTING_TAG t/RESULTING_TAG`
 
 Command Details & Constraints:
 * Edits the tag of the student with id `STUDENT_ID`.
-  * The specified student via `STUDENT_ID` must be displayed on the Student List Panel.
-* `EXISTING_TAG` is the existing tag that you intend to edit. It is case-insensitive.
+* `EXISTING_TAG` is the existing tag that you intend to edit.
 * `RESULTING_TAG` is the new tag that will replace the existing tag.
-* Both the `EXISTING_TAG` and `RESULTING_TAG` must be not more than 15 characters long with no space in between.
-* Both the `EXISTING_TAG` and `RESULTING_TAG` much be alphanumeric, and they are case-insensitive.
+  * `EXISTING_TAG` and `RESULTING_TAG` are `TAG` and follow [tag constraints](#parameters).
+  * EduLink-NUS prevents the entry of duplicated tags.
+* All parameters must satisfy their corresponding [parameter constraints](#parameters).
 * For each execution, the command can only **edit** a single tag for one particular student.
 
 Examples:
 * `etag id/A0265901E t/Honors t/Scholar` updates the tag from `Honors` to `Scholar` for the student with ID `A0265901E`.
 
-#### 4.1.8 Deleting a tag from a student: `dtag`
+#### 4.1.8 Deleting Tag(s) from a student: `dtag`
 <a id="deleting-a-tag-from-a-student-dtag"></a>
 
 > Remove a list of specified tags for a particular student in the EduLink-NUS application.
@@ -533,8 +533,8 @@ Format: `dtag id/STUDENT_ID t/TAG [t/TAG] …​`
 
 Command Details & Constraints:
 * Deletes specified tags of the student with id `STUDENT_ID`.
-  * The specified student via `STUDENT_ID` must be displayed on the Student List Panel.
-* `TAG` is case-insensitive: TA and ta are the same.
+* `TAG` is case-insensitive: TA and ta are the same. If user includes multiple identical tags in command, only one of them will be deleted.
+  * `dtag id/A9365941E t/TA t/ta` is same as `dtag id/A9365941E t/TA`
 * All parameters must satisfy their corresponding [parameter constraints](#parameters).
 
 Examples:
@@ -612,10 +612,6 @@ Examples:
 * `filter t/CS2103T` will display only people that have been tagged with `CS2103T`.
 * `filter t/CS2103T t/TA` wil display only people that have been tagged with `CS2103T` and `TA`.
 
-
-
-
-
 ### 4.3 General Commands:
 <a id="general-commands"></a>
 
@@ -633,7 +629,6 @@ Command Details & Constraints:
 * The Student Card will display the details of the first student on the Student List Panel, when a specific student is not selected from the Student List Panel.
 * The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the data within Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter`, `edit`, `tag` ...
 * If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
-
 
 #### 4.3.2 Accessing the Recent Commands:
 <a id="accessing-the-recent-commands"></a>
@@ -661,7 +656,6 @@ Command Details & Constraints:
 * The `undo` command revert the changes done by last **Data changing command** i.e. command that changes (adds, edits or deletes) information for any Student in the Application.
 * The application stores up to 20 previous states, allowing you to undo up to the last 20 commands.
 * If there are no commands to undo or else you already executed `undo` for 20 commands, an error message will be displayed.
-* 
 
 Examples:
 * `undo`
@@ -698,6 +692,7 @@ Command Details & Constraints:
   * E.g. Grades: `CS2030 - 80 | CS2040 - 78` in the CSV File.
 * The `FILENAME` parameter must satisfy its corresponding [parameter constraints](#parameters).
   * Filenames can only contain alphanumeric characters and the special characters: `-`and `_`.
+* Export command will Overwrite the File at `[JAR-FILE-LOCATION]/exports/FILENAME.csv` if the file already exist otherwise it will create new File.
 
 Examples:
 * `export f/Mystudents`
@@ -801,7 +796,7 @@ Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected way
 | **Export**          | `export f/FILENAME` <br> e.g, `export f/mystudents`                                                                                                                                                                         |
 | **Import**          | `import f/FILENAME` <br> e.g,`import f/NTU-CS`                                                                                                                                                                              |
 | **Delete tag/tags** | `dtag id/STUDENT_ID t/TAG` <br> e.g,`dtag id/A0257418E t/potentialTA`                                                                                                                                                       |
-| **Edit tag/tags**   | `etag id/STUDENT_ID t/TAG t/RESULTING_TAG` <br> e.g `etag id/A0265901E t/Honors t/Scholar`                                                                                                                                  |
+| **Edit tag**   | `etag id/STUDENT_ID t/TAG t/RESULTING_TAG` <br> e.g `etag id/A0265901E t/Honors t/Scholar`                                                                                                                                  |
 | **Grade**           | `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE` <br> e.g `grade id/A0262733X mod/CS2103T s/77`                                                                                                                                |
 | **Delete Grade**    | `dgrade id/STUDENT_ID mod/MODULE_CODE` <br> e.g `dgrade id/A0262733X mod/CS2103T`                                                                                                                                           |
 | **Help**            | `help`                                                                                                                                                                                                                      |
