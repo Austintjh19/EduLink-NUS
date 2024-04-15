@@ -436,7 +436,7 @@ Below is a representative class diagram of the feature. The implementation of th
 
 #### Implementation - Sequence Diagram:
 
-<puml src="diagrams/undo/UndoClassDiagram.puml" alt="UML Class Diagram - Undo"/>
+<puml src="diagrams/undo/UndoSequenceDiagram.puml" alt="UML Class Diagram - Undo"/>
 
 #### Design considerations:
 
