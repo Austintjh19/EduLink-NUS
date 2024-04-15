@@ -10,7 +10,7 @@
 
 Welcome to the **EduLink NUS User Guide** – your essential companion in unlocking the full potential of academic contacts and data management at the National University of Singapore (NUS).
 
-In this comprehensive guide, we'll take you on a journey to harness the power of EduLink-NUS. But first, we would  like to extend a warm welcome and express our gratitude to you for choosing EduLink-NUS to enhance and improve your academic interactions.
+In this comprehensive guide, we'll take you on a journey to harness the power of EduLink-NUS. But first, we would  like to extend a warm welcome and express our gratitude to you for choosing EduLink-NUS, to enhance and improve your academic interactions.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
@@ -76,11 +76,12 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
 ### 1.1 What is EduLink-NUS
 <a id="what-is-edulink-nus"></a>
 
-EduLink-NUS serves as a **desktop application tailored specifically for academic instructors** at the National University of Singapore (NUS). It is a powerful tool that can assists in **managing academic contacts and data**. With its purposefully designed Command Line Interface (CLI) and Graphical User Interface (GUI), users have no trouble in integrating it into workflows for efficient academic administration.
+EduLink-NUS serves as a **desktop application tailored specifically for academic instructors** at the National University of Singapore (NUS).
+With its array of powerful features, it facilitates seamless management of academic contacts and data. Its intuitively designed Command Line Interface (CLI) and Graphical User Interface (GUI) ensures that users can effortlessly integrate it into their workflows, enhancing efficiency in academic administration.
 
 Overview of Main Features:
 - Contact Management: Easily add, edit, and delete student entries, ensuring up-to-date information of students is always available.
-- Module Grade Tracking: Record and manage module grades for individual students.
+- Module Score Tracking: Record and manage module scores for individual students.
 - Tagging System: Categorize students with custom tags for streamlined organization and quick retrieval of specific student groups.
 - Export and Import Functionality: Seamlessly export student data to CSV files for external use and import data from JSON files for easier management of diverse organizational data.
 - Undo Functionality: Safeguard against accidental changes with the ability to undo the last action.
@@ -91,7 +92,7 @@ Overview of Main Features:
 - Level of Relatedness: Users of EduLink-NUS are assumed to have a direct relationship with NUS and are actively engaged in academic activities, including teaching, student mentoring, and administrative tasks related to student management.
 
 
-- Comprehension: Users of EduLink-NUS are assumed to have a strong comprehension of academic terminology and procedures used within NUS. They are familiar with concepts such as student IDs and the module grading system.
+- Comprehension: Users of EduLink-NUS are assumed to have a strong comprehension of academic terminology and procedures used within NUS. They are familiar with concepts such as student IDs and the module scoring system.
 
 
 - Prior Knowledge: Users of EduLink-NUS are assumed to possess prior knowledge of computer applications and basic technical skills necessary to navigate software interfaces.
