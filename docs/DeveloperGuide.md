@@ -6,9 +6,6 @@
 
 # EduLink-NUS Developer Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**

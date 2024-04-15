@@ -43,8 +43,8 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
   - [4.1.4 Adding or Editing a Module Score to a Student: `grade`](#adding-or-editing-a-module-score-to-a-student-grade)
   - [4.1.5 Deleting a Module Score for a Student: `dgrade`](#deleting-a-module-score-for-a-student-dgrade)
   - [4.1.6 Tagging a Student: `tag`](#tagging-a-student-tag)
-  - [4.1.7 Editing a tag for a Student: `etag`](#417-editing-tag-for-a-student-etag)
-  - [4.1.8 Deleting tags from a student: `dtag`](#418-deleting-tags-from-a-student-dtag)
+  - [4.1.7 Editing Tag for a Student: `etag`](#editing-tag-for-a-student-etag)
+  - [4.1.8 Deleting Tag(s) from a student: `dtag`](#deleting-tags-from-a-student-dtag)
 - [4.2 Data Filtering Commands](#data-filtering-commands)
     - [4.2.1 Listing all students: `list`](#listing-all-students-list)
     - [4.2.2 Find Students by Name or ID: `find`](#find-students-by-name-or-id-find)
@@ -504,7 +504,7 @@ Examples:
 * `tag id/A0257418E t/potentialTA t/Active`
 
 #### 4.1.7 Editing Tag for a Student: `etag`
-<a id="editing-tags-for-a-student-etag"></a>
+<a id="editing-tag-for-a-student-etag"></a>
 
 > Edits a tag of a specific student in the EduLink-NUS application.
 
@@ -527,7 +527,7 @@ Examples:
 * `etag id/A0265901E t/Honors t/Scholar` updates the tag from `Honors` to `Scholar` for the student with ID `A0265901E`.
 
 #### 4.1.8 Deleting Tag(s) from a student: `dtag`
-<a id="deleting-a-tag-from-a-student-dtag"></a>
+<a id="deleting-tags-from-a-student-dtag"></a>
 
 > Remove a list of specified tags for a particular student in the EduLink-NUS application.
 
