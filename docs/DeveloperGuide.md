@@ -426,7 +426,7 @@ Design of Tag message:
     - **Cons**: Harder to manage user input. Less bug-provoking.
 
 
-### Undo/redo feature
+### Undo feature
 
 #### Implementation - Class Diagram:
 
@@ -436,23 +436,23 @@ Below is a representative class diagram of the feature. The implementation of th
 
 #### Implementation - Sequence Diagram:
 
-<puml src="diagrams/undo/UndoClassDiagram.puml" alt="UML Class Diagram - Undo"/>
+<puml src="diagrams/undo/UndoSequenceDiagram.puml" alt="UML Sequence Diagram - Undo"/>
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative 2:** Individual command knows how to undo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 
-We decided to limit the number of Past History Saved to 20 i.e. User can only revert back from last 20 commands only to avoid the Performance issue and keep the implementation Simple.
+We decided to choose the Alternative 1 and limit the number of Past History Saved to 20 i.e. User can only revert back from last 20 commands only to avoid the Performance issue and keep the implementation Simple.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -778,7 +778,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 5
 
-**Use Case: Edit the Information of a Student**
+#### Use Case: Edit the Information of a Student
 
 **MSS**
 
@@ -816,7 +816,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Delete a Student**
+#### Use Case: Delete a Student
 
 **MSS**
 
@@ -849,7 +849,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 5.
 
-**Use Case: Delete All Students in Filtered List**
+#### Use Case: Delete All Students in Filtered List
 
 **MSS**
 
@@ -919,7 +919,7 @@ Use case ends.
 
     Use case ends.
 
-**Use Case: Delete Grade from a Student**
+#### Use Case: Delete Grade from a Student
 
 **MSS**
 

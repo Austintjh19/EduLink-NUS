@@ -12,7 +12,7 @@
   * It is based on the AddressBook-Level3 project, with additional tweaks and features to provide a customised experience for Academic Instructors.
   * From Address-Book Level-3 :- It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.
-* It is named `EduLink NUS` because It Links Academic Instructors with their Past Students.
+* It is named `EduLink NUS` because It Links Academic Instructors with their Past and Current Students.
 * For the detailed documentation of this project, see the **[EduLink NUS Product Website](https://ay2324s2-cs2103t-t16-1.github.io/tp/)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 

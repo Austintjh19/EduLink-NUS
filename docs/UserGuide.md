@@ -778,6 +778,7 @@ Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected way
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **`NAME` Parameter**, if you try to enter a name that contains `/` the application will show error message about invalid format for `NAME` but someone can have `/` in their legal name e.g `Prabhat S/O Radhe`, this limitation arises due to usage of `/` character for Internal use within the Application. The remedy is to use `|` i.e. pipe character in place of `/`. We Understand that this format doesn't comply with their Legal Names but Since Our Application identifies students based on their StudentID , this remedy doesn't limit the Capabilities of EduLink-NUS in any possible way.
+3. **Student List Panel doesn't move**, if you click `UP` or `DOWN` arrow key to view Student Details Card for students even though the details card are shown correctly and changes perfectly according to the input , the Student List Panel doesn't scroll down or up to align or match with the current Student Displayed in the Details Card. The remedy is to scroll down manually to the highlighted Student Card in the Panel to know which student which being currently displayed.
 
 --------------------------------------------------------------------------------------------------------------------
 ## 7. Glossary
