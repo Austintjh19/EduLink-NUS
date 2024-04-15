@@ -387,6 +387,54 @@ Design of Editing Grade:
   - **Pros**: Editing logic is isolated in its own command class, promoting code organization and maintainability. Each command class has a single responsibility, making it easier to understand and modify.
   - **Cons**: Requires additional command classes. Users may need to remember separate commands for adding and editing grades, which could impact usability.
 
+### Tag Feature
+
+The Tag feature allows users to add tags to a student's profile. The user needs to specify the student to tag by inputting the student's ID. Users can add several tags at once to improve working efficiency. 
+* If one or more tags the user want to add are already there, the system will display an error message to inform the user.
+* If the ID/tag user inputs are invalid, the system will display the constraints for parameters.
+* Tags are designed to be case-insensitive. If the user adds several equivalent tags at once, only one of them will be added to prevent duplication.
+
+#### Implementation - Class Diagrams:
+
+Below is a representative class diagram of the `tag` feature. 
+
+<puml src="diagrams/tag/TagClassDiagram.puml" alt="UML Class Diagram - Tag"/>
+
+#### Implementation - Sequence Diagrams:
+
+The sequence diagram below shows the interaction of different classes to execute add tag command.
+
+<puml src="diagrams/tag/TagSequenceDiagram.puml" alt="UML Sequence Diagram - Tag"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `TagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+</box>
+
+#### Implementation - Design Considerations:
+
+Design of Parsing Tag Input:
+* **Current Implementation (Alternative 1)**:
+    - **Description**: Validation tasks are centralized within the ParserUtil class, offering a modular and maintainable approach.
+    - **Pros**: Promotes code modularity and ease of maintenance by isolating validation logic from other components. Facilitates seamless updates and modifications.
+    - **Cons**: Introduces an additional layer of abstraction, potentially increasing complexity.
+* **Alternative 2**:
+    - **Description**: Embed validation functions directly within TagCommandParser.
+    - **Pros**: More straightforward and independent from the rest of the code.
+    - **Cons**: Inconsistent with the rest code base, harder to maintain and reuse.
+
+
+Design of Tag message:
+* **Current Implementation (Alternative 1)**:
+    - **Description**: Tags names should be alphanumeric. Tags are restricted to 20 characters long.  Tags are case-insensitive: TA and ta are the same.
+    - **Pros**: Make sure tags messages are brief, and work like tag. Standardize tags.
+    - **Cons**: User loses some freedom to customize their tag.
+* **Alternative 2**:
+    - **Description**: User can input whatever they s/he wants as the tag message. 
+    - **Pros**: User has more freedom. 
+    - **Cons**: Harder to manage user input. Less bug-provoking. 
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Implementation - Class Diagram:
@@ -448,37 +496,40 @@ We decided to limit the number of Past History Saved to 20 i.e. User can only re
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a…  | I can…  | So that I can…  |
-|----------|--------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| `**`     | new user | access a help guide that provides detailed instructions | effectively utilize the platform's features and functionalities  |
-| `*`      | user     | export student data to a .csv file file | perform analytics work, such as data analysis and statistical modeling |
-| `**`     | user     | import student data from .json file | eliminate the need to input every piece of information individually |
-| `***`    | user     | view a list of student | Easily reach out to them for academic support or research opportunities |
-| `***`    | user     | add new student information to the system (Grade, Cohort, Module, Contact Information) | keep the database up-to-date with the latest student records |
-| `***`    | user     | delete a student information from the system when necessary | ensure outdated or incorrect records are removed efficiently and accurately |
-| `***`    | user     | edit the information of a student in the system | update their details accurately as needed  |
-|`**`      | <strike> user </strike> | <strike> sort student data by various criteria such as grade and cohort </strike> | <strike> organize student information efficiently and make informed decisions </strike> |
-| `**`     | <strike> user  </strike> | <strike>filter data based on customisable conditions </strike> | <strike> tailor information retrieval to meet diverse academic and administrative needs. </strike> |
-| `***`    | user     | search for students by their name or Student ID | quickly locate specific individuals within the system |
-| `***`    | user     | add tags to students and classify them based on various criteria such as “Potential Teaching Assistant” | easily identify and group students based on specific attributes or characteristics |
-| `*`      | <strike> user </strike> | <strike> add notes or comments to a student's profile </strike> | <strike> maintain a comprehensive record of student achievements, and challenges </strike> |
-| `*`      | <strike> user </strike> | <strike> have automatic tagging, e.g. students below a certain grade threshold are tagged with "high priority student"  </strike> | <strike> save time and resources by automating the identification and classification of students </strike> |
-| `***`    | user     | enjoy the benefit of automatic prevention of duplicate entries | ensure data integrity |
-| `***`    | user     | retrieve specific information based on tags, such as retrieving the emails of all students belonging to a particular cohort | streamline communication with a huge number of students |
-| `*`      | user     | automatically updates student information using the system, e.g. student year group based on current datetime | ensure data accuracy and reduce manual data editing |
-| `*`      | <strike> user </strike> | <strike> filter data by multiple criteria simultaneously within the system </strike> | <strike> refine and narrow down the displayed information </strike> |
-| `*`      | user     | perform bulk deletion of data based on specific criteria within the system | efficiently remove outdated or irrelevant records in large quantities |
-| `*`      | user     | undo previous actions within the system | revert changes or mistakes made, providing a safety net for data integrity |
-| `*`      | <strike> user </strike> | <strike> view the history of changes within the system </strike> | <strike> restore previous versions of data or records in case of accidental changes </strike> |
-| `**`     | <strike> user </strike> | <strike> add group tags to multiple students simultaneously </strike> | <strike> streamline the process of categorizing and organizing student data </strike> |
-| `***`    | user     | enjoy a user-friendly interface (UI) when interacting with the system | reduce cognitive load |
-| `***`    | user     | efficiently navigate and interact with the system using typed user commands | access features swiftly, and accomplish tasks with ease |
-| `***`    | user     | automatically save my modifications every time I make a change within the system | ensure contacts and information are consistently backed up, preventing any major loss of data |
-| `*`      | user     | manage multiple databases within the system | organise and segregate data into distinct databases, such as addressbook1 and addressbook2 |
-| `*`      | user     | view my most recent searches within the system | access previously searched items, saving time and effort when revisiting them |
-| `*`      | <strike> user </strike> | <strike> calculate the mean, median, maximum, minimum, and mode for specific data stored within the system, such as grades </strike> | <strike> analyze the distribution and central tendencies of the data </strike> |
-| `*`      | <strike> user   </strike> | <strike> enjoy autocomplete suggestions for commands as I type </strike> | <strike> improve efficiency and accuracy </strike> |
-| `**`      | user     | Use keyboard shortcut to undo typing commands and access recent commands | Improve efficiency when using the product (do not need to retype command) |
+
+| Priority  | As a…  | I can…                                                                                                                               | So that I can…                                                                                             |
+|----------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `**`     | new user | access a help guide that provides detailed instructions                                                                              | effectively utilize the platform's features and functionalities                                            |
+| `*`      | user     | export student data to a .csv file file                                                                                              | perform analytics work, such as data analysis and statistical modeling                                     |
+| `**`     | user     | import student data from .json file                                                                                                  | eliminate the need to input every piece of information individually                                        |
+| `***`    | user     | view a list of student                                                                                                               | Easily reach out to them for academic support or research opportunities                                    |
+| `***`    | user     | add new student information to the system (Grade, Cohort, Module, Contact Information)                                               | keep the database up-to-date with the latest student records                                               |
+| `***`    | user     | delete a student information from the system when necessary                                                                          | ensure outdated or incorrect records are removed efficiently and accurately                                |
+| `***`    | user     | edit the information of a student in the system                                                                                      | update their details accurately as needed                                                                  |
+|`**`      | <strike> user </strike> | <strike> sort student data by various criteria such as grade and cohort </strike>                                                    | <strike> organize student information efficiently and make informed decisions </strike>                    |
+| `**`     | <strike> user  </strike> | <strike>filter data based on customisable conditions </strike>                                                                       | <strike> tailor information retrieval to meet diverse academic and administrative needs. </strike>         |
+| `***`    | user     | search for students by their name or Student ID                                                                                      | quickly locate specific individuals within the system                                                      |
+| `***`    | user     | add tags to students and classify them based on various criteria such as “PotentialTA”                                               | easily identify and group students based on specific attributes or characteristics                         |
+| `***`    | user     | edit tag of a student                                                                                                                | correct or update student's tag                                                                            |
+| `***`    | user     | delete multiple tags from a student at once                                                                                          | remove unnecessary tags easily                                                                             |
+| `*`      | <strike> user </strike> | <strike> add notes or comments to a student's profile </strike>                                                                      | <strike> maintain a comprehensive record of student achievements, and challenges </strike>                 |
+| `*`      | <strike> user </strike> | <strike> have automatic tagging, e.g. students below a certain grade threshold are tagged with "high priority student"  </strike>    | <strike> save time and resources by automating the identification and classification of students </strike> |
+| `***`    | user     | enjoy the benefit of automatic prevention of duplicate entries                                                                       | ensure data integrity                                                                                      |
+| `***`    | user     | retrieve specific information based on tags, such as retrieving the emails of all students belonging to a particular cohort          | streamline communication with a huge number of students                                                    |
+| `*`      | user     | automatically updates student information using the system, e.g. student year group based on current datetime                        | ensure data accuracy and reduce manual data editing                                                        |
+| `*`      | <strike> user </strike> | <strike> filter data by multiple criteria simultaneously within the system </strike>                                                 | <strike> refine and narrow down the displayed information </strike>                                        |
+| `*`      | user     | perform bulk deletion of data based on specific criteria within the system                                                           | efficiently remove outdated or irrelevant records in large quantities                                      |
+| `*`      | user     | undo previous actions within the system                                                                                              | revert changes or mistakes made, providing a safety net for data integrity                                 |
+| `*`      | <strike> user </strike> | <strike> view the history of changes within the system </strike>                                                                     | <strike> restore previous versions of data or records in case of accidental changes </strike>              |
+| `**`     | <strike> user </strike> | <strike> add group tags to multiple students simultaneously </strike>                                                                | <strike> streamline the process of categorizing and organizing student data </strike>                      |
+| `***`    | user     | enjoy a user-friendly interface (UI) when interacting with the system                                                                | reduce cognitive load                                                                                      |
+| `***`    | user     | efficiently navigate and interact with the system using typed user commands                                                          | access features swiftly, and accomplish tasks with ease                                                    |
+| `***`    | user     | automatically save my modifications every time I make a change within the system                                                     | ensure contacts and information are consistently backed up, preventing any major loss of data              |
+| `*`      | user     | manage multiple databases within the system                                                                                          | organise and segregate data into distinct databases, such as addressbook1 and addressbook2                 |
+| `*`      | user     | view my most recent searches within the system                                                                                       | access previously searched items, saving time and effort when revisiting them                              |
+| `*`      | <strike> user </strike> | <strike> calculate the mean, median, maximum, minimum, and mode for specific data stored within the system, such as grades </strike> | <strike> analyze the distribution and central tendencies of the data </strike>                             |
+| `*`      | <strike> user   </strike> | <strike> enjoy autocomplete suggestions for commands as I type </strike>                                                             | <strike> improve efficiency and accuracy </strike>                                                         |
+| `**`      | user     | Use keyboard shortcut to undo typing commands and access recent commands                                                             | Improve efficiency when using the product (do not need to retype command)                                  |
 
 
 ### Use cases
