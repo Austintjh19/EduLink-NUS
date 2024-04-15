@@ -208,6 +208,10 @@ Please refer below for a comprehensive description of each component.
   * Student Panel Card: Within the Student List Panel, each student is represented by a concise overview encapsulated in a card format.
 * Student Card: For more detailed information about an individual student stored in the system, users can refer to the Student Card, providing comprehensive insights.
 
+<box type="info" seamless>
+Purple footer/status bar located at the bottom of the application is not the current JSON file being accessed, instead it is the default JSON file loaded when the application starts.
+</box>
+
 #### 3.2.2 Additional UI Components:
 <a id="additional-ui-components"></a>
 
@@ -624,7 +628,9 @@ Examples:
 
 **Method 1 -  Using GUI**: Left-click on a specific Student Panel Card within the Student List Panel of the EduLink-NUS User Interface.
 
-**Method 2 -  Using CLI**: Navigate using the up and down arrow keys to switch between Student Panel Cards on the Student List Panel.
+**Method 2 -  Using CLI**: Navigate using the `UP` and `DOWN` arrow keys to switch between Student Panel Cards on the Student List Panel.
+
+![Index Location](images/studentCard.png)
 
 Command Details & Constraints:
 * The Student Card will always display the currently selected Student Panel Card from the Student List Panel. The currently selected Student Panel Card is highlighted in purple.
@@ -694,7 +700,12 @@ Command Details & Constraints:
   * E.g. Grades: `CS2030 - 80 | CS2040 - 78` in the CSV File.
 * The `FILENAME` parameter must satisfy its corresponding [parameter constraints](#parameters).
   * Filenames can only contain alphanumeric characters and the special characters: `-`and `_`.
-* Export command will Overwrite the File at `[JAR-FILE-LOCATION]/exports/FILENAME.csv` if the file already exist otherwise it will create new File.
+* The Export command in EduLink-NUS overwrites the existing file at `[JAR-FILE-LOCATION]/exports/FILENAME.csv` if it already exists; otherwise, it creates a new file.
+
+<box type="warning" seamless>
+<b>Caution:</b>
+The Export command in EduLink-NUS overwrites the existing file at [JAR-FILE-LOCATION]/exports/FILENAME.csv if it already exists; otherwise, it creates a new file.
+</box>
 
 Examples:
 * `export f/Mystudents`
@@ -798,7 +809,7 @@ Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected way
 | **Export**          | `export f/FILENAME` <br> e.g, `export f/mystudents`                                                                                                                                                                         |
 | **Import**          | `import f/FILENAME` <br> e.g,`import f/NTU-CS`                                                                                                                                                                              |
 | **Delete tag/tags** | `dtag id/STUDENT_ID t/TAG` <br> e.g,`dtag id/A0257418E t/potentialTA`                                                                                                                                                       |
-| **Edit tag**   | `etag id/STUDENT_ID t/TAG t/RESULTING_TAG` <br> e.g `etag id/A0265901E t/Honors t/Scholar`                                                                                                                                  |
+| **Edit tag**        | `etag id/STUDENT_ID t/TAG t/RESULTING_TAG` <br> e.g `etag id/A0265901E t/Honors t/Scholar`                                                                                                                                  |
 | **Grade**           | `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE` <br> e.g `grade id/A0262733X mod/CS2103T s/77`                                                                                                                                |
 | **Delete Grade**    | `dgrade id/STUDENT_ID mod/MODULE_CODE` <br> e.g `dgrade id/A0262733X mod/CS2103T`                                                                                                                                           |
 | **Help**            | `help`                                                                                                                                                                                                                      |
