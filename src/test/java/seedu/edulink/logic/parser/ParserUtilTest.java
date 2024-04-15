@@ -14,6 +14,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.edulink.logic.parser.exceptions.ParseException;
+import seedu.edulink.model.grade.Module;
+import seedu.edulink.model.grade.Score;
 import seedu.edulink.model.student.Address;
 import seedu.edulink.model.student.Email;
 import seedu.edulink.model.student.Name;
@@ -39,10 +41,11 @@ public class ParserUtilTest {
     private static final String VALID_FILENAME = "students";
 
     private static final String INVALID_MODULE = "CS100";
-    private static final double INVALID_SCORE_105 = 105;
-    private static final String INVALID_SCORE_ABC = "abc";
+    private static final String INVALID_SCORE_1 = "10A";
+    private static final String INVALID_SCORE_2 = "80.123";
+    private static final String INVALID_SCORE_3 = "-0";
     private static final String VALID_MODULE = "MA1522";
-    private static final double VALID_SCORE = 100;
+    private static final String VALID_SCORE = "89";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -217,21 +220,44 @@ public class ParserUtilTest {
         assertEquals(expectedTagSet, actualTagSet);
     }
 
-    // @Test
-    // public void parseGrade_invalidModule_throwsParseException() {
-    //     assertThrows(ParseException.class, () ->
-    //             ParserUtil.parseGrade(INVALID_MODULE + ":" + VALID_SCORE));
-    // }
+    @Test
+    public void parseModule_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModule((String) null));
+    }
 
-    // @Test
-    // public void parseGrade_invalidScoreNotDouble_throwsParseException() {
-    //     assertThrows(ParseException.class, () ->
-    //         ParserUtil.parseGrade(VALID_MODULE + ":" + INVALID_SCORE_105));
-    // }
+    @Test
+    public void parseModule_validModuleCode_success() throws ParseException {
+        Module expectedModule = new Module(VALID_MODULE);
+        assertEquals(expectedModule, ParserUtil.parseModule(VALID_MODULE));
+    }
 
-    // @Test
-    // public void parseGrade_invalidScoreOutOfRange_throwsParseException() {
-    //     assertThrows(ParseException.class, () ->
-    //             ParserUtil.parseGrade(VALID_MODULE + ":" + INVALID_SCORE_ABC));
-    // }
+    @Test
+    public void parseModule_invalidModuleCode_throwsParseException() {
+        assertThrows(ParseException.class, () -> {
+            ParserUtil.parseModule(INVALID_MODULE);
+        });
+    }
+
+    @Test
+    public void parseScore_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseScore((String) null));
+    }
+
+    @Test
+    public void parseScore_validScore_success() throws ParseException {
+        Score expectedScore = new Score(Double.parseDouble(VALID_SCORE));
+        assertEquals(expectedScore, ParserUtil.parseScore(VALID_SCORE));
+    }
+
+    @Test
+    public void parseScore_invalidScore_throwsParseException() {
+        // non-double
+        assertThrows(ParseException.class, () -> ParserUtil.parseScore(INVALID_SCORE_1));
+
+        // has more than 2 decimal places
+        assertThrows(ParseException.class, () -> ParserUtil.parseScore(INVALID_SCORE_2));
+
+        // out of range
+        assertThrows(ParseException.class, () -> ParserUtil.parseScore(INVALID_SCORE_3));
+    }
 }
