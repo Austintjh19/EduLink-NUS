@@ -147,9 +147,9 @@ public class ParserUtil {
      *
      * @throws ParseException if either the given {@code Score} is invalid.
      */
-    public static Score parseScore(String score) throws ParseException {
-        requireNonNull(score);
-        String trimmedScore = score.trim();
+    public static Score parseScore(String string) throws ParseException {
+        requireNonNull(string);
+        String trimmedScore = string.trim();
         if (!StringUtil.isDouble(trimmedScore) || StringUtil.hasMoreThanTwoDecimalPlaces(trimmedScore)) {
             throw new ParseException(Score.MESSAGE_CONSTRAINTS);
         }
