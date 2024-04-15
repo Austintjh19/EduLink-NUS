@@ -692,6 +692,7 @@ Command Details & Constraints:
   * E.g. Grades: `CS2030 - 80 | CS2040 - 78` in the CSV File.
 * The `FILENAME` parameter must satisfy its corresponding [parameter constraints](#parameters).
   * Filenames can only contain alphanumeric characters and the special characters: `-`and `_`.
+* Export command will Overwrite the File at `[JAR-FILE-LOCATION]/exports/FILENAME.csv` if the file already exist otherwise it will create new File.
 
 Examples:
 * `export f/Mystudents`
