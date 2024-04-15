@@ -778,7 +778,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 5
 
-#### Use Case: Edit the Information of a Student**
+#### Use Case: Edit the Information of a Student
 
 **MSS**
 
@@ -816,7 +816,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use Case: Delete a Student**
+#### Use Case: Delete a Student
 
 **MSS**
 
@@ -849,7 +849,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 5.
 
-#### Use Case: Delete All Students in Filtered List**
+#### Use Case: Delete All Students in Filtered List
 
 **MSS**
 
@@ -919,7 +919,7 @@ Use case ends.
 
     Use case ends.
 
-#### Use Case: Delete Grade from a Student**
+#### Use Case: Delete Grade from a Student
 
 **MSS**
 
