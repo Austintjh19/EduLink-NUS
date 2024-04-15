@@ -14,6 +14,7 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert model != null;
         if (model.resetToPreviousState()) {
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(MESSAGE_SUCCESS);

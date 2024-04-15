@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulink.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.edulink.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.edulink.testutil.TypicalPersons.BENSON;
+import static seedu.edulink.testutil.TypicalPersons.BENSON_GRADES;
 import static seedu.edulink.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -106,7 +107,7 @@ public class EditTagCommandTest {
                 .withMajor("Physics").withIntake("2023")
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withEmail("johnd@example.com").withPhone("98765432")
-                .withTags("owesMoney", "parent").build();
+                .withTags("owesMoney", "parent").withGrades(BENSON_GRADES).build();
         expectedModel.setPerson(BENSON, resultStudent);
         assertCommandSuccess(editTagCommand, model,
                 String.format(EditTagCommand.MESSAGE_EDIT_TAG_SUCCESS, validId, tagToReplace, resultingTag),

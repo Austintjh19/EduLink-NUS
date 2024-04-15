@@ -245,4 +245,34 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    //---------------- Tests for hasMoreThanTwoDecimalPlaces --------------------------------------
+
+    @Test
+    public void hasMoreThanTwoDecimalPlaces_validInput_returnsFalse() {
+        assertFalse(StringUtil.hasMoreThanTwoDecimalPlaces("100."));
+        assertFalse(StringUtil.hasMoreThanTwoDecimalPlaces("80.5"));
+        assertFalse(StringUtil.hasMoreThanTwoDecimalPlaces("89.67"));
+    }
+
+    @Test
+    public void hasMoreThanTwoDecimalPlaces_invalidInput_returnsTrue() {
+        assertTrue(StringUtil.hasMoreThanTwoDecimalPlaces("100.000000000000000000001"));
+        assertTrue(StringUtil.hasMoreThanTwoDecimalPlaces("123.456"));
+        assertTrue(StringUtil.hasMoreThanTwoDecimalPlaces("12.3456789"));
+    }
+
+    @Test
+    public void hasMoreThanTwoDecimalPlaces_noDecimal_returnsFalse() {
+        assertFalse(StringUtil.hasMoreThanTwoDecimalPlaces("100"));
+        assertFalse(StringUtil.hasMoreThanTwoDecimalPlaces("12345"));
+        assertFalse(StringUtil.hasMoreThanTwoDecimalPlaces("0"));
+    }
+
+    @Test
+    public void hasMoreThanTwoDecimalPlaces_noDigits_returnsFalse() {
+        assertFalse(StringUtil.hasMoreThanTwoDecimalPlaces(""));
+        assertFalse(StringUtil.hasMoreThanTwoDecimalPlaces("."));
+        assertFalse(StringUtil.hasMoreThanTwoDecimalPlaces(".."));
+    }
+
 }
