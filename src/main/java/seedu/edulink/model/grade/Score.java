@@ -33,7 +33,15 @@ public class Score {
      * Returns true if a given double is a valid score.
      */
     public static boolean isValidScore(double test) {
-        return test >= MIN_SCORE && test <= MAX_SCORE;
+        return test >= MIN_SCORE && test <= MAX_SCORE
+            && !isNegativeZero(test);
+    }
+
+    /**
+     * Returns true if a given score = -0. -0.0, -0.00.
+     */
+    private static boolean isNegativeZero(double test) {
+        return Double.doubleToRawLongBits(test) == Double.doubleToRawLongBits(-0.0);
     }
 
     public double getScore() {
