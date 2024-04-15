@@ -33,8 +33,8 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         List<Student> studentsList = model.getFilteredPersonList();
+        assert studentsList != null;
         try {
             CsvUtil.convertToCsv(studentsList, this.fileName + EXPORT_FORMAT);
         } catch (IOException e) {

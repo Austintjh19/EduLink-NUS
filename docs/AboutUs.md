@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/dedsecrattle.png" width="200px">
 
 [[github](http://github.com/dedsecrattle)]
-[[portfolio](http://theprabhat.me)]
+[[portfolio](team/dedsecrattle.md)]
 
 * Role: Developer
 * Responsibilities: Backend, UI, DevOps

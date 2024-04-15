@@ -1,7 +1,10 @@
 package seedu.edulink.logic.parser;
 
 import static seedu.edulink.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.edulink.logic.commands.CommandTestUtil.EMPTY_ID_DESC;
 import static seedu.edulink.logic.commands.CommandTestUtil.ID_DESC_AMY;
+import static seedu.edulink.logic.commands.CommandTestUtil.INVALID_ID_DESC;
+import static seedu.edulink.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.edulink.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.edulink.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.edulink.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -34,7 +37,34 @@ public class DeleteCommandParserTest {
     }
 
     @Test
+    public void parse_validAllArgs_returnsDeleteCommand() {
+        assertParseSuccess(parser, "all", new DeleteCommand());
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        // non-integer index
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            DeleteCommand.MESSAGE_USAGE));
+
+        // empty student ID
+        assertParseFailure(parser, EMPTY_ID_DESC, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            Id.MESSAGE_CONSTRAINTS));
+
+        // invalid student ID
+        assertParseFailure(parser, INVALID_ID_DESC, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            Id.MESSAGE_CONSTRAINTS));
+    }
+
+    @Test
+    public void parse_emptyArgs_throwsParseException() {
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidPrefix_failure() {
+        assertParseFailure(parser, ID_DESC_AMY + NAME_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            DeleteCommand.MESSAGE_USAGE));
     }
 }

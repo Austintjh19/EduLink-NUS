@@ -9,7 +9,7 @@
       "address": "123, Jurong West Ave 6, #08-111",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": [],
+      "grades": [ ],
       "tags": [
         "TA",
         "Smart",
@@ -24,7 +24,10 @@
       "address": "311, Clementi Ave 2, #02-25",
       "major": "Physics",
       "intake": "2023",
-      "grade": [],
+      "grades" : [ {
+        "module" : "CS2103T",
+        "score" : 70.0
+      } ],
       "tags": [
         "owesMoney",
         "friends"
@@ -38,7 +41,7 @@
       "address": "wall street",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": [],
+      "grades": [ ],
       "tags": []
     },
     {
@@ -49,7 +52,7 @@
       "address": "10th street",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": [],
+      "grades": [ ],
       "tags": [
         "friends"
       ]
@@ -62,7 +65,7 @@
       "address": "michegan ave",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": [],
+      "grades": [ ],
       "tags": []
     },
     {
@@ -73,7 +76,7 @@
       "address": "little tokyo",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": [],
+      "grades": [ ],
       "tags": []
     },
     {
@@ -84,7 +87,7 @@
       "address": "4th street",
       "major": "Computer Science",
       "intake": "2023",
-      "grade": [],
+      "grades": [ ],
       "tags": []
     },
     {
@@ -95,7 +98,7 @@
       "address": "new york ave",
       "major": "Computer Science",
       "intake": "2024",
-      "grade": [],
+      "grades": [ ],
       "tags": []
     },
     {
@@ -106,7 +109,7 @@
       "address": "hk ave",
       "major": "Computer Science",
       "intake": "2022",
-      "grade": [],
+      "grades": [ ],
       "tags": []
     }
   ]

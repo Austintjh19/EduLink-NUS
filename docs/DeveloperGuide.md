@@ -118,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="650" />
 
 
 The `Model` component,
@@ -132,7 +132,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="650" />
 
 </box>
 
@@ -170,7 +170,7 @@ The activity diagram below shows the sequence of action users will have to take 
 
 <puml src="diagrams/add/AddActivityDiagram.puml" alt="Activity Diagram - Add"/>
 
-#### Implementation - Sequence Diagrams:
+#### Implementation - Class Diagram:
 
 The below class diagram represents the key classes and their relationships involved in the implementation of the Add feature in the EduLink-NUS application.
 
@@ -217,18 +217,23 @@ The search specification will vary depending on the search parameter. i.e. using
   * Only entries with IDs and names that match both criteria will be returned.
   * The constraints for matches, both for Name and ID, are applied the same as when searching by Name and ID individually.
 
-#### Proposed Implementation - Class Diagram:
+#### Implementation - Class Diagram:
 
 Below is a representative class diagram of the feature. The implementation of this feature involved the creation of three new classes, those being IdAndNameContainsQueryIdAndNamePredicate, IdContainsQueryIdPredicate, and NameContainsQueryNamePredicate.
 Each class is designed to address specific aspects of the search specifications outlined in the description. Essentially, they serve to encapsulate and modularize the logic for finding students based on different search criteria.
 
 <puml src="diagrams/find/FindClassDiagram.puml" alt="UML Class Diagram - Find"/>
 
-#### Proposed Implementation - Sequence Diagrams:
+#### Implementation - Sequence Diagrams:
 
 In the sequence diagram provided below, the interaction among various classes forming the foundation of the find feature is illustrated. The sequence is initiated when the user enters the command "find n/John D id/A123" into the command box, triggering the `execute("find n/John D id/A123")` method call in the LogicManager.
 
 <puml src="diagrams/find/FindSequenceDiagram.puml" alt="UML Sequence Diagram - Find"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 The sequence diagram above reveals that the `FindCommand` constructor requires a `Predicate` argument. The determination of which specific predicate to pass — `IdAndNameContainsQueryIdAndNamePredicate`, `IdContainsQueryIdPredicate`, or `NameContainsQueryNamePredicate` — is elucidated below:
 
@@ -256,7 +261,7 @@ Design of Predicate:
   * Description: Each search criteria (e.g., ID, Name) has its own dedicated predicate class (e.g., IdContainsQueryIdPredicate, NameContainsQueryNamePredicate).
   * Pros: Encapsulates the logic for each search criterion in separate classes, ensuring modularity and maintainability.
   * Cons: Requires creating a significant number of predicate classes, potentially leading to codebase complexity.
-* Alternative 2: 
+* Alternative 2:
   * Description: Create a single, more generalized predicate class capable of handling multiple search criteria.
   * Pros:  Reduces the number of classes needed, simplifying the codebase.
   * Cons: Combining multiple search criteria into a single class may reduce modularity, making it harder to isolate and maintain specific functionality.
@@ -270,83 +275,177 @@ Design of Matching ID Criteria Reasoning:
 * Partial matching for ID:
   * Allowing partial word matching for IDs enhances the flexibility of the search functionality. Users can search for IDs even if they don't remember the complete sequence, making it easier to find specific students.
 
+### Export feature
+
+This export feature enables the user to effectively export the students data into nicely formatted CSV file, which users can use to port the data to other Applications such as Excel, Spreadsheet
+User just need to specify the `FileName` and successful execution will create the `FileName.csv` at `[JAR_FileLocation]/exports/Filename.csv`.
+
+#### Implementation - Class Diagram:
+
+Below is a representative class diagram of the feature. The implementation of this feature involved creation of one new class i.e CSVUtil , to handle the conversion between application data into CSV Format.
+
+<puml src="diagrams/export/ExportClassDiagram.puml" alt="UML Class Diagram - Export"/>
+
+#### Implementation - Sequence Diagrams:
+
+<puml src="diagrams/export/ExportSequenceDiagram.puml" alt="UML Sequence Diagram - Export"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ExportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+### Import feature
+
+This import feature enables the user to import the students data into the application from a valid `JSON` file,
+User just need to specify the `FileName` and successful execution will import the data from `FileName.json` located at `[JAR_FileLocation]/data/Filename.json`.
+
+#### Implementation - Class Diagram:
+
+Below is a representative class diagram of the feature. The implementation of this feature didn't involved creation of any class , but it requires some new dependencies to be introduced in order to follow OOP Design. i.e Including `Storage` Object in the `ImportCommand`.
+
+<puml src="diagrams/import/ImportClassDiagram.puml" alt="UML Class Diagram - Import"/>
+
+#### Implementation - Sequence Diagrams:
+
+<puml src="diagrams/import/ImportSequenceDiagram.puml" alt="UML Sequence Diagram - Import"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ImportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+### Grade Feature
+
+The Grade feature allows users to efficiently manage and update student grades within the EduLink-NUS application. To maintain data integrity and completeness, the system requires the inclusion of essential parameters such as Student ID, Module Code and Score. The feature adds or edits depending on the existence of the grade for the specified module and student.
+* if a grade record for the specified student and module already exists:
+  * Updates existing record with the new score.
+* if a grade record for the specified student and module does not exist:
+  * Adds new grade record to the student's record.
+
+The activity diagram below illustrates the sequence of actions users will undertake to add or update student grades within the EduLink-NUS application.
+
+<puml src="diagrams/grade/GradeActivityDiagram.puml" alt="Activity Diagram - Grade"/>
+
+#### Implementation - Class Diagrams:
+
+Below is a representative class diagram of the feature. The implementation of this feature involved the creation of five new classes:
+* Grade: represents grade record for a student within EduLink-NUS.
+* Module, Score and LetterGrade: represents the essential information to stored in the grade record.
+* GradeUtil: to handle the conversion from numerical Score to LetterGrade.
+
+<puml src="diagrams/grade/GradeClassDiagram.puml" alt="UML Class Diagram - Grade"/>
+
+#### Implementation - Sequence Diagrams:
+
+In the sequence diagram provided below, the interaction among various classes forming the foundation of the grade feature is illustrated.
+
+<puml src="diagrams/grade/GradeSequenceDiagram.puml" alt="UML Sequence Diagram - Grade"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `GradeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+The sequence diagram reveals that the `GradeCommand` constructor requires `ID` and `Grade` arguments. The `Grade` argument contains a numerical value representing the grade. This numerical grade is to be processed by the `GradeUtil` class to generate the corresponding letter grade using predefined predicates.
+
+Additional Information:
+- **ParserUtil Class**: This class serves as a helper for the GradeCommandParser, facilitating parsing and validation tasks related to grade data inputs.
+- **ArgumentMultimap Class**: ArgumentMultimap aids in mapping command arguments for grade-related operations, while ParserUtil offers utility methods for parsing different types of grade data.
+- **GradeCommand Class**: Represents the command to add or update a student's grade within the application. Upon execution, it generates a CommandResult. It initializes and manages instances of the Grade class.
+- **GradeUtil Class**: This class serves as a helper for the Grade, generating letter grade based on predefined predicate for score range of each letter grade automatically.
+
+#### Implementation - Design Considerations:
+
+Design of Parsing Grade Data Input:
+* **Current Implementation (Alternative 1)**:
+  - **Description**: Validation tasks are centralized within the ParserUtil class, offering a modular and maintainable approach.
+  - **Pros**: Promotes code modularity and ease of maintenance by isolating validation logic from other components. Facilitates seamless updates and modifications.
+  - **Cons**: Introduces an additional layer of abstraction, potentially increasing complexity.
+* **Alternative 2**:
+  - **Description**: Embed validation functions directly within relevant classes, such as Grade, Module and Score, eliminating the need for a separate ParserUtil class.
+  - **Pros**: Provides context-specific validation, allowing each class to enforce its constraints and behaviors independently.
+  - **Cons**: May lead to code duplication if similar validation logic is required across multiple classes, posing maintenance challenges.
+
+Design of Parsing Letter Grade:
+* **Current Implementation (Alternative 1)**:
+  - **Description**: Score range for each letter range are set and centralized within the GradeUtil class using predicate, offering a modular and maintainable approach.
+  - **Pros**: Promotes code modularity and ease of maintenance by isolating validation logic from other components. Facilitates seamless updates and modifications.
+  - **Cons**: Introduces an additional layer of abstraction, potentially increasing complexity.
+* **Alternative 2**:
+  - **Description**: Having the user input the letter grade directly in the command without calculating it based on the numerical score.
+  - **Pros**: Simplifies the input process for users, as they can directly specify the letter grade without needing to know the corresponding numerical score. Avoids the need for complex validation and conversion logic within the application.
+  - **Cons**: Relies heavily on user input accuracy and understanding, potentially leading to input errors Not suitable if the application needs to perform calculations or analyses based on numerical scores rather than letter grades such as finding the Mean, Median, Maximum and Minimum.
+
+Design of Editing Grade:
+* **Current Implementation (Alternative 1)**:
+  - **Description**: The GradeCommand is responsible for both adding new grade records and editing existing ones.
+  - **Pros**: Centralized logic within the GradeCommand class simplifies the codebase and reduces redundancy. Users interact with a single command for both adding and editing grades, not having to remember one more command word.
+  - **Cons**: May lead to complexity within the GradeCommand class, especially as additional editing functionalities are introduced.
+* **Alternative 2**:
+  - **Description**: Create a new EditGradeCommand class dedicated to editing existing grade records.
+  - **Pros**: Editing logic is isolated in its own command class, promoting code organization and maintainability. Each command class has a single responsibility, making it easier to understand and modify.
+  - **Cons**: Requires additional command classes. Users may need to remember separate commands for adding and editing grades, which could impact usability.
+
+### Tag Feature
+
+The Tag feature allows users to add tags to a student's profile. The user needs to specify the student to tag by inputting the student's ID. Users can add several tags at once to improve working efficiency.
+* If one or more tags the user want to add are already there, the system will display an error message to inform the user.
+* If the ID/tag user inputs are invalid, the system will display the constraints for parameters.
+* Tags are designed to be case-insensitive. If the user adds several equivalent tags at once, only one of them will be added to prevent duplication.
+
+#### Implementation - Class Diagrams:
+
+Below is a representative class diagram of the `tag` feature.
+
+<puml src="diagrams/tag/TagClassDiagram.puml" alt="UML Class Diagram - Tag"/>
+
+#### Implementation - Sequence Diagrams:
+
+The sequence diagram below shows the interaction of different classes to execute add tag command.
+
+<puml src="diagrams/tag/TagSequenceDiagram.puml" alt="UML Sequence Diagram - Tag"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `TagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+</box>
+
+#### Implementation - Design Considerations:
+
+Design of Parsing Tag Input:
+* **Current Implementation (Alternative 1)**:
+    - **Description**: Validation tasks are centralized within the ParserUtil class, offering a modular and maintainable approach.
+    - **Pros**: Promotes code modularity and ease of maintenance by isolating validation logic from other components. Facilitates seamless updates and modifications.
+    - **Cons**: Introduces an additional layer of abstraction, potentially increasing complexity.
+* **Alternative 2**:
+    - **Description**: Embed validation functions directly within TagCommandParser.
+    - **Pros**: More straightforward and independent from the rest of the code.
+    - **Cons**: Inconsistent with the rest code base, harder to maintain and reuse.
+
+
+Design of Tag message:
+* **Current Implementation (Alternative 1)**:
+    - **Description**: Tags names should be alphanumeric. Tags are restricted to 20 characters long.  Tags are case-insensitive: TA and ta are the same.
+    - **Pros**: Make sure tags messages are brief, and work like tag. Standardize tags.
+    - **Cons**: User loses some freedom to customize their tag.
+* **Alternative 2**:
+    - **Description**: User can input whatever they s/he wants as the tag message.
+    - **Pros**: User has more freedom.
+    - **Cons**: Harder to manage user input. Less bug-provoking.
+
+
 ### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation - Class Diagram:
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Below is a representative class diagram of the feature. The implementation of this feature didn't involved creation of any class, but some additional fields in the preexisting classes and changes in methods.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+<puml src="diagrams/undo/UndoClassDiagram.puml" alt="UML Class Diagram - Undo"/>
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+#### Implementation - Sequence Diagram:
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/undo/UndoClassDiagram.puml" alt="UML Class Diagram - Undo"/>
 
 #### Design considerations:
 
@@ -361,12 +460,8 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+We decided to limit the number of Past History Saved to 20 i.e. User can only revert back from last 20 commands only to avoid the Performance issue and keep the implementation Simple.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -401,56 +496,165 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a…    | I can…                                                                                                             | So that I can…                                                                                |
-|----------|----------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| `**`     | new user | access a help guide that provides detailed instructions                                                            | effectively utilize the platform's features and functionalities                               |
-| `*`      | user     | export student data to a .csv, .json or pdf file                                                                   | perform analytics work, such as data analysis and statistical modeling                        |
-| `**`     | user     | import student data from .txt, .csv and .json file                                                                 | eliminate the need to input every piece of information individually                           |
-| `***`    | user     | view a list of student                                                                                             | Easily reach out to them for academic support or research opportunities                       |
-| `***`    | user     | add new student information to the system (Grade, Cohort, Module, Contact Information)                             | keep the database up-to-date with the latest student records                                  |
-| `***`    | user     | delete a student information from the system when necessary                                                        | ensure outdated or incorrect records are removed efficiently and accurately                   |
-| `***`    | user     | edit the information of a student in the system                                                                    | update their details accurately as needed                                                     |
-| `**`     | user     | sort student data by various criteria such as grade and cohort                                                     | organize student information efficiently and make informed decisions                          |
-| `**`     | user     | filter data based on specific criteria                                                                             | tailor information retrieval to meet diverse academic and administrative needs                |
-| `***`    | user     | search for students by their name or Student ID                                                                    | quickly locate specific individuals within the system                                         |
-| `***`    | user     | add tags to students and classify them based on various criteria such as “Potential Teaching Assistant”            | easily identify and group students based on specific attributes or characteristics            |
-| `*`      | user     | check the number of students in the database based on specific criteria, such as those belonging to a specific tag | assess the scope and distribution of students across various criteria                         |
-| `*`      | user     | add notes or comments to a student's profile                                                                       | maintain a comprehensive record of student achievements, and challenges                       |
-| `*`      | user     | have automatic tagging, e.g. students below a certain grade threshold are tagged with "high priority student"      | save time and resources by automating the identification and classification of students       |
-| `***`    | user     | enjoy the benefit of automatic prevention of duplicate entries                                                     | ensure data integrity                                                                         |
-| `***`    | user     | retrieve specific information based on tags                                                                        | streamline communication with a huge number of students                                       |
-| `*`      | user     | automatically updates student information using the system, e.g. student year group based on current datetime      | ensure data accuracy and reduce manual data editing                                           |
-| `***`    | user     | view all contact information for students in an organized and accessible format within the system (Nice GUI)       | look for students easily                                                                      |
-| `*`      | user     | filter data by multiple criteria simultaneously within the system                                                  | refine and narrow down the displayed information                                              |
-| `*`      | user     | perform bulk deletion of data based on specific criteria within the system                                         | efficiently remove outdated or irrelevant records in large quantities                         |
-| `*`      | user     | undo previous actions within the system                                                                            | revert changes or mistakes made, providing a safety net for data integrity                    |
-| `*`      | user     | view the history of changes within the system                                                                      | restore previous versions of data or records in case of accidental changes                    |
-| `**`     | user     | add group tags to multiple students simultaneously within the system                                               | streamline the process of categorizing and organizing student data                            |
-| `***`    | user     | enjoy a user-friendly interface (UI) when interacting with the system                                              | reduce cognitive load                                                                         |
-| `***`    | user     | efficiently navigate and interact with the system using typed user commands                                        | access features swiftly, and accomplish tasks with ease                                       |
-| `***`    | user     | automatically save my modifications every time I make a change within the system                                   | ensure contacts and information are consistently backed up, preventing any major loss of data |
-| `*`      | user     | manage multiple databases within the system                                                                        | organize and segregate data into distinct databases                                           |
-| `*`      | user     | view my most recent searches within the system                                                                     | access previously searched items, saving time and effort                                      |
-| `*`      | user     | calculate statistical measures for specific data stored within the system                                          | analyze the distribution and central tendencies of the data                                   |
-| `*`      | user     | calculate statistical measures for specific filtered data stored within the system                                 | analyze the distribution and central tendencies of the data of certain groups                 |
-| `*`      | user     | enjoy autocomplete suggestions for commands or queries as I type                                                   | improve efficiency and accuracy                                                               |
+
+| Priority  | As a…  | I can…                                                                                                                               | So that I can…                                                                                             |
+|----------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `**`     | new user | access a help guide that provides detailed instructions                                                                              | effectively utilize the platform's features and functionalities                                            |
+| `*`      | user     | export student data to a .csv file file                                                                                              | perform analytics work, such as data analysis and statistical modeling                                     |
+| `**`     | user     | import student data from .json file                                                                                                  | eliminate the need to input every piece of information individually                                        |
+| `***`    | user     | view a list of student                                                                                                               | Easily reach out to them for academic support or research opportunities                                    |
+| `***`    | user     | add new student information to the system (Grade, Cohort, Module, Contact Information)                                               | keep the database up-to-date with the latest student records                                               |
+| `***`    | user     | delete a student information from the system when necessary                                                                          | ensure outdated or incorrect records are removed efficiently and accurately                                |
+| `***`    | user     | edit the information of a student in the system                                                                                      | update their details accurately as needed                                                                  |
+|`**`      | <strike> user </strike> | <strike> sort student data by various criteria such as grade and cohort </strike>                                                    | <strike> organize student information efficiently and make informed decisions </strike>                    |
+| `**`     | <strike> user  </strike> | <strike>filter data based on customisable conditions </strike>                                                                       | <strike> tailor information retrieval to meet diverse academic and administrative needs. </strike>         |
+| `***`    | user     | search for students by their name or Student ID                                                                                      | quickly locate specific individuals within the system                                                      |
+| `***`    | user     | add tags to students and classify them based on various criteria such as “PotentialTA”                                               | easily identify and group students based on specific attributes or characteristics                         |
+| `***`    | user     | edit tag of a student                                                                                                                | correct or update student's tag                                                                            |
+| `***`    | user     | delete multiple tags from a student at once                                                                                          | remove unnecessary tags easily                                                                             |
+| `*`      | <strike> user </strike> | <strike> add notes or comments to a student's profile </strike>                                                                      | <strike> maintain a comprehensive record of student achievements, and challenges </strike>                 |
+| `*`      | <strike> user </strike> | <strike> have automatic tagging, e.g. students below a certain grade threshold are tagged with "high priority student"  </strike>    | <strike> save time and resources by automating the identification and classification of students </strike> |
+| `***`    | user     | enjoy the benefit of automatic prevention of duplicate entries                                                                       | ensure data integrity                                                                                      |
+| `***`    | user     | retrieve specific information based on tags, such as retrieving the emails of all students belonging to a particular cohort          | streamline communication with a huge number of students                                                    |
+| `*`      | user     | automatically updates student information using the system, e.g. student year group based on current datetime                        | ensure data accuracy and reduce manual data editing                                                        |
+| `*`      | <strike> user </strike> | <strike> filter data by multiple criteria simultaneously within the system </strike>                                                 | <strike> refine and narrow down the displayed information </strike>                                        |
+| `*`      | user     | perform bulk deletion of data based on specific criteria within the system                                                           | efficiently remove outdated or irrelevant records in large quantities                                      |
+| `*`      | user     | undo previous actions within the system                                                                                              | revert changes or mistakes made, providing a safety net for data integrity                                 |
+| `*`      | <strike> user </strike> | <strike> view the history of changes within the system </strike>                                                                     | <strike> restore previous versions of data or records in case of accidental changes </strike>              |
+| `**`     | <strike> user </strike> | <strike> add group tags to multiple students simultaneously </strike>                                                                | <strike> streamline the process of categorizing and organizing student data </strike>                      |
+| `***`    | user     | enjoy a user-friendly interface (UI) when interacting with the system                                                                | reduce cognitive load                                                                                      |
+| `***`    | user     | efficiently navigate and interact with the system using typed user commands                                                          | access features swiftly, and accomplish tasks with ease                                                    |
+| `***`    | user     | automatically save my modifications every time I make a change within the system                                                     | ensure contacts and information are consistently backed up, preventing any major loss of data              |
+| `*`      | user     | manage multiple databases within the system                                                                                          | organise and segregate data into distinct databases, such as addressbook1 and addressbook2                 |
+| `*`      | user     | view my most recent searches within the system                                                                                       | access previously searched items, saving time and effort when revisiting them                              |
+| `*`      | <strike> user </strike> | <strike> calculate the mean, median, maximum, minimum, and mode for specific data stored within the system, such as grades </strike> | <strike> analyze the distribution and central tendencies of the data </strike>                             |
+| `*`      | <strike> user   </strike> | <strike> enjoy autocomplete suggestions for commands as I type </strike>                                                             | <strike> improve efficiency and accuracy </strike>                                                         |
+| `**`      | user     | Use keyboard shortcut to undo typing commands and access recent commands                                                             | Improve efficiency when using the product (do not need to retype command)                                  |
 
 
 ### Use cases
 
 (For all use cases below, the **System** is the `EduLink NUS` and the **Actor** is the `National University of Singapore professors and teaching assistants`, unless specified otherwise)
 
-**Use Case: Add a Tag to a Student's Profile**
+#### Use Case: Export Students data
 
 **MSS**
 
-1.  User request to list students.
-2.  AddressBook shows a list of all students.
-3.  User get to know the name or ID of a specific student.
-4.  User requests to add tag a specific student by inputting that student's ID and tag information.
-5.  The tag is successfully added to that student.
+1. Users executes any valid Command
+2. EduLink-NUS shows a list of students.
+3. User request to export the students data in a `.csv` file by inputting a filename (e.g. NUS-CS) (Output filename)
+4. Students data successfully exported and new file create in `[JAR_FILE_LOCATION]/exports/NUS-CS.csv`
 
     Use case ends.
+
+**Extensions**
+* 3a. provided filename doesn't follow the Format.
+
+    * 3a1. EduLink-NUS informs user the constraints for filename
+    * 3a2. User enters new filename
+      Steps 3a1-3a2 are repeated till a valid filename is given
+
+      Use case resumes at Step 4
+
+* 3a. Application was not able to create the file (e.g. Permissions Conflict)
+
+    * 3a1. EduLink-NUS informs user that , Export was not successfully executed.
+    * 3a2. Users verifies the Permissions , etc.
+       Steps 3a1-3a2 are repeated till the issue is resolved
+
+        Use case resumes at Step 4
+
+#### Use Case: Import Students data
+
+**MSS**
+
+1. EduLink-NUS shows list of students , but user wants to import another Student Database.
+2. User request to import the students data from a  valid `JSON` file by inputting a filename (e.g. NUS-CS) (Output filename)
+3. Students data successfully imported from the file located at`[JAR_FILE_LOCATION]/data/NUS-CS.json`
+
+   Use case ends.
+
+**Extensions**
+* 3a. provided filename doesn't follow the Format.
+
+    * 3a1. EduLink-NUS informs user the constraints for filename
+    * 3a2. User enters new filename
+      Steps 3a1-3a2 are repeated until a valid filename is given
+
+      Use case resumes at Step 4
+
+* 3a. Application was not able to import from the Provided file due to Invalid `JSON` file.
+
+    * 3a1. EduLink-NUS informs user that , Import was not successfully executed.
+    * 3a2. User places another `JSON` file.
+      Steps 3a1-3a2 are repeated until a valid `JSON` file is provided.
+
+      Use case resumes at Step 4
+
+* 3a. Application was not able to import as file with input filename doesn't exist.
+
+    * 3a1. EduLink-NUS informs user that , Import was not successfully executed.
+    * 3a2. User verifies the file is present and/or resolve the issue.
+      Steps 3a1-3a2 are repeated util a valid `JSON` is not present with the given filename.
+
+      Use case resumes at Step 4
+
+
+#### Use Case: Undo a previous command
+
+**MSS**
+1. Users executes any valid Command that changes data of any student in the Application.
+2. EduLink-NUS shows a list of students.
+3. User realise that the previous command has introduced some data inconsistency.
+4. User request to `undo` the previous command.
+5. EduLink-NUS revert back to the previous state i.e. state before the execution of the last command.
+
+   Use case ends.
+
+**Extensions**
+* 4a. There is no History available i.e. No previous state available.
+
+    * 4a1. EduLink-NUS informs user that , There is no History available to reset.
+
+    Use case ends
+
+* 3a. User has reached maximum allowed `undo` commands i.e. reverted 20 previously executed commands.
+
+    * 3a1. EduLink-NUS informs user that , User have reached the maximum allowed `undo` commands.
+
+      Use case ends
+
+#### Use Case: Fetch the Recent Commands
+
+**MSS**
+1. Users executes any valid Command.
+2. EduLink-NUS shows a list of students.
+3. User realise that the new command he/she wants to execute is almost same as the previous one.
+4. User requests for the Recent Command either by GUI or CLI.
+5. Recent Command appears in the CommandBox.
+
+   Use case ends.
+
+**Extensions**
+* 4a. No History of Recent Command available
+
+    * 4a1. CommandBox remain Blank.
+
+  Use case ends
+
+
+#### Use Case: Add Tags to a Student's Profile
+
+**MSS**
+
+1.  User requests to list all students. (UC XX)
+2.  EduLink-NUS shows a list of all students.
+3.  User gets to know the ID of a specific student.
+4.  User requests to add tags a specific student by inputting that student's ID and tags.
+5.  The tags are successfully added to that student.
+
+    Use case ends.
+
 **Extensions**
 * 2a. The list is empty.
 
@@ -458,17 +662,130 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. Invalid student ID entered
 
-    * 4a1. AddressBook inform user that student does not exist
+    * 4a1. EduLink-NUS informs user the constraints for student ID.
+    * 4a2. User enters new student ID and tag information.
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given.
+
+      Use case resumes at step 5
+
+* 4b. Duplicate tag(s) found
+
+    * 4b1. EduLink-NUS informs user that one or more tags to add are already exist in the student's profile.
+    * 4a2. User enters new student ID and tag information.
+    Steps 4a1 - 4a2 are repeated till no tags to add are in the student's profile.
+
+    Use case resumes at step 5
+
+* 4c. Invalid tag(s) found
+
+    * 4b1. EduLink-NUS inform the constraints for tag.
+
+    * 4a2. User enters new student ID and tag information.
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid.
+
+      Use case resumes at step 5
+
+#### Use Case: Edit a Student's tag
+
+**MSS**
+1.  User requests to list all students.
+2.  EduLink-NUS shows a list of all students.
+3.  User gets to know the ID of a specific student.
+4.  User requests to edit a specific student's tag by inputting that student's ID tag to be edited and resulting tag
+5.  The student's tag is successfully edited to the resulting tag.
+
+    Use case ends.
+
+ **Extensions**
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 4a. Invalid student ID entered
+
+    * 4a1. EduLink-NUS informs user the constraints for student ID
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+      Use case resumes at step 5
+* 4b. Can't find specified student
+
+    * 4a1. EduLink-NUS informs user that studentID is not found
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+      Use case resumes at step 5
+* 4c. Duplicate tag found (the resulting tag is already there)
+
+    * 4b1. EduLink-NUS informs user that resulting tag already exist for the student specified
+
+  * 4a2. User enters new student ID and tag information
+
+    Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+    Use case resumes at step 5
+
+* 4d. Invalid tag found
+
+    * 4b1. EduLink-NUS informs user the constraints for tag.
+
+    * 4a2. User enters new student ID and tag information
+
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5
+
+* 4e. Can't find the tag to edit
+
+    * 4b1. EduLink-NUS informs user that system can't find the tag to be edited.
+
+    * 4a2. User enters new tag.
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5
+
+#### Use Case: Delete tags from a Student's Profile
+
+**MSS**
+
+1.  User request to list all students.
+2.  EduLink-NUS shows a list of all students.
+3.  User gets to know the name or ID of a specific student.
+4.  User requests to delete tags from a specific student by inputting that student's ID and tags.
+5.  The tags are successfully deleted from that student.
+
+    Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 4a. Invalid student ID entered
+
+    * 4a1. EduLink-NUS informs user the constraints for student ID
     * 4a2. User enters new student ID and tag information
       Steps 4a1 - 4a2 are repeated till a valid student ID is given
 
       Use case resumes at step 5
 
-* 4b. Duplicate tag found
+* 4b. Invalid tag found
 
-    * 4b1. AddressBook inform user that tag already exist for the student specified
+    * 4b1. EduLink-NUS informs user the constraints for tag
 
-      Use case ends
+    * 4a2. User enters new student ID and tag information
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5
+
+* 4c. Can't find the tag to delete
+
+    * 4b1. EduLink-NUS informs user that system can't find the tag to delete.
+
+    * 4a2. User enters new tags.
+      Steps 4a1 - 4a2 are repeated till all inputted tags are valid
+
+      Use case resumes at step 5
 
 **Use Case: Edit the Information of a Student**
 
@@ -513,9 +830,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User request to list students.
-2.  AddressBook shows a list of all students.
-3.  User get to know the name or ID of a specific student.
-4.  User prompt to delete that student by its ID.
+2.  EduLink-NUS shows a list of all students.
+3.  User get to know the name, ID or index of a specific student.
+4.  User prompts to delete the specified student by its ID or index.
 5.  That student is successfully deleted.
 
     Use case ends.
@@ -525,13 +842,140 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given student ID is invalid.
+* 4a. Can't find selected student.
 
-    * 3a1. AddressBook inform user that student does not exist.
+    * 4a1. EduLink-NUS inform user that student does not exist.
+    * 4a2. User enters new student ID
+      Steps 4a1 - 4a2 are repeated till a valid student ID is given
 
-      Use case resumes at step 2.
+      Use case resumes at step 5.
 
-*{More to be added}*
+* 4b. Detect error in delete command entered e.g. invalid ID, index or command
+
+    * 4b1. EduLink-NUS informs user about invalid format and reminds valid format.
+    * 4b2. User enters new updated command.
+      Steps 4b1 - 4b2 are repated till the data entered are correct.
+
+      Use case resumes at step 5.
+
+**Use Case: Delete All Students in Filtered List**
+
+**MSS**
+
+1. User filter students based on specific criteria e.g. find n/NAME or filter t/TAG.
+2. EduLink-NUS shows a list of students matching the filter criteria.
+3. User delete all students in the filtered list.
+4. All students in the filtered list are successfully deleted.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. No students match the filter criteria.
+
+  Use case ends.
+
+* 3a. User decides not to delete any students.
+
+  Use case ends.
+
+**Use Case: Add Grade to a Student**
+
+**MSS**
+
+1. User requests to list students.
+2. EduLink-NUS shows a list of all students.
+3. User identifies the student to whom they want to add a grade by ID.
+4. User prompt to add grade to a specific student by inputting that student's ID, module code and score.
+5. The new grade is successfully added to the student's record.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. User can't find the student he is looking for in the filtered list.
+
+  * 3a1. User requests to list students.
+  * 3a2. User filter students based on specific criteria.
+  * 3a3. EduLink-NUS shows a filterd list of students.
+    Steps 3a1 - 3a3 are repeated till the student is found in the list shown.
+
+    Use case resumes at step 4.
+
+* 4a. Can't find the selected student in the filtered list.
+
+  * 4a1. EduLink-NUS informs the user that the student does not exist.
+  * 4a2. User enters new student ID, together with the module code and score.
+    Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+    Use case resumes at step 5.
+
+* 4b. Detect error in grade command entered e.g. score out of range, invalid module code
+
+  * 4b1. EduLink-NUS informs user about invalid format and reminds valid format.
+  * 4b2. User enters new updated command.
+    Steps 4b1 - 4b2 are repated till the data entered are correct.
+
+    Use case resumes at step 5.
+
+* 4c. Duplicate module code to be graded found.
+
+  * 4c1. The grade for the specified module code is successfully edited with the new given score in the selected student's record.
+
+    Use case ends.
+
+**Use Case: Delete Grade from a Student**
+
+**MSS**
+
+1. User requests to list students.
+2. EduLink-NUS shows a list of all students.
+3. User identifies the student from whom they want to delete a grade by ID.
+4. User prompt to delete a grade from a specific student by inputting that student's ID and module code.
+5. The grade for the specified module is successfully delete from the student's record.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. User can't find the student he is looking for in the filtered list.
+
+  * 3a1. User requests to list students.
+  * 3a2. User filter students based on specific criteria.
+  * 3a3. EduLink-NUS shows a filterd list of students.
+    Steps 3a1 - 3a3 are repeated till the student is found in the list shown.
+
+    Use case resumes at step 4.
+
+* 4a. Can't find the student in the filtered list.
+
+  * 4a1. EduLink-NUS informs the user that the student does not exist.
+  * 4a2. User enters new student ID, together with the module code and score.
+    Steps 4a1 - 4a2 are repeated till a valid student ID is given
+
+    Use case resumes at step 5.
+
+* 4b. Detect error in grade command entered e.g. invalid module code
+
+  * 4b1. EduLink-NUS informs user about invalid format and reminds valid format.
+  * 4b2. User enters new updated command.
+    Steps 4b1 - 4b2 are repated till the data entered are correct.
+
+    Use case resumes at step 5.
+
+* 4c. The selected student does not have a grade recorded for the specified module code.
+
+  * 4c1. EduLink-NUS informd the user that there are no grades to delete for the specified module code in the selected student's record.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -541,6 +985,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  Should be responsive to user input, as user might have a series of commands to execute.
 5.  Should have a resizable UI as the user might work on different programs in parallel.
 6.  Should be able to use Offline (without Internet Connection).
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS

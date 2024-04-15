@@ -7,7 +7,7 @@
 }
 
 #copyButton:hover {
-    -fx-background-color: #a2a3a2y;
+    -fx-background-color: #a2a3a2;
 }
 
 #copyButton:armed {

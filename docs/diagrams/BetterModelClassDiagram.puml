@@ -21,7 +21,7 @@ Student *--> Email
 Student *--> Address
 Student *--> Intake
 Student *--> Major
-Student *--> Grade
+Student *--> "*" Grade
 
 Grade *--> Score
 Grade *--> Module
