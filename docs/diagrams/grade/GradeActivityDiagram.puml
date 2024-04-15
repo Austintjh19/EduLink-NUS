@@ -1,0 +1,34 @@
+@startuml
+|User|
+start
+:Grade command entered;
+|System|
+if (All required parameters given?) then (yes)
+    if (Parameters valid?) then (yes)
+        |System|
+        :Parse command parameters;
+        :Create Grade object;
+        :Parse score parameter to get letter grade;
+        |System|
+        if (does grade for the specified module exist?) then (yes)
+            |System|
+            :Edits existing grade;
+            |User|
+            :Receive edit success message;
+        else (no)
+            |System|
+            :Add new grade to specified student;
+            |User|
+            :Receive add success message;
+        endif
+    else (no)
+        |User|
+        :Receive error message;
+    endif
+else (no)
+    |User|
+    :Receive error message;
+endif
+
+stop
+@enduml
