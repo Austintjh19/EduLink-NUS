@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.edulink.commons.core.index.Index;
 import seedu.edulink.logic.Messages;
 import seedu.edulink.logic.commands.exceptions.CommandException;
+import seedu.edulink.model.AddressBook;
 import seedu.edulink.model.Model;
 import seedu.edulink.model.ModelManager;
 import seedu.edulink.model.UserPrefs;
@@ -114,6 +115,31 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(ALICE);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deletesAllStudentsUnFilteredList_success() throws CommandException {
+        DeleteCommand deleteCommand = new DeleteCommand();
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSONS_SUCCESS,
+                model.getFilteredPersonList().size());
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setAddressBook(new AddressBook());
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deletesAllStudentsFilteredList_success() throws CommandException {
+        Student studentToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand();
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSONS_SUCCESS, 1);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(studentToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }

@@ -389,14 +389,14 @@ Design of Editing Grade:
 
 ### Tag Feature
 
-The Tag feature allows users to add tags to a student's profile. The user needs to specify the student to tag by inputting the student's ID. Users can add several tags at once to improve working efficiency. 
+The Tag feature allows users to add tags to a student's profile. The user needs to specify the student to tag by inputting the student's ID. Users can add several tags at once to improve working efficiency.
 * If one or more tags the user want to add are already there, the system will display an error message to inform the user.
 * If the ID/tag user inputs are invalid, the system will display the constraints for parameters.
 * Tags are designed to be case-insensitive. If the user adds several equivalent tags at once, only one of them will be added to prevent duplication.
 
 #### Implementation - Class Diagrams:
 
-Below is a representative class diagram of the `tag` feature. 
+Below is a representative class diagram of the `tag` feature.
 
 <puml src="diagrams/tag/TagClassDiagram.puml" alt="UML Class Diagram - Tag"/>
 
@@ -430,9 +430,9 @@ Design of Tag message:
     - **Pros**: Make sure tags messages are brief, and work like tag. Standardize tags.
     - **Cons**: User loses some freedom to customize their tag.
 * **Alternative 2**:
-    - **Description**: User can input whatever they s/he wants as the tag message. 
-    - **Pros**: User has more freedom. 
-    - **Cons**: Harder to manage user input. Less bug-provoking. 
+    - **Description**: User can input whatever they s/he wants as the tag message.
+    - **Pros**: User has more freedom.
+    - **Cons**: Harder to manage user input. Less bug-provoking.
 
 
 ### \[Proposed\] Undo/redo feature

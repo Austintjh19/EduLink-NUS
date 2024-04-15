@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulink.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.edulink.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.edulink.testutil.TypicalPersons.BENSON;
+import static seedu.edulink.testutil.TypicalPersons.BENSON_GRADES;
 import static seedu.edulink.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashSet;
@@ -95,7 +96,7 @@ public class DeleteTagCommandTest {
                 .withMajor("Physics").withIntake("2023")
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withEmail("johnd@example.com").withPhone("98765432")
-                .withTags("owesMoney").build();
+                .withTags("owesMoney").withGrades(BENSON_GRADES).build();
         expectedModel.setPerson(BENSON, resultStudent);
         assertCommandSuccess(deletetagCommand, model,
                 String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, tagList), expectedModel);

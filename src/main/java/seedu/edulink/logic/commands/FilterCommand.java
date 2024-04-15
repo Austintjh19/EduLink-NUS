@@ -20,8 +20,8 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose tag matches exaclty with "
             + "the specified tags and displays them as a list with index numbers.\n"
-            + "Parameters: " + PREFIX_TAG + "KEYWORD "
-            + "[" + PREFIX_TAG + "KEYWORD] ... \n"
+            + "Parameters: " + PREFIX_TAG + "TAG "
+            + "[" + PREFIX_TAG + "TAG] ... \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "TA" + " " + PREFIX_TAG + "Kind";
 
     private final Predicate<Student> predicate;

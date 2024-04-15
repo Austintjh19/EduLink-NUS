@@ -21,7 +21,9 @@ import static seedu.edulink.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.edulink.model.AddressBook;
 import seedu.edulink.model.grade.Grade;
@@ -34,9 +36,9 @@ public class TypicalPersons {
 
     public static final Grade ALICE_GRADE = new GradeBuilder().withModule("CS2113").withScore(55)
         .build();
-    public static final Grade BENSON_GRADE = new GradeBuilder().withModule("CS2103").withScore(70)
+    public static final Grade BENSON_GRADE = new GradeBuilder().withModule("CS2103T").withScore(70)
         .build();
-
+    public static final Set<Grade> BENSON_GRADES = new HashSet<>(List.of(BENSON_GRADE));
     public static final Student ALICE = new PersonBuilder().withName("Alice Pauline").withId("A0251893P")
         .withMajor("Computer Science").withIntake("2023")
         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -46,7 +48,7 @@ public class TypicalPersons {
         .withMajor("Physics").withIntake("2023")
         .withAddress("311, Clementi Ave 2, #02-25")
         .withEmail("johnd@example.com").withPhone("98765432")
-        .withTags("owesMoney", "friends").build();
+        .withTags("owesMoney", "friends").withGrades(BENSON_GRADES).build();
     public static final Student CARL = new PersonBuilder().withName("Carl Kurz").withId("A3351893P")
         .withMajor("Computer Science").withIntake("2023")
         .withPhone("95352563")
