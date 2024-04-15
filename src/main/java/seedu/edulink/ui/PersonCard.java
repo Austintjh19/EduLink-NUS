@@ -71,6 +71,7 @@ public class PersonCard extends UiPart<Region> {
         intake.setText(student.getIntake().toString());
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
+        email.maxWidthProperty().bind(cardPane.widthProperty().multiply(0.6));
         student.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
