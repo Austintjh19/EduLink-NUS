@@ -55,6 +55,9 @@ public class ModuleTest {
         // null -> returns false
         assertFalse(module1.equals(null));
 
+        // different type -> returns false
+        assertFalse(module1.equals("not a module"));
+
         // different values -> returns false
         assertFalse(module1.equals(module2));
     }
