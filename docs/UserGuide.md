@@ -277,7 +277,7 @@ Some parameters do not come along with their own Parameter Prefix. E.g. KEYWORD 
 <box type="info" seamless>
 <b>Some Limitations: </b> </br>
 - System date can be modified as to allow for `INTAKE` to be of any year after the current year.</br>
-- Domain name of email can take in 2 consecutive special characters. E.g. test@exam..ple.com. 
+- Domain name of email can take in 2 consecutive special characters. E.g. test@exam..ple.com.
 </box>
 
 
