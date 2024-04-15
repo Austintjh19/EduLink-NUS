@@ -39,6 +39,9 @@ public class GradeTest {
         // different score -> returns false
         editedGrade = new GradeBuilder(ALICE_GRADE).withScore(VALID_SCORE_89).build();
         assertFalse(ALICE_GRADE.equals(editedGrade));
+
+        // check getModuleScore -> returns true
+        assertEquals("CS2113 - 55", gradeCopy.getModuleScore());
     }
 
     @Test
