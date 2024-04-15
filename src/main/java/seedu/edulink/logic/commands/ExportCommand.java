@@ -34,6 +34,7 @@ public class ExportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Student> studentsList = model.getFilteredPersonList();
+        assert studentsList != null;
         try {
             CsvUtil.convertToCsv(studentsList, this.fileName + EXPORT_FORMAT);
         } catch (IOException e) {

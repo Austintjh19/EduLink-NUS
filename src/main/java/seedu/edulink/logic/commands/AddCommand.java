@@ -53,6 +53,7 @@ public class AddCommand extends Command {
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AddCommand(Student student) {
+        assert  student != null;
         requireNonNull(student);
         toAdd = student;
     }

@@ -44,6 +44,7 @@ public class ImportCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         try {
             JsonAddressBookStorage addressBookStorage = getNewAddressBookStorage();
+            assert  addressBookStorage != null;
             Optional<ReadOnlyAddressBook> addressBookOptional = addressBookStorage.readAddressBook();
             if (addressBookOptional.isEmpty()) {
                 throw new CommandException(String.format("File not found: %s.json", fileName));
