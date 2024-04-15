@@ -139,6 +139,14 @@
     -fx-text-fill: #000000;
 }
 
+.cell_small_label_email {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #000000;
+    -fx-text-overrun: ELLIPSIS;
+    -fx-max-width: 400px;
+}
+
 .stack-pane {
     -fx-background-color: #EDEDED;
 }
@@ -497,3 +505,4 @@
     -fx-background-radius: 2;
     -fx-font-size: 13;
 }
+
