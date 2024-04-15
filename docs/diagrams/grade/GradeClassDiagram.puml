@@ -1,0 +1,36 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+Class "  <<interface>>  \nParser" as Parser<GradeCommand>
+Class GradeCommandParser
+
+Class GradeCommand
+Class CommandResult
+
+Class ArgumentMultimap
+Class ParserUtil
+Class GradeUtil
+
+Class Grade
+Class Module
+Class Score
+Class LetterGrade
+
+GradeCommandParser .up.|> Parser
+
+GradeCommandParser .down.> GradeCommand: initialize >
+GradeCommandParser .right.> ArgumentMultimap: utilizes >
+GradeCommandParser .right.> ParserUtil: utilizes >
+
+GradeCommand .down.> CommandResult: outputs >
+
+GradeCommand -right-> Grade: adds/edits >
+
+Grade .right.> GradeUtil: utilizes >
+
+GradeUtil .down.> LetterGrade: parses >
+
+Grade -down-> Module: has >
+Grade -down-> Score: has >
+Grade -down-> LetterGrade: has >
+@enduml

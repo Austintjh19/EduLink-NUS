@@ -43,8 +43,8 @@ In this comprehensive guide, we'll take you on a journey to harness the power of
   - [4.1.4 Adding or Editing a Module Score to a Student: `grade`](#adding-or-editing-a-module-score-to-a-student-grade)
   - [4.1.5 Deleting a Module Score for a Student: `dgrade`](#deleting-a-module-score-for-a-student-dgrade)
   - [4.1.6 Tagging a Student: `tag`](#tagging-a-student-tag)
-  - [4.1.7 Editing tags for a Student: `etag`](#editing-tags-for-a-student-etag)
-  - [4.1.8 Deleting a tag from a student: `dtag`](#deleting-a-tag-from-a-student-dtag)
+  - [4.1.7 Editing a tag for a Student: `etag`](#417-editing-tag-for-a-student-etag)
+  - [4.1.8 Deleting tags from a student: `dtag`](#418-deleting-tags-from-a-student-dtag)
 - [4.2 Data Filtering Commands](#data-filtering-commands)
     - [4.2.1 Listing all students: `list`](#listing-all-students-list)
     - [4.2.2 Find Students by Name or ID: `find`](#find-students-by-name-or-id-find)
@@ -287,13 +287,14 @@ To understand how a full command is interpreted, we will utilise the following e
 | **`n/`**    | Parameter Prefix  | Distinguishes `NAME` from other input fields.                  |
 | **`NAME`**  | Parameter         | Represents placeholder for name of the student.                |
 
+
 You'll notice that `[TAG]` is wrapped in square brackets, indicating that it's an optional component.
 
-- For example, in `n/STUDENT_NAME [TAG]`, you can include a tag like `n/John t/TA` or simply input the student's name as `n/John`.
+- For example, in `n/STUDENT_NAME [t/TAG]`, you can include a tag like `n/John t/TA` or simply input the student's name as `n/John`.
 
-Moreover, notice that `[TAG]` is followed by an ellipsis (`…`). This signifies that items followed by an ellipsis can be entered multiple times, including zero times.
+Moreover, notice that `[t/TAG]` is followed by an ellipsis (`…`). This signifies that items followed by an ellipsis can be entered multiple times, including zero times.
 
-- As an illustration, `n/STUDENT_NAME [TAG]…` can be used with no tags at all, like `n/John`, or with multiple tags, such as `n/John t/Math t/TA`.
+- As an illustration, `n/STUDENT_NAME [t/TAG]…` can be used with no tags at all, like `n/John`, or with multiple tags, such as `n/John t/Math t/TA`.
 
 
 <box type="info" seamless>
@@ -484,13 +485,13 @@ Format: `tag id/STUDENT_ID t/TAG [t/TAG] …​`
 </box>
 
 <box type="tip" seamless>
+
 **Tip:** You can tag the specified student with any number of `TAG`s.
 </box>
 
 Command Details & Constraints:
 * Adds a tag or multiple tags to the student with id `STUDENT_ID`.
-  * The specified student via `STUDENT_ID` must be displayed on the Student List Panel.
-* `TAG` is case-insensitive: TA and ta are the same.
+  * `TAG` is case-insensitive: TA and ta are the same.
   * EduLink-NUS prevents the entry of duplicated tags.
 * All parameters must satisfy their corresponding [parameter constraints](#parameters).
 
@@ -498,10 +499,10 @@ Examples:
 * `tag id/A0257418E t/potentialTA`
 * `tag id/A0257418E t/potentialTA t/Active`
 
-#### 4.1.7 Editing tags for a Student: `etag`
+#### 4.1.7 Editing Tag for a Student: `etag`
 <a id="editing-tags-for-a-student-etag"></a>
 
-> Edits the tag of a specific student in the EduLink-NUS application.
+> Edits a tag of a specific student in the EduLink-NUS application.
 
 Format: `etag id/STUDENT_ID t/EXISTING_TAG t/RESULTING_TAG`
 
@@ -511,17 +512,17 @@ Format: `etag id/STUDENT_ID t/EXISTING_TAG t/RESULTING_TAG`
 
 Command Details & Constraints:
 * Edits the tag of the student with id `STUDENT_ID`.
-  * The specified student via `STUDENT_ID` must be displayed on the Student List Panel.
-* `EXISTING_TAG` is the existing tag that you intend to edit. It is case-insensitive.
+* `EXISTING_TAG` is the existing tag that you intend to edit.
 * `RESULTING_TAG` is the new tag that will replace the existing tag.
-* Both the `EXISTING_TAG` and `RESULTING_TAG` must be not more than 15 characters long with no space in between.
-* Both the `EXISTING_TAG` and `RESULTING_TAG` much be alphanumeric, and they are case-insensitive.
+  * `EXISTING_TAG` and `RESULTING_TAG` are `TAG` and follow [tag constraints](#parameters).
+  * EduLink-NUS prevents the entry of duplicated tags.
+* All parameters must satisfy their corresponding [parameter constraints](#parameters).
 * For each execution, the command can only **edit** a single tag for one particular student.
 
 Examples:
 * `etag id/A0265901E t/Honors t/Scholar` updates the tag from `Honors` to `Scholar` for the student with ID `A0265901E`.
 
-#### 4.1.8 Deleting a tag from a student: `dtag`
+#### 4.1.8 Deleting Tag(s) from a student: `dtag`
 <a id="deleting-a-tag-from-a-student-dtag"></a>
 
 > Remove a list of specified tags for a particular student in the EduLink-NUS application.
@@ -534,8 +535,8 @@ Format: `dtag id/STUDENT_ID t/TAG [t/TAG] …​`
 
 Command Details & Constraints:
 * Deletes specified tags of the student with id `STUDENT_ID`.
-  * The specified student via `STUDENT_ID` must be displayed on the Student List Panel.
-* `TAG` is case-insensitive: TA and ta are the same.
+* `TAG` is case-insensitive: TA and ta are the same. If user includes multiple identical tags in command, only one of them will be deleted.
+  * `dtag id/A9365941E t/TA t/ta` is same as `dtag id/A9365941E t/TA`
 * All parameters must satisfy their corresponding [parameter constraints](#parameters).
 
 Examples:
@@ -613,10 +614,6 @@ Examples:
 * `filter t/CS2103T` will display only people that have been tagged with `CS2103T`.
 * `filter t/CS2103T t/TA` wil display only people that have been tagged with `CS2103T` and `TA`.
 
-
-
-
-
 ### 4.3 General Commands:
 <a id="general-commands"></a>
 
@@ -634,7 +631,6 @@ Command Details & Constraints:
 * The Student Card will display the details of the first student on the Student List Panel, when a specific student is not selected from the Student List Panel.
 * The Student Card will update automatically to display the details of the first student on the Student List Panel whenever a command that alters the data within Student List Panel is executed. e.g. `delete`, `add`, `find`, `filter`, `edit`, `tag` ...
 * If the Student List Panel is empty or becomes empty due to the execution of a command, the Student Card will display nothing.
-
 
 #### 4.3.2 Accessing the Recent Commands:
 <a id="accessing-the-recent-commands"></a>
@@ -662,7 +658,6 @@ Command Details & Constraints:
 * The `undo` command revert the changes done by last **Data changing command** i.e. command that changes (adds, edits or deletes) information for any Student in the Application.
 * The application stores up to 20 previous states, allowing you to undo up to the last 20 commands.
 * If there are no commands to undo or else you already executed `undo` for 20 commands, an error message will be displayed.
-* 
 
 Examples:
 * `undo`
@@ -699,6 +694,7 @@ Command Details & Constraints:
   * E.g. Grades: `CS2030 - 80 | CS2040 - 78` in the CSV File.
 * The `FILENAME` parameter must satisfy its corresponding [parameter constraints](#parameters).
   * Filenames can only contain alphanumeric characters and the special characters: `-`and `_`.
+* Export command will Overwrite the File at `[JAR-FILE-LOCATION]/exports/FILENAME.csv` if the file already exist otherwise it will create new File.
 
 Examples:
 * `export f/Mystudents`
@@ -802,7 +798,7 @@ Furthermore, certain edits can cause the EduLink-NUS to behave in unexpected way
 | **Export**          | `export f/FILENAME` <br> e.g, `export f/mystudents`                                                                                                                                                                         |
 | **Import**          | `import f/FILENAME` <br> e.g,`import f/NTU-CS`                                                                                                                                                                              |
 | **Delete tag/tags** | `dtag id/STUDENT_ID t/TAG` <br> e.g,`dtag id/A0257418E t/potentialTA`                                                                                                                                                       |
-| **Edit tag/tags**   | `etag id/STUDENT_ID t/TAG t/RESULTING_TAG` <br> e.g `etag id/A0265901E t/Honors t/Scholar`                                                                                                                                  |
+| **Edit tag**   | `etag id/STUDENT_ID t/TAG t/RESULTING_TAG` <br> e.g `etag id/A0265901E t/Honors t/Scholar`                                                                                                                                  |
 | **Grade**           | `grade id/STUDENT_ID mod/MODULE_CODE s/SCORE` <br> e.g `grade id/A0262733X mod/CS2103T s/77`                                                                                                                                |
 | **Delete Grade**    | `dgrade id/STUDENT_ID mod/MODULE_CODE` <br> e.g `dgrade id/A0262733X mod/CS2103T`                                                                                                                                           |
 | **Help**            | `help`                                                                                                                                                                                                                      |
