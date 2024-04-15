@@ -11,12 +11,6 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -254,7 +248,7 @@ The below sequence diagram highlights this process:
 
 <puml src="diagrams/find/FindParserSequenceDiagram.puml" alt="UML Sequence Diagram - Find Parser"/>
 
-#### Proposed Implementation - Design Considerations:
+#### Implementation - Design Considerations:
 
 Design of Predicate:
 * Alternative 1 (Current Implementation):
@@ -435,7 +429,7 @@ Design of Tag message:
     - **Cons**: Harder to manage user input. Less bug-provoking.
 
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
 #### Implementation - Class Diagram:
 
